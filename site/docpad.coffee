@@ -13,8 +13,6 @@ rootPath = __dirname
 templateData = rootPath + '/templateData/'
 textData = CSON.parseFileSync(templateData + 'text.cson')
 navigationData = CSON.parseFileSync(templateData + 'navigation.cson')
-for own key, url of navigationData.top
-	console.log "Page: #{key} = URL: #{url}"
 
 # =================================
 # Helpers
@@ -339,6 +337,11 @@ docpadConfig =
 			# Extract the server from the options
 			{server,express} = opts
 			docpad = @docpad
+
+			# Issues
+			server.get /^\/(?:i|issues)(?:\/(.*))?$/, (req,res) ->
+				issueQuery = req.params[0] or ''
+				res.redirect(301, "https://github.com/bevry/#{issueQuery}")
 
 			# Plugins
 			server.get /^\/(?:p|plugins)(?:\/(.*))?$/, (req,res) ->

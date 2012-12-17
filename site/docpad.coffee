@@ -172,7 +172,8 @@ docpadConfig =
 				name = a.basename.replace(/^[\-0-9]+/,'')
 				url = "/docs/#{category}-#{name}.html"
 				slug = "/docs/#{name}"
-				urls = [slug]
+				compatibility = "/docpad/#{name}"
+				urls = [slug, compatibility]
 				title = "#{a.title or humanize name}"
 				pageTitle = "#{title} | #{categoryName}"
 
@@ -336,6 +337,11 @@ docpadConfig =
 			# Extract the server from the options
 			{server,express} = opts
 			docpad = @docpad
+
+			# Bevry Content
+			server.get /^\/((?:node|joe|query-engine).*)$/, (req,res) ->
+				bevryUrl = req.params[0] or ''
+				res.redirect(301, "https://bevry.me/#{bevryUrl}")
 
 			# Issues
 			server.get /^\/(?:i|issues)(?:\/(.*))?$/, (req,res) ->

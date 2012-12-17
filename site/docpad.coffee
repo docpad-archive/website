@@ -97,7 +97,6 @@ docpadConfig =
 				"/vendor/jquery.scrollto.js"
 				"/vendor/modernizr.js"
 				"/vendor/history.js"
-				"/vendor/historyjsit.js"
 
 				# Scripts
 				"/scripts/script.js"

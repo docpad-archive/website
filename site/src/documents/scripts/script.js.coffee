@@ -259,7 +259,7 @@ $ ->
 				# Fetch the content
 				contentHtml = $dataContent.html() or $data.html()
 				unless contentHtml
-					documentation.location.href = url
+					document.location.href = url
 					return false
 
 				$article.stop(true, true)

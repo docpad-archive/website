@@ -1,10 +1,11 @@
 module.exports = {
 	top:
-		'Features': '/#features'
-		'Download': '/download'
+		'Intro': '/docpad/intro'
+		'Install': '/docpad/install'
+		'Start': '/docpad/start'
 		'Documentation': '/docs'
 
 	bottom:
-		'Docpad': '/'
-		'Support': '/#support'
+		'DocPad': '/'
+		'Support': 'http://bevry.me/support'
 }

@@ -244,7 +244,7 @@ docpadConfig =
 			tasks = new balUtil.Group(next)
 
 			# Skip if we are doing a differential generate
-			return next()  if opts.reset is false
+			return next()  if opts.reset is false or 'development' in docpad.getEnvironments()
 
 			# Log
 			docpad.log('info', "Updating Documentation...")

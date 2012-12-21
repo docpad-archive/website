@@ -6,13 +6,15 @@ moment = require('moment')
 strUtil = require('underscore.string')
 balUtil = require('bal-util')
 feedr = new (require('feedr').Feedr)
-CSON = require('cson')
 
 # Prepare
-rootPath = __dirname
-templateData = rootPath + '/templateData/'
-textData = CSON.parseFileSync(templateData + 'text.cson')
-navigationData = CSON.parseFileSync(templateData + 'navigation.cson')
+rootPath = __dirname+'/../..'
+appPath = __dirname
+sitePath = rootPath+'/site'
+textData = require(appPath+'/templateData/text')
+navigationData = require(appPath+'/templateData/navigation')
+
+
 
 # =================================
 # Helpers
@@ -23,10 +25,16 @@ getName = (a,b) ->
 		return textData[b] ? humanize(b)
 	else
 		return textData[a][b] ? humanize(b)
-
+getProjectName = (project) ->
+	getName('projectNames',project)
 getCategoryName = (category) ->
 	getName('categoryNames',category)
+getLinkName = (link) ->
+	getName('linkNames',link)
+getLabelName = (label) ->
+	getName('labelNames',label)
 
+# Humanize
 humanize = (text) ->
 	text ?= ''
 	return strUtil.humanize text.replace(/^[\-0-9]+/,'').replace(/\..+/,'')
@@ -42,6 +50,14 @@ docpadConfig =
 
 	# =================================
 	# DocPad Configuration
+
+	# Paths
+	rootPath: rootPath
+	outPath: rootPath+'/site/out'
+	srcPath: rootPath+'/site/src'
+	reloadPaths: [
+		appPath
+	]
 
 	# Regenerate each day
 	regenerateEvery: 1000*60*60*24
@@ -60,11 +76,14 @@ docpadConfig =
 		underscore: _
 		strUtil: strUtil
 		moment: moment
+
 		text: textData
 		navigation: navigationData
 
+
 		# -----------------------------
 		# Site Properties
+
 		site:
 			# The production URL of our website
 			url: "http://docpad.org"
@@ -101,13 +120,16 @@ docpadConfig =
 				# Scripts
 				"/scripts/script.js"
 			]
-		
+
 		# -----------------------------
 		# Helper Functions
 
 		# Names
 		getName: getName
+		getProjectName: getProjectName
 		getCategoryName: getCategoryName
+		getLinkName: getLinkName
+		getLabelName: getLabelName
 
 		# Get the prepared site/document title
 		# Often we would like to specify particular formatting to our page's title
@@ -178,7 +200,7 @@ docpadConfig =
 				pageTitle = "#{title} | #{categoryName}"
 
 				# Apply
-				document.set({
+				document.setMetaDefaults({
 					title
 					pageTitle
 					layout
@@ -190,23 +212,24 @@ docpadConfig =
 					urls
 					standalone
 				})
-				document.getMeta().set({
-					slug
-					url
-					urls
-				})
 
 		pages: (database) ->
 			database.findAllLive({relativeOutDirPath:'pages'},[filename:1])
 
+
 	# =================================
 	# DocPad Plugins
 
+	plugins:
+		highlightjs:
+			aliases:
+				stylus: 'css'
+
 	environments:
 		development:
-			plugins:
 				coffeekup:
 					format: false
+
 
 	# =================================
 	# DocPad Events
@@ -286,6 +309,7 @@ docpadConfig =
 			# Contributors
 			contributorFeeds = [
 				"https://api.github.com/users/docpad/repos?client_id=#{process.env.BEVRY_GITHUB_CLIENT_ID}&client_secret=#{process.env.BEVRY_GITHUB_CLIENT_SECRET}"
+				"https://api.github.com/users/bevry/repos?client_id=#{process.env.BEVRY_GITHUB_CLIENT_ID}&client_secret=#{process.env.BEVRY_GITHUB_CLIENT_SECRET}"
 			]
 			feedr.readFeeds contributorFeeds, (err,feedRepos) ->
 				for repos in feedRepos
@@ -337,6 +361,27 @@ docpadConfig =
 			# Extract the server from the options
 			{server,express} = opts
 			docpad = @docpad
+			request = require('request')
+
+			# Pushover
+			server.all '/pushover', (req,res) ->
+				return res.send(200)  if 'development' in docpad.getEnvironments()
+				request(
+					{
+						url: "https://api.pushover.net/1/messages.json"
+						method: "POST"
+						form: balUtil.extend(
+							{
+								token: envConfig.BEVRY_PUSHOVER_TOKEN
+								user: envConfig.BEVRY_PUSHOVER_USER_KEY
+								message: req.query
+							}
+							req.query
+						)
+					}
+					(_req,_res,body) ->
+						res.send(body)
+				)
 
 			# Bevry Content
 			server.get /^\/((?:node|joe|query-engine).*)$/, (req,res) ->

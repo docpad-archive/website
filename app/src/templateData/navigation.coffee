@@ -1,4 +1,4 @@
-{
+module.exports = {
 	top:
 		'Features': '/#features'
 		'Download': '/download'

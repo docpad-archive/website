@@ -386,7 +386,7 @@ docpadConfig =
 				)
 
 			# Bevry Content
-			server.get /^\/((?:node|joe|query-engine).*)$/, (req,res) ->
+			server.get /^\/((?:node|joe|query-?engine).*)$/, (req,res) ->
 				bevryUrl = req.params[0] or ''
 				res.redirect(301, "https://bevry.me/#{bevryUrl}")
 

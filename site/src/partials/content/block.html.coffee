@@ -22,7 +22,7 @@ article ".block"+(if cssClasses then '.'+cssClasses.join('.') else ""), ->
 
 		if comments
 			aside '.comments', ->
-				text partial('services/disqus.html.eco', {document})
+				text partial('services/disqus', {document})
 
 		if prev or up or next
 			nav ".prev-next", ->

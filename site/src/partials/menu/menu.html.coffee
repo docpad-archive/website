@@ -14,7 +14,7 @@ ul typeof:'dc:collection', ->
 		categoryItems = collection.findAll({category},itemSort)
 
 		# Category with Items
-		text @partial('menu/category.html.coffee',{
+		text @partial('menu/category',{
 			type: 'menu'
 			items: categoryItems
 			activeItem: @activeItem

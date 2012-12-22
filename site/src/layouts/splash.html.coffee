@@ -1,6 +1,7 @@
 ###
 layout: structure
-splash: true
 ###
 
-text @content
+section '#content', ->
+	article '.splash', ->
+		text @content

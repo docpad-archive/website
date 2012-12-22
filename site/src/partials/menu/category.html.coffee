@@ -11,5 +11,7 @@ _categoryCssClasses.concat(categoryCssClasses?)
 
 # Category
 li '.'+_categoryCssClasses.join('.'), typeof:'dc:collection', ->
-	a href:'#', -> span ".list-#{type}-category-title", property:'dc:title', -> text _categoryItem.categoryName
-	ul @partial('menu/items.html.coffee', @)
+	a href:@items.at(0).get('url'), ->
+		span ".list-#{type}-category-title", property:'dc:title', ->
+			text _categoryItem.categoryName
+	ul @partial('menu/items', @)

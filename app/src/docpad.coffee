@@ -118,6 +118,8 @@ docpadConfig =
 				"/vendor/history.js"
 
 				# Scripts
+				"/scripts/historyjsit.js"
+				"/scripts/bevry.js"
 				"/scripts/script.js"
 			]
 

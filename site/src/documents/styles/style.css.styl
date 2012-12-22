@@ -231,27 +231,35 @@ body > footer
 	clearfix()
 
 .nav-secondary
-	ul
+	.list-menu-categories
 		&:first-child
 			border-left: 2px solid colorLightGold
 			padding: 0
 
-		> li
+		.list-menu-category
 			padding: 5px 0
-			ul
+			.list-menu-items
 				margin: 5px 0
 				padding-left: 15px
+				overflow: hidden
+				transition: max-height 0.5s ease-out
+				height: auto
+				max-height: 300px
 
-				> li.active a
+				.list-menu-item.active a
 					border-color: transparent
 					color: colorDarkGold
 
 			&.inactive
-				li
-					display: none
+				.list-menu-items
+					max-height: 0
 
 			&.active > a
 				border-color: colorLightGold
+
+			&:hover
+				.list-menu-items
+					max-height: 300px
 
 	a
 		border-left: 5px solid transparent

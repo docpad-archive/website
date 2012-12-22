@@ -15,7 +15,7 @@ nav '.nav-main', ->
 
 div '.container.clearfix', -> text @content
 
-footer '.clearfix', ->
+footer '.footer.clearfix', ->
 	div '.about', -> @text['copyright']
 
 	nav '.nav-footer', ->

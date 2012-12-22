@@ -75,28 +75,37 @@ a
 // ====================================
 // Layout and structure
 
-body > footer
+.footer
 .nav-main
 .container
 	margin: 0 auto
 	width: 90%
 	position: relative
+	background: hsl(0, 0%, 95%)
+
+.nav-main
+	top: 0
+	position: fixed
+	left: 5%
+	z-index: 500
 
 .nav-secondary
 	position: fixed
-	top: 5em
+	top: 4em
 	left: 5%
+
 	width: 15%
 	max-width: 200px
 	opacity: 1
 	transition: all 0.2s ease-out
+
 	&.fixed
 		opacity: 0.5
-		top: 0.5em
 		&:hover
 			opacity: 1
 
 .page
+	margin-top: 3em
 	float: right
 	width: 76%
 	max-width: 1100px
@@ -360,25 +369,27 @@ body > footer
 // ====================================
 // Footer
 
-body > footer
+.footer
 	border-top: 1px solid white
 	box-shadow: 0 -1px 0 colorLightBrown
-	min-height: 100px
+	min-height: 60px
 
 	a:hover
 		text-decoration: underline
+
+	.about
+	.nav-footer
+		font-size: 15px
+		margin: 1em 0
 
 	.about
 		float: left
 		a
 			color: colorBlue
 
-.nav-footer
-	float: right
-	a
-		color: colorDarkestBrown
-		margin-left: 15px
+	.nav-footer
+		float: right
+		a
+			color: colorDarkestBrown
+			margin-left: 15px
 
-footer span, .nav-footer
-	font-size: 15px
-	margin: 1em 0

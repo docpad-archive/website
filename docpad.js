@@ -1,1 +1,1 @@
-module.exports = require(__dirname+'/app/out/docpad');
+module.exports = require('bal-util').requireFresh(__dirname+'/app/out/docpad');

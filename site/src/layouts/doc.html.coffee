@@ -10,7 +10,7 @@ for item,index in docsCollection.models
 prevModel = docsCollection.models[index-1] ? null
 nextModel = docsCollection.models[index+1] ? null
 
-nav '.nav-secondary', ->
+nav '.sidebar', ->
 	text @partial('menu/menu.html.coffee',{
 		collection: docsCollection
 		activeItem: @document

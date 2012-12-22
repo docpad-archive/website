@@ -5,14 +5,15 @@ _ = require('underscore')
 moment = require('moment')
 strUtil = require('underscore.string')
 balUtil = require('bal-util')
+{requireFresh} = balUtil
 feedr = new (require('feedr').Feedr)
 
 # Prepare
 rootPath = __dirname+'/../..'
 appPath = __dirname
 sitePath = rootPath+'/site'
-textData = require(appPath+'/templateData/text')
-navigationData = require(appPath+'/templateData/navigation')
+textData = requireFresh(appPath+'/templateData/text')
+navigationData = requireFresh(appPath+'/templateData/navigation')
 
 
 

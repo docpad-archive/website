@@ -9,6 +9,7 @@ module.exports = {
   },
   bottom: {
     'DocPad': '/',
+    'GitHub': 'https://github.com/bevry/docpad',
     'Support': 'http://bevry.me/support'
   }
 };

@@ -35,6 +35,9 @@ class BevryApp
 		# Always trigger initial page change
 		@$window.trigger('statechangecomplete')
 
+		# ScrollSpy
+		setInterval(@scrollSpy, 200)
+
 		# Chain
 		@
 
@@ -213,6 +216,10 @@ class BevryApp
 			$articleNav.css('opacity',1)
 		else
 			$articleNav.removeAttr('style')
+
+		# Handle
+		sidebarFixed = window.scrollY > $('#content').offset().top
+		$('.nav-secondary').toggleClass('fixed', sidebarFixed)
 
 		# Chain
 		@

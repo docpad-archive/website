@@ -16,7 +16,7 @@ nav '.nav-main', ->
 div '.container.clearfix', -> text @content
 
 footer '.clearfix', ->
-	span -> @text['copyright']
+	div '.about', -> @text['copyright']
 
 	nav '.nav-footer', ->
 		for own page, url of @navigation.bottom

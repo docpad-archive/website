@@ -7,8 +7,19 @@
 @import 'nib'
 
 // ====================================
-// Colors
+// Configuration
 
+// Fonts
+fontMyraid = "Myriad Pro", "Segoe WP", "Segoe UI", Segoe, Calibri, Helvetica, Arial
+fontMyraidBoldest = 700
+fontMyraidBold = 600
+fontMyraidNormal = 500
+fontMyraidLight = 500
+fontMyraidLightest = 500
+fontFutura = "futura-pt", Helvetica, Arial, sans-serif
+
+
+// Colors
 colorBlue = #259dcf
 
 colorDarkGold = #998758
@@ -25,7 +36,7 @@ colorLighterBrown = #dbdbdb
 colorLightestBrown = #f1f1f1
 
 colorLink = colorBlue
-colorAccent = colorGold
+colorAccent = colorDarkGold
 
 
 // ====================================
@@ -33,18 +44,24 @@ colorAccent = colorGold
 
 body
 .search input
-	font-family: Georgia, Times, serif
+	font-family: fontMyraid
+	font-smooth: always
+	-webkit-font-smoothing: antialiased
+    color-profile: sRGB
+    rendering-intent: auto
+	text-rendering: optimizeLegibility
 
-nav, h1, h2, h3, h4
+nav
 .btn
 .providers
 footer
-	font-family: "futura-pt", Helvetica, Arial, sans-serif
-	font-weight: 500
+	font-family: fontMyraid
+	font-weight: fontMyraidNormal
 	text-transform: uppercase
 
-table
-	font-family: Helvetica, Arial, sans-serif
+h1, h2, h3, h4
+	font-family: fontMyraid
+	font-weight: fontMyraidBoldest
 
 blockquote
 	margin: 3em
@@ -165,6 +182,44 @@ a
 	width: 76%
 	max-width: 1100px
 	padding: 0 3%
+
+.webchat
+	position: fixed
+	left: 0%
+	bottom: 0
+	width: 100%
+	height: 500px
+	.wrapper
+		border: 1px solid hsl(209, 32%, 82%)
+		background: hsl(209, 70%, 94%)
+		width: 30%
+		height: 500px
+	iframe
+		background: white
+		border: none
+		width: 100%
+		height: 500px
+	.close
+		position: absolute
+		top: 0
+		right: 0
+		width: 20px
+		height: 20px
+		padding-top:3px
+		cursor: pointer
+		text-align: center
+	.open
+		position: absolute
+		bottom: 0
+		left: 0
+		width: 100px
+		height: 25px
+		cursor: pointer
+		border: 1px solid hsl(209, 32%, 82%)
+		background: hsl(209, 70%, 94%)
+		text-align: center
+		padding-top: 0.3em
+
 
 
 // ====================================
@@ -348,10 +403,11 @@ a
 
 	h1
 		margin-bottom: 0
-		font-size: 32px
+		font-size: 36px
+		font-weight: bold
 
 	h2
-		font-weight: bold
+		font-weight: fontMyraidBoldest
 		font-size: 26px
 		margin-top: 4em
 
@@ -376,14 +432,6 @@ a
 		font-weight: bold
 		&:hover { text-decoration: underline }
 
-	p, ul, dl, ol
-		font-size: 16px
-		line-height: 25px
-
-	ul ul
-	ol ol
-		margin: 5px 0
-
 	dl dt { font-weight: bold }
 	dl dd { margin: 0 0 20px 15px }
 
@@ -407,9 +455,9 @@ a
 
 		tr:nth-child(2n+2) { background: colorLightestBrown }
 
-	footer
-		border-top: 1px dashed colorLighterBrown
-		margin: 2em 0 1.5em
+	.block-footer
+		border-top: 1px dotted colorLighterBrown
+		margin: 5em 0 1.5em
 		padding-top: 1em
 		clearfix()
 
@@ -431,7 +479,7 @@ a
 .footer
 	border-top: 1px solid white
 	box-shadow: 0 -1px 0 colorLightBrown
-	min-height: 60px
+	min-height: 70px
 
 	a:hover
 		text-decoration: underline

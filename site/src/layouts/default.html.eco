@@ -42,7 +42,9 @@
 	<![endif]-->
 
 	<!-- Content -->
-	<%- @content %>
+	<div class="container">
+		<%- @content %>
+	</div>
 
 	<!-- DocPad Scripts + Our Own -->
 	<%- @getBlock('scripts').add(@site.scripts or []).toHTML() %>

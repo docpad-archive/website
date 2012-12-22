@@ -102,6 +102,7 @@ docpadConfig =
 				"""
 
 			styles: [
+				"/vendor/ui-lightness/jquery-ui-1.9.2.custom.css"
 				'/vendor/highlight.css'
 				'/vendor/normalize.css'
 				'/vendor/h5bp.css'
@@ -112,6 +113,7 @@ docpadConfig =
 			scripts: [
 				# Vendor
 				"/vendor/jquery.js"
+				"/vendor/jquery-ui-1.9.2.custom.js"
 				"/vendor/log.js"
 				"/vendor/jquery.scrollto.js"
 				"/vendor/modernizr.js"

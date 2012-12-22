@@ -5,6 +5,31 @@ standalone: true
 # App
 class App extends BevryApp
 
+	# Dom Ready
+	onDomReady: =>
+		$webchat = $('.webchat')
+		$iframe = $webchat.find('iframe')
+		$wrapper = $webchat.find('.wrapper').hide()
+		$close = $webchat.find('.close')
+		$open = $webchat.find('.open')
+		$wrapper
+			.resizable(
+				alsoResize: $iframe
+				handles: "e"
+			)
+			.on 'resizestart', ->
+				$iframe.hide()
+			.on 'resizestop', (event,ui) ->
+				$webchat.add($iframe).height(ui.size.height)
+				$webchat.add($iframe).width(ui.size.width)
+				$iframe.show()
+		$close.add($open).on 'click', ->
+			$wrapper.toggle()
+			$open.toggle()
+
+		# Super
+		super
+
 	# State Change
 	stateChange: (event,data) =>
 		# Check

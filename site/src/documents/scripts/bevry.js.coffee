@@ -127,7 +127,6 @@ class BevryApp
 			else
 				$docHeaders.filter('.current').removeClass('current')
 				$docHeaders.last().click()
-				#$body.ScrollTo()
 
 		# Chain
 		@
@@ -162,7 +161,7 @@ class BevryApp
 		{$docHeaders,$docSectionWrapper} = @
 
 		# Special handling for long docs
-		@$article = $article = $('article:first')
+		@$article = $article = $('#content article:first')
 
 		# Documentation
 		if $article.is('.block.doc')
@@ -186,7 +185,7 @@ class BevryApp
 							.next('.section-wrapper')
 								.addClass('active')
 								.end()
-						$header.ScrollTo()  if !opts or opts.scroll isnt false
+						$header.ScrollTo({offsetTop:40})  if !opts or opts.scroll isnt false
 					.first()
 						.trigger('click',{scroll:false})
 
@@ -199,7 +198,7 @@ class BevryApp
 						$header = $(this)
 							.addClass('current')
 							.stop(true,false).css({'opacity':0.5}).animate({opacity:1},1000)
-						$header.ScrollTo()  if !opts or opts.scroll isnt false
+						$header.ScrollTo({offsetTop:40})  if !opts or opts.scroll isnt false
 
 		else
 			@$docHeaders = $docHeaders = null

@@ -24,6 +24,10 @@ colorLightBrown = #aaa
 colorLighterBrown = #dbdbdb
 colorLightestBrown = #f1f1f1
 
+colorLink = colorBlue
+colorAccent = colorGold
+
+
 // ====================================
 // Fonts
 
@@ -41,6 +45,32 @@ footer
 
 table
 	font-family: Helvetica, Arial, sans-serif
+
+blockquote
+	margin: 3em
+	color: hsl(11, 90%, 55%)
+	em
+		font-style: italic
+
+em
+	color: colorAccent
+	font-style: normal
+
+
+// ------------------------------------
+// Links
+
+a:not(.hover-link),.link
+	cursor: pointer
+	text-decoration: none
+	color: colorLink
+	font-weight: bold
+.hover-link
+	cursor: pointer
+	text-decoration: none
+	color: inherit
+a:hover,.hover-link:hover
+	text-decoration: underline
 
 
 // ------------------------------------
@@ -311,15 +341,38 @@ a
 	background: white
 	border-radius: 3px
 
-	h1 { font-size: 30px }
-	h2 { font-size: 26px }
-	h3 { font-size: 22px }
-	h4 { font-size: 18px }
+	.section-wrapper
+		display:none
+		&.active
+			display:block
 
-	h3, h4 { border-bottom: 1px dotted colorLighterBrown }
+	h1
+		margin-bottom: 0
+		font-size: 32px
+
+	h2
+		font-weight: bold
+		font-size: 26px
+		margin-top: 4em
+
+	.compact
+		h2
+			color: colorLink
+
+	h3
+		font-size: 22px
+		margin-top: 3em
+
+	h4
+		font-size: 18px
+		margin-top: 2.5em
+
+	h2
+		border-bottom: 1px dotted colorLighterBrown
+
 
 	a
-		color: colorBlue
+		color: colorLink
 		font-weight: bold
 		&:hover { text-decoration: underline }
 
@@ -339,8 +392,6 @@ a
 		display: block
 		margin: 1em auto
 		max-width: 100%
-
-	blockquote { font-style: italic }
 
 	table
 		font-size: 14px
@@ -393,7 +444,7 @@ a
 	.about
 		float: left
 		a
-			color: colorBlue
+			color: colorLink
 
 	.nav-footer
 		float: right

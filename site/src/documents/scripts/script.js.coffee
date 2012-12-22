@@ -13,6 +13,14 @@ class App extends BevryApp
 		$close = $webchat.find('.close')
 		$open = $webchat.find('.open')
 
+		normalizeHeights = ->
+			if $wrapper.is(':visible')
+				$webchat.height($iframe.height())
+				$webchat.width($iframe.width())
+			else
+				$webchat.height($open.height())
+				$webchat.width($open.width())
+
 		$wrapper
 			.hide()
 			.resizable(
@@ -29,8 +37,10 @@ class App extends BevryApp
 			.on 'click', ->
 				$wrapper.toggle()
 				$open.toggle()
+				normalizeHeights()
 
 		$webchat.show()
+		normalizeHeights()
 
 		# Super
 		super

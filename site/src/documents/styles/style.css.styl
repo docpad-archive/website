@@ -42,10 +42,35 @@ footer
 table
 	font-family: Helvetica, Arial, sans-serif
 
+
+// ------------------------------------
+// Code
+
 code
-	font-size: 0.8em
+pre code
+	font-family: Consolas, Monaco, 'Source Code Pro', 'courier new', monospace, serif
+	border-radius: 0.5em
+	background: colorLightestGold
+	border: 1px solid hsl(186, 8%, 88%)
+	color: hsl(186, 8%, 15%)
+
+code
+	font-size: 0.75em
+	font-weight: 500
+	padding: 0.05em 0.5em 0em
+	white-space: pre
+	display: inline-block
+	margin: 0.4em 0.2em 0.2em 0
+
+pre code
+	font-size: 0.7em
 	font-family: Monaco, Consolas, 'Source Code Pro', 'courier new', monospace, serif
+	display: block
+	margin: 2.5em 0
+	padding: 1em 1.5em
 	line-height: 1.5em
+	border: 1px solid hsl(192, 8%, 84%)
+
 
 // ====================================
 // Global Styles
@@ -330,23 +355,6 @@ a
 			color: white
 
 		tr:nth-child(2n+2) { background: colorLightestBrown }
-
-	code
-		background: colorLightestGold
-		border-radius: 3px
-		display: inline-block
-		padding: 0 5px
-
-		&.command-line
-			background: colorLightestBrown
-			border: 1px solid colorLighterBrown
-			display: block
-			padding: 10px
-
-	pre code
-	code.code-block
-		display: block
-		padding: 5px
 
 	footer
 		border-top: 1px dashed colorLighterBrown

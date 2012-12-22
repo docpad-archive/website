@@ -5,7 +5,7 @@ return  unless collection
 _ = @underscore
 
 # Menu
-ul typeof:'dc:collection', ->
+ul '.list-menu-categories', typeof:'dc:collection', ->
 
 	# Categories
 	categories = _.uniq collection.pluck('category')

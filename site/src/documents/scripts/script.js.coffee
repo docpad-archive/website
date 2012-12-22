@@ -9,10 +9,12 @@ class App extends BevryApp
 	onDomReady: =>
 		$webchat = $('.webchat')
 		$iframe = $webchat.find('iframe')
-		$wrapper = $webchat.find('.wrapper').hide()
+		$wrapper = $webchat.find('.wrapper')
 		$close = $webchat.find('.close')
 		$open = $webchat.find('.open')
+
 		$wrapper
+			.hide()
 			.resizable(
 				alsoResize: $iframe
 				handles: "e"
@@ -23,9 +25,12 @@ class App extends BevryApp
 				$webchat.add($iframe).height(ui.size.height)
 				$webchat.add($iframe).width(ui.size.width)
 				$iframe.show()
-		$close.add($open).on 'click', ->
-			$wrapper.toggle()
-			$open.toggle()
+		$close.add($open)
+			.on 'click', ->
+				$wrapper.toggle()
+				$open.toggle()
+
+		$webchat.show()
 
 		# Super
 		super

@@ -20,10 +20,31 @@ class App extends BevryApp
 
 		# Remote has navSecondary so ensure we have it locally
 		else
+			# Add our navSecondary
 			if $navSecondaryLocal.length is 0
 				$('.container').prepend($navSecondaryRemote)
+
+			# Update our active menu and item
 			else
-				$navSecondaryLocal.replaceWith($navSecondaryRemote)
+				# Remove active menu and item
+				$navSecondaryLocal.find('.active').removeClass('active').addClass('inactive')
+
+				# Discover active menu and item in rmeote
+				$activeMenuRemote = $navSecondaryRemote.find('.list-menu-category.active')
+				$activeItemRemote = $activeMenuRemote.find('.list-menu-item.active')
+
+				# Update corresponding local menu and item to be active
+				$activeMenuLocal = $navSecondaryLocal.find('.list-menu-category').eq($activeMenuRemote.index()).removeClass('inactive').addClass('active')
+				$activeItemLocal = $activeMenuLocal.find('.list-menu-item').eq($activeItemRemote.index()).removeClass('inactive').addClass('active')
+
+		# Super
+		super
+
+	# Scroll Spy
+	scrollSpy: =>
+		# Handle
+		sidebarFixed = window.scrollY > $('#content').offset().top
+		$('.nav-secondary').toggleClass('fixed', sidebarFixed)
 
 		# Super
 		super

@@ -75,17 +75,10 @@ a
 // ====================================
 // Layout and structure
 
-.nav-main
-.hero
-.support div
-.about
-.container
 body > footer
+.nav-main
+.container
 	margin: 0 auto
-
-body > footer
-.nav-main
-.container
 	width: 90%
 	position: relative
 
@@ -192,7 +185,7 @@ body > footer
 
 		li
 			background: url(../img/splash-features.png) no-repeat 4px 100%
-			float: left
+			display: inline-block
 			margin-right: 50px
 			min-height: 256px
 			width: 152px
@@ -209,7 +202,8 @@ body > footer
 
 	.support
 		background: colorLightGold
-		p { color: colorDarkestBrown }
+		p
+			color: colorDarkestBrown
 
 	.providers
 		list-style: none
@@ -363,11 +357,13 @@ body > footer
 	box-shadow: 0 -1px 0 colorLightBrown
 	min-height: 100px
 
-	a:hover { text-decoration: underline }
-	span
-		float: left
+	a:hover
+		text-decoration: underline
 
-		a { color: colorBlue }
+	.about
+		float: left
+		a
+			color: colorBlue
 
 .nav-footer
 	float: right

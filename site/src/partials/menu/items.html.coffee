@@ -45,3 +45,4 @@ items.forEach (item) ->
 		# Display the content if it exists
 		if showContent and item.contentRenderedWithoutLayouts
 			div ".list-#{type}-content", property:"dc:content", -> contentRenderedWithoutLayouts
+

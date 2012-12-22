@@ -77,7 +77,7 @@ docpadConfig = {
       description: "Empower your website frontends with layouts, meta-data, pre-processors (markdown, jade, coffeescript, etc.), partials, skeletons, file watching, querying, and an amazing plugin system. Use it either standalone, as a build script, or even as a module in a bigger system. Either way, DocPad will streamline your web development process allowing you to craft full-featured websites quicker than ever before.",
       keywords: "bevry, bevryme, balupton, benjamin lupton, docpad, node, node.js, javascript, coffeescript, query engine, queryengine, backbone.js, cson",
       styles: ['/vendor/highlight.css', '/vendor/normalize.css', '/vendor/h5bp.css', '/styles/style.css'],
-      scripts: ["/vendor/jquery.js", "/vendor/log.js", "/vendor/jquery.scrollto.js", "/vendor/modernizr.js", "/vendor/history.js", "/scripts/script.js"]
+      scripts: ["/vendor/jquery.js", "/vendor/log.js", "/vendor/jquery.scrollto.js", "/vendor/modernizr.js", "/vendor/history.js", "/scripts/historyjsit.js", "/scripts/bevry.js", "/scripts/script.js"]
     },
     getName: getName,
     getProjectName: getProjectName,

@@ -34,16 +34,13 @@
 		"docpad-plugin-stylus": "2.1.x",
 		"docpad-plugin-text": "2.x",
 		"feedr": "2.4.x",
-		"bal-util": "1.15.x",
+		"bal-util": "~1.15.3",
 		"moment": "1.7.x",
 		"underscore": "1.4.x",
 		"underscore.string": "2.3.x",
 		"request": "2.11.x"
 	},
 	"devDependencies": {
-		"passport": "0.1.x",
-		"passport-github": "0.1.x",
-		"mongodb": "1.1.x",
 		"coffee-script": "1.4.x",
 		"docpad-plugin-livereload": "2.x"
 	},

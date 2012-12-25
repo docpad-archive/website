@@ -1,5 +1,5 @@
 # Prepare
-{ itemSort, collection, getCategoryName } = @
+{ itemSort, collection } = @
 return  unless collection
 
 _ = @underscore

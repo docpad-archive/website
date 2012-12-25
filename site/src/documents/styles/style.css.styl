@@ -229,6 +229,9 @@ a
 	width: 100%
 	padding-left: 200px
 
+.page.nonav
+	padding-left: 0
+
 .mainbar
 	font-weight: 400
 	margin-bottom: 80px
@@ -446,6 +449,31 @@ a
 		padding: 2px 8px
 
 		&:hover { color: colorBrown }
+
+// ====================================
+// Index Page
+
+.column
+	display: inline-block
+	overflow: hidden
+	width: 21%
+	margin: 0 1.7%
+	float: left
+	min-width: 210px
+	min-height: 365px
+
+	// Category
+	h2 { color: colorDarkGold }
+
+	// Items
+	.list-menu-items
+		padding: 0 1em
+		list-style: none
+
+		// Item
+		.list-menu-item
+			padding-bottom: .25em
+			a { color: colorDarkestBrown }
 
 // ====================================
 // Main Content

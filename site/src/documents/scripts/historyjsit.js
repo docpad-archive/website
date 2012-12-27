@@ -111,6 +111,13 @@
 				url = State.url,
 				relativeUrl = url.replace(rootUrl,'');
 
+			// Check
+			var fixedUrl = url.replace('/docpad/','/docs/');
+			if ( fixedUrl !== url ) {
+				History.replaceState(null, null, fixedUrl);
+				return;
+			}
+
 			// Set Loading
 			$body.addClass('loading');
 

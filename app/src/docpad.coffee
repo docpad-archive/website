@@ -197,10 +197,7 @@ docpadConfig =
 				category = categoryDirectory.replace(/^[\-0-9]+/,'')
 				categoryName = getCategoryName(category)
 				name = a.basename.replace(/^[\-0-9]+/,'')
-				url = "/docs/#{category}-#{name}.html"
-				slug = "/docs/#{name}"
-				compatibility = "/docpad/#{name}"
-				urls = [slug, compatibility]
+				urls = ["/docs/#{name}", "/docs/#{category}-#{name}", "/docpad/#{name}"]
 				title = "#{a.title or humanize name}"
 				pageTitle = "#{title} | #{categoryName}"
 
@@ -212,8 +209,7 @@ docpadConfig =
 					categoryDirectory
 					category
 					categoryName
-					slug
-					url
+					url: urls[0]
 					urls
 					standalone
 				})

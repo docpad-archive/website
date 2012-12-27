@@ -323,7 +323,7 @@ docpadConfig = {
           return res.send(body);
         });
       });
-      server.get(/^\/((?:node|joe|query-?engine).*)$/, function(req, res) {
+      server.get(/^\/((?:support|node|joe|query-?engine).*)$/, function(req, res) {
         var bevryUrl;
         bevryUrl = req.params[0] || '';
         return res.redirect(301, "https://bevry.me/" + bevryUrl);

@@ -93,15 +93,13 @@ footer
 	font-weight: fontMyraidNormal
 	text-transform: uppercase
 
-//h1, h2, h3, h4
-//	font-family: fontMyraid
-//	font-weight: fontMyraidBoldest
-
-h1, h2, h3, h4
+h1
+h2
+h3
+h4
 	font-family: fontFutura
 	font-weight: fontMyraidNormal
 	text-transform: uppercase
-
 
 // ------------------------------------
 // Links
@@ -358,7 +356,8 @@ a
 		margin-right: auto
 		width: 450px
 
-	.btn { font-size: 18px }
+	.btn
+		font-size: 18px
 
 	// ====================================
 	// Splash - Hero Space
@@ -419,79 +418,119 @@ a
 				color: white
 
 // ====================================
-// Secondary Navigation
+// Navigation
 
-.sidebar
-	overflow: hidden
+// Menu
+.list-menu
+	// Group
+	ul
+		padding: 0
+		marign: 0
 
-	a
+	// Title
+	.list-menu-title
+		font-size: 1em
+		margin: 0
+		font-weight: inherit
+		font-family: inherit
+		text-transform: inherit
+
+	// Link
+	.list-menu-link
 		border-left: 5px solid transparent
 		color: colorDarkestBrown
 		display: inline-block
-		font-size: 17px
 		padding: 2px 8px
+		font-weight: fontMyraidBold
+	
+	// Category
+	.list-menu-category > .list-menu-link .list-menu-title
 		font-weight: fontMyraidBoldest
-	.list-menu-item a
-		font-weight: fontMyraidNormal
+
+	// Item
+	.list-menu-item .list-menu-link
+		text-transform: none
 		&:hover
 			color: colorDarkGold
-	.list-menu-item.active a
+
+	// Item Active
+	.list-menu-item.active .list-menu-link
 		font-weight: fontMyraidBold
 		color: colorDarkGold
 
-	.list-menu-categories
-		&:first-child
-			border-left: 2px solid colorLightGold
-			padding: 0
-
-	.list-menu-category
-		padding: 5px 0
-
-		&.active > a
-			border-color: colorLightGold
-		&.inactive
-			.list-menu-items
-				max-height: 0
-		&:hover
-			.list-menu-items
-				max-height: 300px
-
-	.list-menu-items
-		text-transform: none
-		margin: 5px 0
-		padding-left: 15px
-		overflow: hidden
-		transition: max-height 0.5s ease-out
-		height: auto
-		max-height: 300px
-
-// ====================================
-// Index Page
-
-.column
-	display: inline-block
+// Sidebar
+.sidebar
 	overflow: hidden
-	width: 21%
-	margin: 0 1.7%
-	float: left
-	min-width: 210px
-	min-height: 365px
 
-	// Category
-	h2
-		color: colorDarkGold
+	// Menu
+	.list-menu
+		// Category Group
+		.list-menu-categories
+			&:first-child
+				border-left: 2px solid colorLightGold
+				padding: 0
 
-	// Items
-	.list-menu-items
-		padding: 0 1em
-		list-style: none
+		// Category
+		.list-menu-category
+			padding: 5px 0
 
-		// Item
-		.list-menu-item
-			padding-bottom: .25em
-			a
-				font-weight: fontMyraidBold
-				color: colorDarkestBrown
+			&.active > .list-menu-link
+				border-color: colorLightGold
+			&.inactive
+				.list-menu-items
+					max-height: 0
+			&:hover
+				.list-menu-items
+					max-height: 300px
+
+		// Item Group
+		.list-menu-items
+			margin: 5px 0
+			padding-left: 15px
+			overflow: hidden
+			transition: max-height 0.5s ease-out
+			height: auto
+			max-height: 300px
+
+// Documentation Index Page
+.docs
+	// Menu
+	.list-menu
+		margin-top: 3em
+		//margin-left: -4%
+
+		// Category
+		.list-menu-category
+			display: inline-block
+			overflow: hidden
+			width: 21%
+			//margin-left: 4%
+			margin: 0 2%
+			float: left
+			min-width: 210px
+			min-height: 365px
+
+			> .list-menu-link
+				padding: 0
+				border: none
+				color: colorDarkGold
+				.list-menu-title
+					font-size: 1.5em
+					font-family: fontFutura
+					font-weight: fontMyraidNormal
+
+		// Item Group
+		.list-menu-items
+			padding: 1em 3%
+			background: white
+			border-radius: 3px
+
+			// Item
+			.list-menu-item
+				a
+					font-weight: fontMyraidBold
+					color: colorDarkestBrown
+
 
 // ====================================
 // Main Content

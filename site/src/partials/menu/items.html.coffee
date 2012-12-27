@@ -31,7 +31,7 @@ items.forEach (item) ->
 		# Link
 		a ".list-#{type}-link", href:url, ->
 			# Title
-			span ".list-#{type}-title", property:"dc:title", -> title
+			h3 ".list-#{type}-title", property:"dc:title", -> title
 
 			# Date
 			if showDate and moment

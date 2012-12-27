@@ -1,8 +1,8 @@
 module.exports = {
 	top:
-		'Intro': '/docpad/intro'
-		'Install': '/docpad/install'
-		'Start': '/docpad/start'
+		'Intro': '/docs/intro'
+		'Install': '/docs/install'
+		'Start': '/docs/start'
 		'Documentation': '/docs'
 
 	bottom:

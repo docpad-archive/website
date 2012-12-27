@@ -104,11 +104,13 @@ h4
 // ------------------------------------
 // Links
 
+a
+	text-decoration: none
 a:not(.hover-link),.link
 	cursor: pointer
 	text-decoration: none
 	color: colorLink
-	font-weight: fontMyraidBoldest
+	font-weight: fontMyraidBold
 .hover-link
 	cursor: pointer
 	text-decoration: none
@@ -171,9 +173,6 @@ em
 nav
 nav li
 	list-style: none
-
-a
-	text-decoration: none
 
 .btn
 	background-color: colorLightGold
@@ -576,7 +575,7 @@ a
 
 	a
 		color: colorLink
-		font-weight: fontMyraidBoldest
+		font-weight: fontMyraidBold
 		&:hover
 			text-decoration: underline
 
@@ -613,6 +612,9 @@ a
 		clearfix()
 
 	.prev-next
+		a
+			font-weight: fontMyraidBoldest
+
 		.prev
 			float: left
 			margin-right: 15px
@@ -633,8 +635,10 @@ a
 	border-top: 1px solid white
 	box-shadow: 0 -1px 0 colorLightBrown
 
-	a:hover
-		text-decoration: underline
+	a
+		font-weight: fontMyraidBoldest
+		&:hover
+			text-decoration: underline
 
 	.about
 	.links

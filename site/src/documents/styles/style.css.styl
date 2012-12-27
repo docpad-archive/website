@@ -49,7 +49,6 @@ fontMyraidLight = 500
 fontMyraidLightest = 500
 fontFutura = "futura-pt", Helvetica, Arial, sans-serif
 fontGeorgia = Georgia, Times, serif
-fontConsolas = Consolas, Menlo, Monaco, 'Source Code Pro', 'courier new', monospace, serif
 
 
 // Colors
@@ -110,7 +109,7 @@ a:not(.hover-link),.link
 	cursor: pointer
 	text-decoration: none
 	color: colorLink
-	font-weight: fontMyraidBold
+	font-weight: bold
 .hover-link
 	cursor: pointer
 	text-decoration: none
@@ -124,20 +123,23 @@ a:hover,.hover-link:hover
 
 code
 pre code
-	font-family: fontConsolas
-	font-size: 0.75em
-	border-radius: 0.25em
+	font-family: Consolas, Monaco, 'Source Code Pro', 'courier new', monospace, serif
+	border-radius: 0.5em
 	background: colorLightestGold
+	border: 1px solid hsl(186, 8%, 88%)
 	color: hsl(186, 8%, 15%)
 
 code
+	font-size: 0.75em
+	font-weight: 500
 	padding: 0.05em 0.5em 0em
 	white-space: pre
 	display: inline-block
 	margin: 0.4em 0.2em 0.2em 0
-	border: 1px solid hsl(186, 8%, 88%)
 
 pre code
+	font-size: 0.7em
+	font-family: Monaco, Consolas, 'Source Code Pro', 'courier new', monospace, serif
 	display: block
 	margin: 2.5em 0
 	padding: 1em 1.5em
@@ -214,7 +216,7 @@ a
 	top: 4em
 	left: 5%
 
-	width: 17.88%
+	width: 15%
 	max-width: 200px
 
 	opacity: 1
@@ -284,8 +286,7 @@ a
 .topbar
 	border-bottom: 1px solid colorLightBrown
 	box-shadow: 0 1px 0 white
-	padding-top: 1.2em
-	line-height: 1.5em
+	padding: 1.2em 0 0.6em
 
 	.links
 		display: inline
@@ -296,18 +297,15 @@ a
 		display: inline-block
 		font-size: 15px
 		margin-right: 25px
-		padding-bottom: 0.6em
 
 		&:hover, &.active
 			border-color: colorLightGold
-			text-decoration: none
 
 	.logo
 		background: transparent url(/img/logo-docpad.png) no-repeat 0 58%
 		height: 25px
 		text-indent: -9999em
 		width: 141px
-		padding: 0
 		&:hover
 			border-color: transparent
 
@@ -320,7 +318,7 @@ a
 			border-radius: 30px
 			color: colorDarkBrown
 			font-size: 14px
-			padding: .313em 0.938em .188em 2.188em
+			padding: 5px 15px 5px 35px
 			width: 170px
 
 			&:focus
@@ -415,7 +413,6 @@ a
 		.list-menu-category
 			padding: 5px 0
 			.list-menu-items
-				text-transform: none
 				margin: 5px 0
 				padding-left: 15px
 				overflow: hidden
@@ -423,12 +420,9 @@ a
 				height: auto
 				max-height: 300px
 
-				.list-menu-item
-					&.active a
-						border-color: transparent
-						color: colorDarkGold
-					a
-						font-weight: fontMyraidNormal
+				.list-menu-item.active a
+					border-color: transparent
+					color: colorDarkGold
 
 			&.inactive
 				.list-menu-items
@@ -494,7 +488,7 @@ a
 	h1
 		margin-bottom: 0
 		font-size: 36px
-		font-weight: fontMyraidBold
+		font-weight: bold
 
 	h2
 		font-weight: fontMyraidBoldest
@@ -519,10 +513,10 @@ a
 
 	a
 		color: colorLink
-		font-weight: fontMyraidBold
+		font-weight: bold
 		&:hover { text-decoration: underline }
 
-	dl dt { font-weight: fontMyraidBold }
+	dl dt { font-weight: bold }
 	dl dd { margin: 0 0 20px 15px }
 
 	img

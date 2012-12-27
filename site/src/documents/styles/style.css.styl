@@ -49,7 +49,8 @@ fontMyraidLight = 500
 fontMyraidLightest = 500
 fontFutura = "futura-pt", Helvetica, Arial, sans-serif
 fontGeorgia = Georgia, Times, serif
-
+fontConsolas = Consolas, Menlo, Monaco, 'Source Code Pro', 'courier new', monospace, serif
+fontMonaco = Monaco, Menlo, Consolas, 'Source Code Pro', 'courier new', monospace, serif
 
 // Colors
 colorBlue = #259dcf
@@ -109,7 +110,7 @@ a:not(.hover-link),.link
 	cursor: pointer
 	text-decoration: none
 	color: colorLink
-	font-weight: bold
+	font-weight: fontMyraidBoldest
 .hover-link
 	cursor: pointer
 	text-decoration: none
@@ -123,28 +124,32 @@ a:hover,.hover-link:hover
 
 code
 pre code
-	font-family: Consolas, Monaco, 'Source Code Pro', 'courier new', monospace, serif
+	font-weight: 500
 	border-radius: 0.5em
 	background: colorLightestGold
-	border: 1px solid hsl(186, 8%, 88%)
 	color: hsl(186, 8%, 15%)
 
 code
 	font-size: 0.75em
-	font-weight: 500
-	padding: 0.05em 0.5em 0em
-	white-space: pre
+	font-family: fontConsolas
+	
 	display: inline-block
+	padding: 0.05em 0.5em 0em
 	margin: 0.4em 0.2em 0.2em 0
+	border: 1px solid hsl(186, 8%, 88%)
+	
+	white-space: pre
 
 pre code
 	font-size: 0.7em
-	font-family: Monaco, Consolas, 'Source Code Pro', 'courier new', monospace, serif
+	font-family: fontMonaco
+	
 	display: block
 	margin: 2.5em 0
 	padding: 1em 1.5em
-	line-height: 1.5em
 	border: 1px solid hsl(192, 8%, 84%)
+
+	line-height: 1.5em
 
 
 // ====================================
@@ -286,7 +291,8 @@ a
 .topbar
 	border-bottom: 1px solid colorLightBrown
 	box-shadow: 0 1px 0 white
-	padding: 1.2em 0 0.6em
+	padding-top: 1.2em
+	line-height: 1.5em
 
 	.links
 		display: inline
@@ -297,15 +303,19 @@ a
 		display: inline-block
 		font-size: 15px
 		margin-right: 25px
+		padding-bottom: 0.6em
 
-		&:hover, &.active
+		&:hover
+		&.active
 			border-color: colorLightGold
+			text-decoration: none
 
 	.logo
 		background: transparent url(/img/logo-docpad.png) no-repeat 0 58%
+		width: 141px
 		height: 25px
 		text-indent: -9999em
-		width: 141px
+		padding: 0
 		&:hover
 			border-color: transparent
 
@@ -333,9 +343,12 @@ a
 		padding: 40px 0 50px
 		text-align: center
 
-	h1 { font-size: 60px }
-	h2 { font-size: 36px }
-	h3 { font-size: 36px }
+	h1
+		font-size: 60px
+	h2
+		font-size: 36px
+	h3
+		font-size: 36px
 
 	p
 		color: colorDarkBrown
@@ -368,12 +381,17 @@ a
 			min-height: 256px
 			width: 152px
 
-			&:last-child { margin-right: 0 }
+			&:last-child
+				margin-right: 0
 
-			&.skeletons { background-position: -206px 100% }
-			&.language  { background-position: -400px 100% }
-			&.deploys   { background-position: -596px 100% }
-			&.plugins   { background-position: -806px 100% }
+			&.skeletons
+				background-position: -206px 100%
+			&.language
+				background-position: -400px 100%
+			&.deploys
+				background-position: -596px 100%
+			&.plugins
+				background-position: -806px 100%
 
 	// ====================================
 	// Splash - Support & About Sections
@@ -397,7 +415,8 @@ a
 			font-size: 20px
 			font-weight: 400
 
-			&:hover { color: white }
+			&:hover
+				color: white
 
 // ====================================
 // Secondary Navigation
@@ -405,44 +424,46 @@ a
 .sidebar
 	overflow: hidden
 
-	.list-menu-categories
-		&:first-child
-			border-left: 2px solid colorLightGold
-			padding: 0
-
-		.list-menu-category
-			padding: 5px 0
-			.list-menu-items
-				margin: 5px 0
-				padding-left: 15px
-				overflow: hidden
-				transition: max-height 0.5s ease-out
-				height: auto
-				max-height: 300px
-
-				.list-menu-item.active a
-					border-color: transparent
-					color: colorDarkGold
-
-			&.inactive
-				.list-menu-items
-					max-height: 0
-
-			&.active > a
-				border-color: colorLightGold
-
-			&:hover
-				.list-menu-items
-					max-height: 300px
-
 	a
 		border-left: 5px solid transparent
 		color: colorDarkestBrown
 		display: inline-block
 		font-size: 17px
 		padding: 2px 8px
+		font-weight: fontMyraidBoldest
+	.list-menu-item a
+		font-weight: fontMyraidNormal
+		&:hover
+			color: colorDarkGold
+	.list-menu-item.active a
+		font-weight: fontMyraidBold
+		color: colorDarkGold
 
-		&:hover { color: colorBrown }
+	.list-menu-categories
+		&:first-child
+			border-left: 2px solid colorLightGold
+			padding: 0
+
+	.list-menu-category
+		padding: 5px 0
+
+		&.active > a
+			border-color: colorLightGold
+		&.inactive
+			.list-menu-items
+				max-height: 0
+		&:hover
+			.list-menu-items
+				max-height: 300px
+
+	.list-menu-items
+		text-transform: none
+		margin: 5px 0
+		padding-left: 15px
+		overflow: hidden
+		transition: max-height 0.5s ease-out
+		height: auto
+		max-height: 300px
 
 // ====================================
 // Index Page
@@ -457,7 +478,8 @@ a
 	min-height: 365px
 
 	// Category
-	h2 { color: colorDarkGold }
+	h2
+		color: colorDarkGold
 
 	// Items
 	.list-menu-items
@@ -467,7 +489,9 @@ a
 		// Item
 		.list-menu-item
 			padding-bottom: .25em
-			a { color: colorDarkestBrown }
+			a
+				font-weight: fontMyraidBold
+				color: colorDarkestBrown
 
 // ====================================
 // Main Content
@@ -488,7 +512,7 @@ a
 	h1
 		margin-bottom: 0
 		font-size: 36px
-		font-weight: bold
+		font-weight: fontMyraidBoldest
 
 	h2
 		font-weight: fontMyraidBoldest
@@ -513,11 +537,14 @@ a
 
 	a
 		color: colorLink
-		font-weight: bold
-		&:hover { text-decoration: underline }
+		font-weight: fontMyraidBoldest
+		&:hover
+			text-decoration: underline
 
-	dl dt { font-weight: bold }
-	dl dd { margin: 0 0 20px 15px }
+	dl dt
+		font-weight: fontMyraidBoldest
+	dl dd
+		margin: 0 0 20px 15px
 
 	img
 		border: 2px solid colorLightestBrown
@@ -537,7 +564,8 @@ a
 			background: colorLightGold
 			color: white
 
-		tr:nth-child(2n+2) { background: colorLightestBrown }
+		tr:nth-child(2n+2)
+			background: colorLightestBrown
 
 	.block-footer
 		border-top: 1px dotted colorLighterBrown
@@ -549,12 +577,14 @@ a
 		.prev
 			float: left
 			margin-right: 15px
-			&:before { content: '← '}
+			&:before
+				content: '← '
 
 		.next
 			float: right
 			margin-left: 15px
-			&:after { content: ' →' }
+			&:after
+				content: ' →'
 
 
 // ====================================

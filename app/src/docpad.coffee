@@ -373,8 +373,8 @@ docpadConfig =
 						method: "POST"
 						form: balUtil.extend(
 							{
-								token: envConfig.BEVRY_PUSHOVER_TOKEN
-								user: envConfig.BEVRY_PUSHOVER_USER_KEY
+								token: process.env.BEVRY_PUSHOVER_TOKEN
+								user: process.env.BEVRY_PUSHOVER_USER_KEY
 								message: req.query
 							}
 							req.query

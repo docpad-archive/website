@@ -311,8 +311,8 @@ docpadConfig = {
           url: "https://api.pushover.net/1/messages.json",
           method: "POST",
           form: balUtil.extend({
-            token: envConfig.BEVRY_PUSHOVER_TOKEN,
-            user: envConfig.BEVRY_PUSHOVER_USER_KEY,
+            token: process.env.BEVRY_PUSHOVER_TOKEN,
+            user: process.env.BEVRY_PUSHOVER_USER_KEY,
             message: req.query
           }, req.query)
         }, function(_req, _res, body) {

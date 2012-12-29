@@ -102,6 +102,16 @@ docpadConfig =
 				bevry, bevryme, balupton, benjamin lupton, docpad, node, node.js, javascript, coffeescript, query engine, queryengine, backbone.js, cson
 				"""
 
+			# Services
+			services:
+				disqus: 'docpad'
+				ircwebchat: 'docpad'
+				gauges: '50dead2bf5a1f541d7000008'
+				googleAnalytics: 'UA-35505181-2'
+				mixpanel: 'd0f9b33c0ec921350b5419352028577e'
+				reinvigorate: '89t63-62ne18262h'
+
+			# Styles
 			styles: [
 				"/vendor/ui-lightness/jquery-ui-1.9.2.custom.css"
 				'/vendor/highlight.css'
@@ -228,8 +238,13 @@ docpadConfig =
 
 	environments:
 		development:
-				coffeekup:
-					format: false
+			templateData:
+				site:
+					services:
+						gauges: false
+						googleAnalytics: false
+						mixpanel: false
+						reinvigorate: false
 
 
 	# =================================

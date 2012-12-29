@@ -73,6 +73,38 @@ colorAccent = colorDarkGold
 
 
 // ====================================
+// Mixins
+
+// Icons
+mixinIconPageUp()
+	&:before
+		content: '↑'
+mixinIconPageDown()
+	&:before
+		content: '↓'
+mixinIconPagePrev()
+	&:before
+		content: '←'
+mixinIconPageNext()
+	&:before
+		content: '→'
+mixinIconSectionUp()
+	&:before
+		content: '⇧'
+mixinIconSectionDown()
+	display: inline-block
+	transform: rotate(-180deg)
+	&:before
+		content: '⇧'
+mixinIconAccountPointer()
+	display: inline-block
+	transform: rotate(-180deg)
+	transition: all 0.5s
+	&:before
+		content: '▴'
+
+
+// ====================================
 // Fonts
 
 body
@@ -132,18 +164,18 @@ pre code
 code
 	font-size: 0.75em
 	font-family: fontConsolas
-	
+
 	display: inline-block
 	padding: 0.05em 0.5em 0em
 	margin: 0.4em 0.2em 0.2em 0
 	border: 1px solid hsl(186, 8%, 88%)
-	
+
 	white-space: pre
 
 pre code
 	font-size: 0.7em
 	font-family: fontMonaco
-	
+
 	display: block
 	margin: 2.5em 0
 	padding: 1em 1.5em
@@ -218,8 +250,8 @@ nav li
 	top: 4em
 	left: 5%
 
-	width: 15%
-	max-width: 200px
+	width: 200px
+	word-wrap: break-word
 
 	opacity: 1
 	transition: all 0.2s ease-out
@@ -238,7 +270,6 @@ nav li
 
 .mainbar
 	font-weight: 400
-	margin-bottom: 80px
 	margin-top: 40px
 	clearfix()
 
@@ -441,7 +472,7 @@ nav li
 		display: inline-block
 		padding: 2px 8px
 		font-weight: fontMyraidBold
-	
+
 	// Category
 	.list-menu-category > .list-menu-link .list-menu-title
 		font-weight: fontMyraidBoldest
@@ -612,20 +643,45 @@ nav li
 		clearfix()
 
 	.prev-next
+		position: relative
+		height: 2em
+
 		a
 			font-weight: fontMyraidBoldest
 
 		.prev
-			float: left
-			margin-right: 15px
-			&:before
-				content: '← '
-
 		.next
-			float: right
-			margin-left: 15px
-			&:after
-				content: ' →'
+		.up
+			display: block
+			position: absolute
+			bottom: 0
+			height: 2em
+			width: 33%
+			text-decoration: none
+			&:hover
+				opacity: 1
+				.title
+					text-decoration: underline
+			.icon
+				display: block
+				height: auto
+				width: auto
+
+		.prev
+			left: 0
+			text-align: left
+			.icon
+				mixinIconPagePrev()
+		.next
+			right: 0
+			text-align: right
+			.icon
+				mixinIconPageNext()
+		.up
+			left: 33%
+			text-align: center
+			.icon
+				mixinIconPageUp()
 
 
 // ====================================
@@ -655,4 +711,89 @@ nav li
 		a
 			color: colorDarkestBrown
 			margin-left: 15px
+
+
+
+// ====================================
+// Layout: Responsive
+// Write your responsive layout styles here
+// Below is merely an example of how this should work
+
+// Disable search bar
+@media screen and (max-width: 1000px)
+	.topbar
+		.search
+			display: none
+	.webchat
+		position: absolute
+		left: -1000px
+		top: -1000px
+
+// Remove side padding
+@media screen and (max-width: 900px)
+	.container
+		width: 100%
+	.sidebar
+	.topbar
+		left: 0
+	.topbar
+		width: 100%
+
+// Make top menu two rows
+// Decrease sidebar width and font size
+@media screen and (max-width: 730px)
+	.topbar
+		text-align: center
+		.links
+			padding-top: 1em
+			display: block
+	.sidebar
+		top: 6em
+		width: 150px
+		.list-menu
+			font-size: 80%
+	.page
+		padding-left: 150px
+
+// Remove sidebar
+@media screen and (max-width: 650px)
+	.sidebar
+		display: none
+	.page
+		padding-left: 0
+		width: 100%
+	.bottombar
+		margin-top: 0
+
+// Make footer two rows
+@media screen and (max-width: 450px)
+	.bottombar
+		text-align: center
+		.about
+		.links
+			float: none
+		.links
+			display: none
+
+// Make main nav absolute instead of fixed
+@media screen and (max-height: 650px)
+	.topbar
+		position: relative
+		width: 100%
+		left: 0
+	.sidebar
+		position: relative
+		left: 0
+		top: 0
+		float: left
+	.mainbar
+		margin-top: 0
+	.page
+		padding-top: 0
+	.bottombar
+		margin-top: 0
+	.webchat
+		position: absolute
+		left: -1000px
+		top: -1000px
 

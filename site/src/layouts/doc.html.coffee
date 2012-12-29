@@ -38,4 +38,7 @@ section '#content', ->
 				if nextModel
 					url: nextModel.attributes.url
 					title: nextModel.attributes.title
+			up:
+				url: "/docs/"
+				title: 'Documentation'
 		})

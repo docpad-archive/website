@@ -17,12 +17,12 @@ class App extends BevryApp
 			wrapperIsVisible = $wrapper.is(':visible')
 			if wrapperIsVisible
 				$webchat.add($iframe,$wrapper)
-					.height Math.max($iframe.height(),500)
-					.width  Math.max($iframe.width(),350)
+					.height(Math.max($iframe.height(),500))
+					.width(Math.max($iframe.width(),350))
 			else
 				$webchat.add($iframe,$wrapper)
-					.height $open.height()
-					.width  $open.width()
+					.height($open.height())
+					.width($open.width())
 
 		$wrapper
 			.hide()

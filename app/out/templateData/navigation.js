@@ -5,11 +5,13 @@ module.exports = {
     'Intro': '/docs/intro',
     'Install': '/docs/install',
     'Start': '/docs/start',
+    'Showcase': '/docs/showcase',
+    'Plugins': '/docs/plugins',
     'Documentation': '/docs'
   },
   bottom: {
     'DocPad': '/',
     'GitHub': 'https://github.com/bevry/docpad',
-    'Support': 'http://bevry.me/support'
+    'Support': '/support'
   }
 };

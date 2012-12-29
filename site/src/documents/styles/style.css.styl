@@ -357,7 +357,7 @@ nav li
 			border-radius: 30px
 			color: colorDarkBrown
 			font-size: 14px
-			padding: 5px 15px 5px 35px
+			padding: .313em 0.938em .188em 2.188em
 			width: 170px
 
 			&:focus
@@ -369,59 +369,61 @@ nav li
 
 .splash
 	section
-		padding: 40px 0 50px
+		margin: 4em 0
+		padding: 1.5em 0
 		text-align: center
 
 	h1
-		font-size: 60px
+		font-size: 4em
 	h2
-		font-size: 36px
+		font-size: 2.5em
 	h3
-		font-size: 36px
+		font-size: 2.5em
 
 	p
 		color: colorDarkBrown
-		font-size: 17px
-		line-height: 29px
+		font-size: 1.1em
+		line-height: 1.6em
 		margin-left: auto
 		margin-right: auto
-		width: 450px
+		max-width: 450px
 
 	.btn
-		font-size: 18px
+		font-size: 1.5em
+
 
 	// ====================================
 	// Splash - Hero Space
 
-	.hero
-		padding: 50px 0 90px
-		text-align: center
-
 	.overview
-		font-size: 18px;
-		line-height: 23px;
-		list-style: none;
-		margin: 70px 0 0;
-		padding: 0;
+		font-family: fontFutura
+		font-size: 1.4em
+		line-height: 1.2em
+		list-style: none
+		padding: 3em 0 1em
+		width: 90%
+		margin: 0 auto
 
 		li
-			background: url(../img/splash-features.png) no-repeat 4px 100%
 			display: inline-block
-			margin-right: 50px
-			min-height: 256px
-			width: 152px
+			margin: 0 1%
+			width: 17%
 
-			&:last-child
-				margin-right: 0
+			.image
+				background: url(../img/splash-features.png) no-repeat 4px 100%
+				width: 152px
+				height: 256px
+				margin-top: -1.5em
 
-			&.skeletons
+			&.skeletons .image
 				background-position: -206px 100%
-			&.language
+			&.language .image
 				background-position: -400px 100%
-			&.deploys
+			&.deploys .image
 				background-position: -596px 100%
-			&.plugins
+			&.plugins .image
 				background-position: -806px 100%
+
 
 	// ====================================
 	// Splash - Support & About Sections
@@ -433,16 +435,15 @@ nav li
 
 	.providers
 		list-style: none
-		margin-top: 60px
-		padding: 0
+		padding: 2em 0 0
 
 		li
 			display: inline-block
-			margin: 0 40px 20px
+			margin: 0 3em 2em
 
 		a
 			color: colorLightestGold
-			font-size: 20px
+			font-size: 1.4em
 			font-weight: 400
 
 			&:hover
@@ -471,7 +472,7 @@ nav li
 		border-left: 5px solid transparent
 		color: colorDarkestBrown
 		display: inline-block
-		padding: 2px 8px
+		padding: 0.15em 0.5em
 		font-weight: fontMyraidBold
 
 	// Category
@@ -517,7 +518,7 @@ nav li
 		// Item Group
 		.list-menu-items
 			margin: 5px 0
-			padding-left: 15px
+			padding-left: 1em
 			overflow: hidden
 			transition: max-height 0.5s ease-out
 			height: auto
@@ -573,6 +574,8 @@ nav li
 	padding: 0.5em 3%
 	background: white
 	border-radius: 3px
+	word-wrap: break-word
+	overflow: hidden
 
 	.section-wrapper
 		display:none
@@ -581,12 +584,12 @@ nav li
 
 	h1
 		margin-bottom: 0
-		font-size: 36px
+		font-size: 2.5em
 		font-weight: fontMyraidBoldest
 
 	h2
 		font-weight: fontMyraidBoldest
-		font-size: 26px
+		font-size: 1.8em
 		margin-top: 4em
 
 	.compact
@@ -594,11 +597,11 @@ nav li
 			color: colorLink
 
 	h3
-		font-size: 22px
+		font-size: 1.5em
 		margin-top: 3em
 
 	h4
-		font-size: 18px
+		font-size: 1.2em
 		margin-top: 2.5em
 
 	h2
@@ -614,7 +617,7 @@ nav li
 	dl dt
 		font-weight: fontMyraidBoldest
 	dl dd
-		margin: 0 0 20px 15px
+		margin: 0 0 1.4em 1.1em
 
 	img
 		border: 2px solid colorLightestBrown
@@ -623,12 +626,13 @@ nav li
 		max-width: 100%
 
 	table
-		font-size: 14px
+		font-size: 1em
 		margin: 2em 0
 		width: 100%
 
 		th
-		td { padding: 10px }
+		td
+			padding: 0.8em
 
 		th
 			background: colorLightGold
@@ -699,7 +703,7 @@ nav li
 
 	.about
 	.links
-		font-size: 15px
+		font-size: 1em
 		margin: 1em 0
 
 	.about
@@ -711,7 +715,7 @@ nav li
 		float: right
 		a
 			color: colorDarkestBrown
-			margin-left: 15px
+			margin-left: 1em
 
 
 
@@ -725,6 +729,10 @@ nav li
 	.topbar
 		.search
 			display: none
+	.splash
+		.overview
+			li
+				zoom: 0.75
 	.webchat
 		position: absolute
 		left: -1000px
@@ -740,14 +748,15 @@ nav li
 	.topbar
 		width: 100%
 
-// Make top menu two rows
-// Decrease sidebar width and font size
 @media screen and (max-width: 730px)
+	// Make top menu two rows
 	.topbar
 		text-align: center
 		.links
 			padding-top: 1em
 			display: block
+
+	// Decrease sidebar width and font size
 	.sidebar
 		top: 6em
 		width: 150px
@@ -756,37 +765,14 @@ nav li
 	.page
 		padding-left: 150px
 
-// Remove sidebar
-@media screen and (max-width: 650px)
-	.sidebar
-		display: none
-	.page
-		padding-left: 0
-		width: 100%
-	.bottombar
-		margin-top: 0
-
-// Make footer two rows
-@media screen and (max-width: 450px)
-	.bottombar
-		text-align: center
-		.about
-		.links
-			float: none
-		.links
-			display: none
-
-// Make main nav absolute instead of fixed
-@media screen and (max-height: 650px)
+	// Make main nav absolute instead of fixed
 	.topbar
 		position: relative
 		width: 100%
 		left: 0
-	.sidebar
-		position: relative
-		left: 0
+	.sidebar.fixed
 		top: 0
-		float: left
+		opacity: 1
 	.mainbar
 		margin-top: 0
 	.page
@@ -798,3 +784,64 @@ nav li
 		left: -1000px
 		top: -1000px
 
+	// Shrink features even more
+	.splash
+		.overview
+			li
+				zoom: 0.5
+				//.title
+				//	font-size: 1.6em
+
+@media screen and (max-width: 650px)
+	// Remove sidebar
+	.sidebar
+		display: none
+	.page
+		font-size: 95%
+		padding-left: 0
+		width: 100%
+	.splash
+		font-size: 80%
+	.bottombar
+		margin-top: 0
+
+	.block
+		h2
+			margin-top: 3em
+		h3
+			margin-top: 2.5em
+		h4
+			margin-top: 2.1em
+
+	// Make footer two rows
+	.bottombar
+		text-align: center
+		.about
+		.links
+			float: none
+
+
+@media screen and (max-width: 450px)
+	// Hide the links
+	.bottombar
+		.links
+			display: none
+
+	code
+		word-wrap: break-word
+	.page
+		font-size: 90%
+	.splash
+		font-size: 65%
+		p
+			font-size: 130%
+
+	.prev-next
+		font-size: 80%
+	.block
+		h2
+			margin: 2.3em 0 1em
+		h3
+			margin: 2.2em 0 1em
+		h4
+			margin: 2.1em 0 1em

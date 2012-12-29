@@ -254,7 +254,7 @@ docpadConfig =
 			repos =
 				'docpad-documentation':
 					path: pathUtil.join(config.documentsPaths[0],'docs')
-					url:'git://github.com/bevry/docpad-documentation.git'
+					url: 'git://github.com/bevry/docpad-documentation.git'
 			for own repoKey,repoValue of repos
 				tasks.push repoValue, (complete) ->
 					balUtil.initOrPullGitRepo(balUtil.extend({

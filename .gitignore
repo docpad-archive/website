@@ -17,4 +17,4 @@ env.coffee
 .env
 
 site/out
-site/src/docs
+site/src/documents/docs

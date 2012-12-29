@@ -27,5 +27,5 @@ aside '.webchat', ->
 	div '.wrapper', ->
 		iframe src:'http://webchat.freenode.net/?randomnick=1&channels=docpad', ->
 		div '.close', -> text 'X'
-	div '.open', ->
+	a '.open', href:'http://webchat.freenode.net/?channels=docpad', ->
 		text 'IRC Chat'

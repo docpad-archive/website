@@ -78,6 +78,14 @@ docpadConfig = {
       title: "DocPad - Streamlined Web Development",
       description: "Empower your website frontends with layouts, meta-data, pre-processors (markdown, jade, coffeescript, etc.), partials, skeletons, file watching, querying, and an amazing plugin system. Use it either standalone, as a build script, or even as a module in a bigger system. Either way, DocPad will streamline your web development process allowing you to craft full-featured websites quicker than ever before.",
       keywords: "bevry, bevryme, balupton, benjamin lupton, docpad, node, node.js, javascript, coffeescript, query engine, queryengine, backbone.js, cson",
+      services: {
+        disqus: 'docpad',
+        ircwebchat: 'docpad',
+        gauges: '50dead2bf5a1f541d7000008',
+        googleAnalytics: 'UA-35505181-2',
+        mixpanel: 'd0f9b33c0ec921350b5419352028577e',
+        reinvigorate: '89t63-62ne18262h'
+      },
       styles: ["/vendor/ui-lightness/jquery-ui-1.9.2.custom.css", '/vendor/highlight.css', '/vendor/normalize.css', '/vendor/h5bp.css', '/styles/style.css'],
       scripts: ["/vendor/jquery.js", "/vendor/jquery-ui-1.9.2.custom.js", "/vendor/log.js", "/vendor/jquery.scrollto.js", "/vendor/modernizr.js", "/vendor/history.js", "/scripts/historyjsit.js", "/scripts/bevry.js", "/scripts/script.js"]
     },
@@ -179,8 +187,15 @@ docpadConfig = {
   },
   environments: {
     development: {
-      coffeekup: {
-        format: false
+      templateData: {
+        site: {
+          services: {
+            gauges: false,
+            googleAnalytics: false,
+            mixpanel: false,
+            reinvigorate: false
+          }
+        }
       }
     }
   },

@@ -14,12 +14,15 @@ class App extends BevryApp
 		$open = $webchat.find('.open')
 
 		normalizeHeights = ->
-			if $wrapper.is(':visible')
-				$webchat.height($iframe.height())
-				$webchat.width($iframe.width())
+			wrapperIsVisible = $wrapper.is(':visible')
+			if wrapperIsVisible
+				$webchat.add($iframe,$wrapper)
+					.height Math.max($iframe.height(),500)
+					.width  Math.max($iframe.width(),350)
 			else
-				$webchat.height($open.height())
-				$webchat.width($open.width())
+				$webchat.add($iframe,$wrapper)
+					.height $open.height()
+					.width  $open.width()
 
 		$wrapper
 			.hide()
@@ -34,7 +37,9 @@ class App extends BevryApp
 				$webchat.add($iframe).width(ui.size.width)
 				$iframe.show()
 		$close.add($open)
-			.on 'click', ->
+			.on 'click', (event) ->
+				event.preventDefault()
+				event.stopImmediatePropagation()
 				$wrapper.toggle()
 				$open.toggle()
 				normalizeHeights()

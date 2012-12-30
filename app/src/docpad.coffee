@@ -330,8 +330,8 @@ docpadConfig =
 
 			# Contributors
 			contributorFeeds = [
-				"https://api.github.com/users/docpad/repos?client_id=#{process.env.BEVRY_GITHUB_CLIENT_ID}&client_secret=#{process.env.BEVRY_GITHUB_CLIENT_SECRET}"
-				"https://api.github.com/users/bevry/repos?client_id=#{process.env.BEVRY_GITHUB_CLIENT_ID}&client_secret=#{process.env.BEVRY_GITHUB_CLIENT_SECRET}"
+				"https://api.github.com/users/docpad/repos?per_page=100&client_id=#{process.env.BEVRY_GITHUB_CLIENT_ID}&client_secret=#{process.env.BEVRY_GITHUB_CLIENT_SECRET}"
+				"https://api.github.com/users/bevry/repos?per_page=100&client_id=#{process.env.BEVRY_GITHUB_CLIENT_ID}&client_secret=#{process.env.BEVRY_GITHUB_CLIENT_SECRET}"
 			]
 			feedr.readFeeds contributorFeeds, (err,feedRepos) ->
 				for repos in feedRepos

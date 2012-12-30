@@ -256,7 +256,7 @@ docpadConfig = {
         return next();
       });
       if (!(process.env.BEVRY_GITHUB_CLIENT_ID && process.env.BEVRY_GITHUB_CLIENT_SECRET)) {
-        docpad.log('warn', "Unable to Fetch Contributors!");
+        docpad.log('warn', "Cannot fetch contributors if the BEVRY_GITHUB_CLIENT_ID and BEVRY_GITHUB_CLIENT_SECRET environment variables are not set.");
         return next();
       }
       contributorFeeds = ["https://api.github.com/users/docpad/repos?client_id=" + process.env.BEVRY_GITHUB_CLIENT_ID + "&client_secret=" + process.env.BEVRY_GITHUB_CLIENT_SECRET, "https://api.github.com/users/bevry/repos?client_id=" + process.env.BEVRY_GITHUB_CLIENT_ID + "&client_secret=" + process.env.BEVRY_GITHUB_CLIENT_SECRET];
@@ -319,7 +319,7 @@ docpadConfig = {
       docpad = this.docpad;
       request = require('request');
       server.all('/pushover', function(req, res) {
-        if (__indexOf.call(docpad.getEnvironments(), 'development') >= 0) {
+        if (__indexOf.call(docpad.getEnvironments(), 'development') >= 0 || (process.env.BEVRY_PUSHOVER_TOKEN != null) === false) {
           return res.send(200);
         }
         return request({

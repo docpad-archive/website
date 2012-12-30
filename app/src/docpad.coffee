@@ -229,13 +229,19 @@ docpadConfig =
 
 
 	# =================================
-	# DocPad Plugins
+	# Plugins
 
+	# Alias stylus highlighting to css and there is no inbuilt stylus support
 	plugins:
 		highlightjs:
 			aliases:
 				stylus: 'css'
 
+
+	# =================================
+	# Environments
+
+	# Disable analytic services on the development environment
 	environments:
 		development:
 			templateData:
@@ -248,7 +254,7 @@ docpadConfig =
 
 
 	# =================================
-	# DocPad Events
+	# Events
 
 	events:
 
@@ -317,7 +323,7 @@ docpadConfig =
 			# If the GitHub Tokens are Missing, Skip Contributors
 			unless process.env.BEVRY_GITHUB_CLIENT_ID and process.env.BEVRY_GITHUB_CLIENT_SECRET
 				# Log
-				docpad.log('warn', "Unable to Fetch Contributors!")
+				docpad.log('warn', "Cannot fetch contributors if the BEVRY_GITHUB_CLIENT_ID and BEVRY_GITHUB_CLIENT_SECRET environment variables are not set.")
 
 				# Done
 				return next()
@@ -379,9 +385,10 @@ docpadConfig =
 			docpad = @docpad
 			request = require('request')
 
-			# Pushover
+			# Pushover - Optional
+			# Called by the 404 page to alert our mobile phone of missing pages
 			server.all '/pushover', (req,res) ->
-				return res.send(200)  if 'development' in docpad.getEnvironments()
+				return res.send(200)  if 'development' in docpad.getEnvironments() or process.env.BEVRY_PUSHOVER_TOKEN? is false
 				request(
 					{
 						url: "https://api.pushover.net/1/messages.json"

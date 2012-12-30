@@ -539,8 +539,7 @@ nav li
 			//margin-left: 4%
 			margin: 0 2%
 			float: left
-			min-width: 210px
-			min-height: 365px
+			min-height: 350px
 
 			> .list-menu-link
 				padding: 0
@@ -752,13 +751,36 @@ nav li
 		left: -1000px
 		top: -1000px
 
+@media screen and (max-width: 960px)
+	// Reduce doc columns
+	.docs
+		.list-menu
+			.list-menu-category
+				font-size: 90%
+				min-height: 300px
+
 @media screen and (max-width: 900px)
 	// Hide the search bar
 	.topbar
 		.search
 			display: none
 
+@media screen and (max-width: 830px)
+	// Reduce doc columns
+	.docs
+		.list-menu
+			.list-menu-category
+				width: 23%
+				margin: 0 1%
+
 @media screen and (max-width: 768px)
+	// Reduce doc columns per row to 2
+	.docs
+		.list-menu
+			.list-menu-category
+				width: 47%
+				margin: 1em 1.5%
+
 	// Make top menu two rows
 	.topbar
 		text-align: center
@@ -858,3 +880,13 @@ nav li
 			margin: 2.2em 0 1em
 		h4
 			margin: 2.1em 0 1em
+
+
+@media screen and (max-width: 320px)
+	// Reduce doc columns per row to 1
+	.docs
+		.list-menu
+			.list-menu-category
+				width: 100%
+				margin: 1em 0
+				min-height: inherit

@@ -232,12 +232,12 @@ nav li
 	width: 90%
 	position: relative
 	background: hsl(0, 0%, 95%)
+	clear: both
 
 .bottombar
 	margin-top: 3em
 	width: 100%
-	height: 50px
-	padding-bottom: 20px
+	min-height: 4em
 
 .topbar
 	top: 0
@@ -693,18 +693,16 @@ nav li
 // Footer
 
 .bottombar
+	font-size: 1em
 	border-top: 1px solid white
 	box-shadow: 0 -1px 0 colorLightBrown
+	padding: 1em 0
+	line-height: 2em
 
 	a
 		font-weight: fontMyraidBoldest
 		&:hover
 			text-decoration: underline
-
-	.about
-	.links
-		font-size: 1em
-		margin: 1em 0
 
 	.about
 		float: left
@@ -715,7 +713,7 @@ nav li
 		float: right
 		a
 			color: colorDarkestBrown
-			margin-left: 1em
+			margin: 0 0.5em
 
 
 
@@ -724,31 +722,43 @@ nav li
 // Write your responsive layout styles here
 // Below is merely an example of how this should work
 
-// Disable search bar
-@media screen and (max-width: 1000px)
-	.topbar
-		.search
-			display: none
+@media screen and (max-width: 1024px)
+	// Shrink splash overview
 	.splash
 		.overview
 			li
 				zoom: 0.75
+
+	// Remove side padding
+	.container
+		width: 100%
+	.topbar
+		width: 100%
+	.topbar
+	.sidebar
+		left: 0
+
+	// Remove margin about the bottombar
+	.bottombar
+		margin-top: 2em
+		.about
+			margin-left: 2%
+		.links
+			margin-right: 2%
+
+	// Hide the webchat button
 	.webchat
 		position: absolute
 		left: -1000px
 		top: -1000px
 
-// Remove side padding
 @media screen and (max-width: 900px)
-	.container
-		width: 100%
-	.sidebar
+	// Hide the search bar
 	.topbar
-		left: 0
-	.topbar
-		width: 100%
+		.search
+			display: none
 
-@media screen and (max-width: 730px)
+@media screen and (max-width: 768px)
 	// Make top menu two rows
 	.topbar
 		text-align: center
@@ -777,12 +787,14 @@ nav li
 		margin-top: 0
 	.page
 		padding-top: 0
+
+	// Remove top margin on the bottombar
 	.bottombar
 		margin-top: 0
-	.webchat
-		position: absolute
-		left: -1000px
-		top: -1000px
+		.about
+		.links
+			margin: 0
+
 
 	// Shrink features even more
 	.splash
@@ -796,15 +808,14 @@ nav li
 	// Remove sidebar
 	.sidebar
 		display: none
+
+	// Adjust font sizes
 	.page
 		font-size: 95%
 		padding-left: 0
 		width: 100%
 	.splash
 		font-size: 80%
-	.bottombar
-		margin-top: 0
-
 	.block
 		h2
 			margin-top: 3em
@@ -827,15 +838,17 @@ nav li
 		.links
 			display: none
 
+	// Allow code blocks to break
 	code
 		word-wrap: break-word
+
+	// Adjust font sizes
 	.page
 		font-size: 90%
 	.splash
 		font-size: 65%
 		p
 			font-size: 130%
-
 	.prev-next
 		font-size: 80%
 	.block

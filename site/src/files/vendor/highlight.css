@@ -3,12 +3,14 @@
 Zenburn style from voldmar.ru (c) Vladimir Epifanov <voldmar@voldmar.ru>
 based on dark.css by Ivan Sagalaev
 
+Customized for DocPad.org
+
 */
 
 pre code {
   display: block; padding: 0.5em;
-  background: #3F3F3F;
-  color: #DCDCDC;
+  background: #3E3E3E;
+  color: #DBDBDB;
 }
 
 pre .keyword,
@@ -110,6 +112,8 @@ pre .xml .javascript,
 pre .xml .vbscript,
 pre .xml .css,
 pre .xml .cdata {
-  opacity: 0.5;
+  background: #464646;
+  color: #F3F3F3;
+  padding: .125em 0;
 }
 

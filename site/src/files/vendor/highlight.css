@@ -112,7 +112,6 @@ pre .xml .javascript,
 pre .xml .vbscript,
 pre .xml .css,
 pre .xml .cdata {
-  background: #464646;
   color: #F3F3F3;
   padding: .125em 0;
 }

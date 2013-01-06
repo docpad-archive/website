@@ -28,6 +28,7 @@
 		"docpad-plugin-coffeekup": "2.x",
 		"docpad-plugin-coffeescript": "2.x",
 		"docpad-plugin-eco": "2.x",
+		"docpad-plugin-feedr": "2.x",
 		"docpad-plugin-highlightjs": "2.x",
 		"docpad-plugin-robotskirt": "2.x",
 		"docpad-plugin-partials": "2.x",

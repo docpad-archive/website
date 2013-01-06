@@ -105,14 +105,3 @@ pre .doctype {
   color: #7F9F7F;
 }
 
-pre .coffeescript .javascript,
-pre .javascript .xml,
-pre .tex .formula,
-pre .xml .javascript,
-pre .xml .vbscript,
-pre .xml .css,
-pre .xml .cdata {
-  color: #F3F3F3;
-  padding: .125em 0;
-}
-

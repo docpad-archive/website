@@ -273,7 +273,7 @@ docpadConfig =
 			# Cycle through the repos assigning each repo value to @ so it works asynchronously
 			for own repoKey,repoValue of repos
 				tasks.push repoValue, (complete) ->
-					if opts.reset is true or fs.existsSync(@path) is false
+					if opts.reset is true or fsUtil.existsSync(@path) is false
 						# Log
 						docpad.log('info', "Updating #{@name}...")
 

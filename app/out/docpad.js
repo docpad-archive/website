@@ -217,7 +217,7 @@ docpadConfig = {
         repoValue = repos[repoKey];
         tasks.push(repoValue, function(complete) {
           var _this = this;
-          if (opts.reset === true || fs.existsSync(this.path) === false) {
+          if (opts.reset === true || fsUtil.existsSync(this.path) === false) {
             docpad.log('info', "Updating " + this.name + "...");
             return balUtil.initOrPullGitRepo(balUtil.extend({
               remote: 'origin',

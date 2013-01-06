@@ -264,30 +264,32 @@ docpadConfig =
 			docpad = @docpad
 			config = docpad.getConfig()
 			tasks = new balUtil.Group(next)
-
-			# Skip if we are doing a differential generate
-			return next()  if opts.reset is false or 'development' in docpad.getEnvironments()
-
-			# Log
-			docpad.log('info', "Updating Documentation...")
-
-			# Repos
 			repos =
 				'docpad-documentation':
+					name: 'DocPad Documentation'
 					path: pathUtil.join(config.documentsPaths[0],'docs')
 					url: 'git://github.com/bevry/docpad-documentation.git'
+
+			# Cycle through the repos assigning each repo value to @ so it works asynchronously
 			for own repoKey,repoValue of repos
 				tasks.push repoValue, (complete) ->
-					balUtil.initOrPullGitRepo(balUtil.extend({
-						remote: 'origin'
-						branch: 'master'
-						output: true
-						next: (err) ->
-							# warn about errors, but don't let them kill execution
-							docpad.warn(err)  if err
-							docpad.log('info', "Updated Documentation")
-							complete()
-					},@))
+					if opts.reset is true or fsUtil.existsSync(@path) is false
+						# Log
+						docpad.log('info', "Updating #{@name}...")
+
+						# Init or Update
+						balUtil.initOrPullGitRepo(balUtil.extend({
+							remote: 'origin'
+							branch: 'master'
+							output: true
+							next: (err) =>
+								# warn about errors, but don't let them kill execution
+								docpad.warn(err)  if err
+								docpad.log('info', "Updated #{@name}")
+								complete()
+						},@))
+					else
+						complete()
 
 			# Fire
 			tasks.async()

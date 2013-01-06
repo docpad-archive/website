@@ -406,23 +406,69 @@ nav li
 
 		li
 			display: inline-block
-			margin: 0 1%
+			margin: .25em 1%
 			width: 17%
+			position: relative
+
+			span
+				display: block
 
 			.image
 				background: url(../img/splash-features.png) no-repeat 4px 100%
 				width: 152px
 				height: 256px
-				margin-top: -1.5em
+				margin: 0 auto
 
+			&.versioning .image
+				background-position: 0 10px
 			&.skeletons .image
-				background-position: -206px 100%
+				background-position: -206px 0
 			&.language .image
-				background-position: -400px 100%
+				background-position: -400px 0
 			&.deploys .image
-				background-position: -596px 100%
+				background-position: -596px 0
 			&.plugins .image
-				background-position: -806px 100%
+				background-position: -806px 0
+
+			// Popover
+			.popover
+				position: absolute
+				left: 0
+				margin: .75em -2%
+				z-index: 3
+
+				background: white
+				padding: .25em
+				border-radius: .25em
+
+				line-height: 1.25em
+
+				visibility: hidden
+				opacity: 0
+				transition: all .2s ease-in-out
+
+			.popover:before
+				content: ""
+				background: white
+
+				z-index: -3
+				width: 1em
+				height: 1em
+				margin-left: -.5em
+
+				position: absolute
+				top: -.4em
+				left: 50%
+
+				transform: rotate(45deg)
+
+			&:hover
+				cursor: pointer
+
+				.popover
+					visibility: visible
+					opacity: 1
+					margin-top: 1em
 
 
 	// ====================================
@@ -726,7 +772,10 @@ nav li
 	.splash
 		.overview
 			li
-				zoom: 0.75
+				margin: 0 4%
+
+				.popover
+					margin: .5em -10%
 
 	// Remove side padding
 	.container
@@ -822,11 +871,17 @@ nav li
 	.splash
 		.overview
 			li
-				zoom: 0.5
-				//.title
-				//	font-size: 1.6em
+				.image
+					zoom: 0.75
 
 @media screen and (max-width: 650px)
+	// Shrink features even more
+	.splash
+		.overview
+			li
+				.image
+					zoom: 0.6
+
 	// Remove sidebar
 	.sidebar
 		display: none
@@ -855,6 +910,13 @@ nav li
 
 
 @media screen and (max-width: 450px)
+	// Shrink features even more
+	.splash
+		.overview
+			li
+				.image
+					zoom: 0.5
+
 	// Hide the links
 	.bottombar
 		.links

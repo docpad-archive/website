@@ -183,6 +183,13 @@ docpadConfig = {
       aliases: {
         stylus: 'css'
       }
+    },
+    feedr: {
+      feeds: {
+        exchange: {
+          url: 'http://docpad.org/exchange.json'
+        }
+      }
     }
   },
   environments: {

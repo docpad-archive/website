@@ -369,7 +369,7 @@ docpadConfig = {
         issueQuery = req.params[0] || '';
         return res.redirect(301, "https://github.com/bevry/docpad/issues/" + issueQuery);
       });
-      server.get(/^\/(?:p|plugins)(?:\/(.*))?$/, function(req, res) {
+      server.get(/^\/(?:p|plugin)(?:\/(.*))?$/, function(req, res) {
         var plugin;
         plugin = req.params[0] || '';
         return res.redirect(301, "https://github.com/docpad/docpad-plugin-" + plugin);

@@ -438,7 +438,7 @@ docpadConfig =
 				res.redirect(301, "https://github.com/bevry/docpad/issues/#{issueQuery}")
 
 			# Plugins
-			server.get /^\/(?:p|plugins)(?:\/(.*))?$/, (req,res) ->
+			server.get /^\/(?:p|plugin)(?:\/(.*))?$/, (req,res) ->
 				plugin = req.params[0] or ''
 				res.redirect(301, "https://github.com/docpad/docpad-plugin-#{plugin}")
 

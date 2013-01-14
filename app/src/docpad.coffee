@@ -412,15 +412,30 @@ docpadConfig =
 						res.send(body)
 				)
 
+			# DocPad Short Links
+			server.get /^\/(plugins|upgrade|install|troubleshoot)\/?$/, (req,res) ->
+				relativeUrl = req.params[0] or ''
+				res.redirect(301, "http://docpad.org/docs/#{relativeUrl}")
+
+			# DocPad Content
+			server.get /^\/docpad(?:\/(.*))?$/, (req,res) ->
+				relativeUrl = req.params[0] or ''
+				res.redirect(301, "http://docpad.org/docs/#{relativeUrl}")
+
 			# Bevry Content
 			server.get /^\/((?:support|node|joe|query-?engine).*)$/, (req,res) ->
-				bevryUrl = req.params[0] or ''
-				res.redirect(301, "https://bevry.me/#{bevryUrl}")
+				relativeUrl = req.params[0] or ''
+				res.redirect(301, "http://bevry.me/#{relativeUrl}")
+
+			# GitHub
+			server.get /^\/(?:g|github)(?:\/(.*))?$/, (req,res) ->
+				issueQuery = req.params[0] or ''
+				res.redirect(301, "https://github.com/bevry/docpad/#{issueQuery}")
 
 			# Issues
 			server.get /^\/(?:i|issues)(?:\/(.*))?$/, (req,res) ->
 				issueQuery = req.params[0] or ''
-				res.redirect(301, "https://github.com/bevry/#{issueQuery}")
+				res.redirect(301, "https://github.com/bevry/docpad/issues/#{issueQuery}")
 
 			# Plugins
 			server.get /^\/(?:p|plugins)(?:\/(.*))?$/, (req,res) ->

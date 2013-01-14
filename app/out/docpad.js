@@ -344,15 +344,30 @@ docpadConfig = {
           return res.send(body);
         });
       });
+      server.get(/^\/(plugins|upgrade|install|troubleshoot)\/?$/, function(req, res) {
+        var relativeUrl;
+        relativeUrl = req.params[0] || '';
+        return res.redirect(301, "http://docpad.org/docs/" + relativeUrl);
+      });
+      server.get(/^\/docpad(?:\/(.*))?$/, function(req, res) {
+        var relativeUrl;
+        relativeUrl = req.params[0] || '';
+        return res.redirect(301, "http://docpad.org/docs/" + relativeUrl);
+      });
       server.get(/^\/((?:support|node|joe|query-?engine).*)$/, function(req, res) {
-        var bevryUrl;
-        bevryUrl = req.params[0] || '';
-        return res.redirect(301, "https://bevry.me/" + bevryUrl);
+        var relativeUrl;
+        relativeUrl = req.params[0] || '';
+        return res.redirect(301, "http://bevry.me/" + relativeUrl);
+      });
+      server.get(/^\/(?:g|github)(?:\/(.*))?$/, function(req, res) {
+        var issueQuery;
+        issueQuery = req.params[0] || '';
+        return res.redirect(301, "https://github.com/bevry/docpad/" + issueQuery);
       });
       server.get(/^\/(?:i|issues)(?:\/(.*))?$/, function(req, res) {
         var issueQuery;
         issueQuery = req.params[0] || '';
-        return res.redirect(301, "https://github.com/bevry/" + issueQuery);
+        return res.redirect(301, "https://github.com/bevry/docpad/issues/" + issueQuery);
       });
       server.get(/^\/(?:p|plugins)(?:\/(.*))?$/, function(req, res) {
         var plugin;

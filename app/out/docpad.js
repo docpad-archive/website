@@ -163,9 +163,8 @@ docpadConfig = {
           category: category,
           categoryName: categoryName,
           url: urls[0],
-          urls: urls,
           standalone: standalone
-        });
+        }).addUrl(urls);
       });
     },
     pages: function(database) {

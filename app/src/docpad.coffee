@@ -220,9 +220,8 @@ docpadConfig =
 					category
 					categoryName
 					url: urls[0]
-					urls
 					standalone
-				})
+				}).addUrl(urls)
 
 		pages: (database) ->
 			database.findAllLive({relativeOutDirPath:'pages'},[filename:1])

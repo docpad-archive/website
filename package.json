@@ -6,11 +6,11 @@
 	"homepage": "https://github.com/bevry/docpad-website",
 	"author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
 	"maintainers": [
-		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
 	],
 	"contributors": [
-		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
-		"Chase Colman <chase@infinityatlas.com> (http://thedev.infinityatlas.com)"
+		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
+		"Chase Colman <chase@infinityatlas.com> (https://github.com/chase)"
 	],
 	"bugs": {
 		"url": "https://github.com/bevry/docpad-website/issues"

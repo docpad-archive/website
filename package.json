@@ -6,11 +6,11 @@
 	"homepage": "https://github.com/bevry/docpad-website",
 	"author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
 	"maintainers": [
-		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
 	],
 	"contributors": [
-		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
-		"Chase Colman <chase@infinityatlas.com> (http://thedev.infinityatlas.com)"
+		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
+		"Chase Colman <chase@infinityatlas.com> (https://github.com/chase)"
 	],
 	"bugs": {
 		"url": "https://github.com/bevry/docpad-website/issues"
@@ -35,10 +35,10 @@
 		"docpad-plugin-services": "2.x",
 		"docpad-plugin-stylus": "2.1.x",
 		"docpad-plugin-text": "2.x",
-		"feedr": "~2.4.0",
-		"bal-util": "~1.16.1",
+		"feedr": "~2.4.1",
+		"bal-util": "~1.16.2",
 		"moment": "~1.7.2",
-		"underscore": "~1.4.3",
+		"underscore": "~1.4.4",
 		"underscore.string": "~2.3.1",
 		"request": "~2.12.0"
 	},

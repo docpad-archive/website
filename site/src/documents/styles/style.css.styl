@@ -1,3 +1,7 @@
+---
+standalone: true
+---
+
 // Coded in Stylus: http://learnboost.github.com/stylus/
 
 // ====================================
@@ -113,8 +117,8 @@ body
 
 	font-smooth: always
 	-webkit-font-smoothing: antialiased
-    color-profile: sRGB
-    rendering-intent: auto
+	color-profile: sRGB
+	rendering-intent: auto
 	text-rendering: optimizeLegibility
 
 nav
@@ -401,13 +405,11 @@ nav li
 		line-height: 1.2em
 		list-style: none
 		padding: 3em 0 1em
-		width: 90%
-		margin: 0 auto
+		wrapper(100%)
 
 		li
-			display: inline-block
-			margin: .25em 1%
-			width: 17%
+			column(5)
+			padding: 1em 0
 			position: relative
 
 			span
@@ -434,7 +436,6 @@ nav li
 			.popover
 				position: absolute
 				left: 0
-				margin: .75em -2%
 				z-index: 3
 
 				background: white
@@ -767,17 +768,14 @@ nav li
 // Write your responsive layout styles here
 // Below is merely an example of how this should work
 
-@media screen and (max-width: 1024px)
-	// Shrink splash overview
+@media screen and (max-width: 1280px)
+	// Shrink features even more
 	.splash
 		.overview
 			li
-                width: 13%
-				margin: 0 3%
+				zoom: 0.9
 
-				.popover
-					margin: .5em -10%
-
+@media screen and (max-width: 1024px)
 	// Remove side padding
 	.container
 		width: 100%
@@ -786,6 +784,14 @@ nav li
 	.topbar
 	.sidebar
 		left: 0
+
+	// Shrink features even more
+	.splash
+		.overview
+			li
+				column(4)
+				display: inline-block
+				float: none
 
 	// Remove margin about the bottombar
 	.bottombar
@@ -802,13 +808,6 @@ nav li
 		top: -1000px
 
 @media screen and (max-width: 960px)
-	// Shrink splash overview
-	.splash
-		.overview
-			li
-                width: 17%
-				margin: 0 4%
-
 	// Reduce doc columns
 	.docs
 		.list-menu
@@ -829,6 +828,13 @@ nav li
 			.list-menu-category
 				width: 23%
 				margin: 0 1%
+
+	.splash
+		.overview
+			li
+				margin: 0 3%
+				.image
+					zoom: 0.8
 
 @media screen and (max-width: 768px)
 	// Reduce doc columns per row to 2
@@ -874,22 +880,7 @@ nav li
 		.links
 			margin: 0
 
-
-	// Shrink features even more
-	.splash
-		.overview
-			li
-				.image
-					zoom: 0.75
-
 @media screen and (max-width: 650px)
-	// Shrink features even more
-	.splash
-		.overview
-			li
-				.image
-					zoom: 0.6
-
 	// Remove sidebar
 	.sidebar
 		display: none
@@ -901,6 +892,15 @@ nav li
 		width: 100%
 	.splash
 		font-size: 80%
+		.overview
+			li
+				column(4)
+				display: inline-block
+				float: none
+				padding: 0 0 2em
+				.image
+					zoom: 0.6
+
 	.block
 		h2
 			margin-top: 3em
@@ -917,21 +917,18 @@ nav li
 			float: none
 
 
+@media screen and (max-width: 560px)
+	.splash
+		.overview
+			li
+				.image
+					zoom: 0.5
+
 @media screen and (max-width: 450px)
 	// Shrink features even more
 	.splash
-        section
-            margin: 2em 0
-		.overview
-            padding: 0
-            width: 95%
-            ul
-                margin: 0
-                padding: 0
-			li
-                margin: 0 7.5%
-				.image
-					zoom: 0.4
+		section
+			margin: 2em 0
 
 	// Hide the links
 	.bottombar
@@ -962,7 +959,7 @@ nav li
 	// Shrink features even more
 	.splash
 		.overview
-            margin: 0
+			margin: 0
 
 	// Reduce doc columns per row to 1
 	.docs

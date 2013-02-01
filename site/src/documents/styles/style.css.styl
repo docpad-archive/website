@@ -369,7 +369,7 @@ nav li
 
 .splash
 	section
-		margin: 4em 0
+		margin: 3em 0
 		padding: 1.5em 0
 		text-align: center
 
@@ -772,7 +772,8 @@ nav li
 	.splash
 		.overview
 			li
-				margin: 0 4%
+                width: 13%
+				margin: 0 3%
 
 				.popover
 					margin: .5em -10%
@@ -801,6 +802,13 @@ nav li
 		top: -1000px
 
 @media screen and (max-width: 960px)
+	// Shrink splash overview
+	.splash
+		.overview
+			li
+                width: 17%
+				margin: 0 4%
+
 	// Reduce doc columns
 	.docs
 		.list-menu
@@ -912,10 +920,18 @@ nav li
 @media screen and (max-width: 450px)
 	// Shrink features even more
 	.splash
+        section
+            margin: 2em 0
 		.overview
+            padding: 0
+            width: 95%
+            ul
+                margin: 0
+                padding: 0
 			li
+                margin: 0 7.5%
 				.image
-					zoom: 0.5
+					zoom: 0.4
 
 	// Hide the links
 	.bottombar
@@ -943,6 +959,11 @@ nav li
 
 
 @media screen and (max-width: 320px)
+	// Shrink features even more
+	.splash
+		.overview
+            margin: 0
+
 	// Reduce doc columns per row to 1
 	.docs
 		.list-menu

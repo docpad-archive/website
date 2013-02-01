@@ -37,12 +37,15 @@ wrapper($site-width = 70%)
 column($columns)
 	display: inline
 	float: left
-	overflow: hidden
 	width: (100/$columns)%
 
 
 // ====================================
 // Configuration
+
+// Helpers
+zoom($size)
+	zoom: $size
 
 // Fonts
 fontMyraid = "Myriad Pro", "Segoe WP", "Segoe UI", Segoe, Calibri, Helvetica, Arial
@@ -416,6 +419,7 @@ nav li
 				display: block
 
 			.image
+				display: block
 				background: url(../img/splash-features.png) no-repeat 4px 100%
 				width: 152px
 				height: 256px
@@ -773,7 +777,9 @@ nav li
 	.splash
 		.overview
 			li
-				zoom: 0.9
+				font-size: 90%
+				.image
+					zoom(0.9)
 
 @media screen and (max-width: 1024px)
 	// Remove side padding
@@ -834,7 +840,7 @@ nav li
 			li
 				margin: 0 3%
 				.image
-					zoom: 0.8
+					zoom(0.8)
 
 @media screen and (max-width: 768px)
 	// Reduce doc columns per row to 2
@@ -899,7 +905,7 @@ nav li
 				float: none
 				padding: 0 0 2em
 				.image
-					zoom: 0.6
+					zoom(0.6)
 
 	.block
 		h2
@@ -922,7 +928,7 @@ nav li
 		.overview
 			li
 				.image
-					zoom: 0.5
+					zoom(0.5)
 
 @media screen and (max-width: 450px)
 	// Shrink features even more

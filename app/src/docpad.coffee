@@ -273,6 +273,8 @@ docpadConfig =
 					path: pathUtil.join(config.documentsPaths[0],'docs')
 					url: 'git://github.com/bevry/docpad-documentation.git'
 
+			return next()
+
 			# Cycle through the repos assigning each repo value to @ so it works asynchronously
 			for own repoKey,repoValue of repos
 				tasks.push repoValue, (complete) ->

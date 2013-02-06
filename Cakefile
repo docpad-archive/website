@@ -21,10 +21,12 @@ BIN     = "#{ROOT}/node_modules/.bin"
 CAKE    = "#{BIN}/cake#{EXT}"
 COFFEE  = "#{BIN}/coffee#{EXT}"
 DOCPAD  = "#{BIN}/docpad#{EXT}"
+DOCPADS = "#{BIN}/docpad-server#{EXT}"
 APPOUT  = "#{APP}/out"
 APPSRC  = "#{APP}/src"
 SITEOUT = "#{SITE}/out"
 SITESRC = "#{SITE}/src"
+DEBUG   = ('-d' in process.argv)
 
 
 # -----------------
@@ -32,6 +34,13 @@ SITESRC = "#{SITE}/src"
 
 pathUtil = require('path')
 {exec,spawn} = require('child_process')
+
+childProcesses = []
+exit = (err,code) ->
+	for childProcess in childProcesses
+		childProcess.kill()
+	process.exit(code)
+
 safe = (next,fn) ->
 	return (args...) ->
 		err = args[0]
@@ -52,27 +61,52 @@ clean = (opts,next) ->
 		pathUtil.join(ROOT,'*out')
 		pathUtil.join(ROOT,'*log')
 	]
-	spawn('rm', args, {stdio:'inherit',cwd:ROOT}).on('exit',next)
+	spawn('rm', args, {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',next)
 
 compile = (opts,next) ->
 	(next = opts; opts = {})  unless next?
-	spawn(COFFEE, ['-bco', APPOUT, APPSRC], {stdio:'inherit',cwd:ROOT}).on 'exit', safe next, ->
-		spawn(DOCPAD, ['generate','--env','static'], {stdio:'inherit',cwd:ROOT}).on('exit',next)
+	spawn(COFFEE, ['-bco', APPOUT, APPSRC], {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',next)
 
 watch = (opts,next) ->
 	(next = opts; opts = {})  unless next?
-	spawn(COFFEE, ['-bwco', APPOUT, APPSRC], {stdio:'inherit',cwd:ROOT})
-	spawn(DOCPAD, ['run','--env','static'], {stdio:'inherit',cwd:ROOT})
+	childProcesses.push spawn(COFFEE, ['-bwco', APPOUT, APPSRC], {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',exit)
 	next()
+
+run = (opts,next) ->
+	(next = opts; opts = {})  unless next?
+	if opts.debug ? DEBUG
+		command = NODE
+		args = ['--debug-brk', DOCPAD, 'run']
+	else
+		command = DOCPAD
+		args = ['run']
+	childProcesses.push spawn(command, args, {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',exit)
+	next()
+
+app = (opts,next) ->
+	(next = opts; opts = {})  unless next?
+	watch opts, safe next, ->
+		run opts, next
 
 install = (opts,next) ->
 	(next = opts; opts = {})  unless next?
-	spawn(NPM, ['install'], {stdio:'inherit',cwd:ROOT}).on('exit',next)
+	spawn(NPM, ['install'], {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',next)
 
 reset = (opts,next) ->
 	(next = opts; opts = {})  unless next?
 	clean opts, safe next, ->
 		setup opts, next
+
+server = (opts,next) ->
+	(next = opts; opts = {})  unless next?
+	compile opts, safe next, ->
+		if opts.debug ? DEBUG
+			command = NODE
+			args = ['--debug-brk', DOCPADS]
+		else
+			command = DOCPADS
+			args = []
+		spawn(command, args, {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',next)
 
 setup = (opts,next) ->
 	(next = opts; opts = {})  unless next?
@@ -95,11 +129,19 @@ task 'clean', 'clean up instance', ->
 task 'compile', 'compile our files', ->
 	compile finish
 
-# dev/watch
-task 'dev', 'watch and recompile our files', ->
+# run
+task 'run', 'run our application', ->
+	run finish
+
+# watch
+task 'watch', 'recompile our files when changed', ->
 	watch finish
-task 'watch', 'watch and recompile our files', ->
-	watch finish
+
+# dev/app
+task 'dev', 'watch and run our application', ->
+	app finish
+task 'app', 'watch and run our application', ->
+	app finish
 
 # install
 task 'install', 'install dependencies', ->
@@ -108,6 +150,10 @@ task 'install', 'install dependencies', ->
 # reset
 task 'reset', 'reset instance', ->
 	reset finish
+
+# start
+task 'server', 'start server instance', ->
+	server finish
 
 # setup
 task 'setup', 'setup for development', ->

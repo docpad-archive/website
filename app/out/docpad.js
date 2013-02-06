@@ -218,6 +218,7 @@ docpadConfig = {
           url: 'git://github.com/bevry/docpad-documentation.git'
         }
       };
+      return next();
       for (repoKey in repos) {
         if (!__hasProp.call(repos, repoKey)) continue;
         repoValue = repos[repoKey];

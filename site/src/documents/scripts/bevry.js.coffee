@@ -8,7 +8,12 @@ wait = (delay,callback) -> setTimeout(callback,delay)
 # BevryApp
 class BevryApp
 
+	config: null
+
 	constructor: ->
+		@config ?= {}
+		@config.articleScrollOpts ?= {}
+		@config.sectionScrollOpts ?= {}
 		$(@onDomReady)
 		@
 
@@ -78,6 +83,7 @@ class BevryApp
 
 		# Discover how we should handle the link
 		if event.which is 2 or event.metaKey or event.shiftKey
+			console.log('default')
 			action = 'default'
 		else
 			action = 'new'
@@ -162,7 +168,7 @@ class BevryApp
 	# State Change
 	stateChange: =>
 		# Prepare
-		{$docHeaders,$docSectionWrapper} = @
+		{$docHeaders,$docSectionWrapper,config} = @
 
 		# Special handling for long docs
 		@$article = $article = $('#content article:first')
@@ -189,7 +195,7 @@ class BevryApp
 							.next('.section-wrapper')
 								.addClass('active')
 								.end()
-						$header.ScrollTo({offsetTop:40})  if !opts or opts.scroll isnt false
+						$header.ScrollTo(config.sectionScrollOpts)  if !opts or opts.scroll isnt false
 					.first()
 						.trigger('click',{scroll:false})
 
@@ -202,10 +208,13 @@ class BevryApp
 						$header = $(this)
 							.addClass('current')
 							.stop(true,false).css({'opacity':0.5}).animate({opacity:1},1000)
-						$header.ScrollTo({offsetTop:40})  if !opts or opts.scroll isnt false
+						$header.ScrollTo(config.sectionScrollOpts)  if !opts or opts.scroll isnt false
 
 		else
 			@$docHeaders = $docHeaders = null
+
+		# Scroll to the article
+		$article.ScrollTo(config.articleScrollOpts)
 
 		# Chain
 		@

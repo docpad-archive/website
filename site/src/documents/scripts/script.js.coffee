@@ -5,6 +5,12 @@ standalone: true
 # App
 class App extends BevryApp
 
+	# Constructor
+	constructor: (args...) ->
+		super args...
+		@config.sectionScrollOpts.offsetTop = 40
+		@
+
 	# State Change
 	stateChange: (event,data) =>
 		# Check

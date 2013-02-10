@@ -79,6 +79,11 @@ docpadConfig = {
       description: "Empower your website frontends with layouts, meta-data, pre-processors (markdown, jade, coffeescript, etc.), partials, skeletons, file watching, querying, and an amazing plugin system. Use it either standalone, as a build script, or even as a module in a bigger system. Either way, DocPad will streamline your web development process allowing you to craft full-featured websites quicker than ever before.",
       keywords: "bevry, bevryme, balupton, benjamin lupton, docpad, node, node.js, javascript, coffeescript, query engine, queryengine, backbone.js, cson",
       services: {
+        facebookLikeButton: {
+          applicationId: '266367676718271'
+        },
+        twitterTweetButton: 'docpad',
+        twitterFollowButton: 'docpad',
         disqus: 'docpad',
         ircwebchat: 'docpad',
         gauges: '50dead2bf5a1f541d7000008',

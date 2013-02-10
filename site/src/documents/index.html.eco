@@ -64,4 +64,5 @@ layout: splash
 	<h3>Open Sourced, Community Driven</h3>
 	<p>Built on an open source foundation and supported by community maintained plugins, DocPad is getting better every single day.</p>
 	<a href="/docs/intro" title="Get Started" class="btn">Get Started with DocPad</a>
+	<div class="social-buttons"><%- @getSocialButtons() %></div>
 </section>

@@ -14,6 +14,7 @@ appPath = __dirname
 sitePath = rootPath+'/site'
 textData = requireFresh(appPath+'/templateData/text')
 navigationData = requireFresh(appPath+'/templateData/navigation')
+websiteVersion = require(rootPath+'/package.json').version
 
 
 
@@ -122,7 +123,7 @@ docpadConfig =
 				'/vendor/normalize.css'
 				'/vendor/h5bp.css'
 				'/styles/style.css'
-			]
+			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"  # hack for the meantime until we implement better cache resets
 
 			# Script
 			scripts: [
@@ -138,7 +139,7 @@ docpadConfig =
 				"/scripts/historyjsit.js"
 				"/scripts/bevry.js"
 				"/scripts/script.js"
-			]
+			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"  # hack for the meantime until we implement better cache resets
 
 		# -----------------------------
 		# Helper Functions

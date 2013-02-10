@@ -49,6 +49,10 @@ class BevryApp
 			window.open(url,'_blank')
 		else if action is 'same'
 			wait(100, -> document.location.href = url)
+		else if action is 'default'
+			# ignore, and handle by the browser
+		else
+			console?.log?('unknown link action', action)
 
 		# Chain
 		@
@@ -73,10 +77,10 @@ class BevryApp
 		return @  unless url
 
 		# Discover how we should handle the link
-		if event.which is 2 or event.metaKey
+		if event.which is 2 or event.metaKey or event.shiftKey
 			action = 'default'
 		else
-			action = 'same'
+			action = 'new'
 			event.preventDefault()
 
 		# Open the link

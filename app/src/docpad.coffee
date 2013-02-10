@@ -123,7 +123,7 @@ docpadConfig =
 				'/vendor/normalize.css'
 				'/vendor/h5bp.css'
 				'/styles/style.css'
-			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"  # hack for the meantime until we implement better cache resets
+			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
 			# Script
 			scripts: [
@@ -139,7 +139,7 @@ docpadConfig =
 				"/scripts/historyjsit.js"
 				"/scripts/bevry.js"
 				"/scripts/script.js"
-			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"  # hack for the meantime until we implement better cache resets
+			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
 		# -----------------------------
 		# Helper Functions

@@ -104,6 +104,10 @@ docpadConfig =
 
 			# Services
 			services:
+				facebookLikeButton:
+					applicationId: '266367676718271'
+				twitterTweetButton: 'docpad'
+				twitterFollowButton: 'docpad'
 				disqus: 'docpad'
 				ircwebchat: 'docpad'
 				gauges: '50dead2bf5a1f541d7000008'

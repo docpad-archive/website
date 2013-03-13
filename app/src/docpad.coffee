@@ -242,9 +242,8 @@ docpadConfig =
 				stylus: 'css'
 		feedr:
 			feeds:
-				exchange:
-					url: 'http://docpad.org/exchange.json'
-
+				exchange: url: 'http://docpad.org/exchange.json'
+				#'twitter-favorites': url: 'https://api.twitter.com/1.1/favorites/list.json?screen_name=docpad&count=200&include_entities=true'
 
 	# =================================
 	# Environments

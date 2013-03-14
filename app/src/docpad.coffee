@@ -4,9 +4,9 @@ pathUtil = require('path')
 _ = require('underscore')
 moment = require('moment')
 strUtil = require('underscore.string')
+getContributors = require('getcontributors')
 balUtil = require('bal-util')
 {requireFresh} = balUtil
-feedr = new (require('feedr').Feedr)
 
 # Prepare
 rootPath = __dirname+'/../..'
@@ -307,61 +307,19 @@ docpadConfig =
 			# Prepare
 			docpad = @docpad
 			contributors = {}
-			opts.templateData.contributors = {}
+			opts.templateData.contributors = []
 
-			# Log
-			docpad.log('info', "Fetching Contributors...")
-
-			# Tasks
-			tasks = new balUtil.Group (err) ->
-				# Check
-				return next(err)  if err
-
-				# Handle
-				delete contributors['benjamin lupton']
-				contributorsNames = _.keys(contributors).sort()
-				for contributorName in contributorsNames
-					opts.templateData.contributors[contributorName] = contributors[contributorName]
-
-				# Log
-				docpad.log('info', "Fetched Contributors")
-
-				# Done
-				return next()
-
-			# If the GitHub Tokens are Missing, Skip Contributors
-			unless process.env.BEVRY_GITHUB_CLIENT_ID and process.env.BEVRY_GITHUB_CLIENT_SECRET
-				# Log
-				docpad.log('warn', "Cannot fetch contributors if the BEVRY_GITHUB_CLIENT_ID and BEVRY_GITHUB_CLIENT_SECRET environment variables are not set.")
-
-				# Done
-				return next()
-
-			# Contributors
-			contributorFeeds = [
-				"https://api.github.com/users/docpad/repos?per_page=100&client_id=#{process.env.BEVRY_GITHUB_CLIENT_ID}&client_secret=#{process.env.BEVRY_GITHUB_CLIENT_SECRET}"
-				"https://api.github.com/users/bevry/repos?per_page=100&client_id=#{process.env.BEVRY_GITHUB_CLIENT_ID}&client_secret=#{process.env.BEVRY_GITHUB_CLIENT_SECRET}"
-			]
-			feedr.readFeeds contributorFeeds, (err,feedRepos) ->
-				for repos in feedRepos
-					for repo in repos
-						packageUrl = repo.html_url.replace('//github.com','//raw.github.com')+'/master/package.json'
-						tasks.push {repo,packageUrl}, (complete) ->
-							feedr.readFeed @packageUrl, (err,packageData) ->
-								return complete()  if err or !packageData  # ignore
-								for contributor in packageData.contributors or []
-									contributorMatch = /^([^<(]+)\s*(?:<(.+?)>)?\s*(?:\((.+?)\))?$/.exec(contributor)
-									continue  unless contributorMatch
-									contributorData =
-										name: (contributorMatch[1] or '').trim()
-										email: (contributorMatch[2] or '').trim()
-										url: (contributorMatch[3] or '').trim()
-									contributorId = contributorData.name.toLowerCase()
-									contributors[contributorId] = contributorData
-								complete()
-
-				# Fire
-				tasks.async()
+			# Fetch Contributors
+			getContributors(
+				users: ['bevry','docpad']
+				github_client_id: process.env.BEVRY_GITHUB_CLIENT_ID
+				github_client_secret: process.env.BEVRY_GITHUB_CLIENT_ID
+				log: docpad.log
+				next: (err,contributors) ->
+					return next(err)  if err
+					opts.templateData.contributors = contributors.filter (item) -> item.username isnt 'balupton'
+					return next()
+			)
 
 			# Done
 			return

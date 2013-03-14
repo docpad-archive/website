@@ -24,7 +24,7 @@
 		"npm": "1.1.x"
 	},
 	"dependencies": {
-		"docpad": "~6.21.10",
+		"docpad": "~6.26.0",
 		"docpad-plugin-coffeekup": "2.x",
 		"docpad-plugin-coffeescript": "2.x",
 		"docpad-plugin-eco": "2.x",
@@ -35,12 +35,12 @@
 		"docpad-plugin-services": ">=2.2.2 <3",
 		"docpad-plugin-stylus": "2.1.x",
 		"docpad-plugin-text": "2.x",
-		"feedr": "~2.4.1",
+		"getcontributors": "~1.0.0",
 		"bal-util": "~1.16.3",
-		"moment": "~1.7.2",
+		"moment": "~2.0.0",
 		"underscore": "~1.4.4",
 		"underscore.string": "~2.3.1",
-		"request": "~2.12.0"
+		"request": "~2.16.2"
 	},
 	"devDependencies": {
 		"coffee-script": "~1.4.0",

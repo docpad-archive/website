@@ -20,7 +20,7 @@
 		"url": "http://github.com/bevry/docpad-website.git"
 	},
 	"engines": {
-		"node": "0.10.x",
+		"node": "0.8.x",
 		"npm": "1.2.x"
 	},
 	"dependencies": {

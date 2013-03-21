@@ -20,8 +20,8 @@
 		"url": "http://github.com/bevry/docpad-website.git"
 	},
 	"engines": {
-		"node": "0.8.x",
-		"npm": "1.2.x"
+		"node": "0.10",
+		"npm": "1.2"
 	},
 	"dependencies": {
 		"docpad": "~6.26.0",
@@ -43,7 +43,7 @@
 		"request": "~2.16.2"
 	},
 	"devDependencies": {
-		"coffee-script": "~1.4.0",
+		"coffee-script": "~1.6.2",
 		"docpad-plugin-livereload": "2.x"
 	},
 	"subdomain": "docpad",

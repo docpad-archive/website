@@ -36,7 +36,7 @@
 		"docpad-plugin-stylus": "2.1.x",
 		"docpad-plugin-text": "2.x",
 		"getcontributors": "~1.0.0",
-		"bal-util": "~1.16.13",
+		"bal-util": "~1.18.0",
 		"moment": "~2.0.0",
 		"underscore": "~1.4.4",
 		"underscore.string": "~2.3.1",

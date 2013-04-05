@@ -6,14 +6,17 @@ moment = require('moment')
 strUtil = require('underscore.string')
 getContributors = require('getcontributors')
 balUtil = require('bal-util')
-{requireFresh} = balUtil
+extendr = require('extendr')
+safefs = require('safefs')
+eachr = require('eachr')
+{TaskGroup} = require('taskgroup')
 
 # Prepare
 rootPath = __dirname+'/../..'
 appPath = __dirname
 sitePath = rootPath+'/site'
-textData = requireFresh(appPath+'/templateData/text')
-navigationData = requireFresh(appPath+'/templateData/navigation')
+textData = balUtil.requireFresh(appPath+'/templateData/text')
+navigationData = balUtil.requireFresh(appPath+'/templateData/navigation')
 websiteVersion = require(rootPath+'/package.json').version
 
 
@@ -270,7 +273,7 @@ docpadConfig =
 			# Prepare
 			docpad = @docpad
 			config = docpad.getConfig()
-			tasks = new balUtil.Group(next)
+			tasks = new TaskGroup().setConfig(concurrency:0).once 'complete', (next)
 			repos =
 				'docpad-documentation':
 					name: 'DocPad Documentation'
@@ -278,28 +281,31 @@ docpadConfig =
 					url: 'git://github.com/bevry/docpad-documentation.git'
 
 			# Cycle through the repos assigning each repo value to @ so it works asynchronously
-			for own repoKey,repoValue of repos
-				tasks.push repoValue, (complete) ->
-					if opts.reset is true or fsUtil.existsSync(@path) is false
-						# Log
-						docpad.log('info', "Updating #{@name}...")
+			eachr repos, (repoDetails,repoKey) -> tasks.addTask (complete) ->
+				return complete()  unless opts.reset is true or fsUtil.existsSync(repoDetails.path) is false
 
-						# Init or Update
-						balUtil.initOrPullGitRepo(balUtil.extend({
-							remote: 'origin'
-							branch: 'master'
-							output: true
-							next: (err) =>
-								# warn about errors, but don't let them kill execution
-								docpad.warn(err)  if err
-								docpad.log('info', "Updated #{@name}")
-								complete()
-						},@))
-					else
-						complete()
+				# Log
+				docpad.log('info', "Updating #{repoDetails.name}...")
+
+				# Opts
+				_opts =
+					name: repoDetails.name
+					path: repoDetails.path
+					url: repoDetails.url
+					log: docpad.log
+					remote: 'origin'
+					branch: 'master'
+					output: true
+
+				# Init or Update
+				balUtil.initOrPullGitRepo _opts, (err) =>
+					# warn about errors, but don't let them kill execution
+					docpad.warn(err)  if err
+					docpad.log('info', "Updated #{repoDetails.name}")
+					complete()
 
 			# Fire
-			tasks.async()
+			tasks.run()
 			return
 
 		# Add Contributors to the Template Data
@@ -339,7 +345,7 @@ docpadConfig =
 					sitemap.push siteUrl+document.get('url')
 
 			# Write the sitemap file
-			balUtil.writeFile(sitemapPath, sitemap.sort().join('\n'), next)
+			safefs.writeFile(sitemapPath, sitemap.sort().join('\n'), next)
 
 			# Done
 			return
@@ -360,7 +366,7 @@ docpadConfig =
 					{
 						url: "https://api.pushover.net/1/messages.json"
 						method: "POST"
-						form: balUtil.extend(
+						form: extendr.extend(
 							{
 								token: process.env.BEVRY_PUSHOVER_TOKEN
 								user: process.env.BEVRY_PUSHOVER_USER_KEY

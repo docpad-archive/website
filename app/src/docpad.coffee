@@ -175,6 +175,10 @@ docpadConfig =
 			# Merge the document keywords with the site keywords
 			@site.keywords.concat(@document.keywords or []).join(', ')
 
+		# Get Version
+		getVersion: (v,places=1) ->
+			return v.split('.')[0...places].join('.')
+
 		# Read File
 		readFile: (relativePath) ->
 			path = @document.fullDirPath+'/'+relativePath
@@ -245,6 +249,7 @@ docpadConfig =
 				stylus: 'css'
 		feedr:
 			feeds:
+				latestPackage: url: 'http://docpad.org/latest.json'
 				exchange: url: 'http://docpad.org/exchange.json'
 				#'twitter-favorites': url: 'https://api.twitter.com/1.1/favorites/list.json?screen_name=docpad&count=200&include_entities=true'
 
@@ -278,7 +283,7 @@ docpadConfig =
 				'docpad-documentation':
 					name: 'DocPad Documentation'
 					path: pathUtil.join(config.documentsPaths[0],'docs')
-					url: 'git://github.com/bevry/docpad-documentation.git'
+					url: 'https://github.com/bevry/docpad-documentation.git'
 
 			# Cycle through the repos assigning each repo value to @ so it works asynchronously
 			eachr repos, (repoDetails,repoKey) -> tasks.addTask (complete) ->

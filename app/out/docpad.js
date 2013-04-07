@@ -124,6 +124,12 @@ docpadConfig = {
     getPreparedKeywords: function() {
       return this.site.keywords.concat(this.document.keywords || []).join(', ');
     },
+    getVersion: function(v, places) {
+      if (places == null) {
+        places = 1;
+      }
+      return v.split('.').slice(0, places).join('.');
+    },
     readFile: function(relativePath) {
       var path, result;
 
@@ -206,6 +212,9 @@ docpadConfig = {
     },
     feedr: {
       feeds: {
+        latestPackage: {
+          url: 'http://docpad.org/latest.json'
+        },
         exchange: {
           url: 'http://docpad.org/exchange.json'
         }
@@ -239,7 +248,7 @@ docpadConfig = {
         'docpad-documentation': {
           name: 'DocPad Documentation',
           path: pathUtil.join(config.documentsPaths[0], 'docs'),
-          url: 'git://github.com/bevry/docpad-documentation.git'
+          url: 'https://github.com/bevry/docpad-documentation.git'
         }
       };
       eachr(repos, function(repoDetails, repoKey) {

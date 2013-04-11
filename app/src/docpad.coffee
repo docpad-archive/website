@@ -222,6 +222,7 @@ docpadConfig =
 				urls = ["/docs/#{name}", "/docs/#{category}-#{name}", "/docpad/#{name}"]
 				title = "#{a.title or humanize name}"
 				pageTitle = "#{title} | #{categoryName}"
+				editUrl = "https://github.com/bevry/docpad-documentation/edit/master/" + a.relativePath.replace('docs/','')
 
 				# Apply
 				document.setMetaDefaults({
@@ -233,6 +234,7 @@ docpadConfig =
 					categoryName
 					url: urls[0]
 					standalone
+					editUrl
 				}).addUrl(urls)
 
 		pages: (database) ->

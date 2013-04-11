@@ -38,3 +38,7 @@ article ".block"+(if cssClasses then '.'+cssClasses.join('.') else ""), ->
 					a ".next", href:next.url, ->
 						span ".icon", ->
 						span ".title", -> next.title
+
+if document.editUrl
+	aside '.block-edit', ->
+		a href:document.editUrl, "Edit and improve this page!"

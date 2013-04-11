@@ -170,7 +170,7 @@ docpadConfig = {
         }
       ];
       return database.findAllLive(query, sorting).on('add', function(document) {
-        var a, category, categoryDirectory, categoryName, layout, name, pageTitle, standalone, title, urls;
+        var a, category, categoryDirectory, categoryName, editUrl, layout, name, pageTitle, standalone, title, urls;
 
         a = document.attributes;
         layout = 'doc';
@@ -182,6 +182,7 @@ docpadConfig = {
         urls = ["/docs/" + name, "/docs/" + category + "-" + name, "/docpad/" + name];
         title = "" + (a.title || humanize(name));
         pageTitle = "" + title + " | " + categoryName;
+        editUrl = "https://github.com/bevry/docpad-documentation/edit/master/" + a.relativePath.replace('docs/', '');
         return document.setMetaDefaults({
           title: title,
           pageTitle: pageTitle,
@@ -190,7 +191,8 @@ docpadConfig = {
           category: category,
           categoryName: categoryName,
           url: urls[0],
-          standalone: standalone
+          standalone: standalone,
+          editUrl: editUrl
         }).addUrl(urls);
       });
     },

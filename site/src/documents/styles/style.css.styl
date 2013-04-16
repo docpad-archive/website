@@ -1,3 +1,7 @@
+---
+standalone: true
+---
+
 // Coded in Stylus: http://learnboost.github.com/stylus/
 
 // ====================================
@@ -33,12 +37,15 @@ wrapper($site-width = 70%)
 column($columns)
 	display: inline
 	float: left
-	overflow: hidden
 	width: (100/$columns)%
 
 
 // ====================================
 // Configuration
+
+// Helpers
+zoom($size)
+	zoom: $size
 
 // Fonts
 fontMyraid = "Myriad Pro", "Segoe WP", "Segoe UI", Segoe, Calibri, Helvetica, Arial
@@ -113,8 +120,8 @@ body
 
 	font-smooth: always
 	-webkit-font-smoothing: antialiased
-    color-profile: sRGB
-    rendering-intent: auto
+	color-profile: sRGB
+	rendering-intent: auto
 	text-rendering: optimizeLegibility
 
 nav
@@ -132,6 +139,11 @@ h4
 	font-family: fontFutura
 	font-weight: fontMyraidNormal
 	text-transform: uppercase
+
+code
+pre
+	text-transform: none
+
 
 // ------------------------------------
 // Links
@@ -184,6 +196,10 @@ pre code
 	border: 1px solid hsl(192, 8%, 84%)
 
 	line-height: 1.5em
+
+	overflow: auto
+	// word-wrap: break-word
+	// white-space: pre-wrap
 
 
 // ====================================
@@ -277,42 +293,17 @@ nav li
 
 .webchat
 	position: fixed
-	left: 0%
+	left: 0
 	bottom: 0
-	width: 100%
-	height: 500px
-	display: none
-	.wrapper
-		border: 1px solid hsl(209, 32%, 82%)
-		background: hsl(209, 70%, 94%)
-		width: 30%
-		height: 500px
-	iframe
-		background: white
-		border: none
-		width: 100%
-		height: 500px
-	.close
-		position: absolute
-		top: 0
-		right: 0
-		width: 20px
-		height: 20px
-		padding-top:3px
-		cursor: pointer
-		text-align: center
-	.open
-		display: block
-		position: absolute
-		bottom: 0
-		left: 0
-		width: 100px
-		height: 25px
-		cursor: pointer
-		border: 1px solid hsl(209, 32%, 82%)
-		background: hsl(209, 70%, 94%)
-		text-align: center
-		padding-top: 0.3em
+
+	width: 100px
+	height: 25px
+
+	cursor: pointer
+	border: 1px solid hsl(209, 32%, 82%)
+	background: hsl(209, 70%, 94%)
+	text-align: center
+	padding-top: 0.3em
 
 
 
@@ -371,7 +362,7 @@ nav li
 
 .splash
 	section
-		margin: 4em 0
+		margin: 3em 0
 		padding: 1.5em 0
 		text-align: center
 
@@ -403,28 +394,72 @@ nav li
 		line-height: 1.2em
 		list-style: none
 		padding: 3em 0 1em
-		width: 90%
-		margin: 0 auto
+		wrapper(100%)
 
 		li
-			display: inline-block
-			margin: 0 1%
-			width: 17%
+			column(5)
+			padding: 1em 0
+			position: relative
+
+			span
+				display: block
 
 			.image
+				display: block
 				background: url(../img/splash-features.png) no-repeat 4px 100%
 				width: 152px
 				height: 256px
-				margin-top: -1.5em
+				margin: 0 auto
 
+			&.versioning .image
+				background-position: 0 10px
 			&.skeletons .image
-				background-position: -206px 100%
+				background-position: -206px 0
 			&.language .image
-				background-position: -400px 100%
+				background-position: -400px 0
 			&.deploys .image
-				background-position: -596px 100%
+				background-position: -596px 0
 			&.plugins .image
-				background-position: -806px 100%
+				background-position: -806px 0
+
+			// Popover
+			.popover
+				position: absolute
+				left: 0
+				z-index: 3
+
+				background: white
+				padding: .25em
+				border-radius: .25em
+
+				line-height: 1.25em
+
+				visibility: hidden
+				opacity: 0
+				transition: all .2s ease-in-out
+
+			.popover:before
+				content: ""
+				background: white
+
+				z-index: -3
+				width: 1em
+				height: 1em
+				margin-left: -.5em
+
+				position: absolute
+				top: -.4em
+				left: 50%
+
+				transform: rotate(45deg)
+
+			&:hover
+				cursor: pointer
+
+				.popover
+					visibility: visible
+					opacity: 1
+					margin-top: 1em
 
 
 	// ====================================
@@ -450,6 +485,22 @@ nav li
 
 			&:hover
 				color: white
+
+	.social-buttons
+		.social-button
+			display: inline-block
+			width: 100px
+			text-align: left
+			overflow: hidden
+			&.google-plus-one-button
+			&.hacker-news-submit-button
+				width: 80px
+			&.twitter-follow-button
+				width: 130px
+			&.reddit-submit-button
+				width: 140px
+				iframe
+					padding-top: 3px
 
 // ====================================
 // Navigation
@@ -570,6 +621,17 @@ nav li
 
 .page
 	padding-top: 2em
+
+.block-edit
+	display: block
+	text-align: right
+	padding: 1.5em 0 1em /* top right bottom left */
+	a
+		transition: all 0.2s ease-out
+		color: colorDarkestBrown
+		opacity: 0.3
+		&:hover
+			opacity: 1
 
 .block
 	padding: 0.5em 3%
@@ -723,13 +785,16 @@ nav li
 // Write your responsive layout styles here
 // Below is merely an example of how this should work
 
-@media screen and (max-width: 1024px)
-	// Shrink splash overview
+@media screen and (max-width: 1280px)
+	// Shrink features even more
 	.splash
 		.overview
 			li
-				zoom: 0.75
+				font-size: 90%
+				.image
+					zoom(0.9)
 
+@media screen and (max-width: 1024px)
 	// Remove side padding
 	.container
 		width: 100%
@@ -738,6 +803,14 @@ nav li
 	.topbar
 	.sidebar
 		left: 0
+
+	// Shrink features even more
+	.splash
+		.overview
+			li
+				column(4)
+				display: inline-block
+				float: none
 
 	// Remove margin about the bottombar
 	.bottombar
@@ -774,6 +847,13 @@ nav li
 			.list-menu-category
 				width: 23%
 				margin: 0 1%
+
+	.splash
+		.overview
+			li
+				margin: 0 3%
+				.image
+					zoom(0.8)
 
 @media screen and (max-width: 768px)
 	// Reduce doc columns per row to 2
@@ -819,15 +899,6 @@ nav li
 		.links
 			margin: 0
 
-
-	// Shrink features even more
-	.splash
-		.overview
-			li
-				zoom: 0.5
-				//.title
-				//	font-size: 1.6em
-
 @media screen and (max-width: 650px)
 	// Remove sidebar
 	.sidebar
@@ -840,6 +911,15 @@ nav li
 		width: 100%
 	.splash
 		font-size: 80%
+		.overview
+			li
+				column(4)
+				display: inline-block
+				float: none
+				padding: 0 0 2em
+				.image
+					zoom(0.6)
+
 	.block
 		h2
 			margin-top: 3em
@@ -856,7 +936,19 @@ nav li
 			float: none
 
 
+@media screen and (max-width: 560px)
+	.splash
+		.overview
+			li
+				.image
+					zoom(0.5)
+
 @media screen and (max-width: 450px)
+	// Shrink features even more
+	.splash
+		section
+			margin: 2em 0
+
 	// Hide the links
 	.bottombar
 		.links
@@ -883,6 +975,11 @@ nav li
 
 
 @media screen and (max-width: 320px)
+	// Shrink features even more
+	.splash
+		.overview
+			margin: 0
+
 	// Reduce doc columns per row to 1
 	.docs
 		.list-menu

@@ -4,16 +4,20 @@ pathUtil = require('path')
 _ = require('underscore')
 moment = require('moment')
 strUtil = require('underscore.string')
+getContributors = require('getcontributors')
 balUtil = require('bal-util')
-{requireFresh} = balUtil
-feedr = new (require('feedr').Feedr)
+extendr = require('extendr')
+safefs = require('safefs')
+eachr = require('eachr')
+{TaskGroup} = require('taskgroup')
 
 # Prepare
 rootPath = __dirname+'/../..'
 appPath = __dirname
 sitePath = rootPath+'/site'
-textData = requireFresh(appPath+'/templateData/text')
-navigationData = requireFresh(appPath+'/templateData/navigation')
+textData = balUtil.requireFresh(appPath+'/templateData/text')
+navigationData = balUtil.requireFresh(appPath+'/templateData/navigation')
+websiteVersion = require(rootPath+'/package.json').version
 
 
 
@@ -104,6 +108,10 @@ docpadConfig =
 
 			# Services
 			services:
+				facebookLikeButton:
+					applicationId: '266367676718271'
+				twitterTweetButton: 'docpad'
+				twitterFollowButton: 'docpad'
 				disqus: 'docpad'
 				ircwebchat: 'docpad'
 				gauges: '50dead2bf5a1f541d7000008'
@@ -118,7 +126,7 @@ docpadConfig =
 				'/vendor/normalize.css'
 				'/vendor/h5bp.css'
 				'/styles/style.css'
-			]
+			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
 			# Script
 			scripts: [
@@ -134,7 +142,7 @@ docpadConfig =
 				"/scripts/historyjsit.js"
 				"/scripts/bevry.js"
 				"/scripts/script.js"
-			]
+			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
 		# -----------------------------
 		# Helper Functions
@@ -166,6 +174,10 @@ docpadConfig =
 		getPreparedKeywords: ->
 			# Merge the document keywords with the site keywords
 			@site.keywords.concat(@document.keywords or []).join(', ')
+
+		# Get Version
+		getVersion: (v,places=1) ->
+			return v.split('.')[0...places].join('.')
 
 		# Read File
 		readFile: (relativePath) ->
@@ -210,6 +222,7 @@ docpadConfig =
 				urls = ["/docs/#{name}", "/docs/#{category}-#{name}", "/docpad/#{name}"]
 				title = "#{a.title or humanize name}"
 				pageTitle = "#{title} | #{categoryName}"
+				editUrl = "https://github.com/bevry/docpad-documentation/edit/master/" + a.relativePath.replace('docs/','')
 
 				# Apply
 				document.setMetaDefaults({
@@ -220,9 +233,9 @@ docpadConfig =
 					category
 					categoryName
 					url: urls[0]
-					urls
 					standalone
-				})
+					editUrl
+				}).addUrl(urls)
 
 		pages: (database) ->
 			database.findAllLive({relativeOutDirPath:'pages'},[filename:1])
@@ -236,7 +249,11 @@ docpadConfig =
 		highlightjs:
 			aliases:
 				stylus: 'css'
-
+		feedr:
+			feeds:
+				latestPackage: url: 'http://docpad.org/latest.json'
+				exchange: url: 'http://docpad.org/exchange.json'
+				#'twitter-favorites': url: 'https://api.twitter.com/1.1/favorites/list.json?screen_name=docpad&count=200&include_entities=true'
 
 	# =================================
 	# Environments
@@ -263,36 +280,39 @@ docpadConfig =
 			# Prepare
 			docpad = @docpad
 			config = docpad.getConfig()
-			tasks = new balUtil.Group(next)
+			tasks = new TaskGroup().setConfig(concurrency:0).once 'complete', (next)
 			repos =
 				'docpad-documentation':
 					name: 'DocPad Documentation'
 					path: pathUtil.join(config.documentsPaths[0],'docs')
-					url: 'git://github.com/bevry/docpad-documentation.git'
+					url: 'https://github.com/bevry/docpad-documentation.git'
 
 			# Cycle through the repos assigning each repo value to @ so it works asynchronously
-			for own repoKey,repoValue of repos
-				tasks.push repoValue, (complete) ->
-					if opts.reset is true or fsUtil.existsSync(@path) is false
-						# Log
-						docpad.log('info', "Updating #{@name}...")
+			eachr repos, (repoDetails,repoKey) -> tasks.addTask (complete) ->
+				return complete()  unless opts.reset is true or fsUtil.existsSync(repoDetails.path) is false
 
-						# Init or Update
-						balUtil.initOrPullGitRepo(balUtil.extend({
-							remote: 'origin'
-							branch: 'master'
-							output: true
-							next: (err) =>
-								# warn about errors, but don't let them kill execution
-								docpad.warn(err)  if err
-								docpad.log('info', "Updated #{@name}")
-								complete()
-						},@))
-					else
-						complete()
+				# Log
+				docpad.log('info', "Updating #{repoDetails.name}...")
+
+				# Opts
+				_opts =
+					name: repoDetails.name
+					path: repoDetails.path
+					url: repoDetails.url
+					log: docpad.log
+					remote: 'origin'
+					branch: 'master'
+					output: true
+
+				# Init or Update
+				balUtil.initOrPullGitRepo _opts, (err) =>
+					# warn about errors, but don't let them kill execution
+					docpad.warn(err)  if err
+					docpad.log('info', "Updated #{repoDetails.name}")
+					complete()
 
 			# Fire
-			tasks.async()
+			tasks.run()
 			return
 
 		# Add Contributors to the Template Data
@@ -300,61 +320,19 @@ docpadConfig =
 			# Prepare
 			docpad = @docpad
 			contributors = {}
-			opts.templateData.contributors = {}
+			opts.templateData.contributors = []
 
-			# Log
-			docpad.log('info', "Fetching Contributors...")
-
-			# Tasks
-			tasks = new balUtil.Group (err) ->
-				# Check
-				return next(err)  if err
-
-				# Handle
-				delete contributors['benjamin lupton']
-				contributorsNames = _.keys(contributors).sort()
-				for contributorName in contributorsNames
-					opts.templateData.contributors[contributorName] = contributors[contributorName]
-
-				# Log
-				docpad.log('info', "Fetched Contributors")
-
-				# Done
-				return next()
-
-			# If the GitHub Tokens are Missing, Skip Contributors
-			unless process.env.BEVRY_GITHUB_CLIENT_ID and process.env.BEVRY_GITHUB_CLIENT_SECRET
-				# Log
-				docpad.log('warn', "Cannot fetch contributors if the BEVRY_GITHUB_CLIENT_ID and BEVRY_GITHUB_CLIENT_SECRET environment variables are not set.")
-
-				# Done
-				return next()
-
-			# Contributors
-			contributorFeeds = [
-				"https://api.github.com/users/docpad/repos?per_page=100&client_id=#{process.env.BEVRY_GITHUB_CLIENT_ID}&client_secret=#{process.env.BEVRY_GITHUB_CLIENT_SECRET}"
-				"https://api.github.com/users/bevry/repos?per_page=100&client_id=#{process.env.BEVRY_GITHUB_CLIENT_ID}&client_secret=#{process.env.BEVRY_GITHUB_CLIENT_SECRET}"
-			]
-			feedr.readFeeds contributorFeeds, (err,feedRepos) ->
-				for repos in feedRepos
-					for repo in repos
-						packageUrl = repo.html_url.replace('//github.com','//raw.github.com')+'/master/package.json'
-						tasks.push {repo,packageUrl}, (complete) ->
-							feedr.readFeed @packageUrl, (err,packageData) ->
-								return complete()  if err or !packageData  # ignore
-								for contributor in packageData.contributors or []
-									contributorMatch = /^([^<(]+)\s*(?:<(.+?)>)?\s*(?:\((.+?)\))?$/.exec(contributor)
-									continue  unless contributorMatch
-									contributorData =
-										name: (contributorMatch[1] or '').trim()
-										email: (contributorMatch[2] or '').trim()
-										url: (contributorMatch[3] or '').trim()
-									contributorId = contributorData.name.toLowerCase()
-									contributors[contributorId] = contributorData
-								complete()
-
-				# Fire
-				tasks.async()
+			# Fetch Contributors
+			getContributors(
+				users: ['bevry','docpad']
+				github_client_id: process.env.BEVRY_GITHUB_CLIENT_ID
+				github_client_secret: process.env.BEVRY_GITHUB_CLIENT_ID
+				log: docpad.log
+				next: (err,contributors) ->
+					return next(err)  if err
+					opts.templateData.contributors = contributors.filter (item) -> item.username isnt 'balupton'
+					return next()
+			)
 
 			# Done
 			return
@@ -374,7 +352,7 @@ docpadConfig =
 					sitemap.push siteUrl+document.get('url')
 
 			# Write the sitemap file
-			balUtil.writeFile(sitemapPath, sitemap.sort().join('\n'), next)
+			safefs.writeFile(sitemapPath, sitemap.sort().join('\n'), next)
 
 			# Done
 			return
@@ -395,7 +373,7 @@ docpadConfig =
 					{
 						url: "https://api.pushover.net/1/messages.json"
 						method: "POST"
-						form: balUtil.extend(
+						form: extendr.extend(
 							{
 								token: process.env.BEVRY_PUSHOVER_TOKEN
 								user: process.env.BEVRY_PUSHOVER_USER_KEY
@@ -408,18 +386,43 @@ docpadConfig =
 						res.send(body)
 				)
 
+			# DocPad Regenerate Hook
+			# Automatically regenerate when new changes are pushed to our documentation
+			server.all '/regenerate', (req,res) ->
+				if req.query?.key is process.env.WEBHOOK_KEY
+					docpad.log('info', 'Regenerating for documentation change')
+					docpad.action('generate')
+					res.send(200, 'regenerated')
+				else
+					res.send(400, 'key is incorrect')
+
+			# DocPad Short Links
+			server.get /^\/(plugins|upgrade|install|troubleshoot)\/?$/, (req,res) ->
+				relativeUrl = req.params[0] or ''
+				res.redirect(301, "http://docpad.org/docs/#{relativeUrl}")
+
+			# DocPad Content
+			server.get /^\/docpad(?:\/(.*))?$/, (req,res) ->
+				relativeUrl = req.params[0] or ''
+				res.redirect(301, "http://docpad.org/docs/#{relativeUrl}")
+
 			# Bevry Content
 			server.get /^\/((?:support|node|joe|query-?engine).*)$/, (req,res) ->
-				bevryUrl = req.params[0] or ''
-				res.redirect(301, "https://bevry.me/#{bevryUrl}")
+				relativeUrl = req.params[0] or ''
+				res.redirect(301, "http://bevry.me/#{relativeUrl}")
+
+			# GitHub
+			server.get /^\/(?:g|github)(?:\/(.*))?$/, (req,res) ->
+				issueQuery = req.params[0] or ''
+				res.redirect(301, "https://github.com/bevry/docpad/#{issueQuery}")
 
 			# Issues
 			server.get /^\/(?:i|issues)(?:\/(.*))?$/, (req,res) ->
 				issueQuery = req.params[0] or ''
-				res.redirect(301, "https://github.com/bevry/#{issueQuery}")
+				res.redirect(301, "https://github.com/bevry/docpad/issues/#{issueQuery}")
 
 			# Plugins
-			server.get /^\/(?:p|plugins)(?:\/(.*))?$/, (req,res) ->
+			server.get /^\/(?:p|plugin)(?:\/(.*))?$/, (req,res) ->
 				plugin = req.params[0] or ''
 				res.redirect(301, "https://github.com/docpad/docpad-plugin-#{plugin}")
 

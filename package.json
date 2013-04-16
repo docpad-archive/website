@@ -1,16 +1,16 @@
 {
-	"name": "docpad-wesite",
-	"version": "0.1.0",
+	"name": "docpad-website",
+	"version": "0.1.5",
 	"private": true,
 	"description": "The Docpad Website",
 	"homepage": "https://github.com/bevry/docpad-website",
 	"author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
 	"maintainers": [
-		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
 	],
 	"contributors": [
-		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
-		"Chase Colman <chase@infinityatlas.com> (http://thedev.infinityatlas.com)"
+		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
+		"Chase Colman <chase@infinityatlas.com> (https://github.com/chase)"
 	],
 	"bugs": {
 		"url": "https://github.com/bevry/docpad-website/issues"
@@ -20,29 +20,34 @@
 		"url": "http://github.com/bevry/docpad-website.git"
 	},
 	"engines": {
-		"node": "0.8.x",
-		"npm": "1.1.x"
+		"node": "0.10",
+		"npm": "1.2"
 	},
 	"dependencies": {
-		"docpad": "6.21.x",
+		"docpad": "6.x",
 		"docpad-plugin-coffeekup": "2.x",
 		"docpad-plugin-coffeescript": "2.x",
 		"docpad-plugin-eco": "2.x",
+		"docpad-plugin-feedr": "2.x",
 		"docpad-plugin-highlightjs": "2.x",
 		"docpad-plugin-robotskirt": "2.x",
 		"docpad-plugin-partials": "2.x",
-		"docpad-plugin-services": "2.x",
+		"docpad-plugin-services": ">=2.2.2 <3",
 		"docpad-plugin-stylus": "2.1.x",
 		"docpad-plugin-text": "2.x",
-		"feedr": "2.4.x",
-		"bal-util": "~1.15.3",
-		"moment": "1.7.x",
-		"underscore": "1.4.x",
-		"underscore.string": "2.3.x",
-		"request": "2.11.x"
+		"getcontributors": "~1.0.2",
+		"bal-util": "~2.0.3",
+		"safefs": "~3.0.1",
+		"extendr": "~2.0.1",
+		"taskgroup": "~3.1.1",
+		"eachr": "~2.0.2",
+		"moment": "~2.0.0",
+		"underscore": "~1.4.4",
+		"underscore.string": "~2.3.1",
+		"request": "~2.16.2"
 	},
 	"devDependencies": {
-		"coffee-script": "1.4.x",
+		"coffee-script": "~1.6.2",
 		"docpad-plugin-livereload": "2.x"
 	},
 	"subdomain": "docpad",

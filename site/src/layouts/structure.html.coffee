@@ -23,9 +23,4 @@ footer '.bottombar', ->
 		for own page, url of @navigation.bottom
 			a href: url, -> page
 
-aside '.webchat', ->
-	div '.wrapper', ->
-		iframe src:'http://webchat.freenode.net/?randomnick=1&channels=docpad', ->
-		div '.close', -> text 'X'
-	a '.open', href:'http://webchat.freenode.net/?channels=docpad', ->
-		text 'IRC Chat'
+a '.webchat', href:'http://webchat.freenode.net/?channels=docpad', target:'_blank', -> 'IRC Chat'

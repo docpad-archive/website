@@ -5,50 +5,11 @@ standalone: true
 # App
 class App extends BevryApp
 
-	# Dom Ready
-	onDomReady: =>
-		$webchat = $('.webchat')
-		$iframe = $webchat.find('iframe')
-		$wrapper = $webchat.find('.wrapper')
-		$close = $webchat.find('.close')
-		$open = $webchat.find('.open')
-
-		normalizeHeights = ->
-			wrapperIsVisible = $wrapper.is(':visible')
-			if wrapperIsVisible
-				$webchat.add($iframe,$wrapper)
-					.height(Math.max($iframe.height(),500))
-					.width(Math.max($iframe.width(),350))
-			else
-				$webchat.add($iframe,$wrapper)
-					.height($open.height())
-					.width($open.width())
-
-		$wrapper
-			.hide()
-			.resizable(
-				alsoResize: $iframe
-				handles: "e"
-			)
-			.on 'resizestart', ->
-				$iframe.hide()
-			.on 'resizestop', (event,ui) ->
-				$webchat.add($iframe).height(ui.size.height)
-				$webchat.add($iframe).width(ui.size.width)
-				$iframe.show()
-		$close.add($open)
-			.on 'click', (event) ->
-				event.preventDefault()
-				event.stopImmediatePropagation()
-				$wrapper.toggle()
-				$open.toggle()
-				normalizeHeights()
-
-		$webchat.show()
-		normalizeHeights()
-
-		# Super
-		super
+	# Constructor
+	constructor: (args...) ->
+		super args...
+		@config.sectionScrollOpts.offsetTop = 40
+		@
 
 	# State Change
 	stateChange: (event,data) =>

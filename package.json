@@ -35,7 +35,7 @@
 		"docpad-plugin-services": ">=2.2.2 <3",
 		"docpad-plugin-stylus": "2.1.x",
 		"docpad-plugin-text": "2.x",
-		"getcontributors": "~1.0.0",
+		"getcontributors": "~1.0.2",
 		"bal-util": "~2.0.3",
 		"safefs": "~3.0.1",
 		"extendr": "~2.0.1",

@@ -341,6 +341,17 @@ docpadConfig = {
           return res.send(body);
         });
       });
+      server.all('/regenerate', function(req, res) {
+        var _ref;
+
+        if (((_ref = req.query) != null ? _ref.key : void 0) === process.env.WEBHOOK_KEY) {
+          docpad.log('info', 'Regenerating for documentation change');
+          docpad.action('generate');
+          return res.send(200, 'regenerated');
+        } else {
+          return res.send(400, 'key is incorrect');
+        }
+      });
       server.get(/^\/(plugins|upgrade|install|troubleshoot)\/?$/, function(req, res) {
         var relativeUrl;
 

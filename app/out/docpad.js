@@ -221,6 +221,15 @@ docpadConfig = {
           url: 'http://docpad.org/exchange.json'
         }
       }
+    },
+    repocloner: {
+      repos: [
+        {
+          name: 'DocPad Documentation',
+          path: 'src/documents/docs',
+          url: 'https://github.com/bevry/docpad-documentation.git'
+        }
+      ]
     }
   },
   environments: {
@@ -238,50 +247,6 @@ docpadConfig = {
     }
   },
   events: {
-    generateBefore: function(opts, next) {
-      var config, docpad, repos, tasks;
-
-      docpad = this.docpad;
-      config = docpad.getConfig();
-      tasks = new TaskGroup().setConfig({
-        concurrency: 0
-      }).once('complete', next);
-      repos = {
-        'docpad-documentation': {
-          name: 'DocPad Documentation',
-          path: pathUtil.join(config.documentsPaths[0], 'docs'),
-          url: 'https://github.com/bevry/docpad-documentation.git'
-        }
-      };
-      eachr(repos, function(repoDetails, repoKey) {
-        return tasks.addTask(function(complete) {
-          var _opts,
-            _this = this;
-
-          if (!(opts.reset === true || fsUtil.existsSync(repoDetails.path) === false)) {
-            return complete();
-          }
-          docpad.log('info', "Updating " + repoDetails.name + "...");
-          _opts = {
-            name: repoDetails.name,
-            path: repoDetails.path,
-            url: repoDetails.url,
-            log: docpad.log,
-            remote: 'origin',
-            branch: 'master',
-            output: true
-          };
-          return balUtil.initOrPullGitRepo(_opts, function(err) {
-            if (err) {
-              docpad.warn(err);
-            }
-            docpad.log('info', "Updated " + repoDetails.name);
-            return complete();
-          });
-        });
-      });
-      tasks.run();
-    },
     extendTemplateData: function(opts, next) {
       var contributors, docpad;
 
@@ -303,21 +268,6 @@ docpadConfig = {
           return next();
         }
       });
-    },
-    writeAfter: function(opts, next) {
-      var config, docpad, siteUrl, sitemap, sitemapPath;
-
-      docpad = this.docpad;
-      config = docpad.getConfig();
-      sitemap = [];
-      sitemapPath = config.outPath + '/sitemap.txt';
-      siteUrl = config.templateData.site.url;
-      docpad.getCollection('html').forEach(function(document) {
-        if (document.get('sitemap') !== false && document.get('write') !== false && document.get('ignored') !== true && document.get('body')) {
-          return sitemap.push(siteUrl + document.get('url'));
-        }
-      });
-      safefs.writeFile(sitemapPath, sitemap.sort().join('\n'), next);
     },
     serverExtend: function(opts) {
       var docpad, express, request, server;

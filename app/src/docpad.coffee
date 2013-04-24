@@ -255,6 +255,13 @@ docpadConfig =
 				exchange: url: 'http://docpad.org/exchange.json'
 				#'twitter-favorites': url: 'https://api.twitter.com/1.1/favorites/list.json?screen_name=docpad&count=200&include_entities=true'
 
+		repocloner:
+			repos: [
+				name: 'DocPad Documentation'
+				path: 'src/documents/docs'
+				url: 'https://github.com/bevry/docpad-documentation.git'
+			]
+
 	# =================================
 	# Environments
 
@@ -275,46 +282,6 @@ docpadConfig =
 
 	events:
 
-		# Clone/Update our DocPad Documentation Repository
-		generateBefore: (opts,next) ->
-			# Prepare
-			docpad = @docpad
-			config = docpad.getConfig()
-			tasks = new TaskGroup().setConfig(concurrency:0).once 'complete', (next)
-			repos =
-				'docpad-documentation':
-					name: 'DocPad Documentation'
-					path: pathUtil.join(config.documentsPaths[0],'docs')
-					url: 'https://github.com/bevry/docpad-documentation.git'
-
-			# Cycle through the repos assigning each repo value to @ so it works asynchronously
-			eachr repos, (repoDetails,repoKey) -> tasks.addTask (complete) ->
-				return complete()  unless opts.reset is true or fsUtil.existsSync(repoDetails.path) is false
-
-				# Log
-				docpad.log('info', "Updating #{repoDetails.name}...")
-
-				# Opts
-				_opts =
-					name: repoDetails.name
-					path: repoDetails.path
-					url: repoDetails.url
-					log: docpad.log
-					remote: 'origin'
-					branch: 'master'
-					output: true
-
-				# Init or Update
-				balUtil.initOrPullGitRepo _opts, (err) =>
-					# warn about errors, but don't let them kill execution
-					docpad.warn(err)  if err
-					docpad.log('info', "Updated #{repoDetails.name}")
-					complete()
-
-			# Fire
-			tasks.run()
-			return
-
 		# Add Contributors to the Template Data
 		extendTemplateData: (opts,next) ->
 			# Prepare
@@ -333,26 +300,6 @@ docpadConfig =
 					opts.templateData.contributors = contributors.filter (item) -> item.username isnt 'balupton'
 					return next()
 			)
-
-			# Done
-			return
-
-		# Write
-		writeAfter: (opts,next) ->
-			# Prepare
-			docpad = @docpad
-			config = docpad.getConfig()
-			sitemap = []
-			sitemapPath = config.outPath+'/sitemap.txt'
-			siteUrl = config.templateData.site.url
-
-			# Get all the html files
-			docpad.getCollection('html').forEach (document) ->
-				if document.get('sitemap') isnt false and document.get('write') isnt false and document.get('ignored') isnt true and document.get('body')
-					sitemap.push siteUrl+document.get('url')
-
-			# Write the sitemap file
-			safefs.writeFile(sitemapPath, sitemap.sort().join('\n'), next)
 
 			# Done
 			return

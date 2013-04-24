@@ -38,12 +38,8 @@
 		"docpad-plugin-text": "2.x",
 		"getcontributors": "~1.0.2",
 		"bal-util": "~2.0.3",
-		"safefs": "~3.0.1",
 		"extendr": "~2.0.1",
-		"taskgroup": "~3.1.1",
-		"eachr": "~2.0.2",
 		"moment": "~2.0.0",
-		"underscore": "~1.4.4",
 		"underscore.string": "~2.3.1",
 		"request": "~2.16.2"
 	},

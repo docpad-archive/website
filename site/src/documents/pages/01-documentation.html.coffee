@@ -6,10 +6,9 @@ standalone: true
 ###
 
 # Prepare
-_ = @underscore
 docsCollection = @getCollection('docs')
 
-
+# Render
 section '#content', ->
 	div '.page.nonav.docs', ->
 		header ->
@@ -22,6 +21,5 @@ section '#content', ->
 			activeItem: @document
 			partial: @partial
 			moment: @moment
-			underscore: @underscore
 			getCategoryName: @getCategoryName
 		})

@@ -2,15 +2,18 @@
 { itemSort, collection } = @
 return  unless collection
 
-_ = @underscore
-
 # Menu
 nav '.list-menu', ->
 	ul '.list-menu-categories', typeof:'dc:collection', ->
 
 		# Categories
-		categories = _.uniq collection.pluck('category')
+		occuredCategories = []
+		categories = collection.pluck('category')
 		for category in categories
+			# Check
+			continue  if category in occuredCategories
+			occuredCategories.push(category)
+
 			# Category Items
 			categoryItems = collection.findAll({category},itemSort)
 

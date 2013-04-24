@@ -34,6 +34,7 @@
 		"docpad-plugin-repocloner": "2.x",
 		"docpad-plugin-partials": "2.x",
 		"docpad-plugin-services": ">=2.2.2 <3",
+		"docpad-plugin-sitemap": "0.2.x",
 		"docpad-plugin-stylus": "2.1.x",
 		"docpad-plugin-text": "2.x",
 		"getcontributors": "~1.0.2",

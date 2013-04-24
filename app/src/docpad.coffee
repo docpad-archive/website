@@ -1,15 +1,11 @@
 # Require
 fsUtil = require('fs')
 pathUtil = require('path')
-_ = require('underscore')
 moment = require('moment')
 strUtil = require('underscore.string')
 getContributors = require('getcontributors')
 balUtil = require('bal-util')
 extendr = require('extendr')
-safefs = require('safefs')
-eachr = require('eachr')
-{TaskGroup} = require('taskgroup')
 
 # Prepare
 rootPath = __dirname+'/../..'
@@ -78,7 +74,6 @@ docpadConfig =
 		# -----------------------------
 		# Misc
 
-		underscore: _
 		strUtil: strUtil
 		moment: moment
 

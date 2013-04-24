@@ -31,6 +31,7 @@
 		"docpad-plugin-feedr": "2.x",
 		"docpad-plugin-highlightjs": "2.x",
 		"docpad-plugin-robotskirt": "2.x",
+		"docpad-plugin-repocloner": "2.x",
 		"docpad-plugin-partials": "2.x",
 		"docpad-plugin-services": ">=2.2.2 <3",
 		"docpad-plugin-stylus": "2.1.x",

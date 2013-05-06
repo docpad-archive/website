@@ -293,6 +293,24 @@ docpadConfig = {
           return res.send(400, 'key is incorrect');
         }
       });
+      server.get('/exchange.json', function(req, res) {
+        var branch, version;
+
+        branch = 'master';
+        version = req.query.version.split('.');
+        if (version) {
+          if (version[0] === '5') {
+            if (version[1] === '3') {
+              branch = 'docpad-5.3.x';
+            } else {
+              branch = 'docpad-5.x';
+            }
+          } else if (version[0] === '6') {
+            branch = 'docpad-6.x';
+          }
+        }
+        return res.redirect(301, "https://raw.github.com/bevry/docpad-extras/" + branch + "/exchange.json");
+      });
       server.get(/^\/(plugins|upgrade|install|troubleshoot)\/?$/, function(req, res) {
         var relativeUrl;
 

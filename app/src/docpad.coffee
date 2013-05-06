@@ -339,6 +339,26 @@ docpadConfig =
 				else
 					res.send(400, 'key is incorrect')
 
+			# DocPad Exchange
+			# http://docpad.org/exchange.json?version=6.32.0
+			server.get '/exchange.json', (req,res) ->
+				# Prepare
+				branch = 'master'
+
+				# Determine branch based on docpad version
+				version = req.query.version.split('.')
+				if version
+					if version[0] is '5'
+						if version[1] is '3'
+							branch = 'docpad-5.3.x'
+						else
+							branch = 'docpad-5.x'
+					else if version[0] is '6'
+						branch = 'docpad-6.x'
+
+				# Redirect
+				res.redirect(301, "https://raw.github.com/bevry/docpad-extras/#{branch}/exchange.json")
+
 			# DocPad Short Links
 			server.get /^\/(plugins|upgrade|install|troubleshoot)\/?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''

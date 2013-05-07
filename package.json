@@ -37,12 +37,12 @@
 		"docpad-plugin-sitemap": "0.2.x",
 		"docpad-plugin-stylus": "2.1.x",
 		"docpad-plugin-text": "2.x",
-		"getcontributors": "~1.0.2",
+		"getcontributors": "~1.1.0",
 		"bal-util": "~2.0.5",
 		"extendr": "~2.0.1",
 		"moment": "~2.0.0",
 		"underscore.string": "~2.3.1",
-		"request": "~2.20.0"
+		"request": "~2.21.0"
 	},
 	"devDependencies": {
 		"coffee-script": "~1.6.2",

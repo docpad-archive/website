@@ -34,10 +34,14 @@ class BevryApp
 			.on('click', 'a[href]:external', @externalLinkClick)
 			.on('click', '[data-href]', @linkClick)
 
+		# Anchor Change Event
+		@$window.on('anchorchange', @anchorChange)
+
 		# State Change Event
 		@$window.on('statechangecomplete', @stateChange)
 
 		# Always trigger initial page change
+		@$window.trigger('anchorchange')
 		@$window.trigger('statechangecomplete')
 
 		# ScrollSpy
@@ -83,7 +87,6 @@ class BevryApp
 
 		# Discover how we should handle the link
 		if event.which is 2 or event.metaKey or event.shiftKey
-			console.log('default')
 			action = 'default'
 		else
 			action = 'new'
@@ -165,6 +168,17 @@ class BevryApp
 		# Chain
 		@
 
+	# Anchor Change
+	anchorChange: =>
+		hash = History.getHash()
+		return  unless hash
+		el = document.getElementById(hash)
+		return  unless el
+		if el.tagName.toLowerCase() is 'h2'
+			$(el).trigger('select')
+		else
+			$(el).ScrollTo(@config.sectionScrollOpts)
+
 	# State Change
 	stateChange: =>
 		# Prepare
@@ -175,6 +189,14 @@ class BevryApp
 
 		# Documentation
 		if $article.is('.block.doc')
+			$article.find('h1,h2,h3,h4,h5,h6').each ->
+				return  if @id
+				id = @innerText.toLowerCase().replace(/\s+/g,' ').replace(/[^a-zA-Z0-9]+/g,'-').replace(/--+/g,'-')
+				return  if document.getElementById(id)
+				@id = id
+				@setAttribute('data-href', '#'+@id)  unless @getAttribute('data-href')
+				@className += 'hover-link'  unless @className.indexOf('hover-link') isnt -1
+
 			@$docHeaders = $docHeaders = $article.find('h2')
 
 			# Compact
@@ -184,7 +206,7 @@ class BevryApp
 					.each (index) ->
 						$header = $(this)
 						$header.nextUntil('h2').wrapAll($docSectionWrapper.clone().attr('id','h2-'+index))
-					.click (event,opts) ->
+					.on 'select', (event,opts) ->
 						$docHeaders.filter('.current').removeClass('current')
 						$header = $(this)
 							.addClass('current')
@@ -197,13 +219,13 @@ class BevryApp
 								.end()
 						$header.ScrollTo(config.sectionScrollOpts)  if !opts or opts.scroll isnt false
 					.first()
-						.trigger('click',{scroll:false})
+						.trigger('select',{scroll:false})
 
 			# Non-Compact
 			else
 				$docHeaders
 					.addClass('hover-link')
-					.click (event,opts) ->
+					.on 'select', (event,opts) ->
 						$docHeaders.filter('.current').removeClass('current')
 						$header = $(this)
 							.addClass('current')

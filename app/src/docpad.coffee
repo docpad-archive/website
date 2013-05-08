@@ -134,7 +134,7 @@ docpadConfig =
 				"/vendor/history.js"
 
 				# Scripts
-				"/scripts/historyjsit.js"
+				"/vendor/historyjsit.js"
 				"/scripts/bevry.js"
 				"/scripts/script.js"
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"

@@ -1,6 +1,6 @@
 {
 	"name": "docpad-website",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"private": true,
 	"description": "The Docpad Website",
 	"homepage": "https://github.com/bevry/docpad-website",

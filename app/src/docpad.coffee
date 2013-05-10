@@ -116,10 +116,9 @@ docpadConfig =
 
 			# Styles
 			styles: [
-				"/vendor/ui-lightness/jquery-ui-1.9.2.custom.css"
-				'/vendor/highlight.css'
 				'/vendor/normalize.css'
 				'/vendor/h5bp.css'
+				'/vendor/highlight.css'
 				'/styles/style.css'
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
@@ -127,9 +126,7 @@ docpadConfig =
 			scripts: [
 				# Vendor
 				"/vendor/jquery.js"
-				"/vendor/jquery-ui-1.9.2.custom.js"
-				"/vendor/log.js"
-				"/vendor/jquery.scrollto.js"
+				"/vendor/jquery-scrollto.js"
 				"/vendor/modernizr.js"
 				"/vendor/history.js"
 

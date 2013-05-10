@@ -8,7 +8,8 @@ class App extends BevryApp
 	# Constructor
 	constructor: (args...) ->
 		super args...
-		@config.sectionScrollOpts.offsetTop = 40
+		@config.articleScrollOpts.offsetTop = 100
+		@config.sectionScrollOpts.offsetTop = 80
 		@
 
 	# State Change

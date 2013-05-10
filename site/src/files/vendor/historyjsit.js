@@ -65,6 +65,7 @@
 		var documentHtml = function(html){
 			// Prepare
 			var result = String(html)
+				.replace(/<!--.+?-->/g, '')
 				.replace(/<\!DOCTYPE[^>]*>/i, '')
 				.replace(/<(html|head|body|title|meta|script)([\s\>])/gi,'<div class="document-$1"$2')
 				.replace(/<\/(html|head|body|title|meta|script)\>/gi,'</div>')

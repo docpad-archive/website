@@ -1,31 +1,55 @@
-/**
- * @depends jquery
- * @name jquery.scrollto
- * @package jquery-scrollto {@link http://balupton.com/projects/jquery-scrollto}
- */
-
-/**
- * jQuery Aliaser
- */
-(function(window,undefined){
+/*global define:false require:false */
+(function (name, context, definition) {
+	if (typeof module != 'undefined' && module.exports) module.exports = definition();
+	else if (typeof define == 'function' && define.amd) define(definition);
+	else context[name] = definition();
+})('jquery-scrollto', this, function(){
 	// Prepare
 	var jQuery, $, ScrollTo;
-	jQuery = $ = window.jQuery;
+	jQuery = $ = window.jQuery || require('jquery');
 
-	/**
-	 * jQuery ScrollTo (balupton edition)
-	 * @version 1.2.0
-	 * @date July 9, 2012
-	 * @since 0.1.0, August 27, 2010
-	 * @package jquery-scrollto {@link http://balupton.com/projects/jquery-scrollto}
-	 * @author Benjamin "balupton" Lupton {@link http://balupton.com}
-	 * @copyright (c) 2010 Benjamin Arthur Lupton {@link http://balupton.com}
-	 * @license MIT License {@link http://creativecommons.org/licenses/MIT/}
-	 */
-	ScrollTo = $.ScrollTo = $.ScrollTo || {
-		/**
-		 * The Default Configuration
-		 */
+	// Fix scrolling animations on html/body on safari
+	$.Tween.propHooks.scrollTop = $.Tween.propHooks.scrollLeft = {
+		get: function(tween) {
+			if ( tween.elem.tagName === 'HTML' || tween.elem.tagName === 'BODY' ) {
+				if ( tween.prop === 'scrollLeft' ) {
+					return window.scrollX;
+				} else if ( tween.prop === 'scrollTop' ) {
+					return window.scrollY;
+				}
+			}
+		},
+		set: function(tween) {
+			// Our safari fix
+			if ( tween.elem.tagName === 'HTML' || tween.elem.tagName === 'BODY' ) {
+				// Prepare
+				var scrollLeft, scrollTop;
+
+				// Defaults
+				scrollLeft = window.scrollX;
+				scrollTop = window.scrollY;
+
+				// Apply
+				if ( tween.prop === 'scrollLeft' ) {
+					scrollLeft = tween.now;
+				}
+				else if ( tween.prop === 'scrollTop' ) {
+					scrollTop = tween.now;
+				}
+
+				// Apply
+				window.scrollTo(scrollLeft, scrollTop);
+			}
+			// jQuery's IE8 Fix
+			else if ( tween.elem.nodeType && tween.elem.parentNode ) {
+				tween.elem[ tween.prop ] = tween.now;
+			}
+		}
+	};
+
+	// jQuery ScrollTo
+	ScrollTo = {
+		// Configuration
 		config: {
 			duration: 400,
 			easing: 'swing',
@@ -35,9 +59,7 @@
 			offsetLeft: 0
 		},
 
-		/**
-		 * Configure ScrollTo
-		 */
+		// Set Configuration
 		configure: function(options){
 			// Apply Options to Config
 			$.extend(ScrollTo.config, options||{});
@@ -46,14 +68,12 @@
 			return this;
 		},
 
-		/**
-		 * Perform the Scroll Animation for the Collections
-		 * We use $inline here, so we can determine the actual offset start for each overflow:scroll item
-		 * Each collection is for each overflow:scroll item
-		 */
+		// Perform the Scroll Animation for the Collections
+		// We use $inline here, so we can determine the actual offset start for each overflow:scroll item
+		// Each collection is for each overflow:scroll item
 		scroll: function(collections, config){
 			// Prepare
-			var collection, $container, container, $target, $inline, position,
+			var collection, $container, container, $target, $inline, position, containerTagName,
 				containerScrollTop, containerScrollLeft,
 				containerScrollTopEnd, containerScrollLeftEnd,
 				startOffsetTop, targetOffsetTop, targetOffsetTopAdjusted,
@@ -64,8 +84,8 @@
 			// Determine the Scroll
 			collection = collections.pop();
 			$container = collection.$container;
-			container = $container.get(0);
 			$target = collection.$target;
+			containerTagName = $container.prop('tagName');
 
 			// Prepare the Inline Element of the Container
 			$inline = $('<span/>').css({
@@ -76,7 +96,7 @@
 			position = $container.css('position');
 
 			// Insert the Inline Element of the Container
-			$container.css('position','relative');
+			$container.css({position:'relative'});
 			$inline.appendTo($container);
 
 			// Determine the top offset
@@ -90,12 +110,12 @@
 			targetOffsetLeftAdjusted = targetOffsetLeft - startOffsetLeft - parseInt(config.offsetLeft,10);
 
 			// Determine current scroll positions
-			containerScrollTop = container.scrollTop;
-			containerScrollLeft = container.scrollLeft;
+			containerScrollTop = $container.prop('scrollTop');
+			containerScrollLeft = $container.prop('scrollLeft');
 
 			// Reset the Inline Element of the Container
 			$inline.remove();
-			$container.css('position',position);
+			$container.css({position:position});
 
 			// Prepare the scroll options
 			scrollOptions = {};
@@ -106,7 +126,7 @@
 				if ( collections.length === 0 ) {
 					// Callback
 					if ( typeof config.callback === 'function' ) {
-						config.callback.apply(this,[event]);
+						config.callback();
 					}
 				}
 				else {
@@ -140,13 +160,21 @@
 				scrollOptions.scrollLeft = targetOffsetLeftAdjusted;
 			}
 
-			// Perform the scroll
-			if ( $.browser.safari && container === document.body ) {
-				window.scrollTo(scrollOptions.scrollLeft, scrollOptions.scrollTop);
-				callback();
+			// Check to see if the scroll is necessary
+			if ( $container.prop('scrollHeight') === $container.width() ) {
+				delete scrollOptions.scrollTop;
 			}
-			else if ( scrollOptions.scrollTop || scrollOptions.scrollLeft ) {
-				$container.animate(scrollOptions, config.duration, config.easing, callback);
+			if ( $container.prop('scrollWidth') === $container.width() ) {
+				delete scrollOptions.scrollLeft;
+			}
+
+			// Perform the scroll
+			if ( scrollOptions.scrollTop != null || scrollOptions.scrollLeft != null ) {
+				$container.animate(scrollOptions, {
+					duration: config.duration,
+					easing: config.easing,
+					complete: callback
+				});
 			}
 			else {
 				callback();
@@ -156,9 +184,7 @@
 			return true;
 		},
 
-		/**
-		 * ScrollTo the Element using the Options
-		 */
+		// ScrollTo the Element using the Options
 		fn: function(options){
 			// Prepare
 			var collections, config, $container, container;
@@ -200,9 +226,8 @@
 
 			// Add the final collection
 			collections.push({
-				'$container': $(
-					($.browser.msie || $.browser.mozilla) ? 'html' : 'body'
-				),
+				// Apple browsers only support scrolling the body
+				'$container': $('html,body'),
 				'$target': $target
 			});
 
@@ -219,7 +244,10 @@
 		}
 	};
 
-	// Apply our jQuery Prototype Function
-	$.fn.ScrollTo = $.ScrollTo.fn;
+	// Apply our extensions to jQuery
+	$.ScrollTo = $.ScrollTo || ScrollTo;
+	$.fn.ScrollTo = $.fn.ScrollTo || ScrollTo.fn;
 
-})(window);
+	// Export
+	return ScrollTo;
+});

@@ -191,8 +191,8 @@ class BevryApp
 		if $article.is('.block.doc')
 			$article.find('h1,h2,h3,h4,h5,h6').each ->
 				return  if @id
-				id = @innerText.toLowerCase().replace(/\s+/g,' ').replace(/[^a-zA-Z0-9]+/g,'-').replace(/--+/g,'-').replace(/^-|-$/g,'')
-				return  if document.getElementById(id)
+				id = (@textContent or @innerText or '').toLowerCase().replace(/\s+/g,' ').replace(/[^a-zA-Z0-9]+/g,'-').replace(/--+/g,'-').replace(/^-|-$/g,'')
+				return  if !id or document.getElementById(id)
 				@id = id
 				@setAttribute('data-href', '#'+@id)  unless @getAttribute('data-href')
 				@className += 'hover-link'  unless @className.indexOf('hover-link') isnt -1

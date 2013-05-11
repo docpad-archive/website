@@ -7,7 +7,7 @@ layout: splash
 	<p>DocPad removes limitations and closes the gap between experts and beginners. Designers and developers can create websites faster than ever before.</p>
 	<ul class="overview clearfix">
 		<li class="versioning">
-			<a class="hover-link" href="#">
+			<a class="hover-link" href="/docs/intro">
 				<span class="title">Versioning</span>
 				<span class="popover">Use the versioning tools you're already use to.</span>
 				<span class="image"></span>
@@ -21,7 +21,7 @@ layout: splash
 			</a>
 		</li>
 		<li class="language">
-			<a class="hover-link" href="/docs/intro">
+			<a class="hover-link" href="/docs/plugins#renderers">
 				<span class="title">Language Agnostic</span>
 				<span class="popover">Work in CoffeeScript, Stylus, PHP, Ruby, and more.</span>
 				<span class="image"></span>

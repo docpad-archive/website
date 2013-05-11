@@ -63,6 +63,15 @@ layout: splash
 <section class="about">
 	<h3>Open Sourced, Community Driven</h3>
 	<p>Built on an open source foundation and supported by community maintained plugins, DocPad is getting better every single day.</p>
+
 	<a href="/docs/intro" title="Get Started" class="btn">Get Started with DocPad</a>
+
 	<div class="social-buttons"><%- @getSocialButtons() %></div>
+
+	<div class="tweets">
+		<a class="twitter-timeline" href="https://twitter.com/DocPad/favorites" data-widget-id="333060177597169665" data-cards="hidden" align="center" height="420">Favorite Tweets by @DocPad</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</div>
+
 </section>
+

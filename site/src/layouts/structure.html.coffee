@@ -10,9 +10,7 @@ nav '.topbar', ->
 		for own page, url of @navigation.top
 			a href: url, -> text page
 
-	form '.search', action: 'http://google.com/search', method: 'get', ->
-		input type: 'hidden', name: 'q', value: 'site:docpad.org'
-		input '.search-text', type: 'text', name: 'q', placeholder: 'Search via Google'
+	text @partial 'content/search'
 
 div '.mainbar', ->
 	text @content

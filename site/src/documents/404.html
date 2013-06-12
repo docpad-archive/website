@@ -1,0 +1,34 @@
+---
+title: "Page Not Found"
+layout: error
+---
+
+<!-- Content -->
+<section class="404">
+    <h1>Not found <span>☹</span></h1>
+    <p>Sorry, but the page you were trying to view does not exist.</p>
+    <p>It looks like this was the result of either <em>a mistyped address</em> or <em>an out-of-date link</em></p>
+
+    <!-- Fix URL with Google -->
+    <script>
+        var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),GOOG_FIXURL_SITE = location.host;
+    </script>
+    <script src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
+</section>
+
+<!-- Notify Developer -->
+<script>
+    var request = new XMLHttpRequest();
+    var message = document.location.href;
+    if ( document.referrer ) {
+        message += '\nfrom: '+document.referrer;
+    }
+    request.open(
+        'POST'
+        ,document.location.protocol+'//'+document.location.host+'/pushover'+
+            '?title='+escape("DocPad 404")+
+            '&message='+escape(message)
+        ,true
+    );
+    request.send();
+</script>

@@ -369,7 +369,7 @@ docpadConfig =
 				res.redirect(301, "http://docpad.org/docs/#{relativeUrl}")
 
 			# Bevry Content
-			server.get /^\/((?:support|node|joe|query-?engine).*)$/, (req,res) ->
+			server.get /^\/((?:support|tos|terms|privacy|node|joe|query-?engine).*)$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
 				res.redirect(301, "http://bevry.me/#{relativeUrl}")
 

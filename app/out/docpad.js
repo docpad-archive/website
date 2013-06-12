@@ -331,19 +331,25 @@ docpadConfig = {
         relativeUrl = req.params[0] || '';
         return res.redirect(301, "http://bevry.me/" + relativeUrl);
       });
-      server.get(/^\/(?:g|github)(?:\/(.*))?$/, function(req, res) {
-        var issueQuery;
+      server.get(/^\/(?:g|github|bevry\/docpad)\/?(.*)$/, function(req, res) {
+        var relativeUrl;
 
-        issueQuery = req.params[0] || '';
-        return res.redirect(301, "https://github.com/bevry/docpad/" + issueQuery);
+        relativeUrl = req.params[0] || '';
+        return res.redirect(301, "https://github.com/bevry/docpad/" + relativeUrl);
       });
-      server.get(/^\/(?:i|issues)(?:\/(.*))?$/, function(req, res) {
-        var issueQuery;
+      server.get(/^\/(?:i|issues)\/?(.*)$/, function(req, res) {
+        var relativeUrl;
 
-        issueQuery = req.params[0] || '';
-        return res.redirect(301, "https://github.com/bevry/docpad/issues/" + issueQuery);
+        relativeUrl = req.params[0] || '';
+        return res.redirect(301, "https://github.com/bevry/docpad/issues/" + relativeUrl);
       });
-      server.get(/^\/(?:p|plugin)(?:\/(.*))?$/, function(req, res) {
+      server.get(/^\/(?:p|plugin)\/(.+)$/, function(req, res) {
+        var plugin;
+
+        plugin = req.params[0] || '';
+        return res.redirect(301, "https://github.com/docpad/docpad-plugin-" + plugin);
+      });
+      server.get(/^\/(?:docs\/)?docpad-plugin-(.+)$/, function(req, res) {
         var plugin;
 
         plugin = req.params[0] || '';

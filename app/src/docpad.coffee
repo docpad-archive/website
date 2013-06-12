@@ -374,17 +374,22 @@ docpadConfig =
 				res.redirect(301, "http://bevry.me/#{relativeUrl}")
 
 			# GitHub
-			server.get /^\/(?:g|github)(?:\/(.*))?$/, (req,res) ->
-				issueQuery = req.params[0] or ''
-				res.redirect(301, "https://github.com/bevry/docpad/#{issueQuery}")
+			server.get /^\/(?:g|github|bevry\/docpad)\/?(.*)$/, (req,res) ->
+				relativeUrl = req.params[0] or ''
+				res.redirect(301, "https://github.com/bevry/docpad/#{relativeUrl}")
 
 			# Issues
-			server.get /^\/(?:i|issues)(?:\/(.*))?$/, (req,res) ->
-				issueQuery = req.params[0] or ''
-				res.redirect(301, "https://github.com/bevry/docpad/issues/#{issueQuery}")
+			server.get /^\/(?:i|issues)\/?(.*)$/, (req,res) ->
+				relativeUrl = req.params[0] or ''
+				res.redirect(301, "https://github.com/bevry/docpad/issues/#{relativeUrl}")
 
 			# Plugins
-			server.get /^\/(?:p|plugin)(?:\/(.*))?$/, (req,res) ->
+			server.get /^\/(?:p|plugin)\/(.+)$/, (req,res) ->
+				plugin = req.params[0] or ''
+				res.redirect(301, "https://github.com/docpad/docpad-plugin-#{plugin}")
+
+			# Plugins
+			server.get /^\/(?:docs\/)?docpad-plugin-(.+)$/, (req,res) ->
 				plugin = req.params[0] or ''
 				res.redirect(301, "https://github.com/docpad/docpad-plugin-#{plugin}")
 

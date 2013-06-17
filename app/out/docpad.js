@@ -331,13 +331,13 @@ docpadConfig = {
         relativeUrl = req.params[0] || '';
         return res.redirect(301, "http://bevry.me/" + relativeUrl);
       });
-      server.get(/^\/(?:g|github|bevry\/docpad)\/?(.*)$/, function(req, res) {
+      server.get(/^\/(?:g|github|bevry\/docpad)(?:\/(.*))?$/, function(req, res) {
         var relativeUrl;
 
         relativeUrl = req.params[0] || '';
         return res.redirect(301, "https://github.com/bevry/docpad/" + relativeUrl);
       });
-      server.get(/^\/(?:i|issues)\/?(.*)$/, function(req, res) {
+      server.get(/^\/(?:i|issues)(?:\/(.*))?$/, function(req, res) {
         var relativeUrl;
 
         relativeUrl = req.params[0] || '';

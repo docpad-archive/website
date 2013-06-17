@@ -374,12 +374,12 @@ docpadConfig =
 				res.redirect(301, "http://bevry.me/#{relativeUrl}")
 
 			# GitHub
-			server.get /^\/(?:g|github|bevry\/docpad)\/?(.*)$/, (req,res) ->
+			server.get /^\/(?:g|github|bevry\/docpad)(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
 				res.redirect(301, "https://github.com/bevry/docpad/#{relativeUrl}")
 
 			# Issues
-			server.get /^\/(?:i|issues)\/?(.*)$/, (req,res) ->
+			server.get /^\/(?:i|issues)(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
 				res.redirect(301, "https://github.com/bevry/docpad/issues/#{relativeUrl}")
 

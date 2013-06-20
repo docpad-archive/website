@@ -383,14 +383,26 @@ docpadConfig =
 				relativeUrl = req.params[0] or ''
 				res.redirect(301, "https://github.com/bevry/docpad/issues/#{relativeUrl}")
 
+			# Edit
+			server.get /^\/(?:e|edit)(?:\/docs)?\/(.+)$/, (req,res,next) ->
+				fileRelativeUrl = '/docs/'+req.params[0]
+				console.log 'edit', fileRelativeUrl
+				docpad.getFileByRoute fileRelativeUrl, (err, file) ->
+					console.log 'err', file
+					return docpad.serverMiddleware404(req, res, next)  if err or !file
+					fileEditUrl = file.get('editUrl')
+					console.log 'url', fileEditUrl
+					return docpad.serverMiddleware500(req, res, next)  if !fileEditUrl
+					return res.redirect(301, fileEditUrl)
+
 			# Plugins
 			server.get /^\/(?:p|plugin)\/(.+)$/, (req,res) ->
-				plugin = req.params[0] or ''
+				plugin = req.params[0]
 				res.redirect(301, "https://github.com/docpad/docpad-plugin-#{plugin}")
 
 			# Plugins
 			server.get /^\/(?:docs\/)?docpad-plugin-(.+)$/, (req,res) ->
-				plugin = req.params[0] or ''
+				plugin = req.params[0]
 				res.redirect(301, "https://github.com/docpad/docpad-plugin-#{plugin}")
 
 			# Done

@@ -343,16 +343,36 @@ docpadConfig = {
         relativeUrl = req.params[0] || '';
         return res.redirect(301, "https://github.com/bevry/docpad/issues/" + relativeUrl);
       });
+      server.get(/^\/(?:e|edit)(?:\/docs)?\/(.+)$/, function(req, res, next) {
+        var fileRelativeUrl;
+
+        fileRelativeUrl = '/docs/' + req.params[0];
+        console.log('edit', fileRelativeUrl);
+        return docpad.getFileByRoute(fileRelativeUrl, function(err, file) {
+          var fileEditUrl;
+
+          console.log('err', file);
+          if (err || !file) {
+            return docpad.serverMiddleware404(req, res, next);
+          }
+          fileEditUrl = file.get('editUrl');
+          console.log('url', fileEditUrl);
+          if (!fileEditUrl) {
+            return docpad.serverMiddleware500(req, res, next);
+          }
+          return res.redirect(301, fileEditUrl);
+        });
+      });
       server.get(/^\/(?:p|plugin)\/(.+)$/, function(req, res) {
         var plugin;
 
-        plugin = req.params[0] || '';
+        plugin = req.params[0];
         return res.redirect(301, "https://github.com/docpad/docpad-plugin-" + plugin);
       });
       server.get(/^\/(?:docs\/)?docpad-plugin-(.+)$/, function(req, res) {
         var plugin;
 
-        plugin = req.params[0] || '';
+        plugin = req.params[0];
         return res.redirect(301, "https://github.com/docpad/docpad-plugin-" + plugin);
       });
     }

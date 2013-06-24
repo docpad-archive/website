@@ -4,15 +4,15 @@ pathUtil = require('path')
 moment = require('moment')
 strUtil = require('underscore.string')
 getContributors = require('getcontributors')
-balUtil = require('bal-util')
+safeps = require('safeps')
 extendr = require('extendr')
 
 # Prepare
 rootPath = __dirname+'/../..'
 appPath = __dirname
 sitePath = rootPath+'/site'
-textData = balUtil.requireFresh(appPath+'/templateData/text')
-navigationData = balUtil.requireFresh(appPath+'/templateData/navigation')
+textData = safeps.requireFresh(appPath+'/templateData/text')
+navigationData = safeps.requireFresh(appPath+'/templateData/navigation')
 websiteVersion = require(rootPath+'/package.json').version
 
 

@@ -24,7 +24,7 @@
 		"npm": "1.2"
 	},
 	"dependencies": {
-		"docpad": "~6.39.0",
+		"docpad": "~6.40.0",
 		"docpad-plugin-coffeekup": "2.x",
 		"docpad-plugin-coffeescript": "2.x",
 		"docpad-plugin-eco": "2.x",
@@ -38,7 +38,7 @@
 		"docpad-plugin-stylus": "2.1.x",
 		"docpad-plugin-text": "2.x",
 		"getcontributors": "~1.1.1",
-		"bal-util": "~2.1.0",
+		"safeps": "~2.2.2",
 		"extendr": "~2.0.1",
 		"moment": "~2.0.0",
 		"underscore.string": "~2.3.1",

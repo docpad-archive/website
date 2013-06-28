@@ -38,8 +38,8 @@
 		"docpad-plugin-stylus": "2.1.x",
 		"docpad-plugin-text": "2.x",
 		"getcontributors": "~1.1.1",
-		"bal-util": "~2.1.0",
-		"extendr": "~2.0.1",
+		"safeps": "~2.2.2",
+		"extendr": "~2.1.0",
 		"moment": "~2.0.0",
 		"underscore.string": "~2.3.1",
 		"request": "~2.21.0"

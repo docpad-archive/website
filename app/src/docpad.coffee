@@ -197,10 +197,11 @@ docpadConfig =
 		# [\-0-9]+#{category}/[\-0-9]+#{name}.extension
 		docs: (database) ->
 			query =
-				relativeOutDirPath: $startsWith: 'docs'
+				relativeOutDirPath: $startsWith: 'docs/'
 				body: $ne: ""
 			sorting = [categoryDirectory:1, filename:1]
-			database.findAllLive(query,sorting).on 'add', (document) ->
+
+			database.findAllLive(query, sorting).on 'add', (document) ->
 				# Prepare
 				a = document.attributes
 
@@ -232,7 +233,7 @@ docpadConfig =
 				}).addUrl(urls)
 
 		pages: (database) ->
-			database.findAllLive({relativeOutDirPath:'pages'},[filename:1])
+			database.findAllLive({relativeOutDirPath:'pages'}, [filename:1])
 
 
 	# =================================

@@ -217,7 +217,7 @@ docpadConfig =
 				pageTitle = "#{title} | #{categoryName}"
 				githubEditUrl = "https://github.com/bevry/docpad-documentation/edit/master/"
 				proseEditUrl = "http://prose.io/#bevry/docpad-documentation/edit/master/"
-				editUrl = proseEditUrl + a.relativePath.replace('docs/','')
+				editUrl = githubEditUrl + a.relativePath.replace('docs/', '')
 
 				# Apply
 				document.setMetaDefaults({

@@ -144,7 +144,7 @@ docpadConfig = {
       var query, sorting;
       query = {
         relativeOutDirPath: {
-          $startsWith: 'docs'
+          $startsWith: 'docs/'
         },
         body: {
           $ne: ""

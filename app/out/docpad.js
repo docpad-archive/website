@@ -382,6 +382,9 @@ docpadConfig = {
       server.get('/chat', function(req, res) {
         return res.redirect(301, "http://webchat.freenode.net/?channels=docpad");
       });
+      server.get('/forum', function(req, res) {
+        return res.redirect(301, "http://stackoverflow.com/questions/tagged/docpad");
+      });
     }
   }
 };

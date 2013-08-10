@@ -14,7 +14,7 @@ sitePath = rootPath+'/site'
 textData = safeps.requireFresh(appPath+'/templateData/text')
 navigationData = safeps.requireFresh(appPath+'/templateData/navigation')
 websiteVersion = require(rootPath+'/package.json').version
-
+siteUrl = if process.env.NODE_ENV is 'production' then "http://docpad.org" else "http://localhost:9778"
 
 
 # =================================
@@ -86,7 +86,7 @@ docpadConfig =
 
 		site:
 			# The production URL of our website
-			url: "http://docpad.org"
+			url: siteUrl
 
 			# The default title of our website
 			title: "DocPad - Streamlined Web Development"
@@ -197,6 +197,7 @@ docpadConfig =
 		# [\-0-9]+#{category}/[\-0-9]+#{name}.extension
 		docs: (database) ->
 			query =
+				write: true
 				relativeOutDirPath: $startsWith: 'docs/'
 				body: $ne: ""
 			sorting = [categoryDirectory:1, filename:1]
@@ -232,6 +233,10 @@ docpadConfig =
 					editUrl
 				}).addUrl(urls)
 
+		partners: (database) ->
+			database.findAllLive({relativeOutDirPath:'docs/partners'}, [filename:1]).on 'add', (document) ->
+				document.setMetaDefaults(write: false)
+
 		pages: (database) ->
 			database.findAllLive({relativeOutDirPath:'pages'}, [filename:1])
 
@@ -246,8 +251,8 @@ docpadConfig =
 				stylus: 'css'
 		feedr:
 			feeds:
-				latestPackage: url: 'http://docpad.org/latest.json'
-				exchange: url: 'http://docpad.org/exchange.json'
+				latestPackage: url: "#{siteUrl}/latest.json"
+				exchange: url: "#{siteUrl}/exchange.json"
 				#'twitter-favorites': url: 'https://api.twitter.com/1.1/favorites/list.json?screen_name=docpad&count=200&include_entities=true'
 
 		repocloner:
@@ -346,7 +351,7 @@ docpadConfig =
 				branch = 'master'
 
 				# Determine branch based on docpad version
-				version = req.query.version.split('.')
+				version = (req.query.version or '').split('.')
 				if version
 					if version[0] is '5'
 						if version[1] is '3'
@@ -359,15 +364,19 @@ docpadConfig =
 				# Redirect
 				res.redirect(301, "https://raw.github.com/bevry/docpad-extras/#{branch}/exchange.json")
 
+			# DocPad Latest
+			server.get '/latest.json', (req,res) ->
+				res.redirect(301, "https://raw.github.com/bevry/docpad/master/package.json")
+
 			# DocPad Short Links
 			server.get /^\/(plugins|upgrade|install|troubleshoot)\/?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
-				res.redirect(301, "http://docpad.org/docs/#{relativeUrl}")
+				res.redirect(301, "#{siteUrl}/docs/#{relativeUrl}")
 
 			# DocPad Content
 			server.get /^\/docpad(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
-				res.redirect(301, "http://docpad.org/docs/#{relativeUrl}")
+				res.redirect(301, "#{siteUrl}/docs/#{relativeUrl}")
 
 			# Bevry Content
 			server.get /^\/((?:support|tos|terms|privacy|node|joe|query-?engine).*)$/, (req,res) ->

@@ -1,5 +1,6 @@
 ---
 layout: splash
+standalone: true
 ---
 
 <section class="hero">
@@ -21,7 +22,7 @@ layout: splash
 			</a>
 		</li>
 		<li class="language">
-			<a class="hover-link" href="/docs/plugins#renderers">
+			<a class="hover-link no-ajaxy" href="/docs/plugins#renderers">
 				<span class="title">Language Agnostic</span>
 				<span class="popover">Work in CoffeeScript, Stylus, PHP, Ruby, and more.</span>
 				<span class="image"></span>
@@ -49,14 +50,18 @@ layout: splash
 <section class="support">
 	<div>
 		<h2>DocPad Support</h2>
-		<p>Not sure where to start? These DocPad partners provide support, training courses, and consulting.</p>
-		<ul class="providers clearfix">
-			<li><a href="http://bevry.me" title="Creators of DocPad">Bevry</a></li>
-			<li><a href="http://meltmedia.com" title="Interactive Superheroes">Meltmedia</a></li>
-			<li><a href="http://almero.bg" title="Маркетинг и Бизнес развитие">Алмеро</a></li>
-			<li><a href="http://massdistributionmedia.com/" title="New Age Web Platforms to Selected Clients.">MDM</a></li>
-			<li><a href="http://dobotdo.com/" title="We're a small, human-centered design agency building products for passionate people.">Dobot</a></li>
-		</ul>
+		<p>Not sure where to start? These DocPad partners provide support, training courses, and consulting. <a href="/docs/partners" title="Consulting &amp; Support Partners">Learn&nbsp;more.</a></a></p>
+		<ul class="providers clearfix"><% for partner in @getCollection('partners').models: %>
+			<li>
+				<a
+					class="no-ajaxy"
+					href="/docpad/partners#<%= partner.get('shortname') or partner.get('basename') %>"
+					title="<%= partner.get('description') %>"
+				>
+					<%- partner.get('title') %>
+				</a>
+			</li>
+		<% end %></ul>
 	</div>
 </section>
 

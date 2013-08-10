@@ -423,6 +423,10 @@ docpadConfig =
 			server.get '/chat', (req,res) ->
 				res.redirect(301, "http://webchat.freenode.net/?channels=docpad")
 
+			# Forum
+			server.get '/forum', (req,res) ->
+				res.redirect(301, "http://stackoverflow.com/questions/tagged/docpad")
+
 			# Done
 			return
 

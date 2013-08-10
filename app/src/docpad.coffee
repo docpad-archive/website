@@ -415,6 +415,14 @@ docpadConfig =
 				plugin = req.params[0]
 				res.redirect(301, "https://github.com/docpad/docpad-plugin-#{plugin}")
 
+			# Chat Guidelines
+			server.get '/chat-guidelines', (req,res) ->
+				res.redirect(301, "https://github.com/bevry/docpad/issues/384")
+
+			# Chat
+			server.get '/chat', (req,res) ->
+				res.redirect(301, "http://webchat.freenode.net/?channels=docpad")
+
 			# Done
 			return
 

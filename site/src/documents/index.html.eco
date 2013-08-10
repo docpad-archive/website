@@ -50,12 +50,12 @@ standalone: true
 <section class="support">
 	<div>
 		<h2>DocPad Support</h2>
-		<p>Not sure where to start? These DocPad partners provide support, training courses, and consulting. <a href="/docs/partners" title="Consulting &amp; Support Partners">Learn&nbsp;more.</a></a></p>
+		<p>Not sure where to start? These DocPad partners provide support, training courses, and consulting. <a href="/docs/support" title="Consulting &amp; Support Partners">Learn&nbsp;more.</a></a></p>
 		<ul class="providers clearfix"><% for partner in @getCollection('partners').models: %>
 			<li>
 				<a
 					class="no-ajaxy"
-					href="/docpad/partners#<%= partner.get('shortname') or partner.get('basename') %>"
+					href="/docpad/support#<%= partner.get('shortname') or partner.get('basename') %>"
 					title="<%= partner.get('description') %>"
 				>
 					<%- partner.get('title') %>

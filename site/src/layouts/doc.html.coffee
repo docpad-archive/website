@@ -10,16 +10,6 @@ for item,index in docsCollection.models
 prevModel = docsCollection.models[index-1] ? null
 nextModel = docsCollection.models[index+1] ? null
 
-nav '.sidebar', ->
-	text @partial('menu/menu.html.coffee',{
-		collection: docsCollection
-		activeItem: @document
-		partial: @partial
-		moment: @moment
-		underscore: @underscore
-		getCategoryName: @getCategoryName
-	})
-
 section '#content', ->
 	div '.page', ->
 		text @partial('content/block.html.coffee',{

@@ -2,15 +2,31 @@
 layout: default
 ###
 
-nav '.topbar', ->
-	a '.logo', href: '/', title: @text['heading'], ->
-		@text['heading']
+docsCollection = @getCollection('docs')
+for item,index in docsCollection.models
+	if item.id is @document.id
+		break
 
-	div '.links', ->
-		for own page, url of @navigation.top
-			a href: url, -> text page
+div '.topbar', ->
+	nav '.topnav', ->
+		a '.logo', href: '/', title: @text['heading'], ->
+			@text['heading']
 
-	text @partial 'content/search'
+		div '.links', ->
+			for own page, url of @navigation.top
+				a href: url, -> text page
+
+		text @partial 'content/search'
+
+	nav '.sidebar', ->
+		text @partial('menu/menu.html.coffee',{
+			collection: docsCollection
+			activeItem: @document
+			partial: @partial
+			moment: @moment
+			underscore: @underscore
+			getCategoryName: @getCategoryName
+		})
 
 div '.mainbar', ->
 	text @content

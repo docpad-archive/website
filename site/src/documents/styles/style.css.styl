@@ -282,18 +282,22 @@ nav li
 		word-wrap: break-word
 		overflow: hidden
 
-	&:hover .sidebar
-	.sidebar.active
-		left: 0
-		opacity: 1
+// there is a bug on ipads where the topbar will be have hover active by default
+// therefore the sidebar shows by default on ipads
+// which we do not want as it is difficult to turn the sidebar off on ipads
+// so for now, just disable the sidebar for touch devices
+html.no-touch
+	.topbar:hover
+		.sidebar
+			left: 0
+			opacity: 1
 
 .sidebar
 	position: fixed
 	top: 2.5em
-	left: 0
+	left: -200px
 	width: 220px
 	padding-right: 20px
-	left: -200px
 	z-index: 500
 	word-wrap: break-word
 	transition: all 0.3s ease-in

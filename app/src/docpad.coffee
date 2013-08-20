@@ -417,11 +417,11 @@ docpadConfig =
 
 			# License
 			server.get '/license', (req,res) ->
-				res.redirect(301, "https://raw.github.com/bevry/docpad/master/LICENSE.md")
+				res.redirect(301, "https://github.com/bevry/docpad/blob/master/LICENSE.md#readme")
 
 			# Changes
 			server.get '/changes', (req,res) ->
-				res.redirect(301, "https://raw.github.com/bevry/docpad/master/History.md")
+				res.redirect(301, "https://github.com/bevry/docpad/blob/master/History.md#readme")
 
 			# Chat Guidelines
 			server.get '/chat-guidelines', (req,res) ->

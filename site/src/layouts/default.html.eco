@@ -14,15 +14,20 @@
 	<meta name="description" content="<%= @getPreparedDescription() %>" />
 	<meta name="keywords" content="<%= @getPreparedKeywords() %>" />
 
+	<!-- Icons -->
+	<link rel="shortcut icon" href="/favicon.ico" />
+
 	<!-- DocPad Meta -->
 	<%- @getBlock('meta').toHTML() %>
 
 	<!-- DocPad Styles + Our Own -->
 	<%- @getBlock('styles').add(@site.styles or []).toHTML() %>
 
-	<!-- DocPad Typekit will need to be set up -->
-	<script src="//use.typekit.net/dyv0obd.js"></script>
-	<script>try{Typekit.load();}catch(e){}</script>
+	<% if 'production' in @getEnvironments(): %>
+		<!-- DocPad Typekit will need to be set up -->
+		<script src="//use.typekit.net/dyv0obd.js"></script>
+		<script>try{Typekit.load();}catch(e){}</script>
+	<% end %>
 </head>
 <body>
 	<!--[if lt IE 7]>

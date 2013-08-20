@@ -377,10 +377,10 @@ docpadConfig = {
         return res.redirect(301, "https://github.com/docpad/docpad-plugin-" + plugin);
       });
       server.get('/license', function(req, res) {
-        return res.redirect(301, "https://raw.github.com/bevry/docpad/master/LICENSE.md");
+        return res.redirect(301, "https://github.com/bevry/docpad/blob/master/LICENSE.md#readme");
       });
       server.get('/changes', function(req, res) {
-        return res.redirect(301, "https://raw.github.com/bevry/docpad/master/History.md");
+        return res.redirect(301, "https://github.com/bevry/docpad/blob/master/History.md#readme");
       });
       server.get('/chat-guidelines', function(req, res) {
         return res.redirect(301, "https://github.com/bevry/docpad/issues/384");

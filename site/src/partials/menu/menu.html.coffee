@@ -6,6 +6,16 @@ return  unless collection
 nav '.list-menu', ->
 	ul '.list-menu-categories', typeof:'dc:collection', ->
 
+		text """
+			<li class="list-menu-category list-menu-home" typeof="soic:page" about="/">
+			  <a class="list-menu-link" href="/">
+			    <h3 class="list-menu-title" property="dc:title">
+			      HOME
+			    </h3>
+			  </a>
+			</li>
+			"""
+
 		# Categories
 		occuredCategories = []
 		categories = collection.pluck('category')

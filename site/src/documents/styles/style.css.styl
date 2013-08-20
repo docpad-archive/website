@@ -254,13 +254,10 @@ nav li
 // ====================================
 // Layout and structure
 
-.bottombar
-.topbar
 .container
 	margin: 0 auto
 	width: 90%
 	position: relative
-	background: hsl(0, 0%, 95%)
 	clear: both
 
 .bottombar
@@ -269,30 +266,47 @@ nav li
 	min-height: 4em
 
 .topbar
-	top: 0
 	position: fixed
-	left: 5%
-	z-index: 500
+	top: 0
+	left: 0
+	width: 100%
+	height: 2.5em
+	z-index: 501
+
+	background: hsl(0, 0%, 95%)
+	border-bottom: 1px solid colorLightBrown
+	box-shadow: 0 1px 0 white
+
+	.topnav
+		height: 2.5em
+		word-wrap: break-word
+		overflow: hidden
+
+	&:hover .sidebar
+	.sidebar.active
+		left: 0
+		opacity: 1
 
 .sidebar
 	position: fixed
-	top: 4em
-	left: 5%
-
-	width: 200px
+	top: 2.5em
+	left: 0
+	width: 220px
+	padding-right: 20px
+	left: -200px
+	z-index: 500
 	word-wrap: break-word
+	transition: all 0.3s ease-in
 
-	opacity: 1
-	transition: all 0.2s ease-out
-
-	&.fixed
-		opacity: 0.5
-		&:hover
-			opacity: 1
+	.list-menu
+		overflow: scroll
+		width: 200px
+		background: hsl(0, 0%, 95%)
+		border-right: 1px solid colorLightBrown
+		box-shadow: 0 1px 0 white
 
 .page
 	width: 100%
-	padding-left: 200px
 
 .page.nonav
 	padding-left: 0
@@ -322,38 +336,41 @@ nav li
 // Main navigation
 
 .topbar
-	border-bottom: 1px solid colorLightBrown
-	box-shadow: 0 1px 0 white
-	padding-top: 1.2em
-	line-height: 1.5em
+	.logo
+	.links a
+		margin-right: 25px
 
 	.links
 		display: inline
-
-	a
-		border-bottom: 6px solid transparent
-		color: colorDarkestBrown
-		display: inline-block
-		font-size: 15px
-		margin-right: 25px
-		padding-bottom: 0.6em
-
-		&:hover
-		&.active
-			border-color: colorLightGold
-			text-decoration: none
+		a
+			display: inline-block
+			padding-top: 0.6em
+			padding-bottom: 0.1em
+			border-bottom: 6px solid transparent
+			color: colorDarkestBrown
+			font-size: 15px
+			&:hover
+			&.active
+				border-color: colorLightGold
+				text-decoration: none
 
 	.logo
+		display: inline
+		float: left
+		margin-top: 0.5em
+
 		background: transparent url(/images/logo-docpad.png) no-repeat 0 58%
 		width: 141px
 		height: 25px
 		text-indent: -9999em
-		padding: 0
+
 		&:hover
 			border-color: transparent
 
 	.search
+		display: inline-block
 		float: right
+		margin-top: 0.5em
 
 		input
 			background: white url(/images/icon-search.gif) no-repeat 10px 50%
@@ -583,15 +600,13 @@ nav li
 
 // Sidebar
 .sidebar
-	overflow: hidden
-
 	// Menu
 	.list-menu
 		// Category Group
 		.list-menu-categories
-			&:first-child
-				border-left: 2px solid colorLightGold
-				padding: 0
+			margin: 0.3em 0
+			padding-bottom: 1em
+			border-left: 2px solid colorLightGold
 
 		// Category
 		.list-menu-category
@@ -599,12 +614,14 @@ nav li
 
 			&.active > .list-menu-link
 				border-color: colorLightGold
+			/*
 			&.inactive
 				.list-menu-items
 					max-height: 0
 			&:hover
 				.list-menu-items
 					max-height: 300px
+			*/
 
 		// Item Group
 		.list-menu-items
@@ -653,6 +670,8 @@ nav li
 					font-weight: fontMyraidBold
 					color: colorDarkestBrown
 
+		.list-menu-home
+			display: none
 
 // ====================================
 // Main Content
@@ -836,11 +855,6 @@ nav li
 	// Remove side padding
 	.container
 		width: 100%
-	.topbar
-		width: 100%
-	.topbar
-	.sidebar
-		left: 0
 
 	// Shrink features even more
 	.splash
@@ -901,35 +915,6 @@ nav li
 				width: 47%
 				margin: 1em 1.5%
 
-	// Make top menu two rows
-	.topbar
-		text-align: center
-		.links
-			padding-top: 1em
-			display: block
-
-	// Decrease sidebar width and font size
-	.sidebar
-		top: 6em
-		width: 150px
-		.list-menu
-			font-size: 80%
-	.page
-		padding-left: 150px
-
-	// Make main nav absolute instead of fixed
-	.topbar
-		position: relative
-		width: 100%
-		left: 0
-	.sidebar.fixed
-		top: 0
-		opacity: 1
-	.mainbar
-		margin-top: 0
-	.page
-		padding-top: 0
-
 	// Remove top margin on the bottombar
 	.bottombar
 		margin-top: 0
@@ -938,10 +923,6 @@ nav li
 			margin: 0
 
 @media screen and (max-width: 650px)
-	// Remove sidebar
-	.sidebar
-		display: none
-
 	// Adjust font sizes
 	.page
 		font-size: 95%

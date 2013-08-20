@@ -364,16 +364,16 @@ docpadConfig =
 				# Redirect
 				res.redirect(301, "https://raw.github.com/bevry/docpad-extras/#{branch}/exchange.json")
 
-			# DocPad Latest
+			# Latest
 			server.get '/latest.json', (req,res) ->
 				res.redirect(301, "https://raw.github.com/bevry/docpad/master/package.json")
 
-			# DocPad Short Links
+			# Short Links
 			server.get /^\/(plugins|upgrade|install|troubleshoot)\/?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
 				res.redirect(301, "#{siteUrl}/docs/#{relativeUrl}")
 
-			# DocPad Content
+			# Content
 			server.get /^\/docpad(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
 				res.redirect(301, "#{siteUrl}/docs/#{relativeUrl}")
@@ -410,10 +410,18 @@ docpadConfig =
 				plugin = req.params[0]
 				res.redirect(301, "https://github.com/docpad/docpad-plugin-#{plugin}")
 
-			# Plugins
+			# Plugins via Full
 			server.get /^\/(?:docs\/)?docpad-plugin-(.+)$/, (req,res) ->
 				plugin = req.params[0]
 				res.redirect(301, "https://github.com/docpad/docpad-plugin-#{plugin}")
+
+			# License
+			server.get '/license', (req,res) ->
+				res.redirect(301, "https://raw.github.com/bevry/docpad/master/LICENSE.md")
+
+			# Changes
+			server.get '/changes', (req,res) ->
+				res.redirect(301, "https://raw.github.com/bevry/docpad/master/History.md")
 
 			# Chat Guidelines
 			server.get '/chat-guidelines', (req,res) ->

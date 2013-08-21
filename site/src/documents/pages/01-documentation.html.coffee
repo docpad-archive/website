@@ -10,7 +10,7 @@ docsCollection = @getCollection('docs')
 
 # Render
 section '#content', ->
-	div '.page.nonav.docs', ->
+	div '.page.docs', ->
 		header ->
 			a '.permalink.hover-link', href: '/docs/', ->
 				h1 'Documentation'

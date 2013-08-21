@@ -266,7 +266,7 @@ nav li
 	min-height: 4em
 
 .topbar
-	position: fixed
+	position: relative
 	top: 0
 	left: 0
 	width: 100%
@@ -281,16 +281,6 @@ nav li
 		height: 2.5em
 		word-wrap: break-word
 		overflow: hidden
-
-// there is a bug on ipads where the topbar will be have hover active by default
-// therefore the sidebar shows by default on ipads
-// which we do not want as it is difficult to turn the sidebar off on ipads
-// so for now, just disable the sidebar for touch devices
-html.no-touch
-	.topbar:hover
-		.sidebar
-			left: 0
-			opacity: 1
 
 .sidebar
 	position: fixed
@@ -312,12 +302,8 @@ html.no-touch
 .page
 	width: 100%
 
-.page.nonav
-	padding-left: 0
-
 .mainbar
 	font-weight: 400
-	margin-top: 40px
 	clearfix()
 
 .webchat
@@ -334,56 +320,62 @@ html.no-touch
 	text-align: center
 	padding-top: 0.3em
 
+html.no-touch
+	.topbar
+		position: fixed
+	.mainbar
+		margin-top: 40px
+	.page
+		padding-top: 2em
+
+
+html.no-touch .topbar:hover .sidebar
+.topbar .sidebar.active
+	left: 0
+	opacity: 1
 
 
 // ====================================
 // Main navigation
 
 .topbar
-	.logo
+	.search
+	.links
 	.links a
-		margin-right: 25px
+		display: inline-block
 
 	.links
-		display: inline
+		float: left
+		margin-top: 0.6em
 		a
-			display: inline-block
-			padding-top: 0.6em
-			padding-bottom: 0.1em
-			border-bottom: 6px solid transparent
+			line-height: 1em
+			font-size: 1em
+			margin-right: 20px
 			color: colorDarkestBrown
-			font-size: 15px
+			padding-bottom: 2px
+			border-bottom: 6px solid transparent
+
 			&:hover
 			&.active
 				border-color: colorLightGold
 				text-decoration: none
 
-	.logo
-		display: inline
-		float: left
-		margin-top: 0.5em
-
-		background: transparent url(/images/logo-docpad.png) no-repeat 0 58%
-		width: 141px
-		height: 25px
-		text-indent: -9999em
-
-		&:hover
-			border-color: transparent
+		a.logo
+			margin-left: 10px
+			font-size: 1.25em
+			padding-bottom: 1px
 
 	.search
-		display: inline-block
+		margin-top: 0.4em
 		float: right
-		margin-top: 0.5em
-
 		input
 			background: white url(/images/icon-search.gif) no-repeat 10px 50%
 			border: 1px solid colorLighterBrown
 			border-radius: 30px
 			color: colorDarkBrown
-			font-size: 14px
+			font-size: 1em
 			padding: .313em 0.938em .188em 2.188em
-			width: 170px
+			width: 200px
 
 			&:focus
 				outline: none
@@ -606,10 +598,11 @@ html.no-touch
 .sidebar
 	// Menu
 	.list-menu
+		padding-bottom: 1em
+
 		// Category Group
 		.list-menu-categories
 			margin: 0.3em 0
-			padding-bottom: 1em
 			border-left: 2px solid colorLightGold
 
 		// Category
@@ -679,9 +672,6 @@ html.no-touch
 
 // ====================================
 // Main Content
-
-.page
-	padding-top: 2em
 
 .block-edit
 	display: block
@@ -973,8 +963,15 @@ html.no-touch
 			margin: 2em 0
 
 	// Hide the links
+	.block-edit
+		display: none
 	.bottombar
 		.links
+			display: none
+
+	// Hide the links
+	.topbar
+		a.secondary
 			display: none
 
 	// Allow code blocks to break

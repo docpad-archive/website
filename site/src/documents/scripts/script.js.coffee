@@ -23,12 +23,12 @@ class App extends BevryApp
 		# On touch devices make clicking docpad show the sidebar
 		if $('html').hasClass('no-touch') is false
 			$(document.body)
-				.on 'click touchend', '.logo', (e) =>
+				.on 'click touchstart', '.logo', (e) =>
 					@resize()
 					$('.sidebar').addClass('active')
 					e.preventDefault()
 					return false
-				.on 'click touchend', '.container', (e) ->
+				.on 'click touchstart', '.container', (e) ->
 					if $(e.target).parents('.topbar').length is 0
 						$('.sidebar').removeClass('active')
 					return true

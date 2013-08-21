@@ -11,10 +11,15 @@ class BevryApp
 	config: null
 
 	constructor: ->
+		# Prepare
 		@config ?= {}
 		@config.articleScrollOpts ?= {}
 		@config.sectionScrollOpts ?= {}
+
+		# On dom ready
 		$(@onDomReady)
+
+		# Chain
 		@
 
 	onDomReady: =>
@@ -45,7 +50,13 @@ class BevryApp
 		@$window.trigger('statechangecomplete')
 
 		# ScrollSpy
-		setInterval(@scrollSpy, 500)
+		if @scrollSpy?
+			setInterval(@scrollSpy, 500)
+
+		# Resize
+		if @resize?
+			$(window).on('resize', @resize)
+			@resize()
 
 		# Chain
 		@

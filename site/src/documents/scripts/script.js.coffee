@@ -6,16 +6,50 @@ standalone: true
 class App extends BevryApp
 
 	# Constructor
-	constructor: (args...) ->
-		super args...
+	constructor: ->
+		# Prepare
+		@config ?= {}
+		@config.articleScrollOpts ?= {}
+		@config.sectionScrollOpts ?= {}
+
+		# Apply
 		@config.articleScrollOpts.offsetTop = 100
 		@config.sectionScrollOpts.offsetTop = 80
-		$(window).on('resize', @resize)
-		@
+
+		# Forward
+		super
+
+	onDomReady: =>
+		# Prepare
+		$logo = $('.logo')
+		$sidebar = $('.sidebar')
+
+		# On touch devices make clicking docpad show the sidebar
+		if $('html').hasClass('no-touch') is false
+			$logo.click (e) =>
+				@resize()
+				e.preventDefault()
+				$sidebar.addClass('active')
+			$('.container').click (e) ->
+				if $(e.target).parents('.topbar').length is 0
+					$sidebar.removeClass('active')
+
+		# Forward
+		super
 
 	resize: =>
-		# Height Adjust
-		$('.sidebar').find('.list-menu').height $(window).height() - $('.topbar').height()
+		# Prepare
+		$sidebar = $('.sidebar')
+
+		# Apply
+		if $('html').hasClass('no-touch')
+			$topbar = $('.topbar')
+			topbarHeight = $topbar.outerHeight()
+			$sidebar.find('.list-menu').height($(window).height() - topbarHeight)
+			$sidebar.css(top: topbarHeight)
+		else
+			$sidebar.find('.list-menu').height(parseInt($(window).height(),10) + 50)
+			$sidebar.css(top: 0)
 
 		# Chain
 		@
@@ -23,7 +57,7 @@ class App extends BevryApp
 	# State Change
 	stateChange: (event,data) =>
 		# Fetch
-		$sidebar = $('.sidebar')
+		$sidebar = $('.sidebar').removeClass('active')
 
 		# Ensure our sidebar activity is the same as the remote
 		$sidebarRemote = data?.$dataBody?.find('.sidebar')
@@ -53,7 +87,7 @@ class App extends BevryApp
 			onlyIfOutside: true
 		})
 
-		# Super
+		# Forward
 		super
 
 

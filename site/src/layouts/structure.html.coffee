@@ -9,12 +9,13 @@ for item,index in docsCollection.models
 
 div '.topbar', ->
 	nav '.topnav', ->
-		a '.logo', href: '/', title: @text['heading'], ->
-			@text['heading']
-
 		div '.links', ->
+
+			a '.logo.primary', href: '/', title: @text['heading'], ->
+				@text['heading']
+
 			for own page, url of @navigation.top
-				a href: url, -> text page
+				a '.secondary', href: url, -> text page
 
 		text @partial 'content/search'
 

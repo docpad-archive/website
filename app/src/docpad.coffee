@@ -285,6 +285,9 @@ docpadConfig =
 
 		# Add Contributors to the Template Data
 		extendTemplateData: (opts,next) ->
+			# Check
+			return next()  if 'update' in process.argv
+
 			# Prepare
 			docpad = @docpad
 			contributors = {}

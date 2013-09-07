@@ -253,6 +253,9 @@ docpadConfig = {
   events: {
     extendTemplateData: function(opts, next) {
       var contributors, docpad;
+      if (__indexOf.call(process.argv, 'update') >= 0) {
+        return next();
+      }
       docpad = this.docpad;
       contributors = {};
       opts.templateData.contributors = [];

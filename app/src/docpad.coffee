@@ -103,14 +103,23 @@ docpadConfig =
 
 			# Services
 			services:
+				ircwebchat: 'docpad'
+
+				travisStatusButton: 'bevry/docpad'
+				furyButton: 'docpad'
+				gittipButton: 'docpad'
+				flattrButton: '344188/balupton-on-Flattr'
+				paypalButton: 'QB8GQPZAH84N6'
+
 				facebookLikeButton:
 					applicationId: '266367676718271'
 				twitterTweetButton: 'docpad'
 				twitterFollowButton: 'docpad'
+
 				disqus: 'docpad'
-				ircwebchat: 'docpad'
 				gauges: '50dead2bf5a1f541d7000008'
 				googleAnalytics: 'UA-35505181-2'
+				inspectlet: '746529266'
 				mixpanel: 'd0f9b33c0ec921350b5419352028577e'
 				reinvigorate: '89t63-62ne18262h'
 
@@ -429,6 +438,10 @@ docpadConfig =
 			# Chat Guidelines
 			server.get '/chat-guidelines', (req,res) ->
 				res.redirect(301, "https://github.com/bevry/docpad/issues/384")
+
+			# Chat Logs
+			server.get '/chat-logs', (req,res) ->
+				res.redirect(301, "https://botbot.me/freenode/docpad/")
 
 			# Chat
 			server.get '/chat', (req,res) ->

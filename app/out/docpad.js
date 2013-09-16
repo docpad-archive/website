@@ -79,15 +79,21 @@ docpadConfig = {
       description: "Empower your website frontends with layouts, meta-data, pre-processors (markdown, jade, coffeescript, etc.), partials, skeletons, file watching, querying, and an amazing plugin system. Use it either standalone, as a build script, or even as a module in a bigger system. Either way, DocPad will streamline your web development process allowing you to craft full-featured websites quicker than ever before.",
       keywords: "bevry, bevryme, balupton, benjamin lupton, docpad, node, node.js, javascript, coffeescript, query engine, queryengine, backbone.js, cson",
       services: {
+        ircwebchat: 'docpad',
+        travisStatusButton: 'bevry/docpad',
+        furyButton: 'docpad',
+        gittipButton: 'docpad',
+        flattrButton: '344188/balupton-on-Flattr',
+        paypalButton: 'QB8GQPZAH84N6',
         facebookLikeButton: {
           applicationId: '266367676718271'
         },
         twitterTweetButton: 'docpad',
         twitterFollowButton: 'docpad',
         disqus: 'docpad',
-        ircwebchat: 'docpad',
         gauges: '50dead2bf5a1f541d7000008',
         googleAnalytics: 'UA-35505181-2',
+        inspectlet: '746529266',
         mixpanel: 'd0f9b33c0ec921350b5419352028577e',
         reinvigorate: '89t63-62ne18262h'
       },
@@ -387,6 +393,9 @@ docpadConfig = {
       });
       server.get('/chat-guidelines', function(req, res) {
         return res.redirect(301, "https://github.com/bevry/docpad/issues/384");
+      });
+      server.get('/chat-logs', function(req, res) {
+        return res.redirect(301, "https://botbot.me/freenode/docpad/");
       });
       server.get('/chat', function(req, res) {
         return res.redirect(301, "http://webchat.freenode.net/?channels=docpad");

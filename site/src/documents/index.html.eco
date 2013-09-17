@@ -39,7 +39,7 @@ standalone: true
 		<li class="plugins">
 			<a class="hover-link" href="/docs/plugins">
 				<span class="title">Powerful Plugins</span>
-				<span class="popover">Use the dozens available to transform your content.</span>
+				<span class="popover">Nearly a hundred ready for use.</span> <!-- almost 70, 66 last time I counted -->
 				<span class="image"></span>
 			</a>
 			<div class="title"></div>

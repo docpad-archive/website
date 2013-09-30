@@ -33,7 +33,7 @@
     "docpad-plugin-robotskirt": "~2.0.3",
     "docpad-plugin-repocloner": "~2.2.0",
     "docpad-plugin-partials": "~2.8.0",
-    "docpad-plugin-services": "~2.3.0",
+    "docpad-plugin-services": "~2.4.1",
     "docpad-plugin-stylus": "~2.4.0",
     "docpad-plugin-text": "~2.3.0",
     "getcontributors": "~1.1.1",

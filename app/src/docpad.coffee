@@ -115,6 +115,7 @@ docpadConfig =
 					applicationId: '266367676718271'
 				twitterTweetButton: 'docpad'
 				twitterFollowButton: 'docpad'
+				githubStarButton: 'bevry/docpad'
 
 				disqus: 'docpad'
 				gauges: '50dead2bf5a1f541d7000008'

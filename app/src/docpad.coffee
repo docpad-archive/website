@@ -14,7 +14,9 @@ textData = safeps.requireFresh(appPath+'/templateData/text')
 navigationData = safeps.requireFresh(appPath+'/templateData/navigation')
 websiteVersion = require(rootPath+'/package.json').version
 siteUrl = if process.env.NODE_ENV is 'production' then "http://docpad.org" else "http://localhost:9778"
-contributorGetter = null
+contributorsGetter = null
+contributors = null
+
 
 # =================================
 # Helpers
@@ -195,6 +197,9 @@ docpadConfig =
 			contents = @readFile(relativePath)
 			return """<pre><code class="#{language}">#{contents}</code></pre>"""
 
+		# Get Contributors
+		getContributors: -> contributors or []
+
 
 	# =================================
 	# Collections
@@ -292,29 +297,46 @@ docpadConfig =
 
 	events:
 
-		# Add Contributors to the Template Data
-		extendTemplateData: (opts,next) ->
-			# Check
-			return next()  if 'update' in process.argv
+		# Generate Before
+		generateBefore: (opts) ->
+			# Reset contributors if we are a complete generation (not a partial one)
+			contributors = null
 
+			# Return
+			return true
+
+		# Fetch Contributors
+		renderBefore: (opts,next) ->
 			# Prepare
 			docpad = @docpad
-			contributors = {}
-			opts.templateData.contributors = []
 
-			# Fetch Contributors
-			contributorGetter ?= require('getcontributors').create(
+			# Check
+			return next()  if contributors
+
+			# Log
+			docpad.log('info', 'Fetching your latest contributors for display within the website')
+
+			# Prepare contributors getter
+			contributorsGetter ?= require('getcontributors').create(
 				log: docpad.log
 				github_client_id: process.env.BEVRY_GITHUB_CLIENT_ID
 				github_client_secret: process.env.BEVRY_GITHUB_CLIENT_SECRET
 			)
-			contributorGetter.fetchContributorsFromUsers ['bevry','docpad'], (err,contributors) ->
+
+			# Fetch contributors
+			contributorsGetter.fetchContributorsFromUsers ['bevry','docpad','webwrite'], (err,_contributors=[]) ->
+				# Check
 				return next(err)  if err
-				opts.templateData.contributors = contributors
+
+				# Apply
+				contributors = _contributors
+				docpad.log('info', "Fetched your latest contributors for display within the website, all #{_contributors.length} of them")
+
+				# Complete
 				return next()
 
-			# Done
-			return
+			# Return
+			return true
 
 		# Server Extend
 		# Used to add our own custom routes to the server before the docpad routes are added

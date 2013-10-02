@@ -303,10 +303,10 @@ docpadConfig =
 			opts.templateData.contributors = []
 
 			# Fetch Contributors
-			contributorGetter ?= require('getContributors').create(
+			contributorGetter ?= require('getcontributors').create(
 				log: docpad.log
 				github_client_id: process.env.BEVRY_GITHUB_CLIENT_ID
-				github_client_secret: process.env.BEVRY_GITHUB_CLIENT_ID
+				github_client_secret: process.env.BEVRY_GITHUB_CLIENT_SECRET
 			)
 			contributorGetter.fetchContributorsFromUsers ['bevry','docpad'], (err,contributors) ->
 				return next(err)  if err

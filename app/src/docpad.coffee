@@ -3,7 +3,6 @@ fsUtil = require('fs')
 pathUtil = require('path')
 moment = require('moment')
 strUtil = require('underscore.string')
-getContributors = require('getcontributors')
 safeps = require('safeps')
 extendr = require('extendr')
 
@@ -15,7 +14,7 @@ textData = safeps.requireFresh(appPath+'/templateData/text')
 navigationData = safeps.requireFresh(appPath+'/templateData/navigation')
 websiteVersion = require(rootPath+'/package.json').version
 siteUrl = if process.env.NODE_ENV is 'production' then "http://docpad.org" else "http://localhost:9778"
-
+contributorGetter = null
 
 # =================================
 # Helpers
@@ -304,16 +303,15 @@ docpadConfig =
 			opts.templateData.contributors = []
 
 			# Fetch Contributors
-			getContributors(
-				users: ['bevry','docpad']
+			contributorGetter ?= require('getContributors').create(
+				log: docpad.log
 				github_client_id: process.env.BEVRY_GITHUB_CLIENT_ID
 				github_client_secret: process.env.BEVRY_GITHUB_CLIENT_ID
-				log: docpad.log
-				next: (err,contributors) ->
-					return next(err)  if err
-					opts.templateData.contributors = contributors.filter (item) -> item.username isnt 'balupton'
-					return next()
 			)
+			contributorGetter.fetchContributorsFromUsers ['bevry','docpad'], (err,contributors) ->
+				return next(err)  if err
+				opts.templateData.contributors = contributors
+				return next()
 
 			# Done
 			return

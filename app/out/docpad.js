@@ -276,7 +276,6 @@ docpadConfig = {
       docpad.log('info', 'Fetching your latest contributors for display within the website');
       if (contributorsGetter == null) {
         contributorsGetter = require('getcontributors').create({
-          log: docpad.log,
           github_client_id: process.env.BEVRY_GITHUB_CLIENT_ID,
           github_client_secret: process.env.BEVRY_GITHUB_CLIENT_SECRET
         });

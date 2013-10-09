@@ -321,7 +321,7 @@ docpadConfig =
 
 			# Prepare contributors getter
 			contributorsGetter ?= require('getcontributors').create(
-				log: docpad.log
+				#log: docpad.log
 				github_client_id: process.env.BEVRY_GITHUB_CLIENT_ID
 				github_client_secret: process.env.BEVRY_GITHUB_CLIENT_SECRET
 			)

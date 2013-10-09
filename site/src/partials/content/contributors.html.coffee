@@ -3,16 +3,16 @@ ul '.contributors', ->
 		li '.contributor', ->
 			span '.contributor-name', ->
 				if contributor.url
-					a href:contributor.url, title:'visit their github', ->
-						contributor.name
+					a href:h(contributor.url), title:'visit their github', ->
+						h(contributor.name)
 				else
-					text contributor.name
+					text h(contributor.name)
 			span '.contributor-repos', ->
 				text " contributed to: "
 				for own key,value of contributor.repos
 					repoUrl = value
 					if contributor.username
 						contributionUrl = "#{repoUrl}/commits?author=#{contributor.username}"
-						a '.contributor-repo', title:'view their contributions', href:contributionUrl, key
+						a '.contributor-repo', title:'view their contributions', href:h(contributionUrl), key
 					else
-						a '.contributor-repo', title:'visit the project', href:repoUrl, key
+						a '.contributor-repo', title:'visit the project', href:h(repoUrl), key

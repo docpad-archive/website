@@ -5,6 +5,7 @@ moment = require('moment')
 strUtil = require('underscore.string')
 safeps = require('safeps')
 extendr = require('extendr')
+#validator = require('validator')
 
 # Prepare
 rootPath = __dirname+'/../..'
@@ -77,6 +78,8 @@ docpadConfig =
 
 		strUtil: strUtil
 		moment: moment
+		#sanitize: (input) -> validator.sanitize(input).xss()
+		# disabled due to https://github.com/chriso/node-validator/issues/226 and https://github.com/chriso/node-validator/issues/206
 
 		text: textData
 		navigation: navigationData

@@ -29,9 +29,9 @@ items.forEach (item) ->
 	# Display
 	li "."+_itemCssClasses.join('.'), "typeof":"soic:page", about:url, ->
 		# Link
-		a ".list-#{type}-link", href:url, ->
+		a ".list-#{type}-link", href:h(url), ->
 			# Title
-			h3 ".list-#{type}-title", property:"dc:title", -> title
+			h3 ".list-#{type}-title", property:"dc:title", -> h(title)
 
 			# Date
 			if showDate and moment
@@ -40,7 +40,7 @@ items.forEach (item) ->
 
 		# Display the description if it exists
 		if showDescription and description
-			div ".list-#{type}-description", property:"dc:description", -> description
+			div ".list-#{type}-description", property:"dc:description", -> h(description)
 
 		# Display the content if it exists
 		if showContent and item.contentRenderedWithoutLayouts

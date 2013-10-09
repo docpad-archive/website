@@ -13,5 +13,5 @@ _categoryCssClasses.concat(categoryCssClasses?)
 li '.'+_categoryCssClasses.join('.'), typeof:'dc:collection', ->
 	a ".list-#{type}-link", href:_categoryItem.get('url'), ->
 		h2 ".list-#{type}-title", property:'dc:title', ->
-			text _categoryItem.get('categoryName')
+			text h(_categoryItem.get('categoryName'))
 	ul ".list-#{type}-items", @partial('menu/items', @)

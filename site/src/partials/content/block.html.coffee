@@ -6,11 +6,11 @@ article ".block"+(if cssClasses then '.'+cssClasses.join('.') else ""), ->
 	header ".block-header", ->
 		if permalink
 			a '.permalink.hover-link', href:permalink, ->
-				h1 heading
+				h1 h(heading)
 		else
-			h1 heading
+			h1 h(heading)
 		if subheading
-			h2 subheading
+			h2 h(subheading)
 		if date
 			span '.date', -> date
 		if author
@@ -27,17 +27,17 @@ article ".block"+(if cssClasses then '.'+cssClasses.join('.') else ""), ->
 		if prev or up or next
 			nav ".prev-next", ->
 				if prev
-					a ".prev", href:prev.url, ->
+					a ".prev", href:h(prev.url), ->
 						span ".icon", ->
-						span ".title", -> prev.title
+						span ".title", -> h(prev.title)
 				if up
-					a '.up', href:up.url, ->
+					a '.up', href:h(up.url), ->
 						span '.icon', ->
-						span '.title', -> up.title
+						span '.title', -> h(up.title)
 				if next
-					a ".next", href:next.url, ->
+					a ".next", href:h(next.url), ->
 						span ".icon", ->
-						span ".title", -> next.title
+						span ".title", -> h(next.title)
 
 if document.editUrl
 	aside '.block-edit', ->

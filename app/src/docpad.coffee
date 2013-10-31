@@ -3,7 +3,7 @@ fsUtil = require('fs')
 pathUtil = require('path')
 moment = require('moment')
 strUtil = require('underscore.string')
-safeps = require('safeps')
+{requireFresh} = require('requirefresh')
 extendr = require('extendr')
 #validator = require('validator')
 
@@ -11,8 +11,8 @@ extendr = require('extendr')
 rootPath = __dirname+'/../..'
 appPath = __dirname
 sitePath = rootPath+'/site'
-textData = safeps.requireFresh(appPath+'/templateData/text')
-navigationData = safeps.requireFresh(appPath+'/templateData/navigation')
+textData = requireFresh(appPath+'/templateData/text')
+navigationData = requireFresh(appPath+'/templateData/navigation')
 websiteVersion = require(rootPath+'/package.json').version
 siteUrl = if process.env.NODE_ENV is 'production' then "http://docpad.org" else "http://localhost:9778"
 contributorsGetter = null
@@ -266,6 +266,7 @@ docpadConfig =
 		highlightjs:
 			aliases:
 				stylus: 'css'
+
 		feedr:
 			feeds:
 				latestPackage: url: "#{siteUrl}/latest.json"

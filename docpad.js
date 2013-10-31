@@ -1,1 +1,1 @@
-module.exports = require('safeps').requireFresh(__dirname+'/app/out/docpad');
+module.exports = require('requirefresh').requireFresh(__dirname+'/app/out/docpad');

@@ -423,7 +423,7 @@ docpadConfig = {
         return res.redirect(codeRedirectPermanent, "https://www.gittip.com/for/docpad/");
       });
       server.get(/^\/(?:google\+|\+)$/, function(req, res) {
-        return res.redirect(codeRedirectPermanent, "http://stackoverflow.com/questions/tagged/docpad");
+        return res.redirect(codeRedirectPermanent, "https://plus.google.com/communities/102027871269737205567");
       });
       server.get(/^\/(?:forum|stackoverflow)$/, function(req, res) {
         return res.redirect(codeRedirectPermanent, "http://stackoverflow.com/questions/tagged/docpad");

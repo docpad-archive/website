@@ -294,10 +294,14 @@ docpadConfig = {
       return true;
     },
     serverExtend: function(opts) {
-      var docpad, express, request, server;
-      server = opts.server, express = opts.express;
+      var codeBadRequest, codeRedirectPermanent, codeRedirectTemporary, codeSuccess, docpad, request, server;
+      server = opts.server;
       docpad = this.docpad;
       request = require('request');
+      codeSuccess = 200;
+      codeBadRequest = 400;
+      codeRedirectPermanent = 301;
+      codeRedirectTemporary = 302;
       server.all('/pushover', function(req, res) {
         if (__indexOf.call(docpad.getEnvironments(), 'development') >= 0 || (process.env.BEVRY_PUSHOVER_TOKEN != null) === false) {
           return res.send(200);
@@ -319,9 +323,9 @@ docpadConfig = {
         if (((_ref = req.query) != null ? _ref.key : void 0) === process.env.WEBHOOK_KEY) {
           docpad.log('info', 'Regenerating for documentation change');
           docpad.action('generate');
-          return res.send(200, 'regenerated');
+          return res.send(codeSuccess, 'regenerated');
         } else {
-          return res.send(400, 'key is incorrect');
+          return res.send(codeBadRequest, 'key is incorrect');
         }
       });
       server.get('/exchange.json', function(req, res) {
@@ -339,35 +343,35 @@ docpadConfig = {
             branch = 'docpad-6.x';
           }
         }
-        return res.redirect(301, "https://raw.github.com/bevry/docpad-extras/" + branch + "/exchange.json");
+        return res.redirect(codeRedirectPermanent, "https://raw.github.com/bevry/docpad-extras/" + branch + "/exchange.json");
       });
       server.get('/latest.json', function(req, res) {
-        return res.redirect(301, "https://raw.github.com/bevry/docpad/master/package.json");
+        return res.redirect(codeRedirectPermanent, "https://raw.github.com/bevry/docpad/master/package.json");
       });
       server.get(/^\/(plugins|upgrade|install|troubleshoot)\/?$/, function(req, res) {
         var relativeUrl;
         relativeUrl = req.params[0] || '';
-        return res.redirect(301, "" + siteUrl + "/docs/" + relativeUrl);
+        return res.redirect(codeRedirectPermanent, "" + siteUrl + "/docs/" + relativeUrl);
       });
       server.get(/^\/docpad(?:\/(.*))?$/, function(req, res) {
         var relativeUrl;
         relativeUrl = req.params[0] || '';
-        return res.redirect(301, "" + siteUrl + "/docs/" + relativeUrl);
+        return res.redirect(codeRedirectPermanent, "" + siteUrl + "/docs/" + relativeUrl);
       });
       server.get(/^\/((?:tos|terms|privacy|node|joe|query-?engine).*)$/, function(req, res) {
         var relativeUrl;
         relativeUrl = req.params[0] || '';
-        return res.redirect(301, "http://bevry.me/" + relativeUrl);
+        return res.redirect(codeRedirectPermanent, "http://bevry.me/" + relativeUrl);
       });
       server.get(/^\/(?:g|github|bevry\/docpad)(?:\/(.*))?$/, function(req, res) {
         var relativeUrl;
         relativeUrl = req.params[0] || '';
-        return res.redirect(301, "https://github.com/bevry/docpad/" + relativeUrl);
+        return res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/" + relativeUrl);
       });
       server.get(/^\/(?:i|issues)(?:\/(.*))?$/, function(req, res) {
         var relativeUrl;
         relativeUrl = req.params[0] || '';
-        return res.redirect(301, "https://github.com/bevry/docpad/issues/" + relativeUrl);
+        return res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/issues/" + relativeUrl);
       });
       server.get(/^\/(?:e|edit)(?:\/docs)?\/(.+)$/, function(req, res, next) {
         var fileRelativeUrl;
@@ -384,36 +388,45 @@ docpadConfig = {
           if (!fileEditUrl) {
             return docpad.serverMiddleware500(req, res, next);
           }
-          return res.redirect(301, fileEditUrl);
+          return res.redirect(codeRedirectPermanent, fileEditUrl);
         });
       });
       server.get(/^\/(?:p|plugin)\/(.+)$/, function(req, res) {
         var plugin;
         plugin = req.params[0];
-        return res.redirect(301, "https://github.com/docpad/docpad-plugin-" + plugin);
+        return res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad-plugin-" + plugin);
       });
       server.get(/^\/(?:docs\/)?docpad-plugin-(.+)$/, function(req, res) {
         var plugin;
         plugin = req.params[0];
-        return res.redirect(301, "https://github.com/docpad/docpad-plugin-" + plugin);
+        return res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad-plugin-" + plugin);
       });
       server.get('/license', function(req, res) {
-        return res.redirect(301, "https://github.com/bevry/docpad/blob/master/LICENSE.md#readme");
+        return res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/blob/master/LICENSE.md#readme");
       });
       server.get('/changes', function(req, res) {
-        return res.redirect(301, "https://github.com/bevry/docpad/blob/master/History.md#readme");
+        return res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/blob/master/History.md#readme");
       });
       server.get('/chat-guidelines', function(req, res) {
-        return res.redirect(301, "https://github.com/bevry/docpad/issues/384");
+        return res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/issues/384");
       });
       server.get('/chat-logs', function(req, res) {
-        return res.redirect(301, "https://botbot.me/freenode/docpad/");
+        return res.redirect(codeRedirectPermanent, "https://botbot.me/freenode/docpad/");
       });
       server.get('/chat', function(req, res) {
-        return res.redirect(301, "http://webchat.freenode.net/?channels=docpad");
+        return res.redirect(codeRedirectPermanent, "http://webchat.freenode.net/?channels=docpad");
       });
-      server.get('/forum', function(req, res) {
-        return res.redirect(301, "http://stackoverflow.com/questions/tagged/docpad");
+      server.get(/^\/(?:donate|gittip)$/, function(req, res) {
+        return res.redirect(codeRedirectPermanent, "https://www.gittip.com/docpad/");
+      });
+      server.get('/gittip-community', function(req, res) {
+        return res.redirect(codeRedirectPermanent, "https://www.gittip.com/for/docpad/");
+      });
+      server.get(/^\/(?:google\+|\+)$/, function(req, res) {
+        return res.redirect(codeRedirectPermanent, "http://stackoverflow.com/questions/tagged/docpad");
+      });
+      server.get(/^\/(?:forum|stackoverflow)$/, function(req, res) {
+        return res.redirect(codeRedirectPermanent, "http://stackoverflow.com/questions/tagged/docpad");
       });
     }
   }

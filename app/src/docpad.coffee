@@ -346,9 +346,14 @@ docpadConfig =
 		# Used to add our own custom routes to the server before the docpad routes are added
 		serverExtend: (opts) ->
 			# Extract the server from the options
-			{server,express} = opts
+			{server} = opts
 			docpad = @docpad
 			request = require('request')
+			codeSuccess = 200
+			codeBadRequest = 400
+			codeRedirectPermanent = 301
+			codeRedirectTemporary = 302
+
 
 			# Pushover - Optional
 			# Called by the 404 page to alert our mobile phone of missing pages
@@ -377,9 +382,9 @@ docpadConfig =
 				if req.query?.key is process.env.WEBHOOK_KEY
 					docpad.log('info', 'Regenerating for documentation change')
 					docpad.action('generate')
-					res.send(200, 'regenerated')
+					res.send(codeSuccess, 'regenerated')
 				else
-					res.send(400, 'key is incorrect')
+					res.send(codeBadRequest, 'key is incorrect')
 
 			# DocPad Exchange
 			# http://docpad.org/exchange.json?version=6.32.0
@@ -399,36 +404,38 @@ docpadConfig =
 						branch = 'docpad-6.x'
 
 				# Redirect
-				res.redirect(301, "https://raw.github.com/bevry/docpad-extras/#{branch}/exchange.json")
+				res.redirect(codeRedirectPermanent, "https://raw.github.com/bevry/docpad-extras/#{branch}/exchange.json")
 
 			# Latest
 			server.get '/latest.json', (req,res) ->
-				res.redirect(301, "https://raw.github.com/bevry/docpad/master/package.json")
+				res.redirect(codeRedirectPermanent, "https://raw.github.com/bevry/docpad/master/package.json")
 
 			# Short Links
 			server.get /^\/(plugins|upgrade|install|troubleshoot)\/?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
-				res.redirect(301, "#{siteUrl}/docs/#{relativeUrl}")
+				res.redirect(codeRedirectPermanent, "#{siteUrl}/docs/#{relativeUrl}")
 
 			# Content
 			server.get /^\/docpad(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
-				res.redirect(301, "#{siteUrl}/docs/#{relativeUrl}")
+				res.redirect(codeRedirectPermanent, "#{siteUrl}/docs/#{relativeUrl}")
 
 			# Bevry Content
 			server.get /^\/((?:tos|terms|privacy|node|joe|query-?engine).*)$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
-				res.redirect(301, "http://bevry.me/#{relativeUrl}")
+				res.redirect(codeRedirectPermanent, "http://bevry.me/#{relativeUrl}")
 
 			# GitHub
+			# /(g|github|bevry/docpad)/#{path}
 			server.get /^\/(?:g|github|bevry\/docpad)(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
-				res.redirect(301, "https://github.com/bevry/docpad/#{relativeUrl}")
+				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/#{relativeUrl}")
 
 			# Issues
+			# /(i|issue)/#{issue}
 			server.get /^\/(?:i|issues)(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
-				res.redirect(301, "https://github.com/bevry/docpad/issues/#{relativeUrl}")
+				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/issues/#{relativeUrl}")
 
 			# Edit
 			server.get /^\/(?:e|edit)(?:\/docs)?\/(.+)$/, (req,res,next) ->
@@ -440,41 +447,58 @@ docpadConfig =
 					fileEditUrl = file.get('editUrl')
 					console.log 'url', fileEditUrl
 					return docpad.serverMiddleware500(req, res, next)  if !fileEditUrl
-					return res.redirect(301, fileEditUrl)
+					return res.redirect(codeRedirectPermanent, fileEditUrl)
 
 			# Plugins
+			# /(p|plugin)/#{pluginName}
 			server.get /^\/(?:p|plugin)\/(.+)$/, (req,res) ->
 				plugin = req.params[0]
-				res.redirect(301, "https://github.com/docpad/docpad-plugin-#{plugin}")
+				res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad-plugin-#{plugin}")
 
 			# Plugins via Full
+			# /(docs/)?docpad-plugin-#{pluginName}
 			server.get /^\/(?:docs\/)?docpad-plugin-(.+)$/, (req,res) ->
 				plugin = req.params[0]
-				res.redirect(301, "https://github.com/docpad/docpad-plugin-#{plugin}")
+				res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad-plugin-#{plugin}")
 
 			# License
 			server.get '/license', (req,res) ->
-				res.redirect(301, "https://github.com/bevry/docpad/blob/master/LICENSE.md#readme")
+				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/blob/master/LICENSE.md#readme")
 
 			# Changes
 			server.get '/changes', (req,res) ->
-				res.redirect(301, "https://github.com/bevry/docpad/blob/master/History.md#readme")
+				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/blob/master/History.md#readme")
 
 			# Chat Guidelines
 			server.get '/chat-guidelines', (req,res) ->
-				res.redirect(301, "https://github.com/bevry/docpad/issues/384")
+				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/issues/384")
 
 			# Chat Logs
 			server.get '/chat-logs', (req,res) ->
-				res.redirect(301, "https://botbot.me/freenode/docpad/")
+				res.redirect(codeRedirectPermanent, "https://botbot.me/freenode/docpad/")
 
 			# Chat
 			server.get '/chat', (req,res) ->
-				res.redirect(301, "http://webchat.freenode.net/?channels=docpad")
+				res.redirect(codeRedirectPermanent, "http://webchat.freenode.net/?channels=docpad")
+
+			# Donate
+			# /(donate|gittip)
+			server.get /^\/(?:donate|gittip)$/, (req,res) ->
+				res.redirect(codeRedirectPermanent, "https://www.gittip.com/docpad/")
+
+			# Gittip Community
+			server.get '/gittip-community', (req,res) ->
+				res.redirect(codeRedirectPermanent, "https://www.gittip.com/for/docpad/")
+
+			# Google+
+			# /(google+|+)
+			server.get /^\/(?:google\+|\+)$/, (req,res) ->
+				res.redirect(codeRedirectPermanent, "http://stackoverflow.com/questions/tagged/docpad")
 
 			# Forum
-			server.get '/forum', (req,res) ->
-				res.redirect(301, "http://stackoverflow.com/questions/tagged/docpad")
+			# /(forum|stackoverflow)
+			server.get /^\/(?:forum|stackoverflow)$/, (req,res) ->
+				res.redirect(codeRedirectPermanent, "http://stackoverflow.com/questions/tagged/docpad")
 
 			# Done
 			return

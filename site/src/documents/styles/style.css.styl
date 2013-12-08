@@ -77,6 +77,7 @@ colorLightestBrown = #f1f1f1
 
 colorLink = colorBlue
 colorAccent = colorDarkGold
+colorBackground = colorLightestBrown
 
 
 // ====================================
@@ -114,35 +115,36 @@ mixinIconAccountPointer()
 // ====================================
 // Fonts
 
-body
-.search input
+.container
 	font-family: fontMyraid
-
 	font-smooth: always
 	-webkit-font-smoothing: antialiased
 	color-profile: sRGB
 	rendering-intent: auto
 	text-rendering: optimizeLegibility
 
-nav
-.btn
-.providers
-footer
+	h1
+	h2
+	h3
+	h4
+		font-family: fontFutura
+		font-weight: fontMyraidNormal
+		text-transform: uppercase
+
+.topbar .links
+.sidebar
+.mainbar nav
+.mainbar .btn
+.mainbar .providers
+.bottombar
 	font-family: fontMyraid
 	font-weight: fontMyraidNormal
 	text-transform: uppercase
 
-h1
-h2
-h3
-h4
-	font-family: fontFutura
-	font-weight: fontMyraidNormal
-	text-transform: uppercase
-
-code
-pre
-	text-transform: none
+.mainbar
+	code
+	pre
+		text-transform: none
 
 
 // ------------------------------------
@@ -204,7 +206,7 @@ pre code
 // Global Styles
 
 body
-	background: colorLightestBrown
+	background: colorBackground
 	color: colorDarkestBrown
 
 blockquote
@@ -366,19 +368,16 @@ html.no-touch .topbar:hover .sidebar
 			padding-bottom: 1px
 
 	.search
-		margin-top: 0.4em
 		float: right
-		input
-			background: white url(/images/icon-search.gif) no-repeat 10px 50%
-			border: 1px solid colorLighterBrown
-			border-radius: 30px
-			color: colorDarkBrown
-			font-size: 1em
-			padding: .313em 0.938em .188em 2.188em
-			width: 200px
-
-			&:focus
-				outline: none
+		width: 25%
+		margin-top: 0.3em
+		margin-right: 0.5em
+		*
+			box-sizing: content-box
+		.gsc-control-cse
+			padding: 0
+			border: none
+			background: transparent
 
 
 // ====================================

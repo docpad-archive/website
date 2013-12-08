@@ -493,7 +493,7 @@ docpadConfig =
 			# Google+
 			# /(google+|+)
 			server.get /^\/(?:google\+|\+)$/, (req,res) ->
-				res.redirect(codeRedirectPermanent, "http://stackoverflow.com/questions/tagged/docpad")
+				res.redirect(codeRedirectPermanent, "https://plus.google.com/communities/102027871269737205567")
 
 			# Forum
 			# /(forum|stackoverflow)

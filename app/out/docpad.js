@@ -304,7 +304,7 @@ docpadConfig = {
       codeRedirectTemporary = 302;
       server.all('/pushover', function(req, res) {
         if (__indexOf.call(docpad.getEnvironments(), 'development') >= 0 || (process.env.BEVRY_PUSHOVER_TOKEN != null) === false) {
-          return res.send(200);
+          return res.send(codeSuccess);
         }
         return request({
           url: "https://api.pushover.net/1/messages.json",

@@ -358,7 +358,7 @@ docpadConfig =
 			# Pushover - Optional
 			# Called by the 404 page to alert our mobile phone of missing pages
 			server.all '/pushover', (req,res) ->
-				return res.send(200)  if 'development' in docpad.getEnvironments() or process.env.BEVRY_PUSHOVER_TOKEN? is false
+				return res.send(codeSuccess)  if 'development' in docpad.getEnvironments() or process.env.BEVRY_PUSHOVER_TOKEN? is false
 				request(
 					{
 						url: "https://api.pushover.net/1/messages.json"

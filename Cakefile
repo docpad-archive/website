@@ -1,160 +1,242 @@
-# This file was originally created by Benjamin Lupton <b@lupton.cc> (http://balupton.com)
-# and is currently licensed under the Creative Commons Zero (http://creativecommons.org/publicdomain/zero/1.0/)
-# making it public domain so you can do whatever you wish with it without worry (you can even remove this notice!)
-#
-# If you change something here, be sure to reflect the changes in:
-# - the scripts section of the package.json file
-# - the .travis.yml file
+# v1.3.11 December 11, 2013
+# https://github.com/bevry/base
 
 
-# -----------------
+# =====================================
+# Imports
+
+fsUtil = require('fs')
+pathUtil = require('path')
+
+
+# =====================================
 # Variables
 
-WINDOWS = process.platform.indexOf('win') is 0
-NODE    = process.execPath
-NPM     = if WINDOWS then process.execPath.replace('node.exe','npm.cmd') else 'npm'
-EXT     = (if WINDOWS then '.cmd' else '')
-ROOT    = process.cwd()
-APP     = "#{ROOT}/app"
-SITE    = "#{ROOT}/site"
-BIN     = "#{ROOT}/node_modules/.bin"
-CAKE    = "#{BIN}/cake#{EXT}"
-COFFEE  = "#{BIN}/coffee#{EXT}"
-DOCPAD  = "#{BIN}/docpad#{EXT}"
-DOCPADS = "#{BIN}/docpad-server#{EXT}"
-APPOUT  = "#{APP}/out"
-APPSRC  = "#{APP}/src"
-SITEOUT = "#{SITE}/out"
-SITESRC = "#{SITE}/src"
-DEBUG   = ('-d' in process.argv)
+WINDOWS          = process.platform.indexOf('win') is 0
+NODE             = process.execPath
+NPM              = (if WINDOWS then process.execPath.replace('node.exe', 'npm.cmd') else 'npm')
+EXT              = (if WINDOWS then '.cmd' else '')
+GIT              = "git"
+
+APP_PATH        = process.cwd()
+PACKAGE_PATH     = pathUtil.join(APP_PATH, "package.json")
+PACKAGE_DATA     = require(PACKAGE_PATH)
+
+MODULES_PATH     = pathUtil.join(APP_PATH, "node_modules")
+DOCPAD_PATH      = pathUtil.join(MODULES_PATH, "docpad")
+BIN_PATH         = pathUtil.join(MODULES_PATH, ".bin")
+CAKE             = pathUtil.join(BIN_PATH, "cake" + EXT)
+COFFEE           = pathUtil.join(BIN_PATH, "coffee" + EXT)
+PROJECTZ         = pathUtil.join(BIN_PATH, "projectz" + EXT)
+DOCCO            = pathUtil.join(BIN_PATH, "docco" + EXT)
+DOCPAD           = pathUtil.join(BIN_PATH, "docpad" + EXT)
+
+config = {}
+config.TEST_PATH = "test"
+config.DOCCO_SRC_PATH   = null
+config.DOCCO_OUT_PATH   = "docs"
+config.COFFEE_SRC_PATH  = "src"  # eventually we'll set this to null, right now it isn't for b/c compat
+config.COFFEE_OUT_PATH  = "out"
+config.DOCPAD_SRC_PATH  = null
+config.DOCPAD_OUT_PATH  = "out"
+
+for own key,value of (PACKAGE_DATA.cakeConfiguration or {})
+	config[key] = value
+
+for own key,value of config
+	config[key] = pathUtil.resolve(APP_PATH, value)  if value
 
 
-# -----------------
-# Requires
+# =====================================
+# Generic
 
-pathUtil = require('path')
-{exec,spawn} = require('child_process')
-
-childProcesses = []
-exit = (err,code) ->
-	for childProcess in childProcesses
-		childProcess.kill()
-	process.exit(code)
-
+{spawn, exec} = require('child_process')
 safe = (next,fn) ->
-	return (args...) ->
-		err = args[0]
+	fn ?= next  # support only one argument
+	return (err) ->
+		# success status code
+		if err is 0
+			err = null
+
+		# error status code
+		else if err is 1
+			err = new Error('Process exited with error status code')
+
+		# Error
 		return next(err)  if err
-		return fn(args...)
 
-
-# -----------------
-# Actions
-
-clean = (opts,next) ->
-	(next = opts; opts = {})  unless next?
-	args = [
-		'-Rf'
-		APPOUT
-		SITEOUT
-		pathUtil.join(ROOT,'node_modules')
-		pathUtil.join(ROOT,'*out')
-		pathUtil.join(ROOT,'*log')
-	]
-	spawn('rm', args, {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',next)
-
-compile = (opts,next) ->
-	(next = opts; opts = {})  unless next?
-	spawn(COFFEE, ['-bco', APPOUT, APPSRC], {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',next)
-
-watch = (opts,next) ->
-	(next = opts; opts = {})  unless next?
-	childProcesses.push spawn(COFFEE, ['-bwco', APPOUT, APPSRC], {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',exit)
-	next()
-
-run = (opts,next) ->
-	(next = opts; opts = {})  unless next?
-	if opts.debug ? DEBUG
-		command = NODE
-		args = ['--debug-brk', DOCPAD, 'run']
-	else
-		command = DOCPAD
-		args = ['run']
-	childProcesses.push spawn(command, args, {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',exit)
-	next()
-
-app = (opts,next) ->
-	(next = opts; opts = {})  unless next?
-	watch opts, safe next, ->
-		run opts, next
-
-install = (opts,next) ->
-	(next = opts; opts = {})  unless next?
-	spawn(NPM, ['install'], {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',next)
-
-reset = (opts,next) ->
-	(next = opts; opts = {})  unless next?
-	clean opts, safe next, ->
-		setup opts, next
-
-server = (opts,next) ->
-	(next = opts; opts = {})  unless next?
-	compile opts, safe next, ->
-		if opts.debug ? DEBUG
-			command = NODE
-			args = ['--debug-brk', DOCPADS]
-		else
-			command = DOCPADS
-			args = []
-		spawn(command, args, {env:process.env,stdio:'inherit',cwd:ROOT}).on('exit',next)
-
-setup = (opts,next) ->
-	(next = opts; opts = {})  unless next?
-	install opts, safe next, ->
-		compile opts, next
+		# Continue
+		return fn()
 
 finish = (err) ->
 	throw err  if err
 	console.log('OK')
 
 
-# -----------------
+# =====================================
+# Actions
+
+actions =
+	clean: (opts,next) ->
+		# Prepare
+		(next = opts; opts = {})  unless next?
+		args = ['-Rf', config.COFFEE_COFFEE_OUT_PATH]
+		for path in [APP_PATH, config.TEST_PATH]
+			args.push(
+				pathUtil.join(path,  'build')
+				pathUtil.join(path,  'components')
+				pathUtil.join(path,  'bower_components')
+				pathUtil.join(path,  'node_modules')
+				pathUtil.join(path,  '*out')
+				pathUtil.join(path,  '*log')
+			)
+
+		# rm
+		console.log('clean')
+		spawn('rm', args, {stdio:'inherit', cwd:APP_PATH}).on('close', safe next)
+
+	install: (opts,next) ->
+		# Prepare
+		(next = opts; opts = {})  unless next?
+
+		# Steps
+		step1 = ->
+			console.log('npm install (for app)')
+			spawn(NPM, ['install'], {stdio:'inherit', cwd:APP_PATH}).on('close', safe next, step2)
+		step2 = ->
+			return step3()  if !config.TEST_PATH or !fsUtil.existsSync(config.TEST_PATH)
+			console.log('npm install (for test)')
+			spawn(NPM, ['install'], {stdio:'inherit', cwd:config.TEST_PATH}).on('close', safe next, step3)
+		step3 = ->
+			return step4()  if !fsUtil.existsSync(DOCPAD_PATH)
+			console.log('npm install (for docpad tests)')
+			spawn(NPM, ['install'], {stdio:'inherit', cwd:DOCPAD_PATH}).on('close', safe next, step4)
+		step4 = next
+
+		# Start
+		step1()
+
+	compile: (opts,next) ->
+		# Prepare
+		(next = opts; opts = {})  unless next?
+
+		# Steps
+		step1 = ->
+			console.log('cake install')
+			actions.install(opts, safe next, step2)
+		step2 = ->
+			return step3()  if !config.COFFEE_SRC_PATH or !fsUtil.existsSync(COFFEE)
+			console.log('coffee compile')
+			spawn(COFFEE, ['-co', config.COFFEE_OUT_PATH, config.COFFEE_SRC_PATH], {stdio:'inherit', cwd:APP_PATH}).on('close', safe next, step3)
+		step3 = ->
+			return step4()  if !config.DOCPAD_SRC_PATH or !fsUtil.existsSync(DOCPAD)
+			console.log('docpad generate')
+			spawn(DOCPAD, ['generate'], {stdio:'inherit', cwd:APP_PATH}).on('close', safe next, step4)
+		step4 = next
+
+		# Start
+		step1()
+
+	watch: (opts,next) ->
+		# Prepare
+		(next = opts; opts = {})  unless next?
+
+		# Steps
+		step1 = ->
+			console.log('cake install')
+			actions.install(opts, safe next, step2)
+		step2 = ->
+			return step3()  if !config.COFFEE_SRC_PATH or !fsUtil.existsSync(COFFEE)
+			console.log('coffee watch')
+			spawn(COFFEE, ['-wco', config.COFFEE_OUT_PATH, config.COFFEE_SRC_PATH], {stdio:'inherit', cwd:APP_PATH}).on('close', safe next, step3)
+		step3 = ->
+			return step4()  if !config.DOCPAD_SRC_PATH or !fsUtil.existsSync(DOCPAD)
+			console.log('docpad run')
+			spawn(DOCPAD, ['run'], {stdio:'inherit', cwd:APP_PATH}).on('close', safe next, step4)
+		step4 = next
+
+		# Start
+		step1()
+
+	test: (opts,next) ->
+		# Prepare
+		(next = opts; opts = {})  unless next?
+
+		# Steps
+		step1 = ->
+			console.log('cake compile')
+			actions.compile(opts, safe next, step2)
+		step2 = ->
+			console.log('npm test')
+			spawn(NPM, ['test'], {stdio:'inherit', cwd:APP_PATH}).on('close', safe next, step3)
+		step3 = next
+
+		# Start
+		step1()
+
+	prepublish: (opts,next) ->
+		# Prepare
+		(next = opts; opts = {})  unless next?
+
+		# Steps
+		step1 = ->
+			console.log('cake compile')
+			actions.compile(opts, safe next, step2)
+		step2 = ->
+			return step3()  if !fsUtil.existsSync(PROJECTZ)
+			console.log('projectz compile')
+			spawn(PROJECTZ, ['compile'], {stdio:'inherit', cwd:APP_PATH}).on('close', safe next, step3)
+		step3 = ->
+			return step4()  if !config.DOCCO_SRC_PATH or !fsUtil.existsSync(DOCCO)
+			console.log('docco compile')
+			exec("#{DOCCO} -o #{config.DOCCO_OUT_PATH} #{config.DOCCO_SRC_PATH}", {stdio:'inherit', cwd:APP_PATH}, safe next, step4)
+		step4 = ->
+			console.log('cake test')
+			actions.test(opts, safe next, step5)
+		step5 = next
+
+		# Start
+		step1()
+
+	publish: (opts,next) ->
+		# Prepare
+		(next = opts; opts = {})  unless next?
+
+		# Steps
+		step1 = ->
+			console.log('cake prepublish')
+			actions.prepublish(opts, safe next, step2)
+		step2 = ->
+			console.log('npm publish')
+			spawn(NPM, ['publish'], {stdio:'inherit', cwd:APP_PATH}).on('close', safe next, step3)
+		step3 = ->
+			console.log('git tag')
+			spawn(GIT, ['tag', 'v'+PACKAGE_DATA.version, '-a'], {stdio:'inherit', cwd:APP_PATH}).on('close', safe next, step4)
+		step4 = ->
+			console.log('git push origin master')
+			spawn(GIT, ['push', 'origin', 'master'], {stdio:'inherit', cwd:APP_PATH}).on('close', safe next, step5)
+		step5 = ->
+			console.log('git push tags')
+			spawn(GIT, ['push', 'origin', '--tags'], {stdio:'inherit', cwd:APP_PATH}).on('close', safe next, step6)
+		step6 = next
+
+		# Start
+		step1()
+
+
+# =====================================
 # Commands
 
-# clean
-task 'clean', 'clean up instance', ->
-	clean finish
+commands =
+	clean:       'clean up instance'
+	install:     'install dependencies'
+	compile:     'compile our files (runs install)'
+	watch:       'compile our files initially, and again for each change (runs install)'
+	test:        'run our tests (runs compile)'
+	prepublish:  'prepare our package for publishing'
+	publish:     'publish our package (runs prepublish)'
 
-# compile
-task 'compile', 'compile our files', ->
-	compile finish
-
-# run
-task 'run', 'run our application', ->
-	run finish
-
-# watch
-task 'watch', 'recompile our files when changed', ->
-	watch finish
-
-# dev/app
-task 'dev', 'watch and run our application', ->
-	app finish
-task 'app', 'watch and run our application', ->
-	app finish
-
-# install
-task 'install', 'install dependencies', ->
-	install finish
-
-# reset
-task 'reset', 'reset instance', ->
-	reset finish
-
-# start
-task 'server', 'start server instance', ->
-	server finish
-
-# setup
-task 'setup', 'setup for development', ->
-	setup finish
+Object.keys(commands).forEach (key) ->
+	description = commands[key]
+	fn = actions[key]
+	task key, description, (opts) ->  fn(opts, finish)

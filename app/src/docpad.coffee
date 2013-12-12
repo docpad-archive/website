@@ -467,7 +467,7 @@ docpadConfig =
 
 			# Changes
 			server.get '/changes', (req,res) ->
-				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/blob/master/History.md#readme")
+				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/blob/master/HISTORY.md#readme")
 
 			# Chat Guidelines
 			server.get '/chat-guidelines', (req,res) ->

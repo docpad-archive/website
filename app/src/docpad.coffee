@@ -365,6 +365,7 @@ docpadConfig =
 						method: "POST"
 						form: extendr.extend(
 							{
+								device: process.env.BEVRY_PUSHOVER_DEVICE or null
 								token: process.env.BEVRY_PUSHOVER_TOKEN
 								user: process.env.BEVRY_PUSHOVER_USER_KEY
 								message: req.query

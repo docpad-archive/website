@@ -311,6 +311,7 @@
             url: "https://api.pushover.net/1/messages.json",
             method: "POST",
             form: extendr.extend({
+              device: process.env.BEVRY_PUSHOVER_DEVICE || null,
               token: process.env.BEVRY_PUSHOVER_TOKEN,
               user: process.env.BEVRY_PUSHOVER_USER_KEY,
               message: req.query

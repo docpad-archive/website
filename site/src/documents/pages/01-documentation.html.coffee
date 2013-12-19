@@ -1,7 +1,8 @@
-###
-title: Documentation
-layout: structure
-url: '/docs/'
+### cson
+title: "Documentation"
+layout: "structure"
+url: "/docs/"
+urls: ["/docs"]
 standalone: true
 ###
 

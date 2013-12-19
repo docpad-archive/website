@@ -160,7 +160,7 @@
         query = {
           write: true,
           relativeOutDirPath: {
-            $startsWith: 'docs/'
+            $startsWith: 'learn/'
           },
           body: {
             $ne: ""
@@ -168,41 +168,72 @@
         };
         sorting = [
           {
+            projectDirectory: 1,
             categoryDirectory: 1,
             filename: 1
           }
         ];
         return database.findAllLive(query, sorting).on('add', function(document) {
-          var a, category, categoryDirectory, categoryName, editUrl, githubEditUrl, layout, name, pageTitle, proseEditUrl, standalone, title, urls;
+          var a, basename, category, categoryDirectory, categoryName, editUrl, githubEditUrl, layout, name, organisation, organisationDirectory, organisationName, pageTitle, pathDetails, pathDetailsExtractor, project, projectDirectory, projectName, proseEditUrl, standalone, title, urls;
           a = document.attributes;
+          /*
+          				learn/#{organisation}/#{project}/#{category}/#{filename}
+          */
+
+          pathDetailsExtractor = /^.*?learn\/(.+?)\/(.+?)\/(.+?)\/(.+?)\.(.+?)$/;
+          pathDetails = pathDetailsExtractor.exec(a.relativePath);
           layout = 'doc';
           standalone = true;
-          categoryDirectory = pathUtil.basename(pathUtil.dirname(a.fullPath));
-          category = categoryDirectory.replace(/^[\-0-9]+/, '');
-          categoryName = getCategoryName(category);
-          name = a.basename.replace(/^[\-0-9]+/, '');
-          urls = ["/docs/" + name, "/docs/" + category + "-" + name, "/docpad/" + name];
-          title = "" + (a.title || humanize(name));
-          pageTitle = "" + title + " | " + categoryName;
-          githubEditUrl = "https://github.com/bevry/docpad-documentation/edit/master/";
-          proseEditUrl = "http://prose.io/#bevry/docpad-documentation/edit/master/";
-          editUrl = githubEditUrl + a.relativePath.replace('docs/', '');
-          return document.setMetaDefaults({
-            title: title,
-            pageTitle: pageTitle,
-            layout: layout,
-            categoryDirectory: categoryDirectory,
-            category: category,
-            categoryName: categoryName,
-            url: urls[0],
-            standalone: standalone,
-            editUrl: editUrl
-          }).addUrl(urls);
+          organisationDirectory = organisation = organisationName = projectDirectory = project = projectName = categoryDirectory = category = categoryName = title = pageTitle = null;
+          if (pathDetails != null) {
+            organisationDirectory = pathDetails[1];
+            projectDirectory = pathDetails[2];
+            categoryDirectory = pathDetails[3];
+            basename = pathDetails[4];
+            organisation = organisationDirectory.replace(/[\-0-9]+/, '');
+            organisationName = humanize(project);
+            project = projectDirectory.replace(/[\-0-9]+/, '');
+            projectName = getProjectName(project);
+            category = categoryDirectory.replace(/^[\-0-9]+/, '');
+            categoryName = getCategoryName(category);
+            name = basename.replace(/^[\-0-9]+/, '');
+            title = "" + (a.title || humanize(name));
+            pageTitle = "" + title + " | " + projectName;
+            urls = ["/docs/" + name, "/docs/" + category + "-" + name, "/docpad/" + name];
+            githubEditUrl = "https://github.com/" + organisationDirectory + "/" + projectDirectory + "/edit/master/";
+            proseEditUrl = "http://prose.io/#" + organisationDirectory + "/" + projectDirectory + "/edit/master/";
+            editUrl = githubEditUrl + a.relativePath.replace("learn/" + organisationDirectory + "/" + projectDirectory + "/", '');
+            return document.setMetaDefaults({
+              layout: layout,
+              standalone: standalone,
+              name: name,
+              title: title,
+              pageTitle: pageTitle,
+              url: urls[0],
+              editUrl: editUrl,
+              organisationDirectory: organisationDirectory,
+              organisation: organisation,
+              organisationName: organisationName,
+              projectDirectory: projectDirectory,
+              project: project,
+              projectName: projectName,
+              categoryDirectory: categoryDirectory,
+              category: category,
+              categoryName: categoryName
+            }).addUrl(urls);
+          } else {
+            console.log("The document " + a.relativePath + " was at an invalid path, so has been ignored");
+            return document.setMetaDefaults({
+              ignore: true,
+              render: false,
+              write: false
+            });
+          }
         });
       },
       partners: function(database) {
         return database.findAllLive({
-          relativeOutDirPath: 'docs/partners'
+          relativeOutDirPath: 'learn/docpad/documentation/partners'
         }, [
           {
             filename: 1
@@ -243,7 +274,7 @@
         repos: [
           {
             name: 'DocPad Documentation',
-            path: 'src/documents/docs',
+            path: 'src/documents/learn/docpad/documentation',
             url: 'https://github.com/bevry/docpad-documentation.git'
           }
         ]
@@ -324,7 +355,10 @@
           var _ref;
           if (((_ref = req.query) != null ? _ref.key : void 0) === process.env.WEBHOOK_KEY) {
             docpad.log('info', 'Regenerating for documentation change');
-            docpad.action('generate');
+            docpad.action('generate', {
+              populate: true,
+              reload: true
+            });
             return res.send(codeSuccess, 'regenerated');
           } else {
             return res.send(codeBadRequest, 'key is incorrect');

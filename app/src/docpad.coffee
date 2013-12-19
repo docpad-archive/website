@@ -215,43 +215,103 @@ docpadConfig =
 		docs: (database) ->
 			query =
 				write: true
-				relativeOutDirPath: $startsWith: 'docs/'
+				relativeOutDirPath: $startsWith: 'learn/'
 				body: $ne: ""
-			sorting = [categoryDirectory:1, filename:1]
-
+			sorting = [projectDirectory:1, categoryDirectory:1, filename:1]
 			database.findAllLive(query, sorting).on 'add', (document) ->
 				# Prepare
 				a = document.attributes
 
+				###
+				learn/#{organisation}/#{project}/#{category}/#{filename}
+				###
+				pathDetailsExtractor = ///
+					^
+					.*?learn/
+					(.+?)/        # organisation
+					(.+?)/        # project
+					(.+?)/        # category
+					(.+?)\.       # basename
+					(.+?)         # extension
+					$
+				///
+
+				pathDetails = pathDetailsExtractor.exec(a.relativePath)
+
 				# Properties
 				layout = 'doc'
 				standalone = true
-				categoryDirectory = pathUtil.basename pathUtil.dirname(a.fullPath)
-				category = categoryDirectory.replace(/^[\-0-9]+/,'')
-				categoryName = getCategoryName(category)
-				name = a.basename.replace(/^[\-0-9]+/,'')
-				urls = ["/docs/#{name}", "/docs/#{category}-#{name}", "/docpad/#{name}"]
-				title = "#{a.title or humanize name}"
-				pageTitle = "#{title} | #{categoryName}"
-				githubEditUrl = "https://github.com/bevry/docpad-documentation/edit/master/"
-				proseEditUrl = "http://prose.io/#bevry/docpad-documentation/edit/master/"
-				editUrl = githubEditUrl + a.relativePath.replace('docs/', '')
+				organisationDirectory = organisation = organisationName =
+					projectDirectory = project = projectName =
+					categoryDirectory = category = categoryName =
+					title = pageTitle = null
 
-				# Apply
-				document.setMetaDefaults({
-					title
-					pageTitle
-					layout
-					categoryDirectory
-					category
-					categoryName
-					url: urls[0]
-					standalone
-					editUrl
-				}).addUrl(urls)
+				# Check if we are correctly structured
+				if pathDetails?
+					organisationDirectory = pathDetails[1]
+					projectDirectory = pathDetails[2]
+					categoryDirectory = pathDetails[3]
+					basename = pathDetails[4]
+
+					organisation = organisationDirectory.replace(/[\-0-9]+/, '')
+					organisationName = humanize(project)
+
+					project = projectDirectory.replace(/[\-0-9]+/, '')
+					projectName = getProjectName(project)
+
+					category = categoryDirectory.replace(/^[\-0-9]+/, '')
+					categoryName = getCategoryName(category)
+
+					name = basename.replace(/^[\-0-9]+/,'')
+
+					title = "#{a.title or humanize name}"
+					pageTitle = "#{title} | #{projectName}"
+
+					urls = ["/docs/#{name}", "/docs/#{category}-#{name}", "/docpad/#{name}"]
+
+					githubEditUrl = "https://github.com/#{organisationDirectory}/#{projectDirectory}/edit/master/"
+					proseEditUrl = "http://prose.io/##{organisationDirectory}/#{projectDirectory}/edit/master/"
+					editUrl = githubEditUrl + a.relativePath.replace("learn/#{organisationDirectory}/#{projectDirectory}/", '')
+
+					# Apply
+					document
+						.setMetaDefaults({
+							layout
+							standalone
+
+							name
+							title
+							pageTitle
+
+							url: urls[0]
+
+							editUrl
+
+							organisationDirectory
+							organisation
+							organisationName
+
+							projectDirectory
+							project
+							projectName
+
+							categoryDirectory
+							category
+							categoryName
+						})
+						.addUrl(urls)
+
+				# Otherwise ignore this document
+				else
+					console.log "The document #{a.relativePath} was at an invalid path, so has been ignored"
+					document.setMetaDefaults({
+						ignore: true
+						render: false
+						write: false
+					})
 
 		partners: (database) ->
-			database.findAllLive({relativeOutDirPath:'docs/partners'}, [filename:1]).on 'add', (document) ->
+			database.findAllLive({relativeOutDirPath:'learn/docpad/documentation/partners'}, [filename:1]).on 'add', (document) ->
 				document.setMetaDefaults(write: false)
 
 		pages: (database) ->
@@ -276,7 +336,7 @@ docpadConfig =
 		repocloner:
 			repos: [
 				name: 'DocPad Documentation'
-				path: 'src/documents/docs'
+				path: 'src/documents/learn/docpad/documentation'
 				url: 'https://github.com/bevry/docpad-documentation.git'
 			]
 
@@ -382,7 +442,7 @@ docpadConfig =
 			server.all '/regenerate', (req,res) ->
 				if req.query?.key is process.env.WEBHOOK_KEY
 					docpad.log('info', 'Regenerating for documentation change')
-					docpad.action('generate')
+					docpad.action('generate', {populate:true, reload:true})
 					res.send(codeSuccess, 'regenerated')
 				else
 					res.send(codeBadRequest, 'key is incorrect')

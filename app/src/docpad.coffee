@@ -265,7 +265,7 @@ docpadConfig =
 					name = basename.replace(/^[\-0-9]+/,'')
 
 					title = "#{a.title or humanize name}"
-					pageTitle = "#{title} | #{projectName}"
+					pageTitle = "#{title} | DocPad"  # changed from bevry website
 
 					urls = ["/docs/#{name}", "/docs/#{category}-#{name}", "/docpad/#{name}"]
 

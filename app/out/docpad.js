@@ -198,7 +198,7 @@
             categoryName = getCategoryName(category);
             name = basename.replace(/^[\-0-9]+/, '');
             title = "" + (a.title || humanize(name));
-            pageTitle = "" + title + " | " + projectName;
+            pageTitle = "" + title + " | DocPad";
             urls = ["/docs/" + name, "/docs/" + category + "-" + name, "/docpad/" + name];
             githubEditUrl = "https://github.com/" + organisationDirectory + "/" + projectDirectory + "/edit/master/";
             proseEditUrl = "http://prose.io/#" + organisationDirectory + "/" + projectDirectory + "/edit/master/";

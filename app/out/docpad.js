@@ -326,7 +326,7 @@
         return true;
       },
       serverExtend: function(opts) {
-        var codeBadRequest, codeRedirectPermanent, codeRedirectTemporary, codeSuccess, docpad, request, server;
+        var codeBadRequest, codeRedirectPermanent, codeRedirectTemporary, codeSuccess, docpad, redirects, request, server;
         server = opts.server;
         docpad = this.docpad;
         request = require('request');
@@ -364,6 +364,11 @@
             return res.send(codeBadRequest, 'key is incorrect');
           }
         });
+        server.get(/^\/helper(?:\/(.+))?$/, function(req, res) {
+          var route;
+          route = req.params[0];
+          return res.redirect(codeRedirectPermanent, "http://docpad-helper.herokuapp.com/" + route);
+        });
         server.get('/exchange.json', function(req, res) {
           var branch, version;
           branch = 'master';
@@ -394,7 +399,7 @@
           relativeUrl = req.params[0] || '';
           return res.redirect(codeRedirectPermanent, "" + siteUrl + "/docs/" + relativeUrl);
         });
-        server.get(/^\/((?:tos|terms|privacy|node|joe|query-?engine).*)$/, function(req, res) {
+        server.get(/^\/(?:tos|terms|privacy|node|joe|query-?engine).*$/, function(req, res) {
           var relativeUrl;
           relativeUrl = req.params[0] || '';
           return res.redirect(codeRedirectPermanent, "http://bevry.me/" + relativeUrl);
@@ -403,6 +408,9 @@
           var relativeUrl;
           relativeUrl = req.params[0] || '';
           return res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/" + relativeUrl);
+        });
+        server.get(/^\/(?:t|twitter|tweet)(?:\/(.*))?$/, function(req, res) {
+          return res.redirect(codeRedirectPermanent, "https://twitter.com/docpad");
         });
         server.get(/^\/(?:i|issues)(?:\/(.*))?$/, function(req, res) {
           var relativeUrl;
@@ -437,32 +445,41 @@
           plugin = req.params[0];
           return res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad-plugin-" + plugin);
         });
-        server.get('/license', function(req, res) {
-          return res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/blob/master/LICENSE.md#readme");
-        });
-        server.get('/changes', function(req, res) {
-          return res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/blob/master/HISTORY.md#readme");
-        });
-        server.get('/chat-guidelines', function(req, res) {
-          return res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/issues/384");
-        });
-        server.get('/chat-logs', function(req, res) {
-          return res.redirect(codeRedirectPermanent, "https://botbot.me/freenode/docpad/");
-        });
-        server.get('/chat', function(req, res) {
-          return res.redirect(codeRedirectPermanent, "http://webchat.freenode.net/?channels=docpad");
-        });
-        server.get(/^\/(?:donate|gittip)$/, function(req, res) {
-          return res.redirect(codeRedirectPermanent, "https://www.gittip.com/docpad/");
-        });
-        server.get('/gittip-community', function(req, res) {
-          return res.redirect(codeRedirectPermanent, "https://www.gittip.com/for/docpad/");
-        });
-        server.get(/^\/(?:google\+|\+)$/, function(req, res) {
-          return res.redirect(codeRedirectPermanent, "https://plus.google.com/communities/102027871269737205567");
-        });
-        server.get(/^\/(?:forum|stackoverflow)$/, function(req, res) {
-          return res.redirect(codeRedirectPermanent, "http://stackoverflow.com/questions/tagged/docpad");
+        redirects = {
+          '/license': '/g/blob/master/LICENSE.md#readme',
+          '/chat-logs': 'https://botbot.me/freenode/docpad/',
+          '/chat': 'http://webchat.freenode.net/?channels=docpad',
+          '/changelog': '/g/blob/master/HISTORY.md#readme',
+          '/changes': '/changelog',
+          '/history': '/changelog',
+          '/forum': 'http://stackoverflow.com/questions/tagged/docpad',
+          '/stackoverflow': '/forum',
+          '/google+': 'https://plus.google.com/communities/102027871269737205567',
+          '/+': '/google+',
+          '/gittip-community': 'https://www.gittip.com/for/docpad/',
+          '/gittip': 'https://www.gittip.com/docpad/',
+          '/donate': '/gittip',
+          '/flattr': 'http://flattr.com/thing/344188/balupton-on-Flattr',
+          '/praise': 'https://twitter.com/docpad/favorites',
+          '/growl': 'http://growl.info/downloads',
+          '/partners': '/docs/support#support-consulting-partners',
+          '/contributors': '/docs/participate#contributors',
+          '/docs/start': '/docs/begin',
+          '/get-started': '/docs/overview',
+          '/chat-guidelines': '/i/384',
+          '/unstable-node': '/i/725',
+          '/render-early-via-include': '/i/378',
+          '/extension-not-rendering': '/i/192',
+          '/plugin-conventions': '/i/313'
+        };
+        server.use(function(req, res, next) {
+          var target;
+          target = redirects[req.url];
+          if (target) {
+            return res.redirect(codeRedirectPermanent, target);
+          } else {
+            return next();
+          }
         });
       }
     }

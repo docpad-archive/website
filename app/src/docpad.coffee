@@ -414,7 +414,6 @@ docpadConfig =
 			codeRedirectPermanent = 301
 			codeRedirectTemporary = 302
 
-
 			# Pushover - Optional
 			# Called by the 404 page to alert our mobile phone of missing pages
 			server.all '/pushover', (req,res) ->
@@ -447,6 +446,12 @@ docpadConfig =
 				else
 					res.send(codeBadRequest, 'key is incorrect')
 
+			# Helper
+			# /helper[/#{route}]
+			server.get /^\/helper(?:\/(.+))?$/, (req,res) ->
+				route = req.params[0]
+				res.redirect(codeRedirectPermanent, "http://docpad-helper.herokuapp.com/#{route}")
+
 			# DocPad Exchange
 			# http://docpad.org/exchange.json?version=6.32.0
 			server.get '/exchange.json', (req,res) ->
@@ -477,23 +482,28 @@ docpadConfig =
 				res.redirect(codeRedirectPermanent, "#{siteUrl}/docs/#{relativeUrl}")
 
 			# Content
+			# /docpad[/#{relativeUrl}]
 			server.get /^\/docpad(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
 				res.redirect(codeRedirectPermanent, "#{siteUrl}/docs/#{relativeUrl}")
 
 			# Bevry Content
-			server.get /^\/((?:tos|terms|privacy|node|joe|query-?engine).*)$/, (req,res) ->
+			server.get /^\/(?:tos|terms|privacy|node|joe|query-?engine).*$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
 				res.redirect(codeRedirectPermanent, "http://bevry.me/#{relativeUrl}")
 
 			# GitHub
-			# /(g|github|bevry/docpad)/#{path}
+			# /(g|github|bevry/docpad)[/#{path}]
 			server.get /^\/(?:g|github|bevry\/docpad)(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
 				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/#{relativeUrl}")
 
+			# Twitter
+			server.get /^\/(?:t|twitter|tweet)(?:\/(.*))?$/, (req,res) ->
+				res.redirect(codeRedirectPermanent, "https://twitter.com/docpad")
+
 			# Issues
-			# /(i|issue)/#{issue}
+			# /(i|issue)[/#{issue}]
 			server.get /^\/(?:i|issues)(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
 				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/issues/#{relativeUrl}")
@@ -522,44 +532,39 @@ docpadConfig =
 				plugin = req.params[0]
 				res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad-plugin-#{plugin}")
 
-			# License
-			server.get '/license', (req,res) ->
-				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/blob/master/LICENSE.md#readme")
-
-			# Changes
-			server.get '/changes', (req,res) ->
-				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/blob/master/HISTORY.md#readme")
-
-			# Chat Guidelines
-			server.get '/chat-guidelines', (req,res) ->
-				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/issues/384")
-
-			# Chat Logs
-			server.get '/chat-logs', (req,res) ->
-				res.redirect(codeRedirectPermanent, "https://botbot.me/freenode/docpad/")
-
-			# Chat
-			server.get '/chat', (req,res) ->
-				res.redirect(codeRedirectPermanent, "http://webchat.freenode.net/?channels=docpad")
-
-			# Donate
-			# /(donate|gittip)
-			server.get /^\/(?:donate|gittip)$/, (req,res) ->
-				res.redirect(codeRedirectPermanent, "https://www.gittip.com/docpad/")
-
-			# Gittip Community
-			server.get '/gittip-community', (req,res) ->
-				res.redirect(codeRedirectPermanent, "https://www.gittip.com/for/docpad/")
-
-			# Google+
-			# /(google+|+)
-			server.get /^\/(?:google\+|\+)$/, (req,res) ->
-				res.redirect(codeRedirectPermanent, "https://plus.google.com/communities/102027871269737205567")
-
-			# Forum
-			# /(forum|stackoverflow)
-			server.get /^\/(?:forum|stackoverflow)$/, (req,res) ->
-				res.redirect(codeRedirectPermanent, "http://stackoverflow.com/questions/tagged/docpad")
+			# Common Redirects
+			redirects =
+					'/license': '/g/blob/master/LICENSE.md#readme'
+					'/chat-logs': 'https://botbot.me/freenode/docpad/'
+					'/chat': 'http://webchat.freenode.net/?channels=docpad'
+					'/changelog': '/g/blob/master/HISTORY.md#readme'
+					'/changes': '/changelog'
+					'/history': '/changelog'
+					'/forum': 'http://stackoverflow.com/questions/tagged/docpad'
+					'/stackoverflow': '/forum'
+					'/google+': 'https://plus.google.com/communities/102027871269737205567'
+					'/+': '/google+'
+					'/gittip-community': 'https://www.gittip.com/for/docpad/'
+					'/gittip': 'https://www.gittip.com/docpad/'
+					'/donate': '/gittip'
+					'/flattr': 'http://flattr.com/thing/344188/balupton-on-Flattr'
+					'/praise': 'https://twitter.com/docpad/favorites'
+					'/growl': 'http://growl.info/downloads'
+					'/partners': '/docs/support#support-consulting-partners'
+					'/contributors': '/docs/participate#contributors'
+					'/docs/start': '/docs/begin'
+					'/get-started': '/docs/overview'
+					'/chat-guidelines': '/i/384'
+					'/unstable-node': '/i/725'
+					'/render-early-via-include': '/i/378'
+					'/extension-not-rendering': '/i/192'
+					'/plugin-conventions': '/i/313'
+			server.use (req,res,next) ->
+				target = redirects[req.url]
+				if target
+					res.redirect(codeRedirectPermanent, target)
+				else
+					next()
 
 			# Done
 			return

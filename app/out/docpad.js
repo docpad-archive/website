@@ -399,7 +399,7 @@
           relativeUrl = req.params[0] || '';
           return res.redirect(codeRedirectPermanent, "" + siteUrl + "/docs/" + relativeUrl);
         });
-        server.get(/^\/(?:tos|terms|privacy|node|joe|query-?engine).*$/, function(req, res) {
+        server.get(/^\/((?:tos|terms|privacy|node|joe|query-?engine).*)$/, function(req, res) {
           var relativeUrl;
           relativeUrl = req.params[0] || '';
           return res.redirect(codeRedirectPermanent, "http://bevry.me/" + relativeUrl);

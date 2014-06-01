@@ -540,6 +540,7 @@ docpadConfig =
 					'/changelog': '/g/blob/master/HISTORY.md#readme'
 					'/changes': '/changelog'
 					'/history': '/changelog'
+					'/bug-report': '/docs/support#bug-reports-via-github-s-issue-tracker'
 					'/forum': 'http://stackoverflow.com/questions/tagged/docpad'
 					'/stackoverflow': '/forum'
 					'/google+': 'https://plus.google.com/communities/102027871269737205567'

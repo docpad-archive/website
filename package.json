@@ -3,7 +3,7 @@
   "version": "0.1.29",
   "private": true,
   "description": "The Docpad Website",
-  "homepage": "https://github.com/bevry/docpad-website",
+  "homepage": "https://github.com/docpad/website",
   "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
@@ -13,38 +13,38 @@
     "Chase Colman <chase@infinityatlas.com> (https://github.com/chase)"
   ],
   "bugs": {
-    "url": "https://github.com/bevry/docpad-website/issues"
+    "url": "https://github.com/docpad/website/issues"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/bevry/docpad-website.git"
+    "url": "http://github.com/docpad/website.git"
   },
   "engines": {
     "node": "0.10",
-    "npm": "1.3"
+    "npm": "1.4"
   },
   "dependencies": {
-    "docpad": "~6.63.6",
+    "docpad": "~6.66.0",
     "docpad-plugin-coffeekup": "~2.2.0",
-    "docpad-plugin-coffeescript": "~2.3.0",
+    "docpad-plugin-coffeescript": "~2.4.0",
     "docpad-plugin-eco": "~2.0.3",
     "docpad-plugin-feedr": "~2.7.0",
     "docpad-plugin-highlightjs": "~2.2.1",
-    "docpad-plugin-robotskirt": "~2.0.3",
+    "docpad-plugin-marked": "~2.2.1",
+    "docpad-plugin-partials": "~2.9.1",
     "docpad-plugin-repocloner": "~2.2.1",
-    "docpad-plugin-partials": "~2.8.1",
-    "docpad-plugin-services": "~2.5.0",
-    "docpad-plugin-stylus": "~2.6.0",
+    "docpad-plugin-services": "~2.6.0",
+    "docpad-plugin-stylus": "~2.7.0",
     "docpad-plugin-text": "~2.3.2",
-    "getcontributors": "~1.3.0",
     "extendr": "~2.1.0",
+    "getcontributors": "~1.3.0",
     "moment": "~2.5.1",
-    "underscore.string": "~2.3.1",
     "request": "~2.33.0",
-    "requirefresh": "~1.1.2"
+    "requirefresh": "~1.1.2",
+    "underscore.string": "~2.3.1"
   },
   "devDependencies": {
-    "coffee-script": "~1.6.2",
+    "coffee-script": "~1.7.1",
     "docpad-plugin-livereload": "~2.6.0"
   },
   "subdomain": "docpad",

@@ -1,5 +1,5 @@
 # Prepare
-{ itemSort, collection } = @
+{itemSort, collection } = @
 return  unless collection
 
 # Menu
@@ -25,10 +25,10 @@ nav '.list-menu', ->
 			occuredCategories.push(category)
 
 			# Category Items
-			categoryItems = collection.findAll({category},itemSort)
+			categoryItems = collection.findAll({category}, itemSort)
 
 			# Category with Items
-			text @partial('menu/category',{
+			text @partial('menu/category', {
 				type: 'menu'
 				items: categoryItems
 				activeItem: @activeItem

@@ -24,7 +24,7 @@
     "npm": "1.4"
   },
   "dependencies": {
-    "docpad": "~6.66.0",
+    "docpad": "~6.68.0",
     "docpad-plugin-coffeekup": "~2.2.0",
     "docpad-plugin-coffeescript": "~2.4.0",
     "docpad-plugin-eco": "~2.0.3",

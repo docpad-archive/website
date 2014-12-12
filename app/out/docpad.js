@@ -371,19 +371,8 @@
         });
         server.get('/exchange.json', function(req, res) {
           var branch, version;
-          branch = 'master';
           version = (req.query.version || '').split('.');
-          if (version) {
-            if (version[0] === '5') {
-              if (version[1] === '3') {
-                branch = 'docpad-5.3.x';
-              } else {
-                branch = 'docpad-5.x';
-              }
-            } else if (version[0] === '6') {
-              branch = 'docpad-6.x';
-            }
-          }
+          branch = version[0] === '5' ? version[1] === '3' ? 'docpad-5.3.x' : 'docpad-5.x' : 'docpad-6.x';
           return res.redirect(codeRedirectPermanent, "https://raw.githubusercontent.com/bevry/docpad-extras/" + branch + "/exchange.json");
         });
         server.get('/latest.json', function(req, res) {
@@ -457,9 +446,11 @@
           '/stackoverflow': '/forum',
           '/google+': 'https://plus.google.com/communities/102027871269737205567',
           '/+': '/google+',
-          '/gittip-community': 'https://www.gittip.com/for/docpad/',
-          '/gittip': 'https://www.gittip.com/docpad/',
-          '/donate': '/gittip',
+          '/gittip-community': '/gratipay-community',
+          '/gittip': '/gratipay',
+          '/donate': '/gratipay',
+          '/gratipay-community': 'https://www.gratipay.com/for/docpad/',
+          '/gratipay': 'https://www.gratipay.com/docpad/',
           '/flattr': 'http://flattr.com/thing/344188/balupton-on-Flattr',
           '/praise': 'https://twitter.com/docpad/favorites',
           '/growl': 'http://growl.info/downloads',

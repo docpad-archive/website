@@ -470,11 +470,11 @@ docpadConfig =
 						branch = 'docpad-6.x'
 
 				# Redirect
-				res.redirect(codeRedirectPermanent, "https://raw.github.com/bevry/docpad-extras/#{branch}/exchange.json")
+				res.redirect(codeRedirectPermanent, "https://raw.githubusercontent.com/bevry/docpad-extras/#{branch}/exchange.json")
 
 			# Latest
 			server.get '/latest.json', (req,res) ->
-				res.redirect(codeRedirectPermanent, "https://raw.github.com/bevry/docpad/master/package.json")
+				res.redirect(codeRedirectPermanent, "https://raw.githubusercontent.com/bevry/docpad/master/package.json")
 
 			# Short Links
 			server.get /^\/(plugins|upgrade|install|troubleshoot)\/?$/, (req,res) ->
@@ -545,9 +545,11 @@ docpadConfig =
 					'/stackoverflow': '/forum'
 					'/google+': 'https://plus.google.com/communities/102027871269737205567'
 					'/+': '/google+'
-					'/gittip-community': 'https://www.gittip.com/for/docpad/'
-					'/gittip': 'https://www.gittip.com/docpad/'
-					'/donate': '/gittip'
+					'/gittip-community': '/gratipay-community'
+					'/gittip': '/gratipay'
+					'/donate': '/gratipay'
+					'/gratipay-community': 'https://www.gratipay.com/for/docpad/'
+					'/gratipay': 'https://www.gratipay.com/docpad/'
 					'/flattr': 'http://flattr.com/thing/344188/balupton-on-Flattr'
 					'/praise': 'https://twitter.com/docpad/favorites'
 					'/growl': 'http://growl.info/downloads'

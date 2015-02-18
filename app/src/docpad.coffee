@@ -559,6 +559,7 @@ docpadConfig =
 					'/render-early-via-include': '/i/378'
 					'/extension-not-rendering': '/i/192'
 					'/plugin-conventions': '/i/313'
+					'/plugin-uncompiled': '/i/925'
 			server.use (req,res,next) ->
 				target = redirects[req.url]
 				if target

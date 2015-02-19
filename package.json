@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "cson": "^2.0.0",
-    "docpad": "6.70.1",
+    "docpad": "6.71.0",
     "docpad-plugin-coffeekup": "~2.2.0",
     "docpad-plugin-coffeescript": "~2.4.0",
     "docpad-plugin-eco": "~2.1.0",

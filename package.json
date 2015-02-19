@@ -48,9 +48,10 @@
     "docpad-plugin-livereload": "~2.6.0"
   },
   "subdomain": "docpad",
-  "main": "node_modules/docpad/bin/docpad-server",
+  "main": "node_modules/.bin/docpad-server",
   "scripts": {
-    "start": "node_modules/docpad/bin/docpad-server"
+    "start": "node_modules/.bin/docpad-server",
+    "test": "node_modules/.bin/docpad generate --debug"
   },
   "cakeConfiguration": {
     "DOCPAD_OUT_PATH": "out",

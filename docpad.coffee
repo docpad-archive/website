@@ -1,19 +1,16 @@
 # Require
 fsUtil = require('fs')
 pathUtil = require('path')
+CSON = require('cson')
 moment = require('moment')
 strUtil = require('underscore.string')
-{requireFresh} = require('requirefresh')
 extendr = require('extendr')
 #validator = require('validator')
 
 # Prepare
-rootPath = __dirname+'/../..'
-appPath = __dirname
-sitePath = rootPath+'/site'
-textData = requireFresh(appPath+'/templateData/text')
-navigationData = requireFresh(appPath+'/templateData/navigation')
-websiteVersion = require(rootPath+'/package.json').version
+textData = CSON.parseCSONFile('./templateData/text.cson')
+navigationData = CSON.parseCSONFile('./templateData/navigation.cson')
+websiteVersion = require('./package.json').version
 siteUrl = if process.env.NODE_ENV is 'production' then "http://docpad.org" else "http://localhost:9778"
 contributorsGetter = null
 contributors = null
@@ -53,14 +50,6 @@ docpadConfig =
 
 	# =================================
 	# DocPad Configuration
-
-	# Paths
-	rootPath: rootPath
-	outPath: rootPath+'/site/out'
-	srcPath: rootPath+'/site/src'
-	reloadPaths: [
-		appPath
-	]
 
 	# Regenerate each day
 	regenerateEvery: 1000*60*60*24

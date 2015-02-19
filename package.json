@@ -33,6 +33,7 @@
     "docpad-plugin-highlightjs": "~2.3.0",
     "docpad-plugin-marked": "~2.3.0",
     "docpad-plugin-partials": "~2.9.1",
+    "docpad-plugin-raw": "~2.3.2",
     "docpad-plugin-repocloner": "~2.2.1",
     "docpad-plugin-services": "~2.6.0",
     "docpad-plugin-stylus": "~2.9.0",

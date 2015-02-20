@@ -1,1 +1,1 @@
-web:  node --debug=$PORT node_modules/docpad/out/bin/docpad-server.js
+web: ./node_modules/.bin/node-debug -p $PORT node_modules/docpad/out/bin/docpad-server.js

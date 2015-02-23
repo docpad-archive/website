@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "cson": "^2.0.0",
-    "docpad": "git+https://github.com/docpad/docpad.git#dev",
+    "docpad": "~6.73.3",
     "docpad-plugin-coffeekup": "~2.2.0",
     "docpad-plugin-coffeescript": "~2.4.0",
     "docpad-plugin-eco": "~2.1.0",

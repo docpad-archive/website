@@ -51,6 +51,6 @@
   "main": "node_modules/.bin/docpad-server",
   "scripts": {
     "start": "node_modules/.bin/docpad-server",
-    "test": "node_modules/.bin/docpad generate --debug"
+    "test": "node_modules/.bin/docpad generate --debug --silent"
   }
 }

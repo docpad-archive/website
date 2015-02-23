@@ -2,6 +2,8 @@ language: node_js
 # ensure npm is the latest version (ignore node versions that can't run it)
 install: "npm install -g npm && npm install"
 script: "npm test"
+env:
+  - NODE_ENV="production"
 node_js:
   - "0.10"
   - "0.12"

@@ -443,26 +443,13 @@ docpadConfig =
 				res.redirect(codeRedirectPermanent, "http://docpad-helper.herokuapp.com/#{route}")
 
 			# DocPad Exchange
-			# http://docpad.org/exchange.json?version=6.32.0
-			server.get '/exchange.json', (req,res) ->
-				# Determine branch based on docpad version
-				version = (req.query.version or '')
-				if semver.satisfies(version, '5.3')
-					branch = 'docpad-5.3.x'
-					extension = 'json'
-				else if semver.satisfies(version, '5')
-					branch = 'docpad-5.x'
-					extension = 'json'
-				else
-					branch = 'docpad-6.x'
-					extension = 'cson'
-
+			server.get /^\/exchange/, (req,res) ->
 				# Redirect
-				res.redirect(codeRedirectPermanent, "https://raw.githubusercontent.com/bevry/docpad-extras/#{branch}/exchange.#{extension}")
+				res.redirect(codeRedirectPermanent, "http://helper.docpad.org?method=exchange&version=#{req.query.version}")
 
-			# Latest
+			# Latest DocPad package.json
 			server.get '/latest.json', (req,res) ->
-				res.redirect(codeRedirectPermanent, "https://raw.githubusercontent.com/bevry/docpad/master/package.json")
+				res.redirect(codeRedirectPermanent, "http://helper.docpad.org?method=latest")
 
 			# Short Links
 			server.get /^\/(plugins|upgrade|install|troubleshoot)\/?$/, (req,res) ->

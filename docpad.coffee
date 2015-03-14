@@ -5,6 +5,7 @@ CSON = require('cson')
 moment = require('moment')
 strUtil = require('underscore.string')
 extendr = require('extendr')
+semver = require('semver')
 #validator = require('validator')
 
 # Prepare
@@ -445,18 +446,19 @@ docpadConfig =
 			# http://docpad.org/exchange.json?version=6.32.0
 			server.get '/exchange.json', (req,res) ->
 				# Determine branch based on docpad version
-				version = (req.query.version or '').split('.')
-				branch =
-					if version[0] is '5'
-						if version[1] is '3'
-							'docpad-5.3.x'
-						else
-							'docpad-5.x'
-					else
-						'docpad-6.x'
+				version = (req.query.version or '')
+				if semver.satisfies(version, '5.3')
+					branch = 'docpad-5.3.x'
+					extension = 'json'
+				else if semver.satisfies(version, '5')
+					branch = 'docpad-5.x'
+					extension = 'json'
+				else
+					branch = 'docpad-6.x'
+					extension = 'cson'
 
 				# Redirect
-				res.redirect(codeRedirectPermanent, "https://raw.githubusercontent.com/bevry/docpad-extras/#{branch}/exchange.json")
+				res.redirect(codeRedirectPermanent, "https://raw.githubusercontent.com/bevry/docpad-extras/#{branch}/exchange.#{extension}")
 
 			# Latest
 			server.get '/latest.json', (req,res) ->

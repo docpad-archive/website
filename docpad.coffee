@@ -12,6 +12,7 @@ semver = require('semver')
 textData = CSON.parseCSONFile('./templateData/text.cson')
 navigationData = CSON.parseCSONFile('./templateData/navigation.cson')
 websiteVersion = require('./package.json').version
+docpadVersion = require('./package.json').dependencies.docpad.toString().replace('~', '').replace('^', '')
 siteUrl = if process.env.NODE_ENV is 'production' then "http://docpad.org" else "http://localhost:9778"
 contributorsGetter = null
 contributors = null
@@ -304,9 +305,6 @@ docpadConfig =
 			database.findAllLive({relativeOutDirPath:'learn/docpad/documentation/partners'}, [filename:1]).on 'add', (document) ->
 				document.setMetaDefaults(write: false)
 
-		pages: (database) ->
-			database.findAllLive({relativeOutDirPath:'pages'}, [filename:1])
-
 
 	# =================================
 	# Plugins
@@ -319,8 +317,12 @@ docpadConfig =
 
 		feedr:
 			feeds:
-				latestPackage: url: "#{siteUrl}/latest.json"
-				exchange: url: "#{siteUrl}/exchange.json"
+				latestPackage:
+					url: "http://helper.docpad.org/latest.json"
+					parse: 'json'
+				exchange:
+					url: "http://helper.docpad.org/exchange.cson?version=#{docpadVersion}"
+					parse: 'cson'
 				#'twitter-favorites': url: 'https://api.twitter.com/1.1/favorites/list.json?screen_name=docpad&count=200&include_entities=true'
 
 		repocloner:

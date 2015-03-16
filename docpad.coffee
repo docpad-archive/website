@@ -473,7 +473,7 @@ docpadConfig =
 			# /(g|github|bevry/docpad)[/#{path}]
 			server.get /^\/(?:g|github|bevry\/docpad)(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
-				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/#{relativeUrl}")
+				res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad/#{relativeUrl}")
 
 			# Twitter
 			server.get /^\/(?:t|twitter|tweet)(?:\/(.*))?$/, (req,res) ->
@@ -483,7 +483,7 @@ docpadConfig =
 			# /(i|issue)[/#{issue}]
 			server.get /^\/(?:i|issues)(?:\/(.*))?$/, (req,res) ->
 				relativeUrl = req.params[0] or ''
-				res.redirect(codeRedirectPermanent, "https://github.com/bevry/docpad/issues/#{relativeUrl}")
+				res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad/issues/#{relativeUrl}")
 
 			# Edit
 			server.get /^\/(?:e|edit)(?:\/docs)?\/(.+)$/, (req,res,next) ->

@@ -4,7 +4,7 @@
 
 # DOCPAD CORE TEAM
 
-Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+Benjamin Lupton <b@lupton.cc> (http://balupton.com)
 
 
 # DOCPAD CONTRIBUTORS, ALL <%- @getContributors().length %> OF THEM

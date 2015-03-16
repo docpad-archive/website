@@ -9,6 +9,6 @@
 
 	bottom:
 		'DocPad': '/'
-		'GitHub': 'https://github.com/bevry/docpad'
+		'GitHub': 'https://github.com/docpad/docpad'
 		'Support': '/support'
 }

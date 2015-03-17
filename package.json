@@ -80,9 +80,5 @@
     "start": "node_modules/.bin/docpad-server",
     "test": "node_modules/.bin/docpad generate --debug --silent",
     "info": "node_modules/.bin/docpad info --silent"
-  },
-  "cakeConfiguration": {
-    "DOCPAD_OUT_PATH": "out",
-    "DOCPAD_SRC_PATH": "src"
   }
 }

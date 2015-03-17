@@ -15,7 +15,7 @@
     }
   ],
   "badges": {
-    "travis": false,
+    "travis": true,
     "npm": false,
     "npmdownloads": false,
     "david": false,

@@ -7,3 +7,9 @@ node_js:
 cache:
   directories:
     - node_modules
+notifications:
+  irc:
+    - "irc.freenode.org#bevry-dev"
+  email:
+    recipients:
+      - travisci@bevry.me

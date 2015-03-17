@@ -19,7 +19,7 @@
 1. Clone and run the server
 
 	``` bash
-	git clone https://github.com/docpad/website.git
+	git clone https://github.com/docpad/website.git docpad-website
 	cd docpad-website
 	npm install
 	docpad run

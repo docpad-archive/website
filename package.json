@@ -4,16 +4,15 @@
   "private": true,
   "description": "The Docpad Website",
   "homepage": "https://github.com/docpad/website",
-  "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
-  "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
-  ],
-  "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
-    "Chase Colman <chase@infinityatlas.com> (https://github.com/chase)",
-    "cvrebert (https://github.com/cvrebert)",
-    "lynnandtonic (https://github.com/lynnandtonic)",
-    "mikeumus (https://github.com/mikeumus)"
+  "licenses": [
+    {
+      "type": "MIT",
+      "for": "code"
+    },
+    {
+      "type": "CC-BY-4.0",
+      "for": "everything else (including content, media and design)"
+    }
   ],
   "badges": {
     "travis": false,
@@ -27,15 +26,16 @@
     "bitcoin": "https://coinbase.com/checkouts/9ef59f5479eec1d97d63382c9ebcb93a",
     "wishlist": "http://amzn.com/w/2F8TXKSNAFG4V"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "for": "code"
-    },
-    {
-      "type": "CC-BY-4.0",
-      "for": "everything else (including content, media and design)"
-    }
+  "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
+  "maintainers": [
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+  ],
+  "contributors": [
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
+    "Chase Colman <chase@infinityatlas.com> (https://github.com/chase)",
+    "cvrebert (https://github.com/cvrebert)",
+    "lynnandtonic (https://github.com/lynnandtonic)",
+    "mikeumus (https://github.com/mikeumus)"
   ],
   "bugs": {
     "url": "https://github.com/docpad/website/issues"
@@ -78,7 +78,8 @@
   "main": "node_modules/.bin/docpad-server",
   "scripts": {
     "start": "node_modules/.bin/docpad-server",
-    "test": "node_modules/.bin/docpad generate"
+    "test": "node_modules/.bin/docpad generate --debug --silent",
+    "info": "node_modules/.bin/docpad info --silent"
   },
   "cakeConfiguration": {
     "DOCPAD_OUT_PATH": "out",

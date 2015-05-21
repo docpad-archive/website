@@ -10,7 +10,7 @@ standalone: true
 		<li class="versioning">
 			<a class="hover-link" href="/docs/intro">
 				<span class="title">Versioning</span>
-				<span class="popover">Use the versioning tools you're already use to.</span>
+				<span class="popover">Use the versioning tools you're already used to.</span>
 				<span class="image"></span>
 			</a>
 		</li>

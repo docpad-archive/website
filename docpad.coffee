@@ -321,7 +321,7 @@ docpadConfig =
 					url: "http://helper.docpad.org/latest.json"
 					parse: 'json'
 				exchange:
-					url: "http://helper.docpad.org/exchange.cson?version=#{docpadVersion}"
+					url: "http://helper.docpad.org/exchange.cson?version=6.78.0"# #{docpadVersion}"
 					parse: 'cson'
 				#'twitter-favorites': url: 'https://api.twitter.com/1.1/favorites/list.json?screen_name=docpad&count=200&include_entities=true'
 

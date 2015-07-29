@@ -11,7 +11,7 @@ dependencies:
 deployment:
   pre:
     git config --global user.email "circle@bevry.me"
-    git config --global user.name "Bevry's CircleCI Deployer"
+    git config --global user.name "Bevry CircleCI Deployer"
   production:
     branch: master
     owner: docpad

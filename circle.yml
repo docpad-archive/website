@@ -10,8 +10,8 @@ dependencies:
     - "node_modules"
 deployment:
   pre:
-    git config --global user.email "circle@bevry.me"
-    git config --global user.name "Bevry CircleCI Deployer"
+    - git config --global user.email "circle@bevry.me"
+    - git config --global user.name "Bevry CircleCI Deployer"
   production:
     branch: master
     owner: docpad

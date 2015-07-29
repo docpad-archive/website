@@ -1,0 +1,16 @@
+machine:
+  node:
+    version: "0.12"
+general:
+  branches:
+    ignore:
+      - gh-pages
+dependencies:
+  cache_directories:
+    - "node_modules"
+deployment:
+  production:
+    branch: master
+    owner: docpad
+    commands:
+      - npm deploy

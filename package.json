@@ -71,6 +71,7 @@
     "underscore.string": "^3.0.3"
   },
   "devDependencies": {
+    "docpad-plugin-ghpages": "~2.4.4",
     "docpad-plugin-livereload": "~2.6.1",
     "projectz": "^0.5.0"
   },
@@ -78,7 +79,8 @@
   "main": "node_modules/.bin/docpad-server",
   "scripts": {
     "start": "node_modules/.bin/docpad-server",
-    "test": "node_modules/.bin/docpad generate --debug --silent",
-    "info": "node_modules/.bin/docpad info --silent"
+    "test": "node_modules/.bin/docpad generate --silent --debug",
+    "info": "node_modules/.bin/docpad info --silent",
+    "deploy": "node_modules/.bin/docpad deploy-ghpages --silent --env static"
   }
 }

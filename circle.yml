@@ -13,4 +13,4 @@ deployment:
     branch: master
     owner: docpad
     commands:
-      - npm deploy
+      - npm run-script deploy

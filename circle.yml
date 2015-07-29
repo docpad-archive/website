@@ -8,7 +8,7 @@ general:
 dependencies:
   cache_directories:
     - "node_modules"
-mabhine:
+machine:
   pre:
     - git config --global user.email "circle@bevry.me"
     - git config --global user.name "Bevry CircleCI Deployer"

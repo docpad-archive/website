@@ -70,7 +70,7 @@ getLabelName = (label) ->
 # Humanize
 humanize = (text) ->
 	text ?= ''
-	return strUtil.humanize text.replace(/^[\-0-9]+/,'').replace(/\..+/,'')
+	return require('underscore.string').humanize text.replace(/^[\-0-9]+/,'').replace(/\..+/,'')
 
 
 # =================================

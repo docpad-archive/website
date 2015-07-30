@@ -1,16 +1,47 @@
 # Require
 fsUtil = require('fs')
 pathUtil = require('path')
-CSON = require('cson')
-moment = require('moment')
-strUtil = require('underscore.string')
-extendr = require('extendr')
-semver = require('semver')
-#validator = require('validator')
 
 # Prepare
-textData = CSON.parseCSONFile('./templateData/text.cson')
-navigationData = CSON.parseCSONFile('./templateData/navigation.cson')
+textData =
+	heading: "DocPad"
+	copyright: '''
+		DocPad is a <a href="http://bevry.me" title="Bevry - Node.js, Backbone.js & JavaScript Consultancy in Sydney, Australia">Bevry</a> creation.
+		'''
+
+	linkNames:
+		main: "Website"
+		learn: "Learn"
+		email: "Email"
+		twitter: "Twitter"
+
+		support: "Support"
+		showcase: "Showcase"
+
+	projectNames:
+		docpad: "DocPad"
+		node: "Node.js"
+		queryengine: "Query Engine"
+
+	categoryNames:
+		start: "Getting Started"
+		community: "Community"
+		core: "Core"
+		extend: "Extend"
+		handsonnode: "Hands on with Node"
+navigationData =
+	top:
+		'Intro': '/docs/intro'
+		'Install': '/docs/install'
+		'Start': '/docs/start'
+		'Showcase': '/docs/showcase'
+		'Plugins': '/docs/plugins'
+		'Documentation': '/docs'
+
+	bottom:
+		'DocPad': '/'
+		'GitHub': 'https://github.com/docpad/docpad'
+		'Support': '/support'
 websiteVersion = require('./package.json').version
 docpadVersion = require('./package.json').dependencies.docpad.toString().replace('~', '').replace('^', '')
 siteUrl = if process.env.NODE_ENV is 'production' then "http://docpad.org" else "http://localhost:9778"
@@ -66,11 +97,6 @@ docpadConfig =
 
 		# -----------------------------
 		# Misc
-
-		strUtil: strUtil
-		moment: moment
-		#sanitize: (input) -> validator.sanitize(input).xss()
-		# disabled due to https://github.com/chriso/node-validator/issues/226 and https://github.com/chriso/node-validator/issues/206
 
 		text: textData
 		navigation: navigationData
@@ -332,6 +358,75 @@ docpadConfig =
 				url: 'https://github.com/bevry/docpad-documentation.git'
 			]
 
+		cleanurls:
+			# Common Redirects
+			simpleRedirects:
+				'/license': '/g/blob/master/LICENSE.md#readme'
+				'/chat-logs': 'https://botbot.me/freenode/docpad/'
+				'/chat': 'http://webchat.freenode.net/?channels=docpad'
+				'/changelog': '/g/blob/master/HISTORY.md#readme'
+				'/changes': '/changelog'
+				'/history': '/changelog'
+				'/bug-report': '/docs/support#bug-reports-via-github-s-issue-tracker'
+				'/forum': 'http://stackoverflow.com/questions/tagged/docpad'
+				'/stackoverflow': '/forum'
+				'/google+': 'https://plus.google.com/communities/102027871269737205567'
+				'/+': '/google+'
+				'/gittip-community': '/gratipay-community'
+				'/gittip': '/gratipay'
+				'/donate': '/gratipay'
+				'/gratipay-community': 'https://www.gratipay.com/for/docpad/'
+				'/gratipay': 'https://www.gratipay.com/docpad/'
+				'/flattr': 'http://flattr.com/thing/344188/balupton-on-Flattr'
+				'/praise': 'https://twitter.com/docpad/favorites'
+				'/growl': 'http://growl.info/downloads'
+				'/partners': '/docs/support#support-consulting-partners'
+				'/contributors': '/docs/participate#contributors'
+				'/docs/start': '/docs/begin'
+				'/get-started': '/docs/overview'
+				'/chat-guidelines': '/i/384'
+				'/unstable-node': '/i/725'
+				'/render-early-via-include': '/i/378'
+				'/extension-not-rendering': '/i/192'
+				'/plugin-conventions': '/i/313'
+				'/plugin-uncompiled': '/i/925'
+
+			advancedRedirects: [
+				# Old URLs
+				[/^https?:\/\/(?:refresh\.docpad\.org|herokuapp\.com|docpad\.github\.io\/website)(.*)$/, 'https://docpad.org$1']
+
+				# Short Links
+				[/^\/(plugins|upgrade|install|troubleshoot)\/?$/, '/docs/$1']
+
+				# Content
+				# /docpad[/#{relativeUrl}]
+				[/^\/docpad(?:\/(.*))?$/, '/docs/$1']
+
+				# Bevry Content
+				[/^\/((?:tos|terms|privacy).*)$/, 'https://bevry.me/$1']
+
+				# Learning Centre Content
+				[/^\/((?:node|joe|query-?engine).*)$/, 'https://learn.bevry.me/$1']
+
+				# GitHub
+				# /(g|github|bevry/docpad)[/#{path}]
+				[/^\/(?:g|github|bevry\/docpad)(?:\/(.*))?$/, 'https://github.com/docpad/docpad/$1']
+
+				# Twitter
+				[/^\/(?:t|twitter|tweet)(?:\/(.*))?$/, 'https://twitter.com/docpad']
+
+				# Issues
+				# /(i|issue)[/#{issue}]
+				[/^\/(?:i|issues)(?:\/(.*))?$/, 'https://github.com/docpad/docpad/issues/$1']
+
+				# Plugins
+				# /(p|plugin)/#{pluginName}
+				[/^\/(?:p|plugin)\/(.+)$/, 'https://github.com/docpad/docpad-plugin-$1']
+
+				# Plugins via Full (legacy)
+				# /(docs/)?docpad-plugin-#{pluginName}
+				[/^\/(?:docs\/)?docpad-plugin-(.+)$/, 'https://github.com/docpad/docpad-plugin-$1']
+			]
 
 	# =================================
 	# Environments
@@ -352,6 +447,14 @@ docpadConfig =
 	# Events
 
 	events:
+
+		# Extend Template data
+		extendTemplateData: (opts) ->
+			opts.templateData.moment = require('moment')
+			opts.templateData.strUtil = require('underscore.string')
+
+			# Return
+			return true
 
 		# Generate Before
 		generateBefore: (opts) ->
@@ -393,163 +496,6 @@ docpadConfig =
 
 			# Return
 			return true
-
-		# Server Extend
-		# Used to add our own custom routes to the server before the docpad routes are added
-		serverExtend: (opts) ->
-			# Extract the server from the options
-			{server} = opts
-			docpad = @docpad
-			request = require('request')
-			codeSuccess = 200
-			codeBadRequest = 400
-			codeRedirectPermanent = 301
-			codeRedirectTemporary = 302
-
-			# Pushover - Optional
-			# Called by the 404 page to alert our mobile phone of missing pages
-			server.all '/pushover', (req,res) ->
-				return res.send(codeSuccess)  if 'development' in docpad.getEnvironments() or process.env.BEVRY_PUSHOVER_TOKEN? is false
-				request(
-					{
-						url: "https://api.pushover.net/1/messages.json"
-						method: "POST"
-						form: extendr.extend(
-							{
-								device: process.env.BEVRY_PUSHOVER_DEVICE or null
-								token: process.env.BEVRY_PUSHOVER_TOKEN
-								user: process.env.BEVRY_PUSHOVER_USER_KEY
-								message: req.query
-							}
-							req.query
-						)
-					}
-					(_req,_res,body) ->
-						res.send(body)
-				)
-
-			# DocPad Regenerate Hook
-			# Automatically regenerate when new changes are pushed to our documentation
-			server.all '/regenerate', (req,res) ->
-				if req.query?.key is process.env.WEBHOOK_KEY
-					docpad.log('info', 'Regenerating for documentation change')
-					docpad.action('generate', {populate:true, reload:true})
-					res.send(codeSuccess, 'regenerated')
-				else
-					res.send(codeBadRequest, 'key is incorrect')
-
-			# Helper
-			# /helper[/#{route}]
-			server.get /^\/helper(?:\/(.+))?$/, (req,res) ->
-				route = req.params[0]
-				res.redirect(codeRedirectPermanent, "http://docpad-helper.herokuapp.com/#{route}")
-
-			# DocPad Exchange
-			server.get /^\/exchange/, (req,res) ->
-				# Redirect
-				res.redirect(codeRedirectPermanent, "http://helper.docpad.org?method=exchange&version=#{req.query.version}")
-
-			# Latest DocPad package.json
-			server.get '/latest.json', (req,res) ->
-				res.redirect(codeRedirectPermanent, "http://helper.docpad.org?method=latest")
-
-			# Short Links
-			server.get /^\/(plugins|upgrade|install|troubleshoot)\/?$/, (req,res) ->
-				relativeUrl = req.params[0] or ''
-				res.redirect(codeRedirectPermanent, "#{siteUrl}/docs/#{relativeUrl}")
-
-			# Content
-			# /docpad[/#{relativeUrl}]
-			server.get /^\/docpad(?:\/(.*))?$/, (req,res) ->
-				relativeUrl = req.params[0] or ''
-				res.redirect(codeRedirectPermanent, "#{siteUrl}/docs/#{relativeUrl}")
-
-			# Bevry Content
-			server.get /^\/((?:tos|terms|privacy|node|joe|query-?engine).*)$/, (req,res) ->
-				relativeUrl = req.params[0] or ''
-				res.redirect(codeRedirectPermanent, "http://bevry.me/#{relativeUrl}")
-
-			# GitHub
-			# /(g|github|bevry/docpad)[/#{path}]
-			server.get /^\/(?:g|github|bevry\/docpad)(?:\/(.*))?$/, (req,res) ->
-				relativeUrl = req.params[0] or ''
-				res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad/#{relativeUrl}")
-
-			# Twitter
-			server.get /^\/(?:t|twitter|tweet)(?:\/(.*))?$/, (req,res) ->
-				res.redirect(codeRedirectPermanent, "https://twitter.com/docpad")
-
-			# Issues
-			# /(i|issue)[/#{issue}]
-			server.get /^\/(?:i|issues)(?:\/(.*))?$/, (req,res) ->
-				relativeUrl = req.params[0] or ''
-				res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad/issues/#{relativeUrl}")
-
-			# Edit
-			server.get /^\/(?:e|edit)(?:\/docs)?\/(.+)$/, (req,res,next) ->
-				fileRelativeUrl = '/docs/'+req.params[0]
-				console.log 'edit', fileRelativeUrl
-				docpad.getFileByRoute fileRelativeUrl, (err, file) ->
-					console.log 'err', file
-					return docpad.serverMiddleware404(req, res, next)  if err or !file
-					fileEditUrl = file.get('editUrl')
-					console.log 'url', fileEditUrl
-					return docpad.serverMiddleware500(req, res, next)  if !fileEditUrl
-					return res.redirect(codeRedirectPermanent, fileEditUrl)
-
-			# Plugins
-			# /(p|plugin)/#{pluginName}
-			server.get /^\/(?:p|plugin)\/(.+)$/, (req,res) ->
-				plugin = req.params[0]
-				res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad-plugin-#{plugin}")
-
-			# Plugins via Full
-			# /(docs/)?docpad-plugin-#{pluginName}
-			server.get /^\/(?:docs\/)?docpad-plugin-(.+)$/, (req,res) ->
-				plugin = req.params[0]
-				res.redirect(codeRedirectPermanent, "https://github.com/docpad/docpad-plugin-#{plugin}")
-
-			# Common Redirects
-			redirects =
-					'/license': '/g/blob/master/LICENSE.md#readme'
-					'/chat-logs': 'https://botbot.me/freenode/docpad/'
-					'/chat': 'http://webchat.freenode.net/?channels=docpad'
-					'/changelog': '/g/blob/master/HISTORY.md#readme'
-					'/changes': '/changelog'
-					'/history': '/changelog'
-					'/bug-report': '/docs/support#bug-reports-via-github-s-issue-tracker'
-					'/forum': 'http://stackoverflow.com/questions/tagged/docpad'
-					'/stackoverflow': '/forum'
-					'/google+': 'https://plus.google.com/communities/102027871269737205567'
-					'/+': '/google+'
-					'/gittip-community': '/gratipay-community'
-					'/gittip': '/gratipay'
-					'/donate': '/gratipay'
-					'/gratipay-community': 'https://www.gratipay.com/for/docpad/'
-					'/gratipay': 'https://www.gratipay.com/docpad/'
-					'/flattr': 'http://flattr.com/thing/344188/balupton-on-Flattr'
-					'/praise': 'https://twitter.com/docpad/favorites'
-					'/growl': 'http://growl.info/downloads'
-					'/partners': '/docs/support#support-consulting-partners'
-					'/contributors': '/docs/participate#contributors'
-					'/docs/start': '/docs/begin'
-					'/get-started': '/docs/overview'
-					'/chat-guidelines': '/i/384'
-					'/unstable-node': '/i/725'
-					'/render-early-via-include': '/i/378'
-					'/extension-not-rendering': '/i/192'
-					'/plugin-conventions': '/i/313'
-					'/plugin-uncompiled': '/i/925'
-			server.use (req,res,next) ->
-				target = redirects[req.url]
-				if target
-					res.redirect(codeRedirectPermanent, target)
-				else
-					next()
-
-			# Done
-			return
-
 
 # Export our DocPad Configuration
 module.exports = docpadConfig

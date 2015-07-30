@@ -6,7 +6,7 @@ pathUtil = require('path')
 textData =
 	heading: "DocPad"
 	copyright: '''
-		DocPad is a <a href="http://bevry.me" title="Bevry - Node.js, Backbone.js & JavaScript Consultancy in Sydney, Australia">Bevry</a> creation.
+		DocPad is a <a href="http://bevry.me" title="Bevry - An open company and community dedicated to empowering developers everywhere.">Bevry</a> creation.
 		'''
 
 	linkNames:

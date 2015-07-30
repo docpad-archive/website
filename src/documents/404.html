@@ -15,20 +15,3 @@ layout: error
     </script>
     <script src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
 </section>
-
-<!-- Notify Developer -->
-<script>
-    var request = new XMLHttpRequest();
-    var message = document.location.href;
-    if ( document.referrer ) {
-        message += '\nfrom: '+document.referrer;
-    }
-    request.open(
-        'POST'
-        ,document.location.protocol+'//'+document.location.host+'/pushover'+
-            '?title='+escape("DocPad 404")+
-            '&message='+escape(message)
-        ,true
-    );
-    request.send();
-</script>

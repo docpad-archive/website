@@ -393,7 +393,7 @@ docpadConfig =
 
 			advancedRedirects: [
 				# Old URLs
-				[/^https?:\/\/(?:refresh\.docpad\.org|herokuapp\.com|docpad\.github\.io\/website)(.*)$/, 'https://docpad.org$1']
+				[/^https?:\/\/(?:refresh\.docpad\.org|docpad\.herokuapp\.com|docpad\.github\.io\/website)(.*)$/, 'https://docpad.org$1']
 
 				# Short Links
 				[/^\/(plugins|upgrade|install|troubleshoot)\/?$/, '/docs/$1']

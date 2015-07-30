@@ -126,7 +126,7 @@ docpadConfig =
 			services:
 				ircwebchat: 'docpad'
 
-				travisStatusButton: 'bevry/docpad'
+				travisStatusButton: 'docpad/docpad'
 				furyButton: 'docpad'
 				gittipButton: 'docpad'
 				flattrButton: '344188/balupton-on-Flattr'
@@ -136,14 +136,14 @@ docpadConfig =
 					applicationId: '266367676718271'
 				twitterTweetButton: 'docpad'
 				twitterFollowButton: 'docpad'
-				githubStarButton: 'bevry/docpad'
+				githubStarButton: 'docpad/docpad'
 
-				disqus: 'docpad'
-				gauges: '50dead2bf5a1f541d7000008'
+				#disqus: 'docpad'
+				#gauges: '50dead2bf5a1f541d7000008'
 				googleAnalytics: 'UA-35505181-2'
-				inspectlet: '746529266'
-				mixpanel: 'd0f9b33c0ec921350b5419352028577e'
-				reinvigorate: '89t63-62ne18262h'
+				#inspectlet: '746529266'
+				#mixpanel: 'd0f9b33c0ec921350b5419352028577e'
+				#reinvigorate: '89t63-62ne18262h'
 
 			# Styles
 			styles: [

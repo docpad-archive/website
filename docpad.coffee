@@ -44,6 +44,7 @@ navigationData =
 		'Support': '/support'
 websiteVersion = require('./package.json').version
 docpadVersion = require('./package.json').dependencies.docpad.toString().replace('~', '').replace('^', '')
+exchangeUrl = "http://helper.docpad.org/exchange.cson?version=#{docpadVersion}"
 siteUrl = if process.env.NODE_ENV is 'production' then "http://docpad.org" else "http://localhost:9778"
 contributorsGetter = null
 contributors = null
@@ -101,6 +102,9 @@ docpadConfig =
 		text: textData
 		navigation: navigationData
 
+		# The URL we use to fetch the exchange data, included in template data for debugging
+		exchangeUrl: exchangeUrl
+
 
 		# -----------------------------
 		# Site Properties
@@ -124,11 +128,11 @@ docpadConfig =
 
 			# Services
 			services:
-				ircwebchat: 'docpad'
+				# ircwebchat: 'docpad'
 
-				travisStatusButton: 'docpad/docpad'
+				# travisStatusButton: 'docpad/docpad'
 				furyButton: 'docpad'
-				gittipButton: 'docpad'
+				gratipayButton: 'bevry'
 				flattrButton: '344188/balupton-on-Flattr'
 				paypalButton: 'QB8GQPZAH84N6'
 
@@ -347,7 +351,7 @@ docpadConfig =
 					url: "http://helper.docpad.org/latest.json"
 					parse: 'json'
 				exchange:
-					url: "http://helper.docpad.org/exchange.cson?version=6.78.0"# #{docpadVersion}"
+					url: exchangeUrl
 					parse: 'cson'
 				#'twitter-favorites': url: 'https://api.twitter.com/1.1/favorites/list.json?screen_name=docpad&count=200&include_entities=true'
 

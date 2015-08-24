@@ -43,12 +43,18 @@ after_success: >
   fi
 
 # Custom Configuration
-# travis encrypt "DEPLOY_USER=$GITHUB_USERNAME" --add env.global
-# travis encrypt "DEPLOY_TOKEN=$GITHUB_TRAVIS_TOKEN" --add env.global
 env:
   global:
+    # deployment environment variables
+    # travis encrypt "DEPLOY_USER=$GITHUB_USERNAME" --add env.global
+    # travis encrypt "DEPLOY_TOKEN=$GITHUB_TRAVIS_TOKEN" --add env.global
     - DEPLOY_BRANCH='master'  # this is the branch name that you want tested and deployed, set correctly
     - DEPLOY_NAME='Travis CI Deployer'  # this is the name that is used for the deployment commit, set to whatever
     - DEPLOY_EMAIL='deployer@travis-ci.org'  # this is the email that is used for the deployment commit, set to whatever
     - secure: a8vgLQB3youcz41xwKMqxe5uSp5VbiUYNqN3UP8nd3nXi0/i84sxscvnKuKV6TZXL9CcrTPy7mb4NrxIv9VKc/Ebgeq88wxSAhPi5c8wHXJWvC7p5fap95KTiC/swshKJR/XO7IMb+sJyBJ8nT7gssC5zqi3Z151iawUlbewoe8=
     - secure: FUob0eU6syL7NwRu0ARPhB1NLPG/Uh2rjWXurSOJ7FI7P0m/xNzfmEHRZ1kb90NqhvhiRIKYtqzA9cwRYv3pLEd0nXoN+XuWnp5a5nzkIcGGAfRWOA3sq8mJMMoF/7jjJoHmZT2bNQN1BYfNAMh/HDQ2oCCq/URnWpn1gCAqqdo=
+    # application environment variables
+    # travis encrypt "BEVRY_GITHUB_CLIENT_ID=$BEVRY_GITHUB_CLIENT_ID" --add env.global
+    # travis encrypt "BEVRY_GITHUB_CLIENT_SECRET=$BEVRY_GITHUB_CLIENT_SECRET" --add env.global
+    - secure: G1uikbFzNiHoG0kruqtW5Qu60HQDp4qz5oEy+czMpiuHzDWjoynkuEZAO+EJ/ZZdgcbuuGrd9LmRWAcRJTqusMjDRJR3W9HiXe6d07UIyaocrW351vquNxBBy1F0oApPDbdmRzympWIajbyhmU2TB/zINanq803gcIuphTmxlPM=
+    - secure: c4z13jGW4qUmVydq0TlvikKBVNJ3pP0zzZnl4a00g/dZu1ldTrwmUw7jVwJ8UwT7B8TmhU55V4x0MVckUL0HJNJqO8IVomNUKWcuoXqDkSkYnxT4z+edE75nlOll3cJfgegNbQO3Z3VIZekQEm4LLTt+GBAOQgp695PGrxHZOZ4=

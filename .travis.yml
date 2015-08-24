@@ -36,7 +36,7 @@ env:
     - DEPLOY_EMAIL='travisci@bevry.me'
     - DEPLOY_NAME='Bevry Travis CI Deployer'
     - DEPLOY_USER='balupton'
-    - secure: NDAMdZu5HoBW/Ey2h6Riz5Oaoxa5yDn+Nf15qntVGpyjxPSu/L798BpELpEoSfZw3foaT6yNlGqBhECCNtT++wE6cTjGAv9nEWH4x+68fmwk4XuGyeHoX1GlQru3+WPCOQSHAw7NDhjvMXxSu8KvqbM6A+WYYjXRP3eZwkavybs=
+    - secure: FUob0eU6syL7NwRu0ARPhB1NLPG/Uh2rjWXurSOJ7FI7P0m/xNzfmEHRZ1kb90NqhvhiRIKYtqzA9cwRYv3pLEd0nXoN+XuWnp5a5nzkIcGGAfRWOA3sq8mJMMoF/7jjJoHmZT2bNQN1BYfNAMh/HDQ2oCCq/URnWpn1gCAqqdo=
 after_success: >
   if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) &&
       [ "$TRAVIS_PULL_REQUEST" == "false" ]; then

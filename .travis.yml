@@ -30,7 +30,14 @@ notifications:
 env:
   global:
     secure: "BAWV2Gc+9wgcqygqaSMN1KXfqxi/DRupGd/9flHuIWgikCWQAdMAHmAWZKVh6/bYwGeW7ZVA+hZeBoQBMd6RSPsAi3LTOE/KzUU8edYoibtlF5EMHgOc1rqe5sGzlMdIc2htx5dHOgXP5tr+PcIsCoTeOiKgbCGHxuKcqaQgFMQ="
-after_success:
-  - git remote rm origin
-  - git remote add origin "https://$GITHUB_AUTH@github.com/docpad/website.git"
-  - npm run-script deploy
+after_success: >
+  if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) &&
+      [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    echo "Deploying"
+    git remote rm origin
+    git remote add origin "https://$GITHUB_AUTH@github.com/docpad/website.git"
+    npm run-script deploy
+    echo "Deployed"
+  else
+    echo "Skipped deploy"
+  fi

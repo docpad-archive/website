@@ -30,12 +30,13 @@ notifications:
     secure: TXhffbJwQRIT+9sxFvi/aW8mvE0+IpDyjW5V0nfhjEuyhqsocBQi15rxxfubha9rSs/f1aCoWnH6H5YcrffT8dtVJTe6inKNO0B/JNJa4bIb20+QfoFo2AzMdtxEZPKhy+dEtPW7n9AJrItLVnz5SpqkBkjV0P+rJMTih7ZYtF4=
 
 # Custom deployment
+# travis encrypt "DEPLOY_USER=$GITHUB_USER" --add env.global
 # travis encrypt "DEPLOY_TOKEN=$GITHUB_TRAVIS_TOKEN" --add env.global
 env:
   global:
     - DEPLOY_EMAIL='travisci@bevry.me'
     - DEPLOY_NAME='Bevry Travis CI Deployer'
-    - DEPLOY_USER='balupton'
+    - secure: a8vgLQB3youcz41xwKMqxe5uSp5VbiUYNqN3UP8nd3nXi0/i84sxscvnKuKV6TZXL9CcrTPy7mb4NrxIv9VKc/Ebgeq88wxSAhPi5c8wHXJWvC7p5fap95KTiC/swshKJR/XO7IMb+sJyBJ8nT7gssC5zqi3Z151iawUlbewoe8=
     - secure: FUob0eU6syL7NwRu0ARPhB1NLPG/Uh2rjWXurSOJ7FI7P0m/xNzfmEHRZ1kb90NqhvhiRIKYtqzA9cwRYv3pLEd0nXoN+XuWnp5a5nzkIcGGAfRWOA3sq8mJMMoF/7jjJoHmZT2bNQN1BYfNAMh/HDQ2oCCq/URnWpn1gCAqqdo=
 after_success: >
   if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) &&

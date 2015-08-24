@@ -1,15 +1,22 @@
 # August 21, 2015
 # https://github.com/bevry/base
+
+# Use the latest travis infrastructure
+sudo: false
+
+# We use node
 language: node_js
-# ensure npm is the latest version (ignore node versions that can't run it)
-# ensure correct dependencies are installed (handled via npm run-script install)
-install: "npm install -g npm && npm run-script setup"
-script: "npm test"
 node_js:
   - iojs
 cache:
   directories:
     - node_modules
+
+# Ensure npm is the latest version (ignore node versions that can't run it)
+install: "npm install -g npm && npm install"
+script: "npm test"
+
+# Custom configuration
 notifications:
   # Nofity email travisci@bevry.me
   email:

@@ -21,7 +21,7 @@ notifications:
   email:
     on_success: always
     recipients:
-      - "$DEPLOY_EMAIL"
+      - "travisci@bevry.me"
 
   # Notify slack bevry#updates on https://bevry.slack.com
   # Bevry's token available from https://bevry.slack.com/services/4200459714
@@ -30,7 +30,7 @@ notifications:
     secure: TXhffbJwQRIT+9sxFvi/aW8mvE0+IpDyjW5V0nfhjEuyhqsocBQi15rxxfubha9rSs/f1aCoWnH6H5YcrffT8dtVJTe6inKNO0B/JNJa4bIb20+QfoFo2AzMdtxEZPKhy+dEtPW7n9AJrItLVnz5SpqkBkjV0P+rJMTih7ZYtF4=
 
 # Custom deployment
-# travis encrypt DEPLOY_TOKEN="$GITHUB_TRAVIS_TOKEN" --add env.global
+# travis encrypt "DEPLOY_TOKEN=$GITHUB_TRAVIS_TOKEN" --add env.global
 env:
   global:
     - DEPLOY_EMAIL='travisci@bevry.me'

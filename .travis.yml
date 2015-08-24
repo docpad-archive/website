@@ -12,11 +12,10 @@ cache:
   directories:
     - node_modules
 
-# Ensure npm is the latest version (ignore node versions that can't run it)
-install: "npm install -g npm && npm install"
+# Prepare and run our tests
 script: "npm test"
 
-# Custom configuration
+# Custom notifications
 notifications:
   # Nofity email travisci@bevry.me
   email:
@@ -27,7 +26,7 @@ notifications:
   slack:
     secure: TXhffbJwQRIT+9sxFvi/aW8mvE0+IpDyjW5V0nfhjEuyhqsocBQi15rxxfubha9rSs/f1aCoWnH6H5YcrffT8dtVJTe6inKNO0B/JNJa4bIb20+QfoFo2AzMdtxEZPKhy+dEtPW7n9AJrItLVnz5SpqkBkjV0P+rJMTih7ZYtF4=
 
-# Deployment
+# Custom deployment
 env:
   global:
     secure: "BAWV2Gc+9wgcqygqaSMN1KXfqxi/DRupGd/9flHuIWgikCWQAdMAHmAWZKVh6/bYwGeW7ZVA+hZeBoQBMd6RSPsAi3LTOE/KzUU8edYoibtlF5EMHgOc1rqe5sGzlMdIc2htx5dHOgXP5tr+PcIsCoTeOiKgbCGHxuKcqaQgFMQ="

@@ -17,10 +17,10 @@ script: "npm test"
 
 # Custom notifications
 notifications:
-  # Notify email travisci@bevry.me
+  # Notify email
   email:
     recipients:
-      - travisci@bevry.me
+      - $DEPLOY_EMAIL
 
   # Notify slack bevry#updates on https://bevry.slack.com
   # Bevry's token available from https://bevry.slack.com/services/4200459714

@@ -1,13 +1,8 @@
-# August 21, 2015
+# August 25, 2015
 # https://docpad.org/docs/deploy
 
 # Use the latest travis infrastructure
 sudo: false
-
-# Run travis only on the master branch
-branches:
-  only:
-    - master
 
 # We use node
 language: node_js
@@ -28,7 +23,7 @@ notifications:
     recipients:
       secure: LQkrgsK0K6j92Bg3lfqs1/JRktwuF5uQqYc5DU4UecrKI7uEEFI2H2uNv8Gv0GUFYGYXPKXNdtjregaJVMzT5PNTJAYKqE9XXqs8IJ/IGlfAJDYeypA2E/g70ItMW0RkHYyUxc6RuSRRiLN+JMn3Qu5TgGt7qo3CL/3knKMSJYw=
   slack:
-    secure: TXhffbJwQRIT+9sxFvi/aW8mvE0+IpDyjW5V0nfhjEuyhqsocBQi15rxxfubha9rSs/f1aCoWnH6H5YcrffT8dtVJTe6inKNO0B/JNJa4bIb20+QfoFo2AzMdtxEZPKhy+dEtPW7n9AJrItLVnz5SpqkBkjV0P+rJMTih7ZYtF4=
+    secure: bXgRdWqiZQD5SedL5Z3qXKvs/YtJ6QZOPWI5Iq3ki5MNY9JVOfsOFmdD7WPmDUM4SnXTv+RrWEhRfRnaRRPDdJQU0dcKP58NTjSRGJC8HL/byHtXY79HISrufvoAQ6zAXJGBZhNRMDNxFacU2870rvSq+z7XA9NmdrM19hj/xI4=
 
 # Deployment
 after_success: >

@@ -20,7 +20,7 @@ cache:
 # Prepare and run our tests
 script: "npm test"
 
-# Custom notifications
+# Custom Notifications
 # travis encrypt "$TRAVIS_NOTIFICATION_EMAIL" --add notifications.email.recipients
 # travis encrypt "$SLACK_SUBDOMAIN:$SLACK_TRAVIS_TOKEN#updates" --add notifications.slack
 notifications:
@@ -30,25 +30,30 @@ notifications:
   slack:
     secure: TXhffbJwQRIT+9sxFvi/aW8mvE0+IpDyjW5V0nfhjEuyhqsocBQi15rxxfubha9rSs/f1aCoWnH6H5YcrffT8dtVJTe6inKNO0B/JNJa4bIb20+QfoFo2AzMdtxEZPKhy+dEtPW7n9AJrItLVnz5SpqkBkjV0P+rJMTih7ZYtF4=
 
-# Custom deployment
+# Deployment
+after_success: >
+  if ([ ! -z "$DEPLOY_TOKEN" ] &&
+      [ "$TRAVIS_BRANCH" == "$DEPLOY_BRANCH" ] &&
+      [ -z "$TRAVIS_TAG" ] &&
+      [ "$TRAVIS_PULL_REQUEST" == "false" ]); then
+    echo "Deploying";
+    git config --global user.email "$DEPLOY_EMAIL";
+    git config --global user.name "$DEPLOY_NAME";
+    git remote rm origin;
+    git remote add origin "https://$DEPLOY_USER:$DEPLOY_TOKEN@github.com/$TRAVIS_REPO_SLUG.git";
+    npm run-script deploy;
+    echo "Deployed";
+  else
+    echo "Skipped deploy"
+  fi
+
+# Custom Configuration
 # travis encrypt "DEPLOY_USER=$GITHUB_USERNAME" --add env.global
 # travis encrypt "DEPLOY_TOKEN=$GITHUB_TRAVIS_TOKEN" --add env.global
 env:
   global:
-    - DEPLOY_NAME='Travis CI Deployer'
-    - DEPLOY_EMAIL='deployer@travis-ci.org'
+    - DEPLOY_BRANCH='master'  # this is the branch name that you want tested and deployed, set correctly
+    - DEPLOY_NAME='Travis CI Deployer'  # this is the name that is used for the deployment commit, set to whatever
+    - DEPLOY_EMAIL='deployer@travis-ci.org'  # this is the email that is used for the deployment commit, set to whatever
     - secure: a8vgLQB3youcz41xwKMqxe5uSp5VbiUYNqN3UP8nd3nXi0/i84sxscvnKuKV6TZXL9CcrTPy7mb4NrxIv9VKc/Ebgeq88wxSAhPi5c8wHXJWvC7p5fap95KTiC/swshKJR/XO7IMb+sJyBJ8nT7gssC5zqi3Z151iawUlbewoe8=
     - secure: FUob0eU6syL7NwRu0ARPhB1NLPG/Uh2rjWXurSOJ7FI7P0m/xNzfmEHRZ1kb90NqhvhiRIKYtqzA9cwRYv3pLEd0nXoN+XuWnp5a5nzkIcGGAfRWOA3sq8mJMMoF/7jjJoHmZT2bNQN1BYfNAMh/HDQ2oCCq/URnWpn1gCAqqdo=
-after_success: >
-  if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) &&
-      [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    echo "Deploying"
-    git config --global user.email "$DEPLOY_EMAIL"
-    git config --global user.name "$DEPLOY_NAME"
-    git remote rm origin
-    git remote add origin "https://$DEPLOY_USER:$DEPLOY_TOKEN@github.com/$TRAVIS_REPO_SLUG.git"
-    npm run-script deploy
-    echo "Deployed"
-  else
-    echo "Skipped deploy"
-  fi

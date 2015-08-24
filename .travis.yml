@@ -29,18 +29,22 @@ notifications:
     secure: TXhffbJwQRIT+9sxFvi/aW8mvE0+IpDyjW5V0nfhjEuyhqsocBQi15rxxfubha9rSs/f1aCoWnH6H5YcrffT8dtVJTe6inKNO0B/JNJa4bIb20+QfoFo2AzMdtxEZPKhy+dEtPW7n9AJrItLVnz5SpqkBkjV0P+rJMTih7ZYtF4=
 
 # Custom deployment
-# travis encrypt "$GITHUB_USER:$GITHUB_TRAVIS_TOKEN" --add env.global
+# travis encrypt DEPLOY_TOKEN=$GITHUB_TRAVIS_TOKEN --add env.global
 env:
   global:
-    secure: "BAWV2Gc+9wgcqygqaSMN1KXfqxi/DRupGd/9flHuIWgikCWQAdMAHmAWZKVh6/bYwGeW7ZVA+hZeBoQBMd6RSPsAi3LTOE/KzUU8edYoibtlF5EMHgOc1rqe5sGzlMdIc2htx5dHOgXP5tr+PcIsCoTeOiKgbCGHxuKcqaQgFMQ="
+    - DEPLOY_EMAIL='travisci@bevry.me'
+    - DEPLOY_NAME='Bevry Travis CI Deployer'
+    - DEPLOY_USER='balupton'
+    - DEPLOY_REPO='docpad/website'
+    - secure: WzTH+oFp94kD1tq5+yoX/mt2p/omlikss8ZZyV9ugUcIJHdEE9wxcilDjqeNzUvH43vtZzaKTNA7PvbKfLAzg25VRc2sRWFEhtL61El9FllDnAYIEW7nmwc8cKUj5LcV1DdA0nI0Sql3j8K4OHVB8gbcEgvhbRTk4r34wiV4gJU=
 after_success: >
   if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) &&
       [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "Deploying"
-    git config --global user.email "travisci@bevry.me"
-    git config --global user.name "Bevry Travis CI Deployer"
+    git config --global user.email $DEPLOY_EMAIL
+    git config --global user.name $DEPLOY_NAME
     git remote rm origin
-    git remote add origin "https://$GITHUB_AUTH@github.com/docpad/website.git"
+    git remote add origin "https://$DEPLOY_USER:$DEPLOY_TOKEN@github.com/$DEPLOY_REPO.git"
     npm run-script deploy
     echo "Deployed"
   else

@@ -1,15 +1,30 @@
-# March 17, 2015
-# https://docpad.org/docs/deploy
+# August 21, 2015
+# https://github.com/bevry/base
 language: node_js
+# ensure npm is the latest version (ignore node versions that can't run it)
+# ensure correct dependencies are installed (handled via npm run-script install)
+install: "npm install -g npm && npm run-script setup"
 script: "npm test"
 node_js:
-  - "0.12"
+  - iojs
 cache:
   directories:
     - node_modules
 notifications:
-  irc:
-    - "irc.freenode.org#bevry-dev"
+  # Nofity email travisci@bevry.me
   email:
     recipients:
       - travisci@bevry.me
+
+  # Notify slack bevry#updates
+  slack:
+    secure: TXhffbJwQRIT+9sxFvi/aW8mvE0+IpDyjW5V0nfhjEuyhqsocBQi15rxxfubha9rSs/f1aCoWnH6H5YcrffT8dtVJTe6inKNO0B/JNJa4bIb20+QfoFo2AzMdtxEZPKhy+dEtPW7n9AJrItLVnz5SpqkBkjV0P+rJMTih7ZYtF4=
+
+# Deployment
+env:
+  global:
+    secure: "BAWV2Gc+9wgcqygqaSMN1KXfqxi/DRupGd/9flHuIWgikCWQAdMAHmAWZKVh6/bYwGeW7ZVA+hZeBoQBMd6RSPsAi3LTOE/KzUU8edYoibtlF5EMHgOc1rqe5sGzlMdIc2htx5dHOgXP5tr+PcIsCoTeOiKgbCGHxuKcqaQgFMQ="
+after_success:
+  - git remote rm origin
+  - git remote add origin "https://$GITHUB_AUTH@github.com/docpad/website.git"
+  - npm run-script deploy

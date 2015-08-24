@@ -1,8 +1,13 @@
 # August 21, 2015
-# https://github.com/bevry/base
+# https://docpad.org/docs/deploy
 
 # Use the latest travis infrastructure
 sudo: false
+
+# Run travis only on the master branch
+branches:
+  only:
+    - master
 
 # We use node
 language: node_js
@@ -16,16 +21,12 @@ cache:
 script: "npm test"
 
 # Custom notifications
+# travis encrypt "$TRAVIS_NOTIFICATION_EMAIL" --add notifications.email.recipients
+# travis encrypt "$SLACK_SUBDOMAIN:$SLACK_TRAVIS_TOKEN#updates" --add notifications.slack
 notifications:
-  # Notify email
-  # travis encrypt "$TRAVIS_NOTIFICATION_EMAIL" --add notifications.email.recipients
   email:
     recipients:
       secure: LQkrgsK0K6j92Bg3lfqs1/JRktwuF5uQqYc5DU4UecrKI7uEEFI2H2uNv8Gv0GUFYGYXPKXNdtjregaJVMzT5PNTJAYKqE9XXqs8IJ/IGlfAJDYeypA2E/g70ItMW0RkHYyUxc6RuSRRiLN+JMn3Qu5TgGt7qo3CL/3knKMSJYw=
-
-  # Notify slack
-  # Notify #updates on https://bevry.slack.com / token available from https://bevry.slack.com/services/4200459714
-  # travis encrypt "$SLACK_SUBDOMAIN:$SLACK_TRAVIS_TOKEN#updates" --add notifications.slack
   slack:
     secure: TXhffbJwQRIT+9sxFvi/aW8mvE0+IpDyjW5V0nfhjEuyhqsocBQi15rxxfubha9rSs/f1aCoWnH6H5YcrffT8dtVJTe6inKNO0B/JNJa4bIb20+QfoFo2AzMdtxEZPKhy+dEtPW7n9AJrItLVnz5SpqkBkjV0P+rJMTih7ZYtF4=
 

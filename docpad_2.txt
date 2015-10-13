@@ -151,13 +151,11 @@ docpadConfig =
 
 			# Styles
 			styles: [
-                '/css/layers-min.css'
-                '/css/font-awesome-min.css'
-                '/css/style.css'
-				'/css/extras.css'
-                '/css/color-mauve.css'
+				'/vendor/normalize.css'
+				'/vendor/h5bp.css'
+				'/vendor/highlight.css'
+				'/styles/style.css'
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
-			.concat(['http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700'])
 
 			# Script
 			scripts: [
@@ -171,8 +169,6 @@ docpadConfig =
 				"/vendor/historyjsit.js"
 				"/scripts/bevry.js"
 				"/scripts/script.js"
-				"/js/plugins.js"
-                "/js/main.js"
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
 		# -----------------------------

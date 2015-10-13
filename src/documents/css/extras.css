@@ -1,0 +1,11 @@
+    .laptop {
+        background-image: url(/img/laptop2.jpg);
+        background-color: #32001d;
+        background-position: 50% center;
+        height: auto;
+    }
+    .fade {
+        content: " ";
+        width: 100%;
+        height: 100%;
+        margin: 0 auto; }

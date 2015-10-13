@@ -29,15 +29,15 @@
 		<script>try{Typekit.load();}catch(e){}</script>
 	<% end %>
 </head>
-<body>
+<%cls = if @document.layout in ['post', 'post-nosidebar'] then 'single single-post' else 'page'%>
+<%cls = @document.bodyClass or cls%>
+<body class="<%-cls%>">
 	<!--[if lt IE 7]>
 	<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 	<![endif]-->
 
 	<!-- Content -->
-	<div class="container">
-		<%- @content %>
-	</div>
+    <%- @content %>
 
 	<!-- DocPad Scripts + Our Own -->
 	<%- @getBlock('scripts').add(@site.scripts or []).toHTML() %>

@@ -1,0 +1,27 @@
+    .intro-item {
+        background-color: #2c001e;
+    }
+    
+    header.transparent {
+        background-color: #772953;
+    }
+    
+    header.fixed-header.transparent.light #brand a,
+    header.fixed-header.transparent.light nav > ul > li > a {
+        color: #fff;
+    }
+    
+    .slogan {
+        background-color: #772953;
+    }
+    
+    .fade {
+        background: -moz-linear-gradient(left, #32001d 20%, transparent 100%);
+        background: -webkit-linear-gradient(left, #32001d 20%, transparent 100%);
+        background: -o-linear-gradient(left, #32001d 20%, transparent 100%);
+        background: linear-gradient(left, #32001d 20%, transparent 100%);
+    }
+
+h1, h2, h3, h4, h5, h6 {
+    color: #2c001e;
+}

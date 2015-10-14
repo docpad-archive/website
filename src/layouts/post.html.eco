@@ -1,0 +1,80 @@
+---
+layout: structure
+---
+<div id="main" class="row">
+	<div class="row-content buffer-left buffer-right buffer-bottom">
+		<%models = @getPrevNextModels(@document)%>
+		<%if models:%>
+		<div id="post-nav">
+			<ul class="clear-after reset plain">
+				<li id="prev-items" class="post-nav">
+					<%if models.prev:%>
+					<a href="<%-models.prev.attributes.url%>">
+						<i class="fa fa-chevron-left"></i>
+						<span class="label"><%-models.prev.attributes.title%></span>
+					</a>
+					<%end%>
+				</li>
+				<li id="all-items" class="post-nav">
+					<a href="/docs/"><i class="icon icon-images"></i></a>
+				</li>
+				<li id="next-items" class="post-nav">
+					<%if models.next:%>
+					<a href="<%-models.next.attributes.url%>">
+						<span class="label"><%-models.next.attributes.title%></span>
+						<i class="fa fa-chevron-right"></i>
+					</a>
+					<%end%>
+				</li>
+			</ul>
+		</div>
+		<%end%>
+
+		<div class="post-area clear-after">
+			<article role="main">
+				<h5 class="meta-post">
+					<%if @document.tags:%>
+						<%for val in @document.tags:%>
+						  <a href="#"><%=val%></a>,
+						<%end%>
+					<%end%>                    
+					<time datetime="<%-@document.mtime%>">Last Edited: <%-@document.mtime.toDateString()%></time></h5>
+				<h1><%-@document.title%></h1>
+				<div class="gallery slider" data-autoplay="false" data-autoheight="true">
+					<%img = @document.img or @document.image or @document.figure%>
+                    <%if img:%>
+                    <figure>
+						<div><img src="<%=img%>" alt="">
+						</div>
+					</figure>
+                    <%else if @document.video:%>
+          			<div class=" fluidvids">
+						<iframe width="560" height="315" src="<%-@document.video%>" frameborder="0" allowfullscreen="" class="fluidvids-elem">
+						</iframe>
+					</div>
+                    <%end%>
+				</div>
+				<%-@content%>
+			</article>
+
+		</div>
+		<!-- post-area -->
+
+		<div class="meta-social">
+			<ul class="inline center">
+				<li><a href="#" class="twitter-share border-box"><i class="fa fa-twitter fa-lg"></i></a>
+				</li>
+				<li><a href="#" class="facebook-share border-box"><i class="fa fa-facebook fa-lg"></i></a>
+				</li>
+				<li><a href="#" class="pinterest-share border-box"><i class="fa fa-pinterest fa-lg"></i></a>
+				</li>
+			</ul>
+		</div>
+
+		<%comments = []%>
+		<%-@partial('content/comments',{partial:@partial,comments:comments})%>
+
+	</div>
+	<!-- row-content -->
+</div>
+<!-- row -->

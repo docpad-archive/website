@@ -1,0 +1,34 @@
+<style>
+.blog.masonry-style article.three .blog-excerpt, 
+	.blog.masonry-style article.four .blog-excerpt, 
+	.blog-section.masonry-style article.three .blog-excerpt, 
+	.blog-section.masonry-style article.four .blog-excerpt {
+		border-radius: 1em;	
+	}
+</style>
+<div class="grid-items preload">
+	<%for item in @items:%>
+	<article class="item column three">
+		<a href="#">
+			<div class="blog-excerpt">
+				<div class="blog-excerpt-inner">
+					<h2><%-item.title%></h2>
+					<ul>
+					<%arr = item.categoryItems%>
+					<%for d, i in arr:%>
+						<%if arr[i]:%>
+						<li><a href="<%-arr[i].url%>"><span><%-arr[i].title%></span></a></li>
+						<%end%>
+					<%end%>
+					</ul>
+				</div>
+				<!-- blog-excerpt-inner -->
+			</div>
+			<!-- blog-excerpt -->
+		</a>
+	</article>
+	<%end%>
+
+	<div class="shuffle-sizer three"></div>
+</div>
+<!-- grid-items -->

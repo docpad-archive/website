@@ -1,0 +1,34 @@
+<%comments = @comments%>
+<%dt = new Date("October 13, 2015 11:13:00")%>
+<%comments = []%>
+<%comments.push({author:'Bob Builder',mtime: dt,content:'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'})%>
+<%comments.push({author: 'John Smith',mtime: dt,content:'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'})%>
+
+<div class="comment-section">
+    <h3 id="comments"><%-comments.length%> Comments</h3>
+    <ul class="comment-list plain">
+        <%for comment in comments:%>
+        <li class="comment">
+            <%- @partial('content/single-comment',{author:comment.author,mtime:comment.mtime,content:comment.content}) %>
+        </li>
+        <%end%>
+
+
+    </ul>
+</div>
+<!-- comment-section -->
+<div id="post-comment" class="clear-after">
+    <h3 id="reply-title">Leave a Reply</h3>
+    <p class="comment-note">Your email address will not be published.</p>
+    <form class="comment-form">
+        <span class="pre-input"><i class="icon icon-user"></i></span>
+        <input class="name plain buffer" type="text" placeholder="Name">
+        <span class="pre-input"><i class="icon icon-email"></i></span>
+        <input class="email plain buffer" type="email" placeholder="Email">
+        <span class="pre-input"><i class="icon icon-globe"></i></span>
+        <input class="email plain buffer" type="text" placeholder="Website">
+        <textarea class="plain buffer" placeholder="Don't forget that kindness is all!"></textarea>
+        <input class="plain button red" type="submit" value="Submit Comment">
+    </form>
+</div>
+<!-- post-comment -->

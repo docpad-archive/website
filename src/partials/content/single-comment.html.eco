@@ -1,0 +1,14 @@
+<div class="single-comment">
+	<div class="comment-author">
+		<%avatar = @avatar or 'http://placehold.it/60x60?text='+@author.replace(/\s/g,'+')%>
+		<img src="<%-avatar%>" class="avatar" alt="">
+		<cite><a href="#"><%=@author%></a></cite>
+		<span class="says">says:</span>
+	</div>
+	<!-- comment-author -->
+	<div class="comment-meta">
+		<time datetime="<%-@mtime%>"><%-@mtime.toDateString()%></time> / <a href="#" class="reply">Reply</a>
+	</div>
+	<!-- comment-meta -->
+	<%-@content%>
+</div>

@@ -73,7 +73,7 @@ humanize = (text) ->
 	text ?= ''
 	return require('underscore.string').humanize text.replace(/^[\-0-9]+/,'').replace(/\..+/,'')
 
-
+isWin = process.platform.indexOf('win') is 0
 # =================================
 # Configuration
 
@@ -165,12 +165,12 @@ docpadConfig =
 				"/vendor/jquery.js"
 				"/vendor/jquery-scrollto.js"
 				"/vendor/modernizr.js"
-				"/vendor/history.js"
+				#"/vendor/history.js"
 
 				# Scripts
-				"/vendor/historyjsit.js"
-				"/scripts/bevry.js"
-				"/scripts/script.js"
+				#"/vendor/historyjsit.js"
+				#"/scripts/bevry.js"
+				#"/scripts/script.js"
 				"/js/plugins.js"
                 "/js/main.js"
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
@@ -227,6 +227,21 @@ docpadConfig =
 
 		# Get Contributors
 		getContributors: -> contributors or []
+		
+		getPrevNextModels: (document) ->
+			docsCollection = @getCollection('docs')
+			for item,index in docsCollection.models
+				if item.id is @document.id
+					break
+
+			prev = docsCollection.models[index-1] ? null
+			next = docsCollection.models[index+1] ? null
+
+			return {prev,next}
+		
+		writeObject: (name,obj) ->
+			fsUtil.writeFileSync(name,JSON.stringify(obj),'utf-8')
+					
 
 
 	# =================================
@@ -238,9 +253,10 @@ docpadConfig =
 		# And give them the following meta data based on their file structure
 		# [\-0-9]+#{category}/[\-0-9]+#{name}.extension
 		docs: (database) ->
+			learn = if isWin then 'learn\\' else 'learn/'
 			query =
 				write: true
-				relativeOutDirPath: $startsWith: 'learn/'
+				relativeOutDirPath: $startsWith: learn
 				body: $ne: ""
 			sorting = [projectDirectory:1, categoryDirectory:1, filename:1]
 			database.findAllLive(query, sorting).on 'add', (document) ->
@@ -260,6 +276,19 @@ docpadConfig =
 					(.+?)         # extension
 					$
 				///
+				
+				#To much of a monster to combine the two regex expressions
+				if isWin
+					pathDetailsExtractor = ///
+						^
+						.*?learn\\
+						(.+?)\\        # organisation
+						(.+?)\\        # project
+						(.+?)\\        # category
+						(.+?)\.       # basename
+						(.+?)         # extension
+						$
+					///
 
 				pathDetails = pathDetailsExtractor.exec(a.relativePath)
 
@@ -278,16 +307,18 @@ docpadConfig =
 					categoryDirectory = pathDetails[3]
 					basename = pathDetails[4]
 
-					organisation = organisationDirectory.replace(/[\-0-9]+/, '')
+					p1 = if isWin then /[//-0-9]+/ else  /[\-0-9]+/
+					p2 = if isWin then /^[//-0-9]+/ else /^[\-0-9]+/
+					organisation = organisationDirectory.replace(p1, '')
 					organisationName = humanize(project)
 
-					project = projectDirectory.replace(/[\-0-9]+/, '')
+					project = projectDirectory.replace(p1, '')
 					projectName = getProjectName(project)
 
-					category = categoryDirectory.replace(/^[\-0-9]+/, '')
+					category = categoryDirectory.replace(p2, '')
 					categoryName = getCategoryName(category)
 
-					name = basename.replace(/^[\-0-9]+/,'')
+					name = basename.replace(p2,'')
 
 					title = "#{a.title or humanize name}"
 					pageTitle = "#{title} | DocPad"  # changed from bevry website
@@ -301,7 +332,7 @@ docpadConfig =
 					# Apply
 					document
 						.setMetaDefaults({
-							layout
+							layout: 'post'
 							standalone
 
 							name
@@ -348,6 +379,7 @@ docpadConfig =
 		highlightjs:
 			aliases:
 				stylus: 'css'
+				shell: 'ps'
 
 		feedr:
 			feeds:

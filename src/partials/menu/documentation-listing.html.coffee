@@ -14,11 +14,12 @@ try
 			occuredCategories.push(category)
 
 			# Category Items
+			categoryItems = collection.findAll({category}, itemSort)
 			if category in ["1-start","start"]
 				category = "Getting Started"
 			category =  category[0].toUpperCase() + category.slice(1)
-			categoryItems = collection.findAll({category}, itemSort)
-			output.push({title:category,categoryItems:categoryItems})
+			
+			output.push({title:category,categoryItems:categoryItems.toJSON()})
 
 	text partial('menu/category-grid',{items:output})
 catch err

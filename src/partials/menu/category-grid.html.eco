@@ -5,27 +5,30 @@
 	.blog-section.masonry-style article.four .blog-excerpt {
 		border-radius: 1em;	
 	}
+	.grid-items .column.three {
+		margin-right: 2.9%;	
+	}
 </style>
-<div class="grid-items preload">
+<div class="grid-items">
 	<%for item in @items:%>
-	<article class="item column three">
-		<a href="#">
-			<div class="blog-excerpt">
+	<%h = (item.categoryItems.length * 35) + 100%>
+	<article class="item column three">			
+			<div class="blog-excerpt" style="height:<%-h%>px;">
+				
 				<div class="blog-excerpt-inner">
+
 					<h2><%-item.title%></h2>
 					<ul>
 					<%arr = item.categoryItems%>
-					<%for d, i in arr:%>
-						<%if arr[i]:%>
-						<li><a href="<%-arr[i].url%>"><span><%-arr[i].title%></span></a></li>
-						<%end%>
+					<%for doc in item.categoryItems:%>
+						<li><a href="<%-doc.url%>"><span><%-doc.title%></span></a></li>
 					<%end%>
 					</ul>
+	
 				</div>
 				<!-- blog-excerpt-inner -->
 			</div>
 			<!-- blog-excerpt -->
-		</a>
 	</article>
 	<%end%>
 

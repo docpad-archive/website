@@ -44,6 +44,6 @@
     <%- @content %>
 
 	<!-- DocPad Scripts + Our Own -->
-	<%- @getBlock('scripts').add(@site.scripts or []).toHTML() %>
+	<%- @getBlock('scripts').add(@site.scripts or []).add(@document.scripts or []).toHTML() %>
 </body>
 </html>

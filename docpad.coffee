@@ -153,7 +153,7 @@ docpadConfig =
 			styles: [
                 '/styles/layers-min.css'
                 '/styles/font-awesome-min.css'
-                '/styles/style.css'
+                '/styles/style-dev.css'
 				'/styles/extras.css'
                 '/styles/color-mauve.css'
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
@@ -174,7 +174,6 @@ docpadConfig =
 				"/scripts/modernizr-custom.js"
 				"/scripts/wait-for-images.js"
 				"/scripts/skrollr.js"
-				"/scripts/owl-carousel.js"
 				"/scripts/easy-pie-chart.js"
 				"/scripts/on-screen.js"
 				"/scripts/shuffle.js"
@@ -182,8 +181,6 @@ docpadConfig =
 				"/scripts/image-lightbox.js"
 				"/scripts/count-to.js"
 				"/scripts/all-pages.js"
-				"/scripts/home.js"
-				"/scripts/mockups.js"
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
 		# -----------------------------

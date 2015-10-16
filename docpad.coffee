@@ -151,11 +151,11 @@ docpadConfig =
 
 			# Styles
 			styles: [
-                '/css/layers-min.css'
-                '/css/font-awesome-min.css'
-                '/css/style.css'
-				'/css/extras.css'
-                '/css/color-mauve.css'
+                '/styles/layers-min.css'
+                '/styles/font-awesome-min.css'
+                '/styles/style.css'
+				'/styles/extras.css'
+                '/styles/color-mauve.css'
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 			.concat(['http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700'])
 
@@ -163,16 +163,27 @@ docpadConfig =
 			scripts: [
 				# Vendor
 				"/vendor/jquery.js"
-				"/vendor/jquery-scrollto.js"
-				"/vendor/modernizr.js"
+				#"/vendor/jquery-scrollto.js"
+				#"/vendor/modernizr.js"
 				#"/vendor/history.js"
 
 				# Scripts
 				#"/vendor/historyjsit.js"
 				#"/scripts/bevry.js"
 				#"/scripts/script.js"
-				"/js/plugins.js"
-                "/js/main.js"
+				"/scripts/modernizr-custom.js"
+				"/scripts/wait-for-images.js"
+				"/scripts/skrollr.js"
+				"/scripts/owl-carousel.js"
+				"/scripts/easy-pie-chart.js"
+				"/scripts/on-screen.js"
+				"/scripts/shuffle.js"
+				"/scripts/fluid-vids.js"
+				"/scripts/image-lightbox.js"
+				"/scripts/count-to.js"
+				"/scripts/all-pages.js"
+				"/scripts/home.js"
+				"/scripts/mockups.js"
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
 		# -----------------------------

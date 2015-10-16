@@ -1,0 +1,56 @@
+/*----------------------------------------------------------------
+    Footer
+----------------------------------------------------------------*/
+
+footer {
+    position: relative;
+    z-index: 10;
+    background-color: #363842;
+    color: #545766;
+}
+
+footer h1,
+footer h2,
+footer h3,
+footer h4,
+footer h5,
+footer h6 {
+    color: #fff;
+}
+
+footer a {
+    color: #545766;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+footer .meta-social ul li a {
+    border-color: #545766;
+    color: #545766;
+}
+
+footer .meta-social ul li a:hover {
+    color: #fff;
+}
+
+#top-footer h4 {
+    margin-top: 1.34em;
+}
+
+#top-footer .widget {
+    margin-bottom: 0;
+    font-size: 0.778em;
+}
+
+footer .row-content.buffer {
+    padding-top: 2%;
+    padding-bottom: 0;
+}
+
+#bottom-footer {
+    font-size: 0.667em;
+}
+

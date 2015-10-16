@@ -818,14 +818,12 @@ jQuery(document).ready(function ($) {
     var onScreenAnims = $('.animation');
 
     if (onScreenAnims.length) {
-
         onScreenAnims.onScreen({
             toggleClass: false,
             doIn: function () {
                 $(this).addClass('onscreen')
             }
         });
-
     }
 
 

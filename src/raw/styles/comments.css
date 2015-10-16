@@ -1,0 +1,74 @@
+/*----------------------------------------------------------------
+    Comments
+----------------------------------------------------------------*/
+
+#comments,
+#reply-title {
+    margin-bottom: 2em;
+    color: #ccc;
+    text-transform: uppercase;
+    font-size: 0.778em;
+}
+
+#reply-title {
+    margin-bottom: 0;
+}
+
+.comment-section {
+    margin-bottom: 3em;
+}
+
+.single-comment {
+    position: relative;
+    margin-bottom: 2em;
+    padding-left: 4.444em;
+}
+
+.comment-list li.comment > div img.avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    float: left;
+    width: 4.286em;
+    height: 4.286em;
+    -webkit-border-radius: 25%;
+    -moz-border-radius: 25%;
+    border-radius: 25%;
+}
+
+.comment-author cite {
+    font-style: normal;
+}
+
+.comment-author cite a,
+a.reply {
+    color: #333;
+    text-decoration: none;
+}
+
+.comment-author cite a:hover,
+a.reply:hover {
+    color: #FD685B;
+}
+
+.comment-author {
+    font-weight: 700;
+}
+
+.comment-author,
+.single-comment p {
+    font-size: 0.778em;
+}
+
+.comment-meta {
+    color: #999;
+    font-size: 0.667em;
+}
+
+.comment-note {
+    font-size: 0.667em;
+}
+
+.comment-list .children {
+    padding-left: 2em;
+}

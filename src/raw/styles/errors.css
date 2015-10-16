@@ -1,0 +1,15 @@
+/*----------------------------------------------------------------
+    Error pages
+----------------------------------------------------------------*/
+
+.error404 h2,
+.search-no-results h2,
+.search-results > h4 {
+    margin-top: 0;
+}
+
+.error404 article,
+.search-no-results article,
+.search-results {
+    margin-top: 3em;
+}

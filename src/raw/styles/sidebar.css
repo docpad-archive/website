@@ -1,0 +1,39 @@
+/*----------------------------------------------------------------
+    Sidebar
+----------------------------------------------------------------*/
+
+.widget {
+    font-size: 0.722em;
+}
+
+.widget h4 {
+    margin-top: 0;
+    color: #ccc;
+}
+
+.widget {
+    margin-bottom: 3.333em;
+}
+
+.widget_search input,
+.search-no-results input {
+    padding-left: 3.077em;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 1.538em;
+}
+
+.widget_search form,
+.search-no-results form {
+    position: relative;
+}
+
+.pre-input {
+    position: absolute;
+}
+
+.pre-input i {
+    padding: 0.35em 0.6em 0.4em 1em;
+    color: #ccc;
+    line-height: 1.8 !important;
+}

@@ -1,0 +1,73 @@
+/*----------------------------------------------------------------
+    Masonry
+----------------------------------------------------------------*/
+
+.grid-items,
+.dribbble-items {
+    position: relative;
+}
+
+.grid-items {
+    min-height: 15em;
+}
+
+.dribbble-items {
+    min-height: 9em;
+}
+
+.grid-items .column.three,
+.grid-items .column.four,
+.grid-items .column.six,
+.grid-items .column.eight {
+    margin-right: 0;
+}
+
+.shuffle-sizer {
+    position: absolute;
+    visibility: hidden;
+    margin-left: 3.8%;
+    min-height: 1px;
+    opacity: 0;
+}
+
+.shuffle-sizer.three {
+    width: 22.05%;
+}
+
+.shuffle-sizer.four {
+    width: 30.75%;
+}
+
+.grid-items .item,
+.dribbble-items .item {
+    position: relative;
+    margin-bottom: 2.96%;
+}
+
+.dribbble-items .item {
+    -webkit-transform: scale3d(1, 1, 1);
+    /* Fix some Chrome flikering on hover */
+    ;
+}
+
+.grid-items.preload .item,
+.dribbble-items.preload .item {
+    display: none;
+}
+
+@media handheld,
+only screen and (max-width:48em) {
+    .shuffle-sizer-four {
+        margin-left: 3.8%;
+        width: 48%;
+    }
+    .grid-items.shuffle .column {
+        width: 100% !important;
+    }
+    .grid-items .item,
+    .dribbble-items .item {
+        position: relative;
+        margin-bottom: 3.8%;
+    }
+}
+

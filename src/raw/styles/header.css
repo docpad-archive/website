@@ -1,0 +1,258 @@
+/*----------------------------------------------------------------
+    Header menu
+----------------------------------------------------------------*/
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    padding: 0.5rem 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.97);
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.no-parallax header {
+    z-index: 9998 !important;
+    background-color: rgba(255, 255, 255, 0.97) !important;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1) !important;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.no-parallax #intro {
+    position: relative !important;
+}
+
+.no-parallax header.transparent.light #brand a,
+.no-parallax header.transparent.light nav > ul > li > a {
+    color: #333 !important;
+}
+
+header.transition {
+    -webkit-transition: background-color 0.3s ease;
+    -moz-transition: background-color 0.3s ease;
+    -ms-transition: background-color 0.3s ease;
+    -o-transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+}
+
+header.transparent {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+header.transparent.light #brand a,
+header.transparent.light nav > ul > li > a,
+.caption {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+header.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    background-color: rgba(255, 255, 255, 0.97);
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -o-transform: none !important;
+    transform: none !important;
+}
+
+#brand {
+    float: left;
+    clear: none;
+}
+
+#brand a,
+nav a {
+    text-decoration: none;
+}
+
+#brand h1 {
+    font-size: 1.556em;
+    line-height: 3rem;
+}
+
+nav {
+    position: relative;
+    display: inline-block;
+    float: right;
+    clear: none;
+}
+
+#brand a,
+nav a {
+    color: #333;
+}
+
+#brand a img#default-logo,
+#brand a img#retina-logo {
+    float: left;
+    margin-top: 0.286em;
+    margin-right: 0.5em;
+    height: 1.143em;
+}
+
+#brand a img#retina-logo {
+    display: none;
+}
+
+
+/* retina logo */
+
+@media only screen and (-moz-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5),
+only screen and (min-resolution: 144dpi) {
+    #brand a img#retina-logo {
+        display: block;
+    }
+    #brand a img#default-logo {
+        display: none;
+    }
+}
+
+header.transparent.light #brand a,
+header.transparent.light nav > ul > li > a {
+    color: #fff;
+}
+
+header.fixed-header.transparent.light #brand a,
+header.fixed-header.transparent.light nav > ul > li > a {
+    color: #333;
+    text-shadow: none;
+}
+
+header.fixed-header.transparent.light nav > ul > li:hover > a {
+    border-bottom: 2px solid #333;
+}
+
+nav > ul,
+nav > ul > li {
+    float: left;
+    clear: none;
+}
+
+nav > ul > li {
+    padding: 0 0.778em;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.778em;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+nav > ul > li:last-child {
+    padding: 0 0 0 0.778em;
+}
+
+nav > ul > li > a {
+    line-height: 3rem;
+}
+
+nav > ul > li:hover > a {
+    border-bottom: 2px solid #333;
+}
+
+header.transparent.light nav > ul > li:hover > a {
+    border-bottom: 2px solid #fff;
+	text-decoration: none;
+}
+
+nav li {
+    position: relative;
+    white-space: nowrap;
+}
+
+nav > ul li:hover > ul.sub-menu {
+    display: block;
+    /* show the submenu */
+    ;
+}
+
+nav .sub-arrow {
+    padding-left: 0.500em;
+    vertical-align: middle;
+    font-size: 0.714em;
+}
+
+nav ul.sub-menu {
+    position: absolute;
+    left: 0;
+    z-index: 9999;
+    /* level 2 */
+    display: none;
+    margin-bottom: 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+nav ul.sub-menu ul.sub-menu {
+    top: 0px;
+    left: 100%;
+    /* level 3+ */
+    margin-top: -0.063rem;
+    padding-top: 0;
+}
+
+nav ul.sub-menu > li > a {
+    display: block;
+    padding: 0.5rem 1rem;
+    background-color: #F6F6F6;
+    font-size: 0.786em;
+}
+
+nav ul.sub-menu > li > a:hover {
+    background-color: #FD685B;
+    color: #fff;
+}
+
+nav ul.sub-menu > li:first-child > a {
+    border-radius: 2px 2px 0 0;
+}
+
+nav ul.sub-menu > li:last-child > a {
+    border-radius: 0 0 2px 2px;
+}
+
+#menu-toggle {
+    display: none;
+    color: #CCC;
+    text-decoration: none;
+}
+
+#menu-toggle i {
+    line-height: 2;
+    -webkit-transition: -webkit-transform 0.3s;
+    -moz-transition: -moz-transform 0.3s;
+    transition: transform 0.3s;
+}
+
+#menu-toggle i.active {
+    filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=-1);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+#menu-toggle:hover {
+    color: #FD685B;
+}

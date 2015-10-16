@@ -23,5 +23,13 @@
     }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #2c001e;
+    color: #772953;
+}
+
+a {
+    color: #fd685c;
+    text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
 }

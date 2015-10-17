@@ -41,7 +41,7 @@ navigationData =
 	bottom:
 		'DocPad': '/'
 		'GitHub': 'https://github.com/docpad/docpad'
-		'Support': '/support'
+		'Support': '/docs/support'
 websiteVersion = require('./package.json').version
 docpadVersion = require('./package.json').dependencies.docpad.toString().replace('~', '').replace('^', '')
 exchangeUrl = "http://helper.docpad.org/exchange.cson?version=#{docpadVersion}"
@@ -338,8 +338,10 @@ docpadConfig =
 					categoryDirectory = pathDetails[3]
 					basename = pathDetails[4]
 
-					p1 = if isWin then /[//-0-9]+/ else  /[\-0-9]+/
-					p2 = if isWin then /^[//-0-9]+/ else /^[\-0-9]+/
+					#regex to strip out leading numbers in
+					#the form of "01-" for purposes of urls
+					p1 = /[\-0-9]+/
+					p2 = /^[\-0-9]+/
 					organisation = organisationDirectory.replace(p1, '')
 					organisationName = humanize(project)
 

@@ -156,6 +156,7 @@ docpadConfig =
                 '/styles/style-dev.css'
 				'/styles/extras.css'
                 '/styles/color-mauve.css'
+				'/styles/monokai_sublime.css'
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 			.concat(['http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700'])
 

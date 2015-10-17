@@ -82,3 +82,9 @@
 #post-nav #next-items .label {
     padding-right: 1.5em;
 }
+
+code {
+	-webkit-border-radius: 0.5em;
+	border-radius: 0.5em;
+	background: #f2d9e6;
+}

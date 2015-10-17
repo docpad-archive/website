@@ -1,0 +1,93 @@
+---
+layout: default 
+---
+<%listing = @getDocumentationListing()%>
+<header class="transparent light" role="banner">
+	<div class="row">
+		<div class="nav-inner row-content buffer-left buffer-right even clear-after">
+			<div id="brand">
+				<h1 class="reset">
+          			<a href="/" title="<%-@text['heading']%>"><%-@text['heading']%></a>
+        		</h1>
+			</div>
+			<a id="menu-toggle" href="#">
+				<i class="fa fa-bars fa-lg"></i>
+			</a>
+			<nav>
+				<ul class="reset" role="navigation">
+					<% for own page, url of @navigation.top:%>
+					<li class="menu-item">
+						<a href="<%-url%>"><%-page%></a>
+					<% if page == 'Documentation':%>
+					
+						<ul class="sub-menu">
+							<%for item in listing:%>
+							<li><a href="#"><%-item.title%></a>
+								<ul class="sub-menu child-menu">
+								<%for doc in item.categoryItems:%>
+									<li><a href="<%-doc.url%>"><%-doc.title%></a></li>
+								<%end%>
+								</ul>
+							</li>
+							<%end%>
+						</ul>					
+					<%end%>
+					</li>
+					<%end%>
+
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>
+<main role="contentinfo">
+<%-@content%>
+</main>
+<footer role="contentinfo">
+	<div class="row">
+		<div class="row-content buffer clear-after">
+			<section id="top-footer">
+				<div class="widget column three">
+					<h4>Menu</h4>
+					<ul class="plain">
+						<%for own page, url of @navigation.bottom:%>
+							<li><a href="<%-url%>"><%-page%></a></li>
+						<%end%>
+					</ul>
+				</div>
+				<div class="widget column three">
+					<h4>Archives</h4>
+					<ul class="plain">
+						<li>
+							<a href="#">March 2015</a>
+						</li>
+					</ul>
+				</div>
+				<div class="widget column three">
+					<h4>About</h4>
+					<p><%-@text['copyright']%></p>
+				</div>
+				<div class="widget meta-social column three">
+					<h4>Follow Us</h4>
+					<ul class="inline">
+						<li>
+							<a class="twitter-share border-box" href="https://twitter.com/docpad">
+								<i class="fa fa-twitter fa-lg"></i>
+							</a>
+						</li>
+						<li>
+							<a class="facebook-share border-box" href="#">
+								<i class="fa fa-facebook fa-lg"></i>
+							</a>
+						</li>
+						<li>
+							<a class="pinterest-share border-box" href="#">
+								<i class="fa fa-pinterest fa-lg"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</div>
+</footer>

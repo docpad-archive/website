@@ -248,6 +248,28 @@ docpadConfig =
 
 			return {prev,next}
 		
+		output: []
+		getDocumentationListing: ->
+			if @output.length > 0
+				return @output
+			collection = @getCollection('docs')
+			occuredCategories = []
+			categories = collection.pluck('category')
+			for category in categories
+				# Check
+				if category != "partners"
+					continue  if category in occuredCategories
+					occuredCategories.push(category)
+
+					# Category Items
+					categoryItems = collection.findAll({category}, {title: 1})
+					if category in ["1-start","start"]
+						category = "Getting Started"
+					category =  category[0].toUpperCase() + category.slice(1)
+			
+					@output.push({title:category,categoryItems:categoryItems.toJSON()})
+			return @output
+		
 		writeObject: (name,obj) ->
 			fsUtil.writeFileSync(name,JSON.stringify(obj),'utf-8')
 					

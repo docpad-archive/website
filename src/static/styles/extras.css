@@ -88,3 +88,9 @@ code {
 	border-radius: 0.5em;
 	background: #f2d9e6;
 }
+.sub-menu {
+	background: #fff;
+}
+.sub-menu li a:hover {
+	text-decoration: none;
+}

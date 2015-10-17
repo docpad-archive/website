@@ -6,5 +6,5 @@ bodyClass: "blog masonry-style"
 ###
 
 # Prepare
-docsCollection = @getCollection('docs')
-text @partial('menu/documentation-listing',{collection: docsCollection,partial:@partial})
+listing = @getDocumentationListing()
+text @partial('menu/category-grid',{items:listing})

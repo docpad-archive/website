@@ -19,7 +19,6 @@
 
 					<h2><%-item.title%></h2>
 					<ul>
-					<%arr = item.categoryItems%>
 					<%for doc in item.categoryItems:%>
 						<li><a href="<%-doc.url%>"><span><%-doc.title%></span></a></li>
 					<%end%>

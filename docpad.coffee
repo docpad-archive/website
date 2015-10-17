@@ -269,6 +269,18 @@ docpadConfig =
 			
 					@output.push({title:category,categoryItems:categoryItems.toJSON()})
 			return @output
+		anchorRegex: new RegExp(/(#+\s[\w|\d|\s|`|,]+)\n/)
+		anchorCount: 0
+		getPageAnchors: (document) ->
+			txt = document.source
+			lines = txt.split('\n')
+			result = []
+			for line in lines
+				if line.substr(0,1) == '#'
+					line = line.replace(/#/g,'').trim()
+					result.push(line)
+			return result
+			
 		
 		writeObject: (name,obj) ->
 			fsUtil.writeFileSync(name,JSON.stringify(obj),'utf-8')

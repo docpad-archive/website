@@ -117,6 +117,60 @@ $(function () {
 			marginTop: headerHeight + 'px'
 		});
 	}
-	
+
+
+	function createfloatMenu() {
+		var flMenu = $("#fl_menu");
+		if(flMenu.length === 0){
+			return;
+		}
+		
+		var floatSpeed = 1500; //milliseconds
+		var floatEasing = "easeOut";
+		var menuFadeSpeed = 500; //milliseconds
+		var closedMenuOpacity = 0.75;
+
+		
+		var flMenuMenu = $("#fl_menu .menu");
+		var flMenuLabel = $("#fl_menu .label");
+
+		var menuPosition = flMenu.position().top;
+
+
+		function floatMenu() {
+			var scrollAmount = $(document).scrollTop();
+			var newPosition = menuPosition + scrollAmount;
+			if ($(window).height() < flMenu.height() + flMenuMenu.height()) {
+				flMenu.css("top", menuPosition);
+			} else {
+				flMenu.stop().animate({
+					top: newPosition
+				}, floatSpeed);
+			}
+		}
+
+
+		//floatMenu();
+		flMenu.hover(
+			function () { //mouse over
+				flMenuLabel.fadeTo(menuFadeSpeed, 1);
+				flMenuMenu.fadeIn(menuFadeSpeed);
+			},
+			function () { //mouse out
+				flMenuLabel.fadeTo(menuFadeSpeed, closedMenuOpacity);
+				flMenuMenu.fadeOut(menuFadeSpeed);
+			}
+		);
+
+		$(window).scroll(function () {
+			//floatMenu();
+		});
+
+	}
+
+	createfloatMenu();
+
+
+
 
 });

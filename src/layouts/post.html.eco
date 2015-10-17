@@ -40,6 +40,21 @@ layout: structure
 					<%end%>                    
 					<time datetime="<%-@document.mtime%>">Last Edited: <%-@document.mtime.toDateString()%></time></h5>
 				<h1><%-@document.title%></h1>
+				<%anchors = @getPageAnchors(@document,@content)%>
+				<%if anchors and anchors.length > 2:%>
+				<div id="fl_menu">
+					<div class="label">Contents
+					<span class="sub-arrow"><i class="fa fa-chevron-down"></i></span>
+					</div>
+					<div class="menu">
+						<%for anc in anchors:%>
+						<%ancref = anc.toLowerCase().replace(/\s/g,'-')%>
+    					<a href="#<%=ancref%>" class="menu_item"><%=anc%></a>
+						<%end%>
+    				</div>
+				</div>
+				<%end%>
+				<%if @document.img or @document.image or @document.figure or @document.video:%>
 				<div class="gallery slider" data-autoplay="false" data-autoheight="true">
 					<%img = @document.img or @document.image or @document.figure%>
                     <%if img:%>
@@ -54,6 +69,7 @@ layout: structure
 					</div>
                     <%end%>
 				</div>
+				<%end%>
 				<%-@content%>
 			</article>
 

@@ -1,0 +1,25 @@
+<section class="row section">
+	<div class="row-content buffer even clear-after">
+		<div class="section-title">
+			<h3>Testimonials</h3>
+		</div>
+		<div class="testimonial-slider"  data-autoplay="5000" data-pagination="true" data-transition="fade" data-autoheight="false">
+			<%for item in @testimonials:%>
+			<div class="quote">
+				<div class="column two">
+					<figure class="testimonial-img">
+						<img src="<%-item.image%>" alt="">
+					</figure>
+				</div>
+				<!-- column -->
+				<div class="column ten last">
+					<p><%-item.text%></p>
+					<div class="author"><%-item.author%></div>
+				</div>
+				<!-- column -->
+			</div>
+			<%end%>
+		</div>
+		<!-- testimonial-slider -->
+	</div>
+</section>

@@ -56,11 +56,14 @@ layout: default
 					</ul>
 				</div>
 				<div class="widget column three">
-					<h4>Archives</h4>
+					<h4>Latest Edits</h4>
 					<ul class="plain">
-						<li>
-							<a href="#">March 2015</a>
+						<%documents = @getLatestEdits()%>
+						<%for doc in documents:%>
+						<li datetime="<%-doc.mtime%>">
+							<a href="<%-doc.url%>"><%=doc.title%></a>
 						</li>
+						<%end%>
 					</ul>
 				</div>
 				<div class="widget column three">
@@ -81,8 +84,8 @@ layout: default
 							</a>
 						</li>
 						<li>
-							<a class="pinterest-share border-box" href="#">
-								<i class="fa fa-pinterest fa-lg"></i>
+							<a class="github-share border-box" href="https://github.com/docpad/docpad">
+								<i class="fa fa-github fa-lg"></i>
 							</a>
 						</li>
 					</ul>

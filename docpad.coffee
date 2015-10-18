@@ -172,6 +172,16 @@ docpadConfig =
 				#"/vendor/historyjsit.js"
 				#"/scripts/bevry.js"
 				#"/scripts/script.js"
+				#"/scripts/wait-for-images.js"
+				#"/scripts/modernizr-custom.js"
+				#"/scripts/skrollr.js"
+				#"/scripts/easy-pie-chart.js"
+				#"/scripts/on-screen.js"
+				#"/scripts/shuffle.js"
+				#"/scripts/fluid-vids.js"
+				#"/scripts/image-lightbox.js"
+				#"/scripts/count-to.js"
+				#"/scripts/all-pages.js"
 				"/scripts/all-pages-min.js"
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
@@ -260,8 +270,43 @@ docpadConfig =
 			
 					@output.push({title:category,categoryItems:categoryItems.toJSON()})
 			return @output
-		anchorRegex: new RegExp(/(#+\s[\w|\d|\s|`|,]+)\n/)
-		anchorCount: 0
+		
+		getLatestEdits: (num) ->
+			num = 4 or num
+			docs = @getCollection('docs').findAll({},[mtime:1],{limit:4}).toJSON()
+			return docs
+			
+		
+		callToAction:
+			callText: 'Install DocPad Now?'
+			buttonText:'Install'
+			buttonUrl: "https://www.npmjs.com/package/docpad"
+		
+		mockUp:
+			title: 'Open Sourced and Community Driven'
+			text: 'Built on an open source foundation and supported by community maintained plugins, DocPad is getting better every single day.'
+			buttonText: 'Get Started With DocPad'
+			buttonUrl: '/docs/start'
+			
+		counters: [
+			{name:'Downloads Per Month',value:1400}
+			{name:'DocPad Plugins',value:200}
+			{name:'Something Else',value:326}
+			{name:'Everyday visitor',value:58802}
+		]
+		
+		partners:
+			title:'DocPad Partners'
+			text: 'Myplanet is a digital product development company based out of Toronto, Canada. They funded the development of DocPad’s <a href="https://github.com/bevry/docpad/issues/500">importer functionality</a>.'
+			buttonUrl:'/partners/myplanet'
+		
+		testimonials: [
+			{text:"I like DocPad because it's nice and it makes websites.",author:"Benjamin Lupton",image:"/img/balupton.jpg"}
+			{text:"Bob the Builder asked if we could fix it. We said 'Yes we can!'",author:"Bob Builder",image:"/img/bob-builder.jpg"}
+			{text:"We are the Borg. Lower your shields and surrender your ships. We will add your biological and technological distinctiveness to our own. Your culture will adapt to service us. Resistance is futile.",author:"The Borg",image:"/img/borg.jpg"}
+		]
+			
+
 		getPageAnchors: (document) ->
 			txt = document.source
 			lines = txt.split('\n')
@@ -271,6 +316,7 @@ docpadConfig =
 					line = line.replace(/#/g,'').trim()
 					result.push(line)
 			return result
+		
 			
 		
 		writeObject: (name,obj) ->

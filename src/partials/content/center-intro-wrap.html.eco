@@ -1,0 +1,19 @@
+<div id="intro-wrap">
+	<div id="intro" class="preload" data-autoplay="5000" data-navigation="true" data-pagination="true" data-transition="fade">
+		<div class="intro-item">
+			<div class="intro-mockup-wrapper">
+				<div class="caption-mockup">
+					<h2>DocPad Sets You Free</h2>
+					<p>DocPad removes limitations and closes the gap between experts and beginners. Designers and developers can create websites faster than ever before.</p>
+				</div>
+				<div class="intro-mockup">
+					<img src="<%-@image or '/img/intro-mockup-02.png'%>" alt="">
+				</div>
+				<!-- intro-mockup -->
+			</div>
+			<!-- intro-mockup-wrapper -->
+		</div>
+	</div>
+	<!-- intro -->
+</div>
+<!-- intro-wrap -->

@@ -247,5 +247,35 @@ $(function () {
     if (countItem.length) {
         milestone();
     }
+	
+	 /* Testimonial Carousel */
+	var testimonial = $('.testimonial-slider');
+    function initTestimonial() {
+		
+        testimonial.each(function () {
+            var $this = $(this),
+                autoplay = $this.data('autoplay'),
+                pagination = $this.data('pagination'),
+                transition = $this.data('transition'),
+                autoheight = $this.data('autoheight');
+
+            $this.owlCarousel({
+                singleItem: true,
+                autoPlay: autoplay || false,
+                transitionStyle: transition || false,
+                autoHeight: autoheight || false,
+                stopOnHover: true,
+                responsiveBaseWidth: ".slider",
+                responsiveRefreshRate: 0,
+                addClassActive: true,
+                pagination: pagination || false,
+                rewindSpeed: 2000
+            });
+        });
+    }
+
+    if (testimonial.length) {
+        initTestimonial();
+    }
 
 });

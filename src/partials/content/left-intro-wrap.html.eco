@@ -1,0 +1,24 @@
+<div id="intro-wrap">
+    <div id="intro">
+
+        <div class="intro-item">
+            <div class="intro-mockup-wrapper">
+                <div class="caption-mockup caption-left column six">
+                    <h2>DocPad Sets You Free</h2>
+                    <p>
+                        DocPad removes limitations and closes the gap between experts and beginners. Designers and developers can create websites faster than ever before.
+                    </p>
+                    <a class="button white transparent" href="/docs/intro">Read More</a>
+                </div>
+                <!-- caption -->
+                <div class="intro-mockup intro-right column six last">
+                    <img src="<%-@image or ''/img/globe-net.svg''%>" alt="">
+                </div>
+                <!-- intro-mockup -->
+            </div>
+            <!-- intro-mockup-wrapper -->
+        </div>
+    </div>
+    <!-- intro -->
+</div>
+<!-- intro-wrap -->

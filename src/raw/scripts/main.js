@@ -742,11 +742,9 @@ jQuery(document).ready(function ($) {
 
 
     /* Testimonial Carousel */
-
     function initTestimonial() {
 
         testimonial.each(function () {
-
             var $this = $(this),
                 autoplay = $this.data('autoplay'),
                 pagination = $this.data('pagination'),
@@ -765,15 +763,11 @@ jQuery(document).ready(function ($) {
                 pagination: pagination || false,
                 rewindSpeed: 2000,
             });
-
         });
-
     }
 
     if (testimonial.length) {
-
         initTestimonial();
-
     }
 
 

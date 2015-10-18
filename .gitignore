@@ -26,6 +26,7 @@ out/
 
 src/documents/learn
 html/
+.concat
 
 #various windows ignores
 #ignore thumbnails created by windows
@@ -57,3 +58,4 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 *.bat
+

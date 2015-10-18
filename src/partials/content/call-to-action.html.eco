@@ -1,0 +1,6 @@
+<section class="row section call-to-action">
+	<div class="row-content buffer even animation">
+		<p><%-@callText%></p>
+		<a class="button red" href="<%-@buttonUrl%>"><%-@buttonText%></a>
+	</div>
+</section>

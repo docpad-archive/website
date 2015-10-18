@@ -1,0 +1,91 @@
+    <section class="row section">
+        <div class="row-content buffer even clear-after">
+            <div class="section-title">
+                <h3><%-@title%></h3>
+            </div>
+            <div class="grid-items blog-section masonry-style preload">
+<!--
+                <article class="item column three">
+                    <a href="/docs/intro">
+                        <figure><img src="/img/splash1b.png" alt="">
+                        </figure>
+                        <div class="blog-excerpt">
+                            <div class="blog-excerpt-inner">
+                                <h5 class="meta-post">Versioning</h5>
+                                <h2>Versioning</h2>
+                                <p>Use the versioning tools you're already used to.</p>
+                            </div>               
+                        </div>              
+                    </a>
+                </article>
+-->
+				
+                <article class="item column three">
+                    <a href="/docs/skeletons">
+                        <figure><img src="/img/splash2b.png" alt="">
+                        </figure>
+                        <div class="blog-excerpt">
+                            <div class="blog-excerpt-inner">
+                                <h5 class="meta-post">Automation</h5>
+                                <h2>Pre-Built Skeletions</h2>
+                                <p>Have a fully functional website up in seconds.</p>
+                            </div>
+                            <!-- blog-excerpt -->
+                        </div>
+                        <!-- blog-excerpt-inner -->
+                    </a>
+                </article>
+                <article class="item column three">
+                    <a href="/docs/plugins#renderers">
+                        <figure><img src="/img/splash3b.png" alt="">
+                        </figure>
+                        <div class="blog-excerpt">
+                            <div class="blog-excerpt-inner">
+                                <h5 class="meta-post">Languages</h5>
+                                <h2>Language Agnostic</h2>
+                                <p>Work in CoffeeScript, Stylus, PHP, Ruby, and more.</p>
+                            </div>
+                            <!-- blog-excerpt -->
+                        </div>
+                        <!-- blog-excerpt-inner -->
+                    </a>
+                </article>
+                <article class="item column three">
+                    <a href="/docs/plugins">
+                        <figure><img src="/img/splash4b.png" alt="">
+                        </figure>
+                        <div class="blog-excerpt">
+                            <div class="blog-excerpt-inner">
+                                <h5 class="meta-post">Deployment</h5>
+                                <h2>Simple Deploys</h2>
+                                <p>Push to Heroku, Amazon S3, GitHub Pages, or any other host.</p>
+                            </div>
+                            <!-- blog-excerpt -->
+                        </div>
+                        <!-- blog-excerpt-inner -->
+                    </a>
+                </article>
+				 <article class="item column three">
+                    <a href="/docs/deploy">
+                        <figure><img src="/img/splash5b.png" alt="">
+                        </figure>
+                        <div class="blog-excerpt">
+                            <div class="blog-excerpt-inner">
+                                <h5 class="meta-post">Plugins</h5>
+                                <h2>Powerful Plugins</h2>
+                                <p>Use the hundred available to awesomify your project.</p>
+                            </div>
+                            <!-- blog-excerpt -->
+                        </div>
+                        <!-- blog-excerpt-inner -->
+                    </a>
+                </article>
+
+                <div class="shuffle-sizer three"></div>
+            </div>
+            <!-- grid-items -->
+            <div class="more-btn">
+				<a class="button transparent aqua" href="/docs/intro">Read More About DocPad's Features</a>
+            </div>
+        </div>
+    </section>

@@ -1,0 +1,17 @@
+<section class="row section">
+	<div class="row-content buffer even clear-after">
+		<div class="column six">
+			<h2><%-@title%></h2>
+			<p><%-@text%></p>
+			<a class="button transparent aqua" href="<%-@buttonUrl%>"><%=@buttonText%></a>
+		</div>
+		<div class="side-mockup right-mockup animation">
+			<div class="slider ipad-slider black" data-autoplay="false">
+				<figure>
+					<div><img src="img/ipad-02.jpg" alt="">
+					</div>
+				</figure>
+			</div>
+		</div>
+	</div>
+</section>

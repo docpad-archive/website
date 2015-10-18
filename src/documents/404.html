@@ -1,17 +1,25 @@
+--- 
+title: "Page Not Found" 
+layout: structure 
+bodyClass: error404 
 ---
-title: "Page Not Found"
-layout: error
----
-
-<!-- Content -->
-<section class="404">
-    <h1>Not found <span>☹</span></h1>
-    <p>Sorry, but the page you were trying to view does not exist.</p>
-    <p>It looks like this was the result of either <em>a mistyped address</em> or <em>an out-of-date link</em></p>
-
-    <!-- Fix URL with Google -->
-    <script>
-        var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),GOOG_FIXURL_SITE = location.host;
-    </script>
-    <script src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
-</section>
+<div id="main" class="row">
+	<div class="row-content buffer-left buffer-right buffer-bottom clear-after">
+		<div class="column twelve">
+			<article class="clear-after">
+				<h2>Page Not Found</h2>
+				<p>It looks like this was the result of either <em>a mistyped address</em> or <em>an out-of-date link</em></p>
+			</article>
+			<div style="width:50%; margin-left:auto; margin-right:auto;">
+				<!-- Fix URL with Google -->
+				<script>
+					var GOOG_FIXURL_LANG = (navigator.language || '').slice(0, 2),
+						GOOG_FIXURL_SITE = location.host;
+				</script>
+				<script src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
+			</div>
+		</div>
+	</div>
+	<!-- row-content -->
+</div>
+<!-- row -->

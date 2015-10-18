@@ -1,0 +1,24 @@
+---
+layout: structure
+standalone: true
+scripts: ["/scripts/owl-carousel.js","/scripts/home.js","/scripts/mockups.js"]
+---
+<%#we havn't gone partial mad! This enables us to easily change the home page by removing and adding partials%>
+<%-@partial('content/intro-wrap',{image: '/images/laptop-typist.jpg'})%>
+<div id="main">
+	<%-@partial('content/call-to-action',{callText: 'Install DocPad Now?',buttonText:'Install',buttonUrl: "https://www.npmjs.com/package/docpad"})%>
+	
+	<%-@partial('content/features',{title: 'DocPad Features'})%>
+	
+	<%paraText = 'Built on an open source foundation and supported by community maintained plugins, DocPad is getting better every single day.'%>
+	<%-@partial('content/mockup-right',{title: 'Open Sourced and Community Driven',text: paraText, buttonText: 'Get Started With DocPad',buttonUrl: '#'})%>
+	
+	<%counters = [{name:'Downloads Per Month',value:1400},{name:'DocPad Plugins',value:200},{name:'Something Else',value:326},{name:'Everyday visitor',value:58802}]%>
+	<%-@partial('content/counters',counters: counters)%>
+	
+	<%paraText = 'Myplanet is a digital product development company based out of Toronto, Canada. They funded the development of DocPad’s <a href="https://github.com/bevry/docpad/issues/500">importer functionality</a>.'%>
+	<%-@partial('content/partners',title:'DocPad Partners', text:paraText, buttonUrl:'/partners/myplanet')%>
+	
+	<%-@partial('content/call-to-action',{callText: 'Install DocPad Now?',buttonText:'Install',buttonUrl: "https://www.npmjs.com/package/docpad"})%>
+</div>
+<!-- id-main -->

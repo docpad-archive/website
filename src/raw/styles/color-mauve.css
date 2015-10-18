@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #772953;
 }
 
-a {
+a, .text-light a {
     color: #fd685c;
     text-decoration: none;
 }

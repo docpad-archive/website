@@ -1,0 +1,11 @@
+<section class="row section text-light laptop">
+	<div class="fade">
+        <div class="row-content buffer even clear-after">
+          <div class="column five">
+            <h2><%=@title%></h2>
+             <p><%-@text%></p>
+			  <a class="button transparent aqua" href="<%-@buttonUrl%>">Read More</a>
+          </div>
+        </div>
+	</div>
+</section>

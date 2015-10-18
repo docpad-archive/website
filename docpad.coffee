@@ -172,16 +172,7 @@ docpadConfig =
 				#"/vendor/historyjsit.js"
 				#"/scripts/bevry.js"
 				#"/scripts/script.js"
-				"/scripts/modernizr-custom.js"
-				"/scripts/wait-for-images.js"
-				"/scripts/skrollr.js"
-				"/scripts/easy-pie-chart.js"
-				"/scripts/on-screen.js"
-				"/scripts/shuffle.js"
-				"/scripts/fluid-vids.js"
-				"/scripts/image-lightbox.js"
-				"/scripts/count-to.js"
-				"/scripts/all-pages.js"
+				"/scripts/all-pages-min.js"
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
 		# -----------------------------
@@ -369,6 +360,8 @@ docpadConfig =
 					pageTitle = "#{title} | DocPad"  # changed from bevry website
 
 					urls = ["/docs/#{name}", "/docs/#{category}-#{name}", "/docpad/#{name}"]
+					if category == 'partners'
+						urls = ["/partners/#{name}"].concat(urls)
 
 					githubEditUrl = "https://github.com/#{organisationDirectory}/#{projectDirectory}/edit/master/"
 					proseEditUrl = "http://prose.io/##{organisationDirectory}/#{projectDirectory}/edit/master/"

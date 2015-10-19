@@ -78,11 +78,13 @@ layout: default
 								<i class="fa fa-twitter fa-lg"></i>
 							</a>
 						</li>
+						<!--
 						<li>
 							<a class="facebook-share border-box" href="#">
 								<i class="fa fa-facebook fa-lg"></i>
 							</a>
 						</li>
+						-->
 						<li>
 							<a class="github-share border-box" href="https://github.com/docpad/docpad">
 								<i class="fa fa-github fa-lg"></i>

@@ -1,4 +1,4 @@
- .laptop {
+.laptop {
  	background-image: url(/img/laptop2.jpg);
  	background-color: #32001d;
  	background-position: 50% center;
@@ -149,10 +149,70 @@
  	background: #FD685B;
  	color: #fff;
  }
-h1:before,h2:before,h3:before,h4:before,h5:before {
-  content:"";
-  display:block;
-margin-top: -70px; 
-  height: 70px; 
  
+ h1:before,
+ h2:before,
+ h3:before,
+ h4:before,
+ h5:before {
+ 	content: "";
+ 	display: block;
+ 	margin-top: -70px;
+ 	height: 70px;
+ }
+ 
+ .meta-social ul li a.facebook-share,
+ ul.meta-social li a.facebook-share {
+ 	border-color: #3b5998;
+ 	background-color: #3b5998;
+ 	color: #fff;
+ }
+ 
+ .meta-social ul li a.github-share,
+ ul.meta-social li a.github-share {
+ 	border-color: #171515;
+ 	background-color: #171515;
+ 	color: #fff;
+ }
+ 
+ .meta-social ul li a.gplus-share,
+ ul.meta-social li a.gplus-share {
+ 	border-color: #dd4b39;
+ 	background-color: #dd4b39;
+ 	color: #fff;
+ }
+ 
+ .meta-social ul li a.twitter-share,
+ ul.meta-social li a.twitter-share {
+ 	border-color: #00acee;
+ 	background-color: #00acee;
+ 	color: #fff;
+ }
+ 
+ .meta-social ul li a.facebook-share:hover,
+ ul.meta-social li a.facebook-share:hover {
+ 	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+ 	-moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+ 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+ }
+ 
+ .meta-social ul li a.github-share:hover,
+ ul.meta-social li a.github-share:hover {
+ 	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+ 	-moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+ 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+ }
+ 
+ .meta-social ul li a.gplus-share:hover,
+ ul.meta-social li a.gplus-share:hover {
+ 	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+ 	-moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+ 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+ }
+ 
+ .meta-social ul li a.twitter-share:hover,
+ ul.meta-social li a.twitter-share:hover {
+ 	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+ 	-moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+ 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
 }

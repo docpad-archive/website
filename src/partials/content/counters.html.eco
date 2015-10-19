@@ -1,6 +1,6 @@
     <section class="row section">
         <div class="row-content buffer even clear-after">
-            <div class="column three">
+            <div class="column six">
                 <div class="count-item">
                     <div class="small-icon red"><i class="icon icon-download"></i>
                     </div>
@@ -9,7 +9,7 @@
                 </div>
                 <!-- count-item -->
             </div>
-            <div class="column three">
+            <div class="column six last">
                 <div class="count-item">
                     <div class="small-icon red"><i class="icon icon-equalizer"></i>
                     </div>
@@ -17,24 +17,6 @@
                     <div class="count-subject"><%=@counters[1].name%></div>
                 </div>
                 <!-- count-item -->
-            </div>
-            <div class="column three">
-                <div class="count-item">
-                    <div class="small-icon red"><i class="icon icon-tablet"></i>
-                    </div>
-                    <div class="count-number" data-from="0" data-to="<%-@counters[2].value%>" data-speed="2000" data-refresh-interval="25"></div>
-                    <div class="count-subject"><%=@counters[2].name%></div>
-                </div>
-                <!-- count-item -->
-            </div>
-            <div class="column three last">
-                <div class="count-item">
-                    <div class="small-icon red"><i class="icon icon-graph"></i>
-                    </div>
-                    <div class="count-number" data-from="0" data-to="<%-@counters[3].value%>" data-speed="2500" data-refresh-interval="25"></div>
-                    <div class="count-subject"><%=@counters[3].name%></div>
-                </div>
-                <!-- count-item -->
-            </div>
+            </div>		
         </div>
     </section>

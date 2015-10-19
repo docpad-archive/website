@@ -289,7 +289,7 @@ docpadConfig =
 			buttonUrl: '/docs/start'
 			
 		counters: [
-			{name:'Downloads Per Month',value:1400}
+			{name:'Downloads Per Month',value:14000}
 			{name:'DocPad Plugins',value:200}
 			{name:'Something Else',value:326}
 			{name:'Everyday visitor',value:58802}

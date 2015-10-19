@@ -16,7 +16,7 @@ layout: structure
 					<%end%>
 				</li>
 				<li id="all-items" class="post-nav">
-					<a href="/docs/"><i class="icon icon-images"></i></a>
+					<a href="/docs/"><i class="icon icon-doc"></i></a>
 				</li>
 				<li id="next-items" class="post-nav">
 					<%if models.next:%>
@@ -78,11 +78,11 @@ layout: structure
 
 		<div class="meta-social">
 			<ul class="inline center">
-				<li><a href="#" class="twitter-share border-box"><i class="fa fa-twitter fa-lg"></i></a>
+				<li><a href="https://twitter.com/home?status=<%=@site.url+@document.url%>" class="twitter-share border-box"><i class="fa fa-twitter fa-lg"></i></a>
 				</li>
-				<li><a href="#" class="facebook-share border-box"><i class="fa fa-facebook fa-lg"></i></a>
+				<li><a href="https://www.facebook.com/sharer/sharer.php?u=<%=@site.url+@document.url%>" class="facebook-share border-box"><i class="fa fa-facebook fa-lg"></i></a>
 				</li>
-				<li><a href="#" class="pinterest-share border-box"><i class="fa fa-pinterest fa-lg"></i></a>
+				<li><a href="https://plus.google.com/share?url=<%=@site.url+@document.url%>" class="gplus-share border-box"><i class="fa fa-google-plus fa-lg"></i></a>
 				</li>
 			</ul>
 		</div>

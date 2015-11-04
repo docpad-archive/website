@@ -4,6 +4,7 @@
     
     header.transparent {
         background-color: #772953;
+        opacity: 0.8;
     }
     
     header.fixed-header.transparent.light #brand a,
@@ -31,5 +32,5 @@ a, .text-light a {
     text-decoration: none;
 }
 a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }

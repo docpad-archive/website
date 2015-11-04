@@ -36,6 +36,7 @@ navigationData =
 		'Start': '/docs/start'
 		'Showcase': '/docs/showcase'
 		'Plugins': '/docs/plugins'
+		'Support': '/docs/support'
 		'Documentation': '/docs'
 
 	bottom:

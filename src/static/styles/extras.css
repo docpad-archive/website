@@ -1,7 +1,7 @@
-.laptop {
- 	background-image: url(/img/laptop2.jpg);
+.partners {
+ 	background-image: url(/img/ben-conference.jpg);
  	background-color: #32001d;
- 	background-position: 50% center;
+ 	background-position: 100% 50%;
  	height: auto;
  }
  
@@ -161,7 +161,7 @@
  	height: 70px;
  }
  
- .meta-social ul li a.facebook-share,
+ /*.meta-social ul li a.facebook-share,
  ul.meta-social li a.facebook-share {
  	border-color: #3b5998;
  	background-color: #3b5998;
@@ -215,4 +215,4 @@
  	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
  	-moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
  	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
-}
+}*/

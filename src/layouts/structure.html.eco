@@ -7,8 +7,8 @@ layout: default
 		<div class="nav-inner row-content buffer-left buffer-right even clear-after">
 			<div id="brand">
 				<h1 class="reset">
-          			<a href="/" title="<%-@text['heading']%>"><%-@text['heading']%></a>
-        		</h1>
+					<a href="/" title="<%-@text['heading']%>"><%-@text['heading']%></a>
+				</h1>
 			</div>
 			<a id="menu-toggle" href="#">
 				<i class="fa fa-bars fa-lg"></i>
@@ -18,23 +18,8 @@ layout: default
 					<% for own page, url of @navigation.top:%>
 					<li class="menu-item">
 						<a href="<%-url%>"><%-page%></a>
-					<% if page == 'Documentation':%>
-					
-						<ul class="sub-menu">
-							<%for item in listing:%>
-							<li><a href="#"><%-item.title%></a>
-								<ul class="sub-menu child-menu">
-								<%for doc in item.categoryItems:%>
-									<li><a href="<%-doc.url%>"><%-doc.title%></a></li>
-								<%end%>
-								</ul>
-							</li>
-							<%end%>
-						</ul>					
-					<%end%>
 					</li>
 					<%end%>
-
 				</ul>
 			</nav>
 		</div>
@@ -56,14 +41,17 @@ layout: default
 					</ul>
 				</div>
 				<div class="widget column three">
-					<h4>Latest Edits</h4>
-					<ul class="plain">
-						<%documents = @getLatestEdits()%>
-						<%for doc in documents:%>
-						<li datetime="<%-doc.mtime%>">
-							<a href="<%-doc.url%>"><%=doc.title%></a>
+					<h4>Related Projects</h4>
+					<ul class="plain">		
+						<li>
+							<a href="http://learn.bevry.me/queryengine/guide/">Query Engine</a>
 						</li>
-						<%end%>
+						<li>
+							<a href="http://learn.bevry.me/taskgroup/guide/">Task Group</a>
+						</li>
+						<li>
+							<a href="http://learn.bevry.me/joe/guide/">Joe - JavaScript Testing Framework</a>
+						</li>
 					</ul>
 				</div>
 				<div class="widget column three">

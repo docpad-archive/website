@@ -4,7 +4,7 @@ standalone: true
 scripts: ["/scripts/owl-carousel.js","/scripts/home.js","/scripts/mockups.js"]
 ---
 <%#we havn't gone partial mad! This enables us to easily change the home page by removing and adding partials%>
-<%-@partial('content/intro-wrap',{image: '/images/laptop-typist.jpg'})%>
+<%-@partial('content/intro-wrap',{image: '/img/ben-listing.jpg'})%>
 <div id="main">
 	<%-@partial('content/call-to-action',@callToAction)%>
 	
@@ -18,6 +18,6 @@ scripts: ["/scripts/owl-carousel.js","/scripts/home.js","/scripts/mockups.js"]
 	
 	<%-@partial('content/call-to-action',@callToAction)%>
 	
-	<%-@partial('content/testimonials',{testimonials:@testimonials})%>
+	<%#-@partial('content/testimonials',{testimonials:@testimonials})%>
 </div>
 <!-- id-main -->

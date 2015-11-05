@@ -7,7 +7,7 @@ layout: default
 		<div class="nav-inner row-content buffer-left buffer-right even clear-after">
 			<div id="brand">
 				<h1 class="reset">
-					<a href="/" title="<%-@text['heading']%>"><%-@text['heading']%></a>
+					<a href="/" title="DocPad">Doc<span>Pad</span></a>
 				</h1>
 			</div>
 			<a id="menu-toggle" href="#">

@@ -4,7 +4,7 @@ layout: structure
 <div id="main" class="row">
 	<div class="row-content buffer-left buffer-right buffer-bottom">
 		<%models = @getPrevNextModels(@document)%>
-		<%-@partial('content/prevNextNav',{models: models})%>
+		<%-@partial('menu/prevNextNav',{models: models})%>
 
 		<div class="post-area clear-after">
 			<article role="main">
@@ -51,7 +51,7 @@ layout: structure
 
 		</div>
 		<!-- post-area -->
-		<%-@partial('content/prevNextNav',{models: models})%>
+		<%-@partial('menu/prevNextNav',{models: models})%>
 
 		<div class="meta-social">
 			<ul class="inline center">

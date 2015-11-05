@@ -236,7 +236,12 @@ $(function () {
                     countNumber.countTo({
 						formatter: function (value,options) {
       						var suffix = $(this).attr('data-suffix');
-							return value.toFixed(options.decimal)+suffix;
+							var output = value.toFixed(options.decimal);
+							var l = 4 - output.length;
+							if(l > 0){
+								output = output + (new Array(l)).join(" ");
+							}
+							return output+suffix;
     					},
                         onComplete: function () {
                             countTitle.delay(100).addClass('subject-on');

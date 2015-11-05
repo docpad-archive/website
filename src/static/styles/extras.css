@@ -190,6 +190,10 @@ div.partner-content ul li {
 	list-style: disc;
 }
 
+#brand a span {
+	color: #FECD5E;
+}
+
 
 /*.meta-social ul li a.facebook-share,
  ul.meta-social li a.facebook-share {
@@ -267,7 +271,8 @@ only screen and (max-width: 40em) {
 	#fl_menu {
 		top: 28px;
 	}
-	.page-title, h2 {
+	.page-title,
+	h2 {
 		text-align: center;
 	}
 	#post-nav li {
@@ -287,7 +292,6 @@ only screen and (max-width: 40em) {
 		margin-top: 0;
 		height: 20px;
 	}
-
 	li#all-items {
 		display: none;
 	}

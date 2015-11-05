@@ -234,9 +234,14 @@ $(function () {
                     var countNumber = $this.find('.count-number');
                     var countTitle = $this.find('.count-subject');
                     countNumber.countTo({
+						formatter: function (value,options) {
+      						var suffix = $(this).attr('data-suffix');
+							return value.toFixed(options.decimal)+suffix;
+    					},
                         onComplete: function () {
                             countTitle.delay(100).addClass('subject-on');
                             countNumber.removeClass('count-number').addClass('count-number-done');
+							
                         }
                     });
                 }

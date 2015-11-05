@@ -291,7 +291,7 @@ docpadConfig =
 			
 		counters: [
 			{name:'Downloads Per Month',value:14000}
-			{name:'DocPad Plugins',value:200}
+			{name:'DocPad Plugins',value:200,suffix: '+'}
 			{name:'Something Else',value:326}
 			{name:'Everyday visitor',value:58802}
 		]

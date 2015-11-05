@@ -1,4 +1,4 @@
-.partners {
+.partners-home {
 	background-image: url(/img/ben-conference.jpg);
 	background-color: #32001d;
 	background-position: 100% 50%;
@@ -180,6 +180,14 @@ h5:before {
 
 #all-items2 {
 	display: none;
+}
+
+ul.partners li {
+	list-style: none;
+}
+
+div.partner-content ul li {
+	list-style: disc;
 }
 
 

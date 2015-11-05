@@ -1,167 +1,189 @@
 .partners {
- 	background-image: url(/img/ben-conference.jpg);
- 	background-color: #32001d;
- 	background-position: 100% 50%;
- 	height: auto;
- }
- 
- .fade {
- 	content: " ";
- 	width: 100%;
- 	height: 100%;
- 	margin: 0 auto;
- }
- 
- header.fixed-header.transparent.light nav > ul > li:hover > a {
- 	border-bottom: 2px solid #fff;
- }
- 
- #post-nav ul {
- 	padding: 1em 0;
- 	border-bottom: 1px solid #ddd;
- 	line-height: 1.778em;
- }
- 
- #post-nav i {
- 	vertical-align: middle;
- }
- 
- .post-nav,
- .pagination-nav {
- 	float: left;
- 	clear: none;
- 	min-height: 1px;
- }
- 
- .post-nav {
- 	width: 33.3%;
- }
- 
- .pagination-nav {
- 	width: 50%;
- }
- 
- #post-nav #all-items {
- 	text-align: center;
- 	font-size: 1.778em;
- }
- 
- #prev-items,
- #pagination #older {
- 	text-align: left;
- }
- 
- #next-items,
- #pagination #newer {
- 	text-align: right;
- }
- 
- #post-nav a {
- 	color: #ccc;
- 	text-decoration: none;
- }
- 
- #post-nav a:hover {
- 	color: #FD685B;
- }
- 
- #post-nav .label {
- 	text-transform: uppercase;
- 	font-family: 'Montserrat', sans-serif;
- }
- 
- #post-nav .label,
- #post-nav #prev-items i,
- #post-nav #next-items i {
- 	font-size: 0.75em;
- }
- 
- #post-nav #prev-items .label {
- 	padding-left: 1.5em;
- }
- 
- #post-nav #next-items .label {
- 	padding-right: 1.5em;
- }
- 
- code {
- 	-webkit-border-radius: 0.5em;
- 	border-radius: 0.5em;
- 	background: #f2d9e6;
- }
- 
- .sub-menu {
- 	background: #fff;
- }
- 
- .sub-menu li a:hover {
- 	text-decoration: none;
- }
- 
- .post-area h1 {
- 	display: inline;
- }
- 
- #fl_menu {
- 	position: absolute;
- 	margin-right: 8%;
- 	top: 120px;
- 	right: 0;
- 	z-index: 9999;
- 	width: 300px;
- 	height: 50px;
- 	text-align: right;
- }
- 
- #fl_menu .label {
- 	padding-left: 20px;
- 	padding-right: 20px;
- 	line-height: 50px;
- 	font-family: "Arial Black", Arial, Helvetica, sans-serif;
- 	font-size: 14px;
- 	font-weight: bold;
- 	background: transparent;
- 	color: #772953;
- 	letter-spacing: 7px;
- }
- 
- #fl_menu .menu {
- 	display: none;
- 	background: #F6F6F6;
- 	-webkit-border-radius: 2px;
- 	-moz-border-radius: 2px;
- 	border-radius: 2px;
- 	-webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
- 	-moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
- 	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
- }
- 
- #fl_menu .menu .menu_item {
- 	display: block;
- 	color: #333;
- 	padding: 10px 20px;
- 	font-family: Arial, Helvetica, sans-serif;
- 	font-size: 12px;
- 	text-decoration: none;
- }
- 
- #fl_menu .menu a.menu_item:hover {
- 	background: #FD685B;
- 	color: #fff;
- }
- 
- h1:before,
- h2:before,
- h3:before,
- h4:before,
- h5:before {
- 	content: "";
- 	display: block;
- 	margin-top: -70px;
- 	height: 70px;
- }
- 
- /*.meta-social ul li a.facebook-share,
+	background-image: url(/img/ben-conference.jpg);
+	background-color: #32001d;
+	background-position: 100% 50%;
+	height: auto;
+}
+
+.fade {
+	content: " ";
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+header.fixed-header.transparent.light nav > ul > li:hover > a {
+	border-bottom: 2px solid #fff;
+}
+
+#post-nav ul {
+	padding: 1em 0;
+	border-bottom: 1px solid #ddd;
+	line-height: 1.778em;
+}
+
+#post-nav i {
+	vertical-align: middle;
+}
+
+.post-nav,
+.pagination-nav {
+	float: left;
+	clear: none;
+	min-height: 1px;
+}
+
+.post-nav {
+	width: 33.3%;
+}
+
+.pagination-nav {
+	width: 50%;
+}
+
+#post-nav #all-items {
+	text-align: center;
+	font-size: 1.778em;
+}
+
+#prev-items,
+#pagination #older {
+	text-align: left;
+}
+
+#next-items,
+#pagination #newer {
+	text-align: right;
+}
+
+#post-nav a {
+	color: #ccc;
+	text-decoration: none;
+}
+
+#post-nav a:hover {
+	color: #FD685B;
+}
+
+#post-nav .label {
+	text-transform: uppercase;
+	font-family: 'Montserrat', sans-serif;
+}
+
+#post-nav .label,
+#post-nav #prev-items i,
+#post-nav #next-items i {
+	font-size: 0.75em;
+}
+
+#post-nav #prev-items .label {
+	padding-left: 1.5em;
+}
+
+#post-nav #next-items .label {
+	padding-right: 1.5em;
+}
+
+code {
+	-webkit-border-radius: 0.5em;
+	border-radius: 0.5em;
+	background: #f2d9e6;
+}
+
+.sub-menu {
+	background: #fff;
+}
+
+.sub-menu li a:hover {
+	text-decoration: none;
+}
+
+.post-area h1 {
+	display: inline;
+}
+
+#fl_menu {
+	position: absolute;
+	margin-right: 8%;
+	top: 120px;
+	right: 0;
+	z-index: 9999;
+	width: 300px;
+	height: 50px;
+	text-align: right;
+}
+
+#fl_menu .label {
+	padding-left: 20px;
+	padding-right: 20px;
+	line-height: 50px;
+	font-family: "Arial Black", Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	background: transparent;
+	color: #772953;
+	letter-spacing: 7px;
+}
+
+#fl_menu .menu {
+	display: none;
+	background: #F6F6F6;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	-webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+#fl_menu .menu .menu_item {
+	display: block;
+	color: #333;
+	padding: 10px 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+#fl_menu .menu a.menu_item:hover {
+	background: #FD685B;
+	color: #fff;
+}
+
+h1:before,
+h2:before,
+h3:before,
+h4:before,
+h5:before {
+	content: "";
+	display: block;
+	margin-top: -70px;
+	height: 70px;
+}
+
+.button {
+	text-align: center;
+}
+
+.single-post main,
+.blog main {
+	margin-top: 64px;
+}
+
+.single .post-nav {
+	width: 40%;
+}
+
+#all-items {
+	width: 20%;
+}
+
+#all-items2 {
+	display: none;
+}
+
+
+/*.meta-social ul li a.facebook-share,
  ul.meta-social li a.facebook-share {
  	border-color: #3b5998;
  	background-color: #3b5998;
@@ -216,3 +238,49 @@
  	-moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
  	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
 }*/
+
+@media handheld,
+only screen and (max-width:48em) {
+	body {
+		font-size: 1.125em;
+	}
+	.single-post main,
+	.blog main {
+		margin-top: 0;
+	}
+}
+
+@media handheld,
+only screen and (max-width: 40em) {
+	#intro .caption p,
+	#intro .caption-mockup p {
+		font-size: 1em;
+	}
+	#fl_menu {
+		top: 28px;
+	}
+	.page-title, h2 {
+		text-align: center;
+	}
+	#post-nav li {
+		display: block;
+	}
+	.single #post-nav ul {
+		padding: 0.2em 0;
+	}
+	.single .post-nav {
+		width: 50%;
+		font-size: 0.8em;
+	}
+	.single .post-nav span {
+		display: none;
+	}
+	.page-title h1:before {
+		margin-top: 0;
+		height: 20px;
+	}
+
+	li#all-items {
+		display: none;
+	}
+}

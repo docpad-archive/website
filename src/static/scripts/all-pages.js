@@ -110,13 +110,13 @@ $(function () {
 		selector: 'iframe',
 		players: ['www.youtube.com', 'player.vimeo.com']
 	});
-
+/*
 	if ((!body.hasClass('mobile')) && ($('#intro-wrap').length === 0)) {
 		var headerHeight = $('header').outerHeight(true);
 		$('main').css({
 			marginTop: headerHeight + 'px'
 		});
-	}
+	}*/
 
 
 	function createfloatMenu() {

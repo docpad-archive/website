@@ -566,7 +566,9 @@ docpadConfig =
 						googleAnalytics: false
 						mixpanel: false
 						reinvigorate: false
-
+			plugins:
+				repocloner:
+					repos: []
 
 	# =================================
 	# Events

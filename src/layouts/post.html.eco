@@ -8,14 +8,9 @@ layout: structure
 
 		<div class="post-area clear-after">
 			<article role="main">
-				<h5 class="meta-post">
-					<%if @document.tags:%>
-						<%for val in @document.tags:%>
-						  <a href="#"><%=val%></a>,
-						<%end%>
-					<%end%>                    
-				</h5>
-				<h1><%-@document.title%></h1>
+				<div class="page-title">
+					<h1><%-@document.title%></h1>
+				</div>
 				<%anchors = @getPageAnchors(@document,@content)%>
 				<%if anchors and anchors.length > 2:%>
 				<div id="fl_menu">

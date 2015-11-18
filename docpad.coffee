@@ -156,6 +156,7 @@ docpadConfig =
                 '/styles/font-awesome-min.css'
                 '/styles/style-dev.css'
 				'/styles/extras.css'
+				'/styles/extra-responsive.css'
                 '/styles/color-mauve.css'
 				'/styles/monokai_sublime.css'
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"

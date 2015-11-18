@@ -1,0 +1,67 @@
+/* Smartphones (landscape) 480 to 660 */
+
+@media handheld,
+only screen and (max-width: 660px) {
+	#intro .caption p,
+	#intro .caption-mockup p {
+		font-size: 1em;
+	}
+}
+
+/* Smartphones (portrait) 320 to 440 */
+
+@media handheld,
+only screen and (max-width: 440px) {
+	#intro .caption p,
+	#intro .caption-mockup p {
+		font-size: 1em;
+	}
+	
+}
+
+@media handheld,
+only screen and (max-width:48em) {
+
+	.single-post main,
+	.blog main {
+		margin-top: 0;
+	}
+	.intro-item .caption {
+		padding-top: 5%;
+	}
+}
+
+@media handheld,
+only screen and (max-width: 40em) {
+	.intro-item .caption {
+		height: 100%;
+		padding-top: 10%;
+	}
+	#fl_menu {
+		top: 28px;
+	}
+	.page-title,
+	h2 {
+		text-align: center;
+	}
+	#post-nav li {
+		display: block;
+	}
+	.single #post-nav ul {
+		padding: 0.2em 0;
+	}
+	.single .post-nav {
+		width: 50%;
+		font-size: 0.8em;
+	}
+	.single .post-nav span {
+		display: none;
+	}
+	.page-title h1:before {
+		margin-top: 0;
+		height: 20px;
+	}
+	li#all-items {
+		display: none;
+	}
+}

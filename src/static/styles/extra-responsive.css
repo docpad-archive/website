@@ -1,6 +1,6 @@
 /* Smartphones (landscape & iphone 4S+ portrait) 414 to 660 */
 @media handheld,
-only screen and (min-width: 25.875em) and (max-width: 46.25em) {
+only screen and (min-width: 25.875em) and (max-width: 48em) {
 
     .grid-items.shuffle .column {
         width: 50% !important;

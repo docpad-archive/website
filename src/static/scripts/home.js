@@ -103,7 +103,7 @@ $(function () {
 	function parallax() {
 
 		if (pxWrapper.length) {
-			var touchDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+			var touchDevice = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 			if (touchDevice) {
 				body.addClass('no-parallax');
 			} else if (!body.hasClass('mobile') && !body.hasClass('no-parallax')) {

@@ -1,11 +1,10 @@
 /* Smartphones (landscape & iphone 4S+ portrait) 414 to 660 */
+
 @media handheld,
 only screen and (min-width: 25.875em) and (max-width: 48em) {
-
-    .grid-items.shuffle .column {
-        width: 50% !important;
-    }
-
+	.grid-items.shuffle .column {
+		width: 50% !important;
+	}
 }
 
 
@@ -28,12 +27,24 @@ only screen and (max-width: 27.5em) {
 	#intro .caption-mockup p {
 		font-size: 1em;
 	}
-	
+	#next-items i {
+		display: block;
+		line-height: 1;
+	}
+	#prev-items i {
+		display: block;
+		line-height: 1;
+	}
+	.single #post-nav #prev-items .label {
+		padding-left: 0;
+	}
+	.single #post-nav #next-items .label {
+		padding-right: 0;
+	}
 }
 
 @media handheld,
 only screen and (max-width:48em) {
-
 	.single-post main,
 	.blog main {
 		margin-top: 0;
@@ -50,7 +61,7 @@ only screen and (max-width: 40em) {
 		padding-top: 10%;
 	}
 	#fl_menu {
-		top: 28px;
+		top: 35px;
 	}
 	.page-title,
 	h2 {
@@ -58,17 +69,21 @@ only screen and (max-width: 40em) {
 	}
 	#post-nav li {
 		display: block;
+		height: 2.5em;
 	}
 	.single #post-nav ul {
-		padding: 0.2em 0;
+		padding: 0.5em 0;
 	}
 	.single .post-nav {
 		width: 50%;
 		font-size: 0.8em;
 	}
-	.single .post-nav span {
-		display: none;
+	.post-area {
+		margin-top: 2em;
 	}
+	/*	.single .post-nav span {
+		display: none;
+	}*/
 	.page-title h1:before {
 		margin-top: 0;
 		height: 20px;

@@ -15,8 +15,8 @@
 		<li id="next-items" class="post-nav">
 			<%if @models.next:%>
 			<a href="<%-@models.next.attributes.url%>" title="<%-@models.next.attributes.title%>">
-				<span class="label"><%-@models.next.attributes.title%></span>
 				<i class="fa fa-chevron-right"></i>
+				<span class="label"><%-@models.next.attributes.title%></span>
 			</a>
 			<%end%>
 		</li>

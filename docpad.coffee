@@ -289,6 +289,7 @@ docpadConfig =
 			text: 'Built on an open source foundation and supported by community maintained plugins, DocPad is getting better every single day.'
 			buttonText: 'Get Started With DocPad'
 			buttonUrl: '/docs/start'
+			image: 'img/magazine.docpad2.jpg'
 			
 		counters: [
 			{name:'Downloads Per Month',value:14000}
@@ -567,6 +568,16 @@ docpadConfig =
 						googleAnalytics: false
 						mixpanel: false
 						reinvigorate: false
+			plugins:
+				repocloner:
+					repos: []
+		production:
+			maxAge: false
+			# maxAge: false
+
+			hostname: process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+			# Listen to port 8082 on the development environment
+			port: process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_INTERNAL_PORT || 9778
 
 	# =================================
 	# Events

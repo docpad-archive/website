@@ -41,6 +41,14 @@ only screen and (max-width: 27.5em) {
 	.single #post-nav #next-items .label {
 		padding-right: 0;
 	}
+	.row-content.buffer,
+	.row-content.buffer-left {
+		padding-left: 4%;
+	}
+	.row-content.buffer,
+	.row-content.buffer-right {
+		padding-right: 4%;
+	}
 }
 
 @media handheld,

@@ -2,7 +2,7 @@
 
 @media handheld,
 only screen and (min-width: 25.875em) and (max-width: 48em) {
-	.grid-items.shuffle .column {
+	.page .grid-items.shuffle .column {
 		width: 50% !important;
 	}
 	h1,

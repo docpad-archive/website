@@ -1,6 +1,7 @@
 ul.partners {
 	padding-left: 0;
 }
+
 .partners-home {
 	background-image: url(/img/ben-conference.jpg);
 	background-color: #32001d;
@@ -155,6 +156,7 @@ code {
 	color: #fff;
 }
 
+
 /*h1:before,
 h2:before,
 h3:before,
@@ -197,6 +199,35 @@ div.partner-content ul li {
 
 #brand a span {
 	color: #FECD5E;
+}
+
+.portfolio .overlay,
+.portfolio-section .overlay {
+	position: absolute;
+	top: 75%;
+	left: 0;
+	display: block;
+	overflow: hidden;
+	padding: 0 1em;
+	height: 25%;
+	border-bottom: none;
+	background-color: rgba(79, 193, 233, 0.9);
+	color: #fff;
+	text-align: center;
+	opacity: 0.9;
+	filter: alpha(opacity=0.9);
+	cursor: pointer;
+	-moz-opacity: 0.9;
+}
+
+.portfolio-section .overlay {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.portfolio-section .four .overlay:hover {
+	height: 50%;
+	top:50%;
 }
 
 
@@ -255,4 +286,3 @@ div.partner-content ul li {
  	-moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
  	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
 }*/
-

@@ -16,69 +16,81 @@ bodyClass: 'portfolio'
 	<div class="row-content buffer clear-after">
 		<div class="grid-items portfolio-section preload">
 			<article class="item column four" data-groups='["fun", "icons"]'>
-				<figure><img src="/images/acherno.jpg" alt=""></figure>
-				<a class="overlay" href="#">
+				<a href="#">
+					<figure><img src="/images/acherno.jpg" alt=""></figure>
+				</a>
+				<div class="overlay" href="#">
 					<div class="overlay-content">
 						<h2>Acherno Interior Design</h2>
 						<p>Corporate web site of the biggest interior design studio in Bulgaria.</p>
 					</div>
 					<!-- overlay-content -->
-				</a>
+				</div>
 				<!-- overlay -->
 			</article>
 			<article class="item column eight" data-groups='["lightbox", "minimal"]'>
-				<figure><img src="/images/alloyui.jpg" alt=""></figure>
-				<a class="overlay" href="#">
+				<a href="#">
+					<figure><img src="/images/alloyui.jpg" alt=""></figure>
+				</a>
+				<div class="overlay">
 					<div class="overlay-content">
 						<h2>Alloy UI</h2>
 						<p>AlloyUI is a UI framework built on top of YUI3 that provides a simple API for building high scalable applications.</p>
 					</div>
 					<!-- overlay-content -->
-				</a>
+				</div>
 				<!-- overlay -->
 			</article>
 			<article class="item column four" data-groups='["fun", "icons"]'>
-				<figure><img src="/images/fizzr.jpg" alt=""></figure>
-				<a class="overlay" href="#">
+				<a href="#">
+					<figure><img src="/images/fizzr.jpg" alt=""></figure>
+				</a>
+				<div class="overlay" href="#">
 					<div class="overlay-content">
 						<h2>FizzrVR</h2>
 						<p>Desarrollador web Backend Quito Ecuador.</p>
 					</div>
 					<!-- overlay-content -->
-				</a>
+				</div>
 				<!-- overlay -->
 			</article>
 			<article class="item column four" data-groups='["infographics", "web-design"]'>
-				<figure><img src="/images/cumulocity.jpg" alt=""></figure>
-				<a class="overlay" href="#">
+				<a href="#">
+					<figure><img src="/images/cumulocity.jpg" alt=""></figure>
+				</a>
+				<div class="overlay" href="#">
 					<div class="overlay-content">
 						<h2>Cumulocity</h2>
 						<p>Internet of Things platform.</p>
 					</div>
 					<!-- overlay-content -->
-				</a>
+				</div>
 				<!-- overlay -->
 			</article>
-			<article class="item column four" data-groups="['advertising', 'lightbox', 'web-design']">
-				<figure><img src="/images/tenacious.jpg" alt=""></figure>
-				<a class="overlay" href="#">
+			<article class="item column four" data-groups="['advertising', 'lightbox', 'web-design']">				
+				<a href="#">
+					<figure><img src="/images/tenacious.jpg" alt=""></figure>
+				</a>
+				<div class="overlay" href="#">
 					<div class="overlay-content">
 						<h2>Tinacious Design</h2>
 						<p>Web design and Development portfolio for Toronto-based Front-end Developer in Toronto, Canada.</p>
 					</div>
 					<!-- overlay-content -->
-				</a>
+				</div>
 				<!-- overlay -->
 			</article>
 			<article class="item column four">
-				<figure><img src="/images/topcoat.jpg" alt=""></figure>
-				<a class="overlay" href="#">
+				<a href="#">
+					<figure><img src="/images/topcoat.jpg" alt=""></figure>
+				</a>
+				<div class="overlay" href="#">
 					<div class="overlay-content">
 						<h2>Topcoat.io</h2>
 						<p>CSS for clean and fast web apps by Adobe.</p>
 					</div>
 					<!-- overlay-content -->
-				</a>
+				</div>
 				<!-- overlay -->
 			</article>
 

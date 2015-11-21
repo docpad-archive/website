@@ -16,9 +16,6 @@ ul.partners {
 	margin: 0 auto;
 }
 
-header.fixed-header.transparent.light nav > ul > li:hover > a {
-	border-bottom: 2px solid #fff;
-}
 
 #post-nav ul {
 	padding: 1em 0;
@@ -212,13 +209,13 @@ div.partner-content ul li {
 	height: 25%;
 	border-bottom: none;
 	background-color: #772953;
-	background-color: rgba(119, 41, 83, 0.9);
+	background-color: rgba(119, 41, 83, 0.8);
 	color: #fff;
 	text-align: center;
-	opacity: 0.9;
-	filter: alpha(opacity=0.9);
+	opacity: 0.8;
+	filter: alpha(opacity=0.8);
 	cursor: pointer;
-	-moz-opacity: 0.9;
+	-moz-opacity: 0.8;
 }
 
 .portfolio-section .overlay {
@@ -229,6 +226,7 @@ div.partner-content ul li {
 .portfolio-section .four .overlay:hover {
 	height: 50%;
 	top:50%;
+	opacity: 1;
 }
 
 

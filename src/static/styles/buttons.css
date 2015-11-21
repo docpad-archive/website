@@ -52,11 +52,12 @@ input.button:active {
 .button.red,
 input.button.red {
     background-color: rgba(253, 104, 91, 1);
+	border: 2px solid rgba(253, 104, 91, 1);
 }
 
 .button.red:hover,
 input.button.red:hover {
-    background-color: rgba(253, 104, 91, 0.9);
+    background-color: rgba(253, 104, 91, 0.8);
 }
 
 .button.orange,

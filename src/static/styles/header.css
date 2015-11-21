@@ -136,7 +136,7 @@ header.fixed-header.transparent.light nav > ul > li > a {
 }
 
 header.fixed-header.transparent.light nav > ul > li:hover > a {
-    border-bottom: 2px solid #333;
+   /* border-bottom: 2px solid #333;*/
 }
 
 nav > ul,
@@ -162,13 +162,21 @@ nav > ul > li > a {
     line-height: 3rem;
 }
 
-nav > ul > li:hover > a {
-    border-bottom: 2px solid #333;
+nav > ul > li:hover > a, nav > ul > li > a:hover {
+    border-bottom: none;
+	text-decoration: none;
 }
 
 header.transparent.light nav > ul > li:hover > a {
-    border-bottom: 2px solid #fff;
+/*    border-bottom: 2px solid #fff;*/
+    border-bottom: none;
 	text-decoration: none;
+	color: #FECD5E;
+}
+
+header.fixed-header.transparent.light nav > ul > li:hover > a {
+	border-bottom: none;
+	color: #FECD5E;
 }
 
 nav li {

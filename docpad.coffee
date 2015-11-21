@@ -415,11 +415,11 @@ docpadConfig =
 					githubEditUrl = "https://github.com/#{organisationDirectory}/#{projectDirectory}/edit/master/"
 					proseEditUrl = "http://prose.io/##{organisationDirectory}/#{projectDirectory}/edit/master/"
 					editUrl = githubEditUrl + a.relativePath.replace("learn/#{organisationDirectory}/#{projectDirectory}/", '')
-
+					layout = if a.name == 'showcase.html' then 'showcase' else 'post'
 					# Apply
 					document
 						.setMetaDefaults({
-							layout: 'post'
+							layout
 							standalone
 
 							name

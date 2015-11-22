@@ -152,8 +152,8 @@ docpadConfig =
 
 			# Styles
 			styles: [
-                '/styles/layers-min.css'
                 '/styles/font-awesome-min.css'
+				'/styles/layers-min.css'
                 '/styles/style-dev.css'
 				'/styles/extras.css'
 				'/styles/extra-responsive.css'
@@ -174,17 +174,17 @@ docpadConfig =
 				#"/vendor/historyjsit.js"
 				#"/scripts/bevry.js"
 				#"/scripts/script.js"
-				#"/scripts/wait-for-images.js"
-				#"/scripts/modernizr-custom.js"
-				#"/scripts/skrollr.js"
-				#"/scripts/easy-pie-chart.js"
-				#"/scripts/on-screen.js"
-				#"/scripts/shuffle.js"
-				#"/scripts/fluid-vids.js"
-				#"/scripts/image-lightbox.js"
-				#"/scripts/count-to.js"
-				#"/scripts/all-pages.js"
-				"/scripts/all-pages-min.js"
+				"/scripts/modernizr-custom.js"
+				"/scripts/wait-for-images.js"
+				"/scripts/skrollr.js"
+				"/scripts/easy-pie-chart.js"
+				"/scripts/on-screen.js"
+				"/scripts/shuffle.js"
+				"/scripts/fluid-vids.js"
+				"/scripts/image-lightbox.js"
+				"/scripts/count-to.js"
+				"/scripts/all-pages.js"
+				#"/scripts/all-pages-min.js"
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
 		# -----------------------------
@@ -415,12 +415,18 @@ docpadConfig =
 					githubEditUrl = "https://github.com/#{organisationDirectory}/#{projectDirectory}/edit/master/"
 					proseEditUrl = "http://prose.io/##{organisationDirectory}/#{projectDirectory}/edit/master/"
 					editUrl = githubEditUrl + a.relativePath.replace("learn/#{organisationDirectory}/#{projectDirectory}/", '')
-					layout = if a.name == 'showcase.html' then 'showcase' else 'post'
+					layout = 'post'
+					scripts = []
+					if a.name == 'showcase.html'
+						layout = 'showcase'
+						scripts = ['/scripts/masonry-load.js']
+						
 					# Apply
 					document
 						.setMetaDefaults({
 							layout
 							standalone
+							scripts
 
 							name
 							title

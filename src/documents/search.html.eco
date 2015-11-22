@@ -1,0 +1,43 @@
+--- 
+layout: structure 
+standalone: true 
+referencesOthers: false
+---
+
+<div id="main" class="row">
+	<div class="row-content buffer-left buffer-right buffer-bottom clear-after">
+
+		<div class="post-area clear-after">
+			<article role="main" class="column">
+
+				<h1>Search Results</h1>
+				<script>
+					(function () {
+						var cx = '000711355494423975011:mvl83obfzvq';
+						var gcse = document.createElement('script');
+						gcse.type = 'text/javascript';
+						gcse.async = true;
+						gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+							'//cse.google.com/cse.js?cx=' + cx;
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(gcse, s);
+					})();
+				</script>
+				<gcse:searchresults-only></gcse:searchresults-only>
+				<style>
+					.gsc-selected-option-container {
+						width: 100px !important;
+					}
+					
+					.gsc-above-wrapper-area-container {
+						margin-bottom: 5px;
+					}
+					
+					.gsc-resultsHeader {
+						margin: 0px;
+					}
+				</style>
+			</article>
+		</div>
+	</div>
+</div>

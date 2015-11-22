@@ -1,86 +1,118 @@
----
+--- 
 layout: default 
 ---
 <%listing = @getDocumentationListing()%>
-<header class="transparent light" role="banner">
-	<div class="row">
-		<div class="nav-inner row-content buffer-left buffer-right even clear-after">
-			<div id="brand">
-				<h1 class="reset">
+	<header class="transparent light" role="banner">
+		<div class="row">
+			<div class="nav-inner row-content buffer-left buffer-right even clear-after">
+				<span id="brand">
+					<h1 class="reset">
 					<a href="/" title="DocPad">Doc<span>Pad</span></a>
 				</h1>
+				</span>
+				<a id="menu-toggle" href="#">
+					<i class="fa fa-bars fa-lg"></i>
+				</a>
+				<nav class="menu">
+					<ul id="nav-menu" class="reset" role="navigation">
+						<% for own page, url of @navigation.top:%>
+							<li class="menu-item">
+								<a href="<%-url%>">
+									<%-page%>
+								</a>
+							</li>
+							<%end%>
+							<li class="menu-item search-btn">
+								<a href="#" title="search button"><i class="fa fa-search fa-lg"></i></a>
+							</li>
+					</ul>
+					<ul id="search-outer" class="reset">
+							<script>
+								(function() {
+								var cx = '000711355494423975011:mvl83obfzvq';
+								var gcse = document.createElement('script');
+								gcse.type = 'text/javascript';
+								gcse.async = true;
+								gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+									'//www.google.com/cse/cse.js?cx=' + cx;
+								var s = document.getElementsByTagName('script')[0];
+								s.parentNode.insertBefore(gcse, s);
+								})();
+							</script>
+						<li class="menu-item search-item">	
+							<gcse:searchbox-only resultsUrl="/search"></gcse:searchbox-only>
+						</li>
+						<span class="menu-item close-btn">
+							<a href="#" title="search close button"><i class="fa fa-remove fa-lg"></i></a>
+						</span>	
+
+					</ul>
+				</nav>
 			</div>
-			<a id="menu-toggle" href="#">
-				<i class="fa fa-bars fa-lg"></i>
-			</a>
-			<nav>
-				<ul class="reset" role="navigation">
-					<% for own page, url of @navigation.top:%>
-					<li class="menu-item">
-						<a href="<%-url%>"><%-page%></a>
-					</li>
-					<%end%>
-				</ul>
-			</nav>
 		</div>
-	</div>
-</header>
-<main role="contentinfo">
-<%-@content%>
-</main>
-<footer role="contentinfo">
-	<div class="row">
-		<div class="row-content buffer clear-after">
-			<section id="top-footer">
-				<div class="widget column three">
-					<h4>Menu</h4>
-					<ul class="plain">
-						<%for own page, url of @navigation.bottom:%>
-							<li><a href="<%-url%>"><%-page%></a></li>
-						<%end%>
-					</ul>
-				</div>
-				<div class="widget column three">
-					<h4>Related Projects</h4>
-					<ul class="plain">		
-						<li>
-							<a href="http://learn.bevry.me/queryengine/guide/">Query Engine</a>
-						</li>
-						<li>
-							<a href="http://learn.bevry.me/taskgroup/guide/">Task Group</a>
-						</li>
-						<li>
-							<a href="http://learn.bevry.me/joe/guide/">Joe - JavaScript Testing Framework</a>
-						</li>
-					</ul>
-				</div>
-				<div class="widget column three">
-					<h4>About</h4>
-					<p><%-@text['copyright']%></p>
-				</div>
-				<div class="widget meta-social column three">
-					<h4>Follow Us</h4>
-					<ul class="inline">
-						<li>
-							<a class="twitter-share border-box" href="https://twitter.com/docpad">
-								<i class="fa fa-twitter fa-lg"></i>
-							</a>
-						</li>
-						<!--
+	</header>
+	<main role="contentinfo">
+		<%-@content%>
+	</main>
+	<footer role="contentinfo">
+		<div class="row">
+			<div class="row-content buffer clear-after">
+				<section id="top-footer">
+					<div class="widget column three">
+						<h4>Menu</h4>
+						<ul class="plain">
+							<%for own page, url of @navigation.bottom:%>
+								<li>
+									<a href="<%-url%>">
+										<%-page%>
+									</a>
+								</li>
+								<%end%>
+						</ul>
+					</div>
+					<div class="widget column three">
+						<h4>Related Projects</h4>
+						<ul class="plain">
+							<li>
+								<a href="http://learn.bevry.me/queryengine/guide/">Query Engine</a>
+							</li>
+							<li>
+								<a href="http://learn.bevry.me/taskgroup/guide/">Task Group</a>
+							</li>
+							<li>
+								<a href="http://learn.bevry.me/joe/guide/">Joe - JavaScript Testing Framework</a>
+							</li>
+						</ul>
+					</div>
+					<div class="widget column three">
+						<h4>About</h4>
+						<p>
+							<%-@text['copyright']%>
+						</p>
+					</div>
+					<div class="widget meta-social column three">
+						<h4>Follow Us</h4>
+						<ul class="inline">
+							<li>
+								<a class="twitter-share border-box" href="https://twitter.com/docpad">
+									<i class="fa fa-twitter fa-lg"></i>
+								</a>
+							</li>
+							<!--
 						<li>
 							<a class="facebook-share border-box" href="#">
 								<i class="fa fa-facebook fa-lg"></i>
 							</a>
 						</li>
 						-->
-						<li>
-							<a class="github-share border-box" href="https://github.com/docpad/docpad">
-								<i class="fa fa-github fa-lg"></i>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</section>
+							<li>
+								<a class="github-share border-box" href="https://github.com/docpad/docpad">
+									<i class="fa fa-github fa-lg"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</div>
 		</div>
-	</div>
-</footer>
+	</footer>

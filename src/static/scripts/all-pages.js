@@ -169,6 +169,18 @@ $(function () {
 	}
 
 	createfloatMenu();
+	
+	$('.search-btn a').click(function(){
+		$('#nav-menu').css('display','none');
+		$('#search-outer').css('display','inline');
+		
+	});
+	
+	$('.close-btn a').click(function(){
+		$('#search-outer').css('display','none');
+		$('#nav-menu').css('display','inline');
+		
+	});
 
 
 

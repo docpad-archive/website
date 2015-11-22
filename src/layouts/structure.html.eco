@@ -116,3 +116,18 @@ layout: default
 			</div>
 		</div>
 	</footer>
+<%if @document.name == 'search.html':%>
+<script>
+	(function () {
+		var cx = '000711355494423975011:mvl83obfzvq';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<gcse:searchresults-only></gcse:searchresults-only>
+<%end%>

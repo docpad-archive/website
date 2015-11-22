@@ -26,6 +26,9 @@ nav.menu {
 .search-btn {
 	display: none;
 }
+.search-item {
+	z-index: 9999;
+}
 
 #search {
 	height: 48px;
@@ -82,6 +85,9 @@ input.gsc-search-button-v2 {
 
 .gsst_a .gscb_a {
 	margin-top: 5px;
+}
+.gsc-results-wrapper-overlay {
+	position: absolute!important;
 }
 
 ul.partners {

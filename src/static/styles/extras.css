@@ -1,54 +1,69 @@
 nav.menu {
 	min-width: 75%;
 }
+
 #search-outer {
 	display: none;
-	float:left;
-	width:100%;
+	float: left;
+	width: 100%;
 }
+
 #search-outer form {
 	margin-top: 3px;
 }
+
 #search-outer form input {
 	width: 100%;
 	max-width: none;
 }
+
 .search-item {
-	width: 650px;
+	width: 250px;
 	font-weight: normal;
 	color: #333;
+}
+
+.search-btn {
+	display: none;
 }
 
 #search {
 	height: 48px;
 }
+
 .menu-item .fa-search.fa-lg {
 	vertical-align: 9%;
 }
 
 .close-btn {
-	float:right;
+	float: right;
 	margin-top: -2.4em;
 	margin-right: 2em;
 }
+
 .close-btn i {
 	color: #fff;
 }
+
 .gsc-control-searchbox-only {
 	margin-top: -14px;
 }
+
 .gsc-input-box {
-/*	border: none !important;
+	/*	border: none !important;
 	background-color: transparent !important;*/
 	height: 33px !important;
 	border-radius: 0.5em !important;
 }
+
 .gsc-input-box table {
 	margin-top: -7px;
 }
+
 .gsc-input-box input {
 	margin-top: 4px !important;
 }
+
 input.gsc-search-button-v2 {
 	padding: 5px 12px !important;
 	width: 40px !important;
@@ -58,15 +73,17 @@ input.gsc-search-button-v2 {
 	color: #fff;
 	border: 1px solid #666666;
 	border-color: #3079ed;
-  	background-color: #FECD5E !important;
-	
+	background-color: #FECD5E !important;
 }
+
 .gsc-search-button {
 	padding: 0 !important;
 }
+
 .gsst_a .gscb_a {
 	margin-top: 5px;
 }
+
 ul.partners {
 	padding-left: 0;
 }
@@ -84,7 +101,6 @@ ul.partners {
 	height: 100%;
 	margin: 0 auto;
 }
-
 
 #post-nav ul {
 	padding: 1em 0;
@@ -294,8 +310,70 @@ div.partner-content ul li {
 
 .portfolio-section .four .overlay:hover {
 	height: 50%;
-	top:50%;
+	top: 50%;
 	opacity: 1;
+}
+
+@media handheld,
+only screen and (min-width: 64em) {
+	.search-item {
+		width: 650px;
+	}
+	.search-btn {
+		display: inline;
+	}
+}
+
+@media handheld,
+only screen and (max-width: 64em) {
+	.close-btn {
+		margin-right: 0;
+	}
+	.search-item {
+		width: 600px;
+	}
+}
+
+@media handheld,
+only screen and (max-width: 46em) {
+	.search-item {
+		width: 600px;
+	}
+}
+
+@media handheld,
+only screen and (max-width: 42em) {
+	.search-item {
+		width: 550px;
+	}
+}
+
+@media handheld,
+only screen and (max-width: 35.5em) {
+	.search-item {
+		width: 465px;
+	}
+}
+
+@media handheld,
+only screen and (max-width: 30em) {
+	.search-item {
+		width: 380px;
+	}
+}
+
+@media handheld,
+only screen and (max-width: 23.5em) {
+	.search-item {
+		width: 345px;
+	}
+}
+
+@media handheld,
+only screen and (max-width: 20em) {
+	.search-item {
+		width: 290px;
+	}
 }
 
 

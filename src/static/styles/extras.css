@@ -43,6 +43,9 @@ nav.menu {
 	margin-top: -2.4em;
 	margin-right: 2em;
 }
+.close-btn a i:hover {
+	color: #FECD5E;
+}
 
 .close-btn i {
 	color: #fff;
@@ -66,8 +69,8 @@ nav.menu {
 .gsc-input-box input {
 	margin-top: 4px !important;
 }
-
-input.gsc-search-button-v2 {
+.cse input.gsc-search-button, input.gsc-search-button,
+input.gsc-search-button-v2{
 	padding: 5px 12px !important;
 	width: 40px !important;
 	height: 28px !important;
@@ -350,12 +353,12 @@ only screen and (max-width: 46em) {
 @media handheld,
 only screen and (max-width: 42em) {
 	.search-item {
-		width: 550px;
+		width: 530px;
 	}
 }
 
 @media handheld,
-only screen and (max-width: 35.5em) {
+only screen and (max-width: 37.5em) {
 	.search-item {
 		width: 465px;
 	}
@@ -369,9 +372,9 @@ only screen and (max-width: 30em) {
 }
 
 @media handheld,
-only screen and (max-width: 23.5em) {
+only screen and (max-width: 24em) {
 	.search-item {
-		width: 345px;
+		width: 328px;
 	}
 }
 

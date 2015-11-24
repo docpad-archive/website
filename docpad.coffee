@@ -319,11 +319,6 @@ docpadConfig =
 					line = line.replace(/#/g,'').trim()
 					result.push(line)
 			return result
-		
-			
-		
-		writeObject: (name,obj) ->
-			fsUtil.writeFileSync(name,JSON.stringify(obj),'utf-8')
 					
 
 
@@ -574,9 +569,6 @@ docpadConfig =
 						googleAnalytics: false
 						mixpanel: false
 						reinvigorate: false
-			plugins:
-				repocloner:
-					repos: []
 		production:
 			maxAge: false
 			# maxAge: false

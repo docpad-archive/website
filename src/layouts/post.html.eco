@@ -11,6 +11,7 @@ layout: structure
 				<div class="page-title">
 					<h1><%-@document.title%></h1>
 				</div>
+				<%if @document.title != 'Documentation':%>
 				<%anchors = @getPageAnchors(@document,@content)%>
 				<%if anchors and anchors.length > 2:%>
 				<div id="fl_menu">
@@ -24,6 +25,7 @@ layout: structure
 						<%end%>
     				</div>
 				</div>
+				<%end%>
 				<%end%>
 				<%if @document.img or @document.image or @document.figure or @document.video:%>
 				<div class="gallery slider" data-autoplay="false" data-autoheight="true">

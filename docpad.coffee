@@ -300,8 +300,7 @@ docpadConfig =
 		
 		partners:
 			title:'DocPad Partners'
-			text: 'Myplanet is a digital product development company based out of Toronto, Canada. They funded the development of DocPad’s <a href="https://github.com/bevry/docpad/issues/500">importer functionality</a>.'
-			buttonUrl:'/partners/myplanet'
+			buttonUrl:'docs/support'
 		
 		testimonials: [
 			{text:"I like DocPad because it's nice and it makes websites.",author:"Benjamin Lupton",image:"/img/balupton.jpg"}

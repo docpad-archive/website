@@ -282,14 +282,14 @@ docpadConfig =
 		callToAction:
 			callText: 'Install DocPad Now?'
 			buttonText:'Install'
-			buttonUrl: "https://www.npmjs.com/package/docpad"
+			buttonUrl: "docs/install"
 		
 		mockUp:
 			title: 'Open Sourced and Community Driven'
 			text: 'Built on an open source foundation and supported by community maintained plugins, DocPad is getting better every single day.'
 			buttonText: 'Get Started With DocPad'
 			buttonUrl: '/docs/start'
-			image: 'img/magazine.docpad2.jpg'
+			image: 'img/docpad-github2.jpg'
 			
 		counters: [
 			{name:'Downloads Per Month',value:14000}

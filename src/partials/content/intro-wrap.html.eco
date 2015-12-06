@@ -4,7 +4,7 @@
         <div class="intro-item" style="background-image: url(<%-@image%>);">
             <div class="caption">
                 <h2>Get Productive</h2>
-                <p>DocPad removes limitations and closes the gap between experts and beginners. Designers and developers can create websites faster than ever before.</p>
+                <p>DocPad is a static-site generator with dynamic abilities. It closes the gap between experts and beginners. Designers and developers can create websites faster than ever before.</p>
                 <a class="button white transparent" href="/docs/intro">Read More</a>
             </div>
         </div>

@@ -4,10 +4,10 @@
           <div class="column five">
             <h2><%=@title%></h2>
              <p>DocPad has several partners whom provide consulting and support services for DocPad.
-			  This includes <a href="http://bevry.me">Bevry</a>, 
-				 <a href="http://www.myplanetdigital.com">Myplanet Digital</a>, 
-				 <a href="http://almero.bg">Almero</a> and 
-				 <a href="http://dockyard.com">Dockyard</a>.			  
+			  This includes <a href="http://bevry.me">Bevry</a>,
+				 <a href="http://www.myplanetdigital.com">Myplanet Digital</a>,
+				 <a href="http://almero.bg">Almero</a> and
+				 <a href="http://dockyard.com">Dockyard</a>
 			  </p>
 			  <a class="button transparent aqua" href="<%-@buttonUrl%>">Read More</a>
           </div>

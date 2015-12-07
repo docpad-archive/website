@@ -150,7 +150,7 @@ docpadConfig =
 				#mixpanel: 'd0f9b33c0ec921350b5419352028577e'
 				#reinvigorate: '89t63-62ne18262h'
 
-			# Styles
+			# Styles - this will be overridden in production
 			styles: [
                 '/styles/font-awesome-min.css'
 				'/styles/layers-min.css'
@@ -160,7 +160,6 @@ docpadConfig =
                 '/styles/color-mauve.css'
 				'/styles/monokai_sublime.css'
 			].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
-			.concat(['http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700'])
 
 			# Script
 			scripts: [
@@ -571,6 +570,14 @@ docpadConfig =
 		production:
 			maxAge: false
 			# maxAge: false
+			templateData:
+				site:
+					# Styles
+					styles: [
+						'/styles/font-awesome-min.css'
+						'/styles/layers-min.css'
+						'/styles/main-min.css'
+					].map (url) -> "#{url}?websiteVersion=#{websiteVersion}"
 
 			hostname: process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 			# Listen to port 8082 on the development environment

@@ -1,0 +1,21 @@
+{
+  "concat": {
+    "css": {
+      "src": ["src/raw/styles/general.css","src/static/styles/header.css","src/raw/styles/intro.css",
+			  "src/raw/styles/blog-portfolio.css","src/raw/styles/masonry.css",
+			  "src/raw/styles/comments.css","src/raw/styles/errors.css",
+			  "src/raw/styles/sidebar.css","src/raw/styles/widgets.css",
+			  "src/static/styles/buttons.css","src/raw/styles/icons.css","src/raw/styles/footer.css",
+			  "src/raw/styles/carousel.css","src/static/styles/responsive.css",
+			  "src/static/styles/extras.css", "src/static/styles/extra-responsive.css", 
+			  "src/static/styles/color-mauve.css", "src/raw/styles/monokai_sublime.css"],
+      "dest": "src/raw/styles/main.css"
+    }
+  },
+  "cssmin": {
+    "all": {
+      "src": ["src/raw/styles/main.css"],
+      "dest": "src/raw/styles/main-min.css"
+    }
+  }
+}

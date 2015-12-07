@@ -14,7 +14,7 @@ scripts: ["/scripts/owl-carousel.js","/scripts/home.js","/scripts/mockups.js"]
 
 	<%-@partial('content/counters',counters: @counters)%>
 
-	<%-@partial('content/partners',@partners)%>
+	<%-@partial('content/partners')%>
 	
 	<%-@partial('content/call-to-action',@callToAction)%>
 	

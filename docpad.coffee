@@ -297,10 +297,6 @@ docpadConfig =
 			{name:'Everyday visitor',value:58802}
 		]
 		
-		partners:
-			title:'DocPad Partners'
-			buttonUrl:'docs/support'
-		
 		testimonials: [
 			{text:"I like DocPad because it's nice and it makes websites.",author:"Benjamin Lupton",image:"/img/balupton.jpg"}
 			{text:"Bob the Builder asked if we could fix it. We said 'Yes we can!'",author:"Bob Builder",image:"/img/bob-builder.jpg"}

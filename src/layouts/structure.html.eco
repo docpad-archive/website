@@ -22,11 +22,11 @@ layout: default
 								</a>
 							</li>
 							<%end%>
-							<li class="menu-item search-btn">
+					<!--		<li class="menu-item search-btn">
 								<a href="#" title="search button"><i class="fa fa-search fa-lg"></i></a>
-							</li>
+							</li>-->
 					</ul>
-					<ul id="search-outer" class="reset">
+<!--					<ul id="search-outer" class="reset">
 							<script>
 								(function() {
 								var cx = '000711355494423975011:mvl83obfzvq';
@@ -46,7 +46,7 @@ layout: default
 							<a href="#" title="search close button"><i class="fa fa-remove fa-lg"></i></a>
 						</span>	
 
-					</ul>
+					</ul>-->
 				</nav>
 			</div>
 		</div>

@@ -4,7 +4,7 @@
   "private": true,
   "description": "The Docpad Website",
   "homepage": "https://github.com/docpad/website",
-  "licenses": "(MIT OR CC-BY-4.0)",
+  "license": "(MIT OR CC-BY-4.0)",
   "badges": {
     "list": [
       "travisci",

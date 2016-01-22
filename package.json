@@ -48,8 +48,8 @@
     "url": "http://github.com/docpad/website.git"
   },
   "engines": {
-    "node": "0.12",
-    "npm": "2"
+    "node": "4",
+    "npm": "3"
   },
   "dependencies": {
     "docpad": "~6.78.1",

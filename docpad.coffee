@@ -89,7 +89,9 @@ docpadConfig =
 	# Regenerate each day
 	regenerateEvery: 1000*60*60*24
 
-
+	# Don't use debug log level as it outputs too much and travis complains
+	# https://travis-ci.org/docpad/website/builds/104133494
+	logLevel: 6
 	# =================================
 	# Template Data
 	# These are variables that will be accessible via our templates

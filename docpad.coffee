@@ -148,10 +148,11 @@ docpadConfig =
 
 				#disqus: 'docpad'
 				#gauges: '50dead2bf5a1f541d7000008'
-				googleAnalytics: 'UA-35505181-2'
+				#googleAnalytics: 'UA-35505181-2'
 				#inspectlet: '746529266'
 				#mixpanel: 'd0f9b33c0ec921350b5419352028577e'
 				#reinvigorate: '89t63-62ne18262h'
+				# ^ no more external analytics, cloudflare gives us what we need
 
 			# Styles
 			styles: [

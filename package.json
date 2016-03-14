@@ -51,6 +51,8 @@
     "npm": "2"
   },
   "dependencies": {
+    "chai": "^3.5.0",
+    "cli-color": "^1.1.0",
     "docpad": "~6.78.1",
     "docpad-plugin-cleanurls": "~2.8.1",
     "docpad-plugin-coffeekup": "~2.2.0",
@@ -86,7 +88,7 @@
   "main": "node_modules/.bin/docpad-server",
   "scripts": {
     "start": "node_modules/.bin/docpad-server",
-    "test": "node_modules/.bin/docpad generate --silent --debug",
+    "test": "node ./tests/test.js",
     "info": "node_modules/.bin/docpad info --silent",
     "deploy": "node_modules/.bin/docpad deploy-ghpages --silent --env static"
   }

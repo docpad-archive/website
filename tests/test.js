@@ -1,26 +1,23 @@
 /*global require, process*/
-var fs = require('fs');
-var util = require('util');
+"use strict"
 
-var joe = require('joe');
 var assert = require('assert-helpers');
 var request = require('superagent');
 
-var HTTP_NOT_FOUND = 404;
 var HTTP_OK = 200;
-var HTTP_BAD_REQUEST = 400;
+
+var siteUrl = "http://127.0.0.1:9778/";
 
 function initialiseTests() {
-    var url = "http://127.0.0.1:9778/";
-    request.get(url).end(function (error, res) {
-       assert.equal(res.statusCode, HTTP_OK, 'status code');
-       require("./tests/pages-exist.js");
+
+    request.get(siteUrl).end(function (error, res) {
+        assert.equal(res.statusCode, HTTP_OK, 'status code');
+        require("./pages-exist.js");
     });
 
 }
 
-function runTests() {
-    "use strict";
+function startDocPad() {
 
     var path = require('path');
     var spawn = require('child_process').spawn;
@@ -35,7 +32,7 @@ function runTests() {
     });
 
     child.stdout.on('data', function (chunk) {
-        var str = chunk.toString();
+        var str = chunk.toString().trim();
         console.log(str);
         if (str.indexOf("The action completed successfully") > -1) {
             console.log("!!!DOCPAD IS READY...");
@@ -43,8 +40,19 @@ function runTests() {
         }
 
     });
+}
 
+function runTests() {
+    
+    request.get(siteUrl).end(function (error, res) {
+        if(res && res.statusCode === HTTP_OK){
+           console.log("!!!DOCPAD ALREADY RUNNING...");
+           initialiseTests(); 
+        }else {
+            startDocPad();
+        }
 
+    });
 
 }
 

@@ -5,12 +5,18 @@
 
 // Import
 var joe = require("joe");
-var assert = require('assert');
-var assertHelper = require("assert-helpers");
-var request = require("superagent");
+//var assert = require("assert-helpers");
+var chai = require('chai');
+var assert = chai.assert;
 var cheerio = require('cheerio');
 var urlUtil = require('url');
 var checkURL = require('./linkChecker').checkURL;
+
+var Reporter = require('./joe-reporter-compact');
+var compact = new Reporter();
+joe.setReporter(compact);
+
+assert.logComparison = function(){};
 
 // Prepare
 var HTTP_NOT_FOUND = 404;
@@ -25,55 +31,42 @@ function buildLinkList(html, selector) {
     var output = [];
     var $ = cheerio.load(html);
     var items = $(selector);
-    items.each(function (i, el) {
+    items.each(function () {
         var href = $(this).attr('href');
         output.push(href);
     });
     return output;
 }
 
-function isEqual (actual, expected, testName) {
-    try {
-		assert.equal(actual, expected, testName)
-	}
-	catch ( checkError ) {
-		assertHelper.logComparison(actual, expected, testName)
-        //don't throw error - totally contrary to the idea
-        //of tests
-	}
-}
 
 joe.suite("Home Page Tests", function (suite, test) {
 
 
-    test("Home page exists", function (done) {
-        checkURL(siteURL,function(error,statusCode,res){
-            isEqual(statusCode, HTTP_OK, "status code");
+    test("Home page exists", function () {
+        checkURL(siteURL, function (error, statusCode, res) {
+            assert.equal(statusCode, HTTP_OK, "status code");
             buildLinkList(res.text, '#nav-menu li.menu-item a');
-            done();
         });
     });
 
     //should really always check the content of the page
     //in someway as links and urls can sometimes lead to
     //the wrong page
-    test("Home page Title is: 'DocPad", function (done) {
+    test("Home page Title is: 'DocPad", function () {
         var url = siteURL;
-        checkURL(url,function(error,statusCode,res){
+        checkURL(url, function (error, statusCode, res) {
             var $ = cheerio.load(res.text);
             var title = $('#brand h1').text().trim();
-            isEqual(title, 'DocPad', 'Title is DocPad');
-            done();
+            assert.equal(title, 'DocPad', 'Title is DocPad');
         });
     });
 
-    test("Home page has navigation menu", function (done) {
+    test("Home page has navigation menu", function () {
         var url = siteURL;
-        checkURL(url,function(error,statusCode,res){
+        checkURL(url, function (error, statusCode, res) {
             var $ = cheerio.load(res.text);
             var menu = $('#nav-menu');
             assert.equal(1, menu.length);
-            done();
         });
     });
 
@@ -82,54 +75,64 @@ joe.suite("Home Page Tests", function (suite, test) {
 });
 
 joe.suite("Menu Links Work", function (suite, test) {
+    this.setNestedConfig({
+        onError: 'ignore'
+    });
 
     var linkList = [];
-    test("Menu links exists", function (done) {
-        checkURL(siteURL,function(error,statusCode,res){
+    test("Menu links exists", function () {
+        checkURL(siteURL, function (error, statusCode, res) {
             var $ = cheerio.load(res.text);
             var menu = $('#nav-menu');
             assert.equal(menu.length, 1, "Nav menu exists");
             linkList = buildLinkList(res.text, '#nav-menu li.menu-item a');
-            done();
         });
     });
 
-    linkList.forEach(function (url) {
-        var fullUrl = urlUtil.resolve(siteURL, url);
-        test(fullUrl, function (done) {
-            checkURL(fullUrl,function(error,statusCode,res){
-                assert.isEqual(statusCode, HTTP_OK, "status code");
-                done();
+    suite("Test All Menu Links", function (suite, test) {
+        this.setNestedConfig({
+            onError: 'ignore'
+        });
+        linkList.forEach(function (url) {
+            var fullUrl = urlUtil.resolve(siteURL, url);
+            test(fullUrl, function () {
+                checkURL(fullUrl, function (error, statusCode) {
+                    assert.isEqual(statusCode, HTTP_OK, "status code");
+                });
             });
         });
+
     });
 
 
 });
 
 joe.suite("Showcase Links Work", function (suite, test) {
-
+    this.setNestedConfig({
+        onError: 'ignore'
+    });
     var showcaseUrl = urlUtil.resolve(siteURL, '/docs/showcase');
     var linkList = [];
-    test("Showcase page exists", function (done) {
-        checkURL(showcaseUrl,function(error,statusCode,res){
-            isEqual(res.statusCode, HTTP_OK, "status code");
+    test("Showcase page exists", function (complete) {
+        checkURL(showcaseUrl, function (error, statusCode, res) {
+            assert.equal(res.statusCode, HTTP_OK, "status code");
             linkList = buildLinkList(res.text, 'article ul li a');
-            done();
+            complete();
         });
     });
 
-
-    suite("Test All Showcase Links", function (suite,test) {
-            linkList.forEach(function (url) {
-                test(url, function (done) {
-                    checkURL(url,function(error,statusCode,res){      
-                        isEqual(statusCode, HTTP_OK, "status code");
-                        done();
-                    });
+    suite("Test All Showcase Links", function (suite, test) {
+        this.setNestedConfig({
+            onError: 'ignore'
+        });
+        linkList.forEach(function (url) {
+            test(url, function (complete) {
+                checkURL(url, function (error, statusCode) {
+                    assert.equal(statusCode, HTTP_OK, "status code");
+                    complete();
                 });
             });
         });
-
+    });
 
 });

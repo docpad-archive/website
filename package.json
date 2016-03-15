@@ -51,8 +51,6 @@
     "npm": "2"
   },
   "dependencies": {
-    "chai": "^3.5.0",
-    "cli-color": "^1.1.0",
     "docpad": "~6.78.1",
     "docpad-plugin-cleanurls": "~2.8.1",
     "docpad-plugin-coffeekup": "~2.2.0",
@@ -82,6 +80,10 @@
     "assert-helpers": "^4.1.0",
     "joe": "^1.6.0",
     "joe-reporter-console": "^1.2.1",
+    "joe-reporter-compact": "0.0.1",
+    "ansicolors": "^0.3.2",
+    "diff": "^2.2.2",
+    "chai": "^3.5.0",
     "cheerio": "^0.20.0"
   },
   "subdomain": "docpad",

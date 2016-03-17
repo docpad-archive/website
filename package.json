@@ -1,36 +1,37 @@
 {
-  "name": "docpad-website",
-  "version": "0.1.30",
-  "private": true,
-  "description": "The Docpad Website",
-  "homepage": "https://github.com/docpad/website",
-  "licenses": [
-    {
-      "type": "MIT",
-      "for": "code"
+    "name": "docpad-website",
+    "version": "0.1.30",
+    "private": true,
+    "description": "The Docpad Website",
+    "homepage": "https://github.com/docpad/website",
+    "license": "(MIT OR CC-BY-4.0)",
+    "badges": {
+        "list": [
+      "travisci",
+      "---",
+      "slackin",
+      "patreon",
+      "gratipay",
+      "flattr",
+      "paypal",
+      "bitcoin",
+      "wishlist"
+    ],
+        "config": {
+            "patreonUsername": "bevry",
+            "gratipayUsername": "bevry",
+            "flattrUsername": "balupton",
+            "paypalURL": "https://bevry.me/paypal",
+            "bitcoinURL": "https://bevry.me/bitcoin",
+            "wishlistURL": "https://bevry.me/wishlist",
+            "slackinURL": "https://slack.bevry.me"
+        }
     },
-    {
-      "type": "CC-BY-4.0",
-      "for": "everything else (including content, media and design)"
-    }
-  ],
-  "badges": {
-    "travis": true,
-    "npm": false,
-    "npmdownloads": false,
-    "david": false,
-    "daviddev": false,
-    "gratipay": "bevry",
-    "flattr": "344188/balupton-on-Flattr",
-    "paypal": "QB8GQPZAH84N6",
-    "bitcoin": "https://bevry.me/bitcoin",
-    "wishlist": "https://bevry.me/wishlist"
-  },
-  "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
-  "maintainers": [
+    "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
+    "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
   ],
-  "contributors": [
+    "contributors": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
     "Chase Colman <chase@infinityatlas.com> (https://github.com/chase)",
     "cvrebert (https://github.com/cvrebert)",
@@ -39,59 +40,59 @@
     "mikeumus (https://github.com/mikeumus)",
     "vsopvsop (https://github.com/vsopvsop)"
   ],
-  "bugs": {
-    "url": "https://github.com/docpad/website/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/docpad/website.git"
-  },
-  "engines": {
-    "node": "0.12",
-    "npm": "2"
-  },
-  "dependencies": {
-    "docpad": "~6.78.1",
-    "docpad-plugin-cleanurls": "~2.8.1",
-    "docpad-plugin-coffeekup": "~2.2.0",
-    "docpad-plugin-coffeescript": "~2.5.0",
-    "docpad-plugin-eco": "~2.1.0",
-    "docpad-plugin-feedr": "~2.11.0",
-    "docpad-plugin-highlightjs": "~2.3.0",
-    "docpad-plugin-marked": "~2.3.0",
-    "docpad-plugin-partials": "~2.9.2",
-    "docpad-plugin-raw": "~2.4.0",
-    "docpad-plugin-repocloner": "~2.2.2",
-    "docpad-plugin-services": "~2.6.0",
-    "docpad-plugin-stylus": "~2.9.0",
-    "docpad-plugin-text": "~2.3.3",
-    "getcontributors": "^1.3.0",
-    "moment": "^2.9.0",
-    "superagent": "^1.7.2",
-    "underscore.string": "^3.0.3"
-  },
-  "devDependencies": {
-    "docpad-plugin-ghpages": "~2.4.4",
-    "docpad-plugin-livereload": "~2.6.1",
-    "projectz": "^0.5.0",
-    "grunt": "^0.4.5",
-    "grunt-contrib-concat": "^0.5.1",
-    "grunt-contrib-cssmin": "^0.14.0",
-    "assert-helpers": "^4.1.0",
-    "joe": "^1.6.0",
-    "joe-reporter-console": "^1.2.1",
-    "joe-reporter-compact": "0.0.1",
-    "ansicolors": "^0.3.2",
-    "diff": "^2.2.2",
-    "chai": "^3.5.0",
-    "cheerio": "^0.20.0"
-  },
-  "subdomain": "docpad",
-  "main": "node_modules/.bin/docpad-server",
-  "scripts": {
-    "start": "node_modules/.bin/docpad-server",
-    "test": "node ./tests/test.js",
-    "info": "node_modules/.bin/docpad info --silent",
-    "deploy": "node_modules/.bin/docpad deploy-ghpages --silent --env static"
-  }
+    "bugs": {
+        "url": "https://github.com/docpad/website/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/docpad/website.git"
+    },
+    "engines": {
+        "node": "4",
+        "npm": "3"
+    },
+    "dependencies": {
+        "docpad": "~6.78.1",
+        "docpad-plugin-cleanurls": "~2.8.1",
+        "docpad-plugin-coffeekup": "~2.2.0",
+        "docpad-plugin-coffeescript": "~2.5.0",
+        "docpad-plugin-eco": "~2.1.0",
+        "docpad-plugin-feedr": "~2.11.0",
+        "docpad-plugin-highlightjs": "~2.3.0",
+        "docpad-plugin-marked": "~2.3.0",
+        "docpad-plugin-partials": "~2.9.2",
+        "docpad-plugin-raw": "~2.4.0",
+        "docpad-plugin-repocloner": "~2.2.2",
+        "docpad-plugin-services": "~2.6.0",
+        "docpad-plugin-stylus": "~2.9.0",
+        "docpad-plugin-text": "~2.3.3",
+        "getcontributors": "^1.3.0",
+        "moment": "^2.9.0",
+        "superagent": "^1.7.2",
+        "underscore.string": "^3.0.3"
+    },
+    "devDependencies": {
+        "docpad-plugin-ghpages": "~2.4.4",
+        "docpad-plugin-livereload": "~2.6.1",
+        "projectz": "^0.5.0",
+        "grunt": "^0.4.5",
+        "grunt-contrib-concat": "^0.5.1",
+        "grunt-contrib-cssmin": "^0.14.0",
+        "assert-helpers": "^4.1.0",
+        "joe": "^1.6.0",
+        "joe-reporter-console": "^1.2.1",
+        "joe-reporter-compact": "0.0.1",
+        "ansicolors": "^0.3.2",
+        "diff": "^2.2.2",
+        "chai": "^3.5.0",
+        "cheerio": "^0.20.0"
+    },
+    "subdomain": "docpad",
+    "main": "node_modules/.bin/docpad-server",
+    "scripts": {
+        "start": "node_modules/.bin/docpad-server",
+        "test": "node ./tests/test.js",
+        "info": "node_modules/.bin/docpad info --silent",
+        "deploy": "node_modules/.bin/docpad deploy-ghpages --silent --env static"
+    }
 }

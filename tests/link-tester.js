@@ -36,7 +36,7 @@ function testLinks(config) {
         });
 
         var linkList = [];
-        test(title+" "+pageURL, function (complete) {
+        test(pageURL, function (complete) {
             var fullUrl = urlUtil.resolve(siteURL,pageURL);
             checkURL(fullUrl, function (error, statusCode, res) {
                 assert.equal(statusCode, 200, "status code");
@@ -45,7 +45,7 @@ function testLinks(config) {
             });
         });
 
-        suite("Test links", function (suite, test) {
+        suite(title+" "+pageURL, function (suite, test) {
             this.setNestedConfig({
                 onError: 'ignore'
             });

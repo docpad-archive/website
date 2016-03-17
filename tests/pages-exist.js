@@ -6,10 +6,12 @@
 // Import
 var util = require("util");
 var joe = require("joe");
-var assert = require("./assert-helpers");//needed to override the logComparison method
+var assert = require("./assert-helpers"); //needed to override the logComparison method
 var cheerio = require('cheerio');
 var urlUtil = require('url');
-var checkURL = require('./linkChecker').checkURL;
+var checkURL = require('./check-url').checkURL;
+var testMenu = require('./menu-tester').testMenu;
+var testLinks = require('./link-tester').testLinks;
 
 var Reporter = require('joe-reporter-compact');
 var compact = new Reporter();
@@ -75,70 +77,23 @@ joe.suite("Home Page Tests", function (suite, test) {
 
 });
 
-joe.suite("Menu Links Work", function (suite, test) {
-    this.setNestedConfig({
-        onError: 'ignore'
-    });
+var expectedMenus = require('./menus.json');
 
-    var linkList = [];
-    test("Menu links exists", function (complete) {
-        checkURL(siteURL, function (error, statusCode, res) {
-            var $ = cheerio.load(res.text);
-            var menu = $('#nav-menu');
-            assert.equal(menu.length, 1, "Nav menu exists");
-            linkList = buildLinkList(res.text, '#nav-menu li.menu-item a');
-            complete();
-        });
-    });
-
-    suite("Test All Menu Links", function (suite, test) {
-        this.setNestedConfig({
-            onError: 'ignore'
-        });
-        linkList.forEach(function (url) {
-            var fullUrl = urlUtil.resolve(siteURL, url);
-            test(fullUrl, function (complete) {
-                checkURL(fullUrl, function (error, statusCode) {
-                    
-                    assert.equal(statusCode, HTTP_OK, "status code");
-                    complete();
-                });
-                
-            });
-        });
-
-    });
-
-
+testMenu({
+    joe: joe,
+    expectedMenus: expectedMenus,
+    siteURL: siteURL,
+    menuItemSelector: '#nav-menu li.menu-item a',
+    titleSelector: '.page-title h1'
 });
 
-joe.suite("Showcase Links Work", function (suite, test) {
-    this.setNestedConfig({
-        onError: 'ignore'
+expectedMenus.forEach(function (item) {
+    testLinks({
+        joe: joe,
+        siteURL: siteURL,
+        pageURL: item.link,
+        linkSelector: 'main a',
+        title: ''
     });
-    var showcaseUrl = urlUtil.resolve(siteURL, '/docs/showcase');
-    var linkList = [];
-    test("Showcase page exists", function (complete) {
-        checkURL(showcaseUrl, function (error, statusCode, res) {
-            assert.equal(res.statusCode, HTTP_OK, "status code");
-            linkList = buildLinkList(res.text, 'article ul li a');
-            complete();
-        });
-    });
-    
-
-    suite("Test All Showcase Links", function (suite, test) {
-        this.setNestedConfig({
-            onError: 'ignore'
-        });
-        linkList.forEach(function (url) {
-            test(url, function (complete) {
-                checkURL(url, function (error, statusCode) {
-                    assert.equal(statusCode, HTTP_OK, "status code");
-                    complete();
-                });
-            });
-        });
-    });
-
 });
+

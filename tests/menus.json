@@ -1,0 +1,30 @@
+[
+    {
+        "link": "/docs/intro",
+        "title": "Intro"
+    },
+    {
+        "link": "/docs/install",
+        "title": "Install"
+    },
+    {
+        "link": "/docs/start",
+        "title": "Beginner Guide"
+    },
+    {
+        "link": "/docs/showcase",
+        "title": "Showcase"
+    },
+    {
+        "link": "/docs/plugins",
+        "title": "Plugins"
+    },
+    {
+        "link": "/docs/support",
+        "title": "Getting Support"
+    },
+    {
+        "link": "/docs",
+        "title": "Documentation"
+    }
+]

@@ -12,4 +12,4 @@ function checkURL(url,done) {
 
 }
 
-exports.checkURL = checkURL;
+module.exports.checkURL = checkURL;

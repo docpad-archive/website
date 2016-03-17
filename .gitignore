@@ -11,6 +11,7 @@ components/
 bower_components/
 node_modules/
 out/
+*.bat
 
 # Editor Caches
 .c9/

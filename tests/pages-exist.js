@@ -14,7 +14,7 @@ var testMenu = require('./menu-tester').testMenu;
 var testLinks = require('./link-tester').testLinks;
 
 var Reporter = require('joe-reporter-compact');
-var compact = new Reporter();
+var compact = new Reporter({hideSuccess:true});
 joe.setReporter(compact);
 
 

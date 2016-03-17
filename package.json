@@ -81,7 +81,7 @@
     "assert-helpers": "^4.1.0",
     "joe": "^1.6.0",
     "joe-reporter-console": "^1.2.1",
-    "joe-reporter-compact": "^0.1.1",
+    "joe-reporter-compact": "^0.1.2",
     "ansicolors": "^0.3.2",
     "diff": "^2.2.2",
     "chai": "^3.5.0",

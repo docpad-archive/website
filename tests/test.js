@@ -20,13 +20,15 @@ function initialiseTests() {
 function startDocPad() {
 
     var path = require('path');
-    var spawn = require('child_process').spawn;
+    var childProcess = require('child_process');
 
     var APP_PATH = process.cwd();
     var MODULES_PATH = path.join(APP_PATH, "node_modules");
     var DOCPAD = path.join(MODULES_PATH, "docpad/bin/docpad");
+    var DOCPAD2 = path.join(MODULES_PATH, ".bin/docpad-server/docpad.cmd");
 
-    var child = spawn('node', [DOCPAD, 'server'], {
+    
+    var child = childProcess.spawn('node', [DOCPAD, 'server'], {
         output: true,
         cwd: APP_PATH
     });
@@ -40,6 +42,7 @@ function startDocPad() {
         }
 
     });
+
 }
 
 function runTests() {

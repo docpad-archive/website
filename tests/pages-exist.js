@@ -14,7 +14,7 @@ var testMenu = require('./menu-tester').testMenu;
 var testLinks = require('./link-tester').testLinks;
 
 var Reporter = require('joe-reporter-compact');
-var compact = new Reporter({hideSuccess:true});
+var compact = new Reporter();
 joe.setReporter(compact);
 
 
@@ -77,6 +77,8 @@ joe.suite("Home Page Tests", function (suite, test) {
 
 });
 
+
+
 var expectedMenus = require('./menus.json');
 
 testMenu({
@@ -98,5 +100,8 @@ expectedMenus.forEach(function (item) {
     });
 });
 
-
-
+joe.suite("Shut Down..", function (suite, test) {
+    setTimeout(function () {
+        joe.exit();
+    }, 3000);
+});

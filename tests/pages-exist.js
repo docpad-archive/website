@@ -24,7 +24,7 @@ var HTTP_NOT_FOUND = 404;
 var HTTP_OK = 200;
 var HTTP_BAD_REQUEST = 400;
 
-function pagesExist(siteURL,httpServer) {
+function pagesExist(siteURL, DocPadOrHttpServer) {
 
 
 	siteURL = siteURL || "http://127.0.0.1:9778/";
@@ -93,7 +93,19 @@ function pagesExist(siteURL,httpServer) {
 	});
 
 	joe.suite("Shut Down..", function (suite, test) {
-		joe.exit();
+		//joe.exit();
+		if (DocPadOrHttpServer) {
+			if (DocPadOrHttpServer.close) {
+				DocPadOrHttpServer.close();
+			} else if (DocPadOrHttpServer.kill) {
+				DocPadOrHttpServer.kill();
+			} else {
+				console.log("NO kill method or close method");
+			}
+
+		} else {
+			console.log("NO DocPad or HttpServer");
+		} 
 	});
 }
 

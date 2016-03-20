@@ -27,7 +27,7 @@ function start(opts, callback) {
 		if (str.indexOf("The action completed successfully") > -1) {
 			console.log("!!!DOCPAD IS READY...");
 			if (useDocPad) {
-				callback();
+				callback(child);
 			} else {
 				child.kill();
 			}

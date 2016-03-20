@@ -81,11 +81,12 @@
     "assert-helpers": "^4.1.0",
     "joe": "^1.6.0",
     "joe-reporter-console": "^1.2.1",
-    "joe-reporter-compact": "^0.1.2",
+    "joe-reporter-compact": "^0.1.4",
     "ansicolors": "^0.3.2",
     "diff": "^2.2.2",
     "chai": "^3.5.0",
-    "cheerio": "^0.20.0"
+    "cheerio": "^0.20.0",
+	"http-server": "^0.9.0"
   },
   "subdomain": "docpad",
   "main": "node_modules/.bin/docpad-server",

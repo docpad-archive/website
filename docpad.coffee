@@ -405,7 +405,8 @@ docpadConfig =
 
 					githubEditUrl = "https://github.com/#{organisationDirectory}/#{projectDirectory}/edit/master/"
 					proseEditUrl = "http://prose.io/##{organisationDirectory}/#{projectDirectory}/edit/master/"
-					editUrl = githubEditUrl + a.relativePath.replace("learn/#{organisationDirectory}/#{projectDirectory}/", '')
+					relativePath = a.relativePath.replace(/\\/g,"/")
+					editUrl = githubEditUrl + relativePath.replace("learn/#{organisationDirectory}/#{projectDirectory}/", '')
 					layout = 'post'
 					scripts = []
 					if a.name == 'showcase.html'

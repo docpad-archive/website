@@ -1,23 +1,10 @@
 /*global require*/
 "use strict";
 var checkURL = require('./check-url').checkURL;
+var buildLinkList = require('./link-builder').buildLinkList;
 var assert = require("./assert-helpers");
 var cheerio = require('cheerio');
 var urlUtil = require('url');
-
-function buildLinkList(html, selector) {
-    var output = [];
-    var $ = cheerio.load(html);
-    var items = $(selector);
-    items.each(function () {
-        var href = $(this).attr('href');
-        if(href.indexOf("#") === -1){
-            output.push(href);
-        }
-        
-    });
-    return output;
-}
 
 
 function testLinks(config) {

@@ -1,49 +1,17 @@
 /*global require, process*/
 "use strict"
 
-try {
-	var assert = require('assert-helpers');
-	var request = require('superagent');
-	var httpServer = require('http-server');
-	var pagesEx = require("./pages-exist");
-	var startServer = require("./start-server");
-} catch (err) {
-	console.log(err);
-	throw err;
-}
+var tester = require('./docpad-website-tester');
+var expectedMenus = require('./menus.json');
 
-var HTTP_OK = 200;
-
-var ip = '127.0.0.1';
-var port = '9778';
-var siteUrl = "http://" + ip + ":" + port;
-
-function initialiseTests(server) {
-
-	request.get(siteUrl).end(function (error, res) {
-		assert.equal(res.statusCode, HTTP_OK, 'status code');
-		pagesEx.pagesExist(siteUrl, server);
-
-	});
-
-}
-
-
-function runTests() {
-
-	request.get(siteUrl).end(function (error, res) {
-		if (res && res.statusCode === HTTP_OK) {
-			console.log("!!!SERVER ALREADY RUNNING ON " + siteUrl);
-			initialiseTests();
-		} else {
-			startServer.start({
-				ip: ip,
-				port: port
-			}, initialiseTests)
-		}
-
-	});
-
-}
-
-runTests();
+tester.runTests({
+	host: "127.0.0.1",
+	port: "9778",
+	menuSelector: "#nav-menu",
+	menuItemSelector: "#nav-menu li.menu-item a",
+	homeTitleSelector: "#brand h1",
+	pageTitleSelector: ".page-title h1",
+	homeTitleText: "DocPad",
+	expectedMenus: expectedMenus,
+	pageLinkSelector: "main a"
+});

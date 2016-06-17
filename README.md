@@ -2,12 +2,15 @@
 
 <!-- BADGES/ -->
 
-[![Build Status](https://img.shields.io/travis/docpad/docpad-website/master.svg)](http://travis-ci.org/docpad/docpad-website "Check this project's build status on TravisCI")<br/>
-[![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
-[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
-[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
-[![BitCoin donate button](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://bevry.me/bitcoin "Donate once-off to this project using BitCoin")
-[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](https://bevry.me/wishlist "Buy an item on our wishlist for us")
+<span class="badge-travisci"><a href="http://travis-ci.org/docpad/website" title="Check this project's build status on TravisCI"><img src="https://img.shields.io/travis/docpad/website/master.svg" alt="Travis CI Build Status" /></a></span>
+<br class="badge-separator" />
+<span class="badge-slackin"><a href="https://slack.bevry.me" title="Join this project's slack community"><img src="https://slack.bevry.me/badge.svg" alt="Slack community badge" /></a></span>
+<span class="badge-patreon"><a href="http://patreon.com/bevry" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
+<span class="badge-gratipay"><a href="https://www.gratipay.com/bevry" title="Donate weekly to this project using Gratipay"><img src="https://img.shields.io/badge/gratipay-donate-yellow.svg" alt="Gratipay donate button" /></a></span>
+<span class="badge-flattr"><a href="https://flattr.com/profile/balupton" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
+<span class="badge-paypal"><a href="https://bevry.me/paypal" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
+<span class="badge-bitcoin"><a href="https://bevry.me/bitcoin" title="Donate once-off to this project using Bitcoin"><img src="https://img.shields.io/badge/bitcoin-donate-yellow.svg" alt="Bitcoin donate button" /></a></span>
+<span class="badge-wishlist"><a href="https://bevry.me/wishlist" title="Buy an item on our wishlist for us"><img src="https://img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a></span>
 
 <!-- /BADGES -->
 
@@ -37,17 +40,16 @@ The DocPad documentation is stored in a [separate repository](https://github.com
 
 <!-- LICENSE/ -->
 
-## License
+<h2>License</h2>
 
 Unless stated otherwise all works are:
 
-- Copyright &copy; Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
+<ul><li>Copyright &copy; <a href="http://bevry.me">Bevry Pty Ltd</a></li></ul>
 
 and licensed under:
 
-- The incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://opensource.org/licenses/mit-license.php)
-- The [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/)
+<ul><li><a href="http://spdx.org/licenses/MIT.html">MIT License</a></li>
+<li>or</li>
+<li><a href="http://spdx.org/licenses/CC-BY-4.0.html">Creative Commons Attribution 4.0</a></li></ul>
 
 <!-- /LICENSE -->
-
-

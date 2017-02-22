@@ -36,7 +36,7 @@ navigationData =
 		'Start': '/docs/start'
 		'Showcase': '/docs/showcase'
 		'Plugins': '/docs/plugins'
-		'Documentation': '/docs'
+		'Documentation': '/docs/'
 
 	bottom:
 		'DocPad': '/'
@@ -361,15 +361,13 @@ docpadConfig =
 			simpleRedirects:
 				'/license': '/g/blob/master/LICENSE.md#readme'
 				'/chat-logs': 'https://botbot.me/freenode/docpad/'
-				'/chat': 'http://webchat.freenode.net/?channels=docpad'
+				'/chat': 'https://discuss.bevry.me/tags/chat'
 				'/changelog': '/g/blob/master/HISTORY.md#readme'
 				'/changes': '/changelog'
 				'/history': '/changelog'
-				'/bug-report': '/docs/support#bug-reports-via-github-s-issue-tracker'
-				'/forum': 'http://stackoverflow.com/questions/tagged/docpad'
-				'/stackoverflow': '/forum'
-				'/google+': 'https://plus.google.com/communities/102027871269737205567'
-				'/+': '/google+'
+				'/bug-report': 'https://discuss.bevry.me/t/official-bevry-support-channels/63'
+				'/forum': 'https://discuss.bevry.me/tags/docpad'
+				'/stackoverflow': 'https://discuss.bevry.me/t/official-stack-overflow-support/61/3'
 				'/donate': 'https://bevry.me/donate'
 				'/gittip-community': '/donate'
 				'/gittip': '/donate'
@@ -425,20 +423,6 @@ docpadConfig =
 				# /(docs/)?docpad-plugin-#{pluginName}
 				[/^\/(?:docs\/)?docpad-plugin-(.+)$/, 'https://github.com/docpad/docpad-plugin-$1']
 			]
-
-	# =================================
-	# Environments
-
-	# Disable analytic services on the development environment
-	environments:
-		development:
-			templateData:
-				site:
-					services:
-						gauges: false
-						googleAnalytics: false
-						mixpanel: false
-						reinvigorate: false
 
 
 	# =================================

@@ -418,7 +418,10 @@ const docpadConfig = {
 				'/render-early-via-include': '/i/378',
 				'/extension-not-rendering': '/i/192',
 				'/plugin-conventions': '/i/313',
-				'/plugin-uncompiled': '/i/925'
+				'/plugin-uncompiled': '/i/925',
+				'/twitter': 'https://twitter.com/docpad',
+				'/tweet': '/twitter',
+				'/t': '/twitter'
 			},
 
 			advancedRedirects: [
@@ -441,9 +444,6 @@ const docpadConfig = {
 				// GitHub
 				// /(g|github|bevry/docpad)[/#{path}]
 				[/^\/(?:g|github|bevry\/docpad)(?:\/(.*))?$/, 'https://github.com/docpad/docpad/$1'],
-
-				// Twitter
-				[/^\/(?:t|twitter|tweet)(?:\/(.*))?$/, 'https://twitter.com/docpad'],
 
 				// Issues
 				// /(i|issue)[/#{issue}]

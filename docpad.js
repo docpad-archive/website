@@ -56,7 +56,7 @@ const navigationData = {
 
 const websiteVersion = require('./package.json').version
 const docpadVersion = require('./package.json').dependencies.docpad.toString().replace('~', '').replace('^', '')
-const exchangeUrl = `http://helper.docpad.org/exchange.cson?version=${docpadVersion}`
+const exchangeUrl = `https://helper.docpad.org/exchange.cson?version=${docpadVersion}`
 const siteUrl = process.env.NODE_ENV === 'production' ? 'http://docpad.org' : 'http://localhost:9778'
 
 
@@ -353,7 +353,7 @@ const docpadConfig = {
 		feedr: {
 			feeds: {
 				latestPackage: {
-					url: 'http://helper.docpad.org/latest.json',
+					url: 'https://helper.docpad.org/latest.json',
 					parse: 'json'
 				},
 				exchange: {

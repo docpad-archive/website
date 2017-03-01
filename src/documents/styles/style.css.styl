@@ -245,19 +245,8 @@ nav li
 // ====================================
 // Layout and structure
 
-.container
-	margin: 0 auto
-	width: 90%
-	position: relative
-	clear: both
-
-.bottombar
-	margin-top: 3em
-	width: 100%
-	min-height: 4em
-
 .topbar
-	position: relative
+	position: fixed
 	top: 0
 	left: 0
 	width: 100%
@@ -273,6 +262,30 @@ nav li
 		word-wrap: break-word
 		overflow: hidden
 
+.topbar:hover .sidebar
+	left: 0
+	opacity: 1
+
+.mainbar
+	position: fixed
+	top: 2.5em
+	left: 0
+
+	overflow: auto
+	height: 100vh
+	width: 100vw
+	padding-bottom: 2.5em
+
+.bottombar
+	margin-top: 3em
+
+.page
+	padding-top: 2em
+	margin: 0 auto
+	width: 90%
+	font-weight: 400
+	clearfix()
+
 .sidebar
 	position: fixed
 	top: 2.5em
@@ -286,28 +299,12 @@ nav li
 	.list-menu
 		overflow: auto
 		height: 100vh
+		padding-bottom: 2.5em
+
 		width: 200px
 		background: hsl(0, 0%, 95%)
 		border-right: 1px solid colorLightBrown
 		box-shadow: 0 1px 0 white
-
-.page
-	width: 100%
-
-.mainbar
-	font-weight: 400
-	clearfix()
-
-.topbar
-	position: fixed
-.mainbar
-	margin-top: 40px
-.page
-	padding-top: 2em
-
-.topbar:hover .sidebar
-	left: 0
-	opacity: 1
 
 
 // ====================================
@@ -553,12 +550,10 @@ nav li
 .sidebar
 	// Menu
 	.list-menu
-		padding-bottom: 1em
-
 		// Category Group
 		.list-menu-categories
 			margin: 0.3em 0
-			border-left: 2px solid colorLightGold
+			// border-left: 2px solid colorLightGold
 
 		// Category
 		.list-menu-category

@@ -45,10 +45,11 @@ div '.topbar', ->
 		})
 
 div '.mainbar', ->
-	text @content
+	div '.contentbar', ->
+		text @content
 
-footer '.bottombar', ->
-	div '.about', -> @text['copyright']
-	div '.links', ->
-		for own page, url of @navigation.bottom
-			a href: url, -> page
+	footer '.bottombar', ->
+		div '.about', -> @text['copyright']
+		div '.links', ->
+			for own page, url of @navigation.bottom
+				a href: url, -> page

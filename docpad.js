@@ -391,12 +391,12 @@ const docpadConfig = {
 		cleanurls: {
 			// Common Redirects
 			simpleRedirects: {
-				'/license': '/g/blob/master/LICENSE.md#readme',
-				'/chat-logs': 'https://botbot.me/freenode/docpad/',
-				'/chat': 'https://discuss.bevry.me/tags/chat',
-				'/changelog': '/g/blob/master/HISTORY.md#readme',
+				'/license': 'https://github.com/docpad/docpad/blob/master/LICENSE.md#readme',
+				'/changelog': 'https://github.com/docpad/docpad/blob/master/HISTORY.md#readme',
 				'/changes': '/changelog',
 				'/history': '/changelog',
+				'/chat-logs': 'https://botbot.me/freenode/docpad/',
+				'/chat': 'https://discuss.bevry.me/tags/chat',
 				// use /support-channels, as there is a /support documentation page
 				'/support-channels': 'https://discuss.bevry.me/t/official-bevry-support-channels/63',
 				'/bug-report': '/support-channels',

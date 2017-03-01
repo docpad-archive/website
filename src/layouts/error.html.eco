@@ -1,7 +1,9 @@
-###
+<!---
 layout: structure
-###
+--->
 
-section '#content', ->
-	article '.error', ->
-		text @content
+<section id="content">
+	<article class="error">
+		<%- @content %>
+	</article>
+</section>

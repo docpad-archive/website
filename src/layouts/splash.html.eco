@@ -1,7 +1,9 @@
-###
+<!---
 layout: structure
-###
+--->
 
-section '#content', ->
-	article '.splash', ->
-		text @content
+<section id="content">
+	<article class="splash">
+		<%- @content %>
+	</article>
+</section>

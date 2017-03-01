@@ -389,6 +389,9 @@ const docpadConfig = {
 		},
 
 		cleanurls: {
+			// enable this for surge.sh deployment
+			trailingSlashes: true,
+
 			// Common Redirects
 			simpleRedirects: {
 				'/license': 'https://github.com/docpad/docpad/blob/master/LICENSE.md#readme',

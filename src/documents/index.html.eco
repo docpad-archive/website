@@ -1,7 +1,7 @@
----
+<!---
 layout: splash
 standalone: true
----
+--->
 
 <section class="hero">
 	<h1>DocPad Sets You Free</h1>
@@ -54,7 +54,6 @@ standalone: true
 		<ul class="providers clearfix"><% for partner in @getCollection('partners').models: %>
 			<li>
 				<a
-					class="no-ajaxy"
 					href="/docpad/support#<%= partner.get('shortname') or partner.get('basename') %>"
 					title="<%= partner.get('description') %>"
 				>
@@ -71,7 +70,6 @@ standalone: true
 
 	<a href="/docs/intro" title="Get Started" class="btn">Get Started with DocPad</a>
 
-	<%- @getServiceButtons() %>
 	<script async defer src="//slack.bevry.me/slackin.js"></script>
 
 	<div class="tweets">

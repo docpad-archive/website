@@ -1,4 +1,4 @@
-### cson
+###
 title: "Documentation"
 layout: "structure"
 standalone: true

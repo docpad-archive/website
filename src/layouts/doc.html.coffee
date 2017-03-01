@@ -32,3 +32,9 @@ section '#content', ->
 				url: '/docs/'
 				title: 'Documentation'
 		})
+
+	script '''
+		document.addEventListener('DOMContentLoaded', function (event) {
+			anchors.add();
+		});
+		'''

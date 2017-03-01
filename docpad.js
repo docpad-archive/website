@@ -2,6 +2,8 @@
 'use strict'
 
 // Require
+const moment = require('moment')
+const strUtil = require('underscore.string')
 const fsUtil = require('fs')
 const pathUtil = require('path')
 
@@ -51,10 +53,6 @@ const navigationData = {
 		Support: '/support'
 	}
 }
-
-// const githubOrganisations = ['bevry', 'docpad', 'webwrite']
-// let contributorsGetter = null
-const contributors = null
 
 const websiteVersion = require('./package.json').version
 const docpadVersion = require('./package.json').dependencies.docpad.toString().replace('~', '').replace('^', '')
@@ -127,6 +125,8 @@ const docpadConfig = {
 
 		text: textData,
 		navigation: navigationData,
+		moment,
+		strUtil,
 
 		// The URL we use to fetch the exchange data, included in template data for debugging
 		exchangeUrl,
@@ -148,15 +148,6 @@ const docpadConfig = {
 			// The website keywords (for SEO) separated by commas
 			keywords: 'bevry, bevryme, balupton, benjamin lupton, docpad, node, node.js, javascript, coffeescript, query engine, queryengine, backbone.js, cson',
 
-			// Services
-			services: {
-				furyButton: 'docpad',
-				gratipayButton: 'bevry',
-				flattrButton: '344188/balupton-on-Flattr',
-				paypalButton: 'QB8GQPZAH84N6',
-				githubStarButton: 'docpad/docpad'
-			},
-
 			// Styles
 			styles: [
 				'/vendor/normalize.css',
@@ -169,19 +160,8 @@ const docpadConfig = {
 
 			// Script
 			scripts: [
-				// Vendor
-				'/vendor/jquery.js',
-				'/vendor/jquery-scrollto.js',
-				'/vendor/modernizr.js',
-				'/vendor/history.js',
-
-				// Scripts
-				'/scripts/historyjs-ajaxify.js',
-				'/scripts/bevry.js',
-				'/scripts/script.js'
-			].map(function (url) {
-				return `${url}?websiteVersion=${websiteVersion}`
-			})
+				'//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js'
+			]
 		},
 
 		// -----------------------------
@@ -243,11 +223,6 @@ const docpadConfig = {
 			language = language || pathUtil.extname(relativePath).substr(1)
 			const contents = this.readFile(relativePath)
 			return `<pre><code class="${language}">${contents}</code></pre>`
-		},
-
-		// Get Contributors
-		getContributors () {
-			return contributors || []
 		}
 	},
 
@@ -410,25 +385,9 @@ const docpadConfig = {
 				path: 'src/raw/vendor/normalize.css',
 				url: 'https://rawgit.com/h5bp/html5-boilerplate/5.3.0/dist/css/normalize.css'
 			}, {
-				name: 'Modernizr',
-				path: 'src/raw/vendor/modernizr.js',
-				url: 'https://rawgit.com/h5bp/html5-boilerplate/5.3.0/dist/js/vendor/modernizr-2.8.3.min.js'
-			}, {
-				name: 'jQuery',
-				path: 'src/raw/vendor/jquery.js',
-				url: 'https://rawgit.com/h5bp/html5-boilerplate/5.3.0/dist/js/vendor/jquery-1.12.0.min.js'
-			}, {
-				name: 'jQuery ScrollTo',
-				path: 'src/raw/vendor/jquery-scrollto.js',
-				url: 'https://rawgit.com/balupton/jquery-scrollto/gh-pages/lib/jquery-scrollto.js'
-			}, {
 				name: 'Highlight.js XCode Theme',
 				path: 'src/raw/vendor/highlight.css',
 				url: 'https://rawgit.com/isagalaev/highlight.js/8.0/src/styles/xcode.css'
-			}, {
-				name: 'History.js',
-				path: 'src/raw/vendor/history.js',
-				url: 'https://browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js'
 			}]
 		},
 
@@ -449,7 +408,9 @@ const docpadConfig = {
 				'/changelog': '/g/blob/master/HISTORY.md#readme',
 				'/changes': '/changelog',
 				'/history': '/changelog',
-				'/bug-report': 'https://discuss.bevry.me/t/official-bevry-support-channels/63',
+				// use /support-channels, as there is a /support documentation page
+				'/support-channels': 'https://discuss.bevry.me/t/official-bevry-support-channels/63',
+				'/bug-report': '/support-channels',
 				'/forum': 'https://discuss.bevry.me/tags/docpad',
 				'/stackoverflow': 'https://discuss.bevry.me/t/official-stack-overflow-support/61/3',
 				'/donate': 'https://bevry.me/donate',
@@ -461,7 +422,6 @@ const docpadConfig = {
 				'/praise': 'https://twitter.com/docpad/favorites',
 				'/growl': 'http://growl.info/downloads',
 				'/partners': '/docs/support#support-consulting-partners',
-				'/contributors': '/docs/participate#contributors',
 				'/docs/start': '/docs/begin',
 				'/get-started': '/docs/overview',
 				'/chat-guidelines': '/i/384',
@@ -509,70 +469,8 @@ const docpadConfig = {
 				[/^\/(?:docs\/)?docpad-plugin-(.+)$/, 'https://github.com/docpad/docpad-plugin-$1']
 			]
 		}
-	},
-
-
-	// =================================
-	// Events
-
-	events: {
-
-		// Extend Template data
-		extendTemplateData (opts) {
-			opts.templateData.moment = require('moment')
-			opts.templateData.strUtil = require('underscore.string')
-
-			// Return
-			return true
-		}
-
-		/*
-		// Generate Before
-		generateBefore () {
-			// Reset contributors if we are a complete generation (not a partial one)
-			contributors = null
-
-			// Return
-			return true
-		},
-
-		// Fetch Contributors
-		renderBefore (opts, next) {
-			// Prepare
-			const docpad = this.docpad
-
-			// Check
-			if ( contributors ) {
-				return next()
-			}
-
-			// Log
-			docpad.log('info', 'Fetching your latest contributors for display within the website')
-
-			// Prepare contributors getter
-			if ( contributorsGetter == null ) {
-				contributorsGetter = require('getcontributors').create({
-					log: docpad.log,
-					github_client_id: process.env.BEVRY_GITHUB_CLIENT_ID,
-					github_client_secret: process.env.BEVRY_GITHUB_CLIENT_SECRET
-				})
-			}
-
-			// Fetch contributors
-			contributorsGetter.fetchContributorsFromUsers(githubOrganisations, function (err, results = []) {
-				// Check
-				if ( err )  return next(err)
-
-				// Apply
-				contributors = results
-				docpad.log('info', `Fetched your latest contributors for display within the website, all ${results.length} of them`)
-
-				// Complete
-				return next()
-			})
-		}
-		*/
 	}
+
 }
 
 // Export our DocPad Configuration

@@ -52,5 +52,3 @@ footer '.bottombar', ->
 	div '.links', ->
 		for own page, url of @navigation.bottom
 			a href: url, -> page
-
-a '.webchat', href:'http://webchat.freenode.net/?channels=docpad', target:'_blank', -> 'IRC Chat'

@@ -1,6 +1,6 @@
----
+/***
 standalone: true
----
+***/
 
 // Coded in Stylus: http://stylus-lang.com
 
@@ -241,19 +241,6 @@ nav li
 		background-image: none
 		box-shadow: inset 1px 1px 2px rgba(black, .2)
 
-.contributors
-	.contributor
-		.contributor-repos
-			display: none
-		&:hover
-			.contributor-repos
-				display: inline
-		.contributor-repo
-			&:after
-				content: ', '
-			&:last-child:after
-				content: ''
-
 
 // ====================================
 // Layout and structure
@@ -310,31 +297,14 @@ nav li
 	font-weight: 400
 	clearfix()
 
-.webchat
+.topbar
 	position: fixed
-	left: 0
-	bottom: 0
+.mainbar
+	margin-top: 40px
+.page
+	padding-top: 2em
 
-	width: 100px
-	height: 25px
-
-	cursor: pointer
-	border: 1px solid hsl(209, 32%, 82%)
-	background: hsl(209, 70%, 94%)
-	text-align: center
-	padding-top: 0.3em
-
-html.no-touch
-	.topbar
-		position: fixed
-	.mainbar
-		margin-top: 40px
-	.page
-		padding-top: 2em
-
-
-html.no-touch .topbar:hover .sidebar
-.topbar .sidebar.active
+.topbar:hover .sidebar
 	left: 0
 	opacity: 1
 
@@ -528,30 +498,6 @@ html.no-touch .topbar:hover .sidebar
 
 			&:hover
 				color: white
-
-	.service-buttons
-		margin-top: 1.5em
-
-	.social-buttons
-	.service-badges
-		display: block
-		margin-top: 0.5em
-
-	.service-button
-		display: inline-block
-		width: 100px
-		text-align: left
-		overflow: hidden
-		&.google-plus-one-button
-		&.hacker-news-submit-button
-			width: 80px
-		&.twitter-follow-button
-		&.fury-button
-			width: 130px
-		&.reddit-submit-button
-			width: 0px !important
-			iframe
-				padding-top: 3px
 
 	.tweets
 		margin-top: 2em
@@ -873,12 +819,6 @@ html.no-touch .topbar:hover .sidebar
 			margin-left: 2%
 		.links
 			margin-right: 2%
-
-	// Hide the webchat button
-	.webchat
-		position: absolute
-		left: -1000px
-		top: -1000px
 
 @media screen and (max-width: 960px)
 	// Reduce doc columns

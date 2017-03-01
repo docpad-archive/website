@@ -76,8 +76,8 @@ env:
   # travis encrypt "SURGE_LOGIN=$SURGE_LOGIN" --add env.global
   # travis encrypt "SURGE_TOKEN=$SURGE_TOKEN" --add env.global
   - DEPLOY_BRANCH='master'  # this is the branch that you want deployed
-  - secure: fHJTisHc/SEKQLzWOgD6oH1Sm6RJdEjg3ojF9WVVQqxcFji1i8HooaHfseC0De1M+PI8Z9i0/d9jXQhXUME/8VYFkxdcAMUNo1zAzEC4vy45rROXr9GAZBkSeAq+7v8rKaL2wXnoOvifdM9BQPe+NmqByQMon3IPYcfSdv/WF34=
-  - secure: d+rdemGCdOteVu7b6erd3pbaTYz1NFNYooY2s+OcA1rCJppM12vUTa57j2emVbkbV4D6Zc29mwRfn6Q5ksX+0Ny6wyNgMZLVDE5t2JVPDuMe6T3OPTjZxRdU8XDKroRKWZ0GM9A75gtAoVLg9sLr9J4VvjFYNhvbBktFz5CqSCY=
+  - secure: YyxmAjx6bw/iARcoTJHFXkj1G1/0JGgOeeyE0w6y/5kFBSTJAmf0sZHzREs5uP8hs3FSCr5w16CJgFYwwaQiW5aPiDUNZ/Az5TOVH5ided5abVOSeK+rd1IxgKvquWDwCgtU+hBMOAWljcp6X+41gC812V03sIF/alNsK4RqCZc=
+  - secure: e8O1Z+/YVuiWXRguQBJkBGQdNtMR1zhjjPp6GQyKBEGCeXj6+KRGbVi7P16P3z5NpVk4bF1KlZtD2QiJgEz20LHdn0FZTi/nc8QPiqeR+poW7ioPdFfjRHcZOCoNGhMLOKq3KKZS9HqBff8rR6wfdbMi3RYxXtHDnuUPNwOYWfs=
 
 # https://github.com/balupton/awesome-travis#slack
 # https://github.com/balupton/awesome-travis#email

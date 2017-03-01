@@ -35,6 +35,6 @@ section '#content', ->
 
 	script '''
 		document.addEventListener('DOMContentLoaded', function (event) {
-			anchors.add();
+			anchors.add().remove('.no-anchor');
 		});
 		'''

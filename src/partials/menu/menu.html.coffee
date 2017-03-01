@@ -9,7 +9,7 @@ nav '.list-menu', ->
 		text '''
 			<li class="list-menu-category list-menu-home" typeof="soic:page" about="/">
 				<a class="list-menu-link" href="/">
-					<h3 class="list-menu-title" property="dc:title">
+					<h3 class="list-menu-title no-anchor" property="dc:title">
 						HOME
 					</h3>
 				</a>

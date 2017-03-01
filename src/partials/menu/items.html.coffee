@@ -31,7 +31,7 @@ items.forEach (item) ->
 		# Link
 		a ".list-#{type}-link", href:h(url), ->
 			# Title
-			h3 ".list-#{type}-title", {property: 'dc:title'}, -> h(title)
+			h3 ".list-#{type}-title.no-anchor", {property: 'dc:title'}, -> h(title)
 
 			# Date
 			if showDate and moment

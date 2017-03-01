@@ -56,7 +56,6 @@
   },
   "dependencies": {
     "docpad": "~6.79.0",
-    "docpad-plugin-cleanurls": "~2.8.1",
     "docpad-plugin-coffeekup": "~2.2.0",
     "docpad-plugin-coffeescript": "~2.5.0",
     "docpad-plugin-downloader": "~2.1.4",

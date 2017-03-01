@@ -75,10 +75,10 @@
   },
   "devDependencies": {
     "coffeelint": "^1.16.0",
-    "docpad-plugin-ghpages": "~2.4.4",
     "docpad-plugin-livereload": "~2.7.1",
     "eslint": "^3.16.1",
-    "projectz": "^1.3.2"
+    "projectz": "^1.3.2",
+    "surge": "^0.18.0"
   },
   "main": "node_modules/.bin/docpad-server",
   "scripts": {
@@ -93,8 +93,8 @@
     "our:test": "npm run our:verify && npm test",
     "our:release": "npm run deploy",
     "start": "docpad-server",
-    "test": "docpad generate --silent",
+    "test": "docpad generate --silent --env static",
     "info": "docpad info --silent",
-    "deploy": "docpad deploy-ghpages --silent --env static"
+    "deploy": "surge --project ./out --domain docpad.surge.sh"
   }
 }

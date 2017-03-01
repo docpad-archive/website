@@ -1,94 +1,111 @@
-###
-standalone: true
-###
+/* global window, document, $ */
+/* eslint no-console:0, new-cap:0 */
+'use strict'
 
-# App
-class App extends BevryApp
+// App
+class App extends window.BevryApp {
 
-	# Constructor
-	constructor: ->
-		# Prepare
-		@config ?= {}
-		@config.articleScrollOpts ?= {}
-		@config.sectionScrollOpts ?= {}
+	// Constructor
+	constructor () {
+		// Prepare
+		super()
 
-		# Apply
-		@config.articleScrollOpts.offsetTop = 100
-		@config.sectionScrollOpts.offsetTop = 80
+		// Apply
+		this.config.articleScrollOpts = Object.assign(this.config.articleScrollOpts || {}, {
+			offsetTop: 100
+		})
+		this.config.sectionScrollOpts = Object.assign(this.config.sectionScrollOpts || {}, {
+			offsetTop: 80
+		})
+	}
 
-		# Forward
-		super
+	onDomReady (...args) {
+		const me = this
 
-	onDomReady: =>
-		# On touch devices make clicking docpad show the sidebar
-		if $('html').hasClass('no-touch') is false
+		// On touch devices make clicking docpad show the sidebar
+		if ( $('html').hasClass('no-touch') === false ) {
 			$(document.body)
-				.on 'click touchstart', '.logo', (e) =>
-					@resize()
+				.on('click touchstart', '.logo', function (e) {
+					me.resize()
 					$('.sidebar').addClass('active')
 					e.preventDefault()
 					return false
-				.on 'click touchstart', '.container', (e) ->
-					if $(e.target).parents('.topbar').length is 0
+				})
+				.on('click touchstart', '.container', function (e) {
+					if ( $(e.target).parents('.topbar').length === 0 ) {
 						$('.sidebar').removeClass('active')
+					}
 					return true
+				})
+		}
 
-		# Forward
-		super
+		// Forward
+		return super.onDomReady(...args)
+	}
 
-	resize: =>
-		# Prepare
-		$sidebar = $('.sidebar')
+	resize () {
+		// Prepare
+		const $sidebar = $('.sidebar')
 
-		# Apply
-		if $('html').hasClass('no-touch')
-			$topbar = $('.topbar')
-			topbarHeight = $topbar.outerHeight()
+		// Apply
+		if ( $('html').hasClass('no-touch') ) {
+			const $topbar = $('.topbar')
+			const topbarHeight = $topbar.outerHeight()
 			$sidebar.find('.list-menu').height($(window).height() - topbarHeight)
-			$sidebar.css(top: topbarHeight)
-		else
-			$sidebar.find('.list-menu').height(parseInt($(window).height(),10) + 50)
-			$sidebar.css(top: 0)
+			$sidebar.css({top: topbarHeight})
+		}
+		else {
+			$sidebar.find('.list-menu').height(parseInt($(window).height(), 10) + 50)
+			$sidebar.css({top: 0})
+		}
 
-		# Chain
-		@
+		// Chain
+		return this
+	}
 
-	# State Change
-	stateChange: (event,data) =>
-		# Fetch
-		$sidebar = $('.sidebar').removeClass('active')
+	// State Change
+	stateChange (event, data) {
+		// Fetch
+		const $sidebar = $('.sidebar').removeClass('active')
 
-		# Ensure our sidebar activity is the same as the remote
-		$sidebarRemote = data?.$dataBody?.find('.sidebar')
-		if $sidebarRemote and $sidebarRemote.length isnt 0
-			# Remove active menu and item
+		// Ensure our sidebar activity is the same as the remote
+		const $sidebarRemote = data && data.$dataBody && data.$dataBody.find('.sidebar')
+		let $activeItemLocal = null
+		if ( $sidebarRemote && $sidebarRemote.length ) {
+			// Remove active menu and item
 			$sidebar.find('.active').removeClass('active').addClass('inactive')
 
-			# Discover active menu and item in rmeote
-			$activeMenuRemote = $sidebarRemote.find('.list-menu-category.active')
-			$activeItemRemote = $activeMenuRemote.find('.list-menu-item.active')
+			// Discover active menu and item in rmeote
+			const $activeMenuRemote = $sidebarRemote.find('.list-menu-category.active')
+			const $activeItemRemote = $activeMenuRemote.find('.list-menu-item.active')
 
-			# Update corresponding local menu and item to be active
-			if $activeItemRemote and $activeItemRemote.length isnt 0
-				$activeMenuLocal = $sidebar.find('.list-menu-category').eq($activeMenuRemote.index()).removeClass('inactive').addClass('active')
+			// Update corresponding local menu and item to be active
+			if ( $activeItemRemote && $activeItemRemote.length ) {
+				const $activeMenuLocal = $sidebar.find('.list-menu-category').eq($activeMenuRemote.index()).removeClass('inactive').addClass('active')
 				$activeItemLocal = $activeMenuLocal.find('.list-menu-item').eq($activeItemRemote.index()).removeClass('inactive').addClass('active')
-		else
-			# Discover active menu and item in rmeote
-			$activeMenuLocal = $sidebar.find('.list-menu-category.active')
+			}
+		}
+		else {
+			// Discover active menu and item in rmeote
+			const $activeMenuLocal = $sidebar.find('.list-menu-category.active')
 			$activeItemLocal = $activeMenuLocal.find('.list-menu-item.active')
+		}
 
-		# Resize
-		@resize()
+		// Resize
+		this.resize()
 
-		# Scroll to the active menu item
-		$activeItemLocal = $sidebar.find('.list-menu-category:first').addClass('active')  if !$activeItemLocal or $activeItemLocal.length is 0
+		// Scroll to the active menu item
+		if ( !$activeItemLocal || $activeItemLocal.length === 0 ) {
+			$activeItemLocal = $sidebar.find('.list-menu-category:first').addClass('active')
+		}
 		$activeItemLocal.ScrollTo({
 			onlyIfOutside: true
 		})
 
-		# Forward
-		super
+		// Forward
+		return super.stateChange(event, data)
+	}
+}
 
-
-# Create
-app = new App()
+// Create
+window.app = new App()

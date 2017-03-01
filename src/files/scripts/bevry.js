@@ -1,271 +1,335 @@
-###
-standalone: true
-###
+/* global window, document, $, History */
+/* eslint no-console:0, new-cap:0 */
+'use strict'
 
-# Prepare
-wait = (delay,callback) -> setTimeout(callback,delay)
+// Prepare
+function wait (delay, callback) {
+	return setTimeout(callback, delay)
+}
 
-# BevryApp
-class BevryApp
+// BevryApp
+class BevryApp {
+	constructor () {
+		// Prepare
+		this.config = {}
+		this.config.articleScrollOpts = {}
+		this.config.sectionScrollOpts = {}
 
-	config: null
+		// Bind all the functions
+		const me = this
+		Object.keys(this).forEach(function (method) {
+			if ( me[method] && me[method].bind ) {
+				me[method] = me[method].bind(me)
+			}
+		})
 
-	constructor: ->
-		# Prepare
-		@config ?= {}
-		@config.articleScrollOpts ?= {}
-		@config.sectionScrollOpts ?= {}
+		// On dom ready
+		$(this.onDomReady)
+	}
 
-		# On dom ready
-		$(@onDomReady)
+	onDomReady () {
+		// Prepare
+		this.$document = $(document)
+		this.$body = $(document.body)
+		this.$window = $(window)
+		this.$docnav = $('.docnav')
+		this.$docnavUp = this.$docnav.find('.up')
+		this.$docnavDown = this.$docnav.find('.down')
+		this.$docSectionWrapper = $('<div class="section-wrapper">')
+		this.$article = null
+		this.$docHeaders = null
 
-		# Chain
-		@
+		// Link Click Events
+		this.$body
+			.on('click', 'a[href]:external', this.externalLinkClick)
+			.on('click', '[data-href]', this.linkClick)
 
-	onDomReady: =>
-		# Prepare
-		@$document = $(document)
-		@$body = $(document.body)
-		@$window = $(window)
-		@$docnav = $('.docnav')
-		@$docnavUp = @$docnav.find('.up')
-		@$docnavDown = @$docnav.find('.down')
-		@$docSectionWrapper = $('<div class="section-wrapper">')
-		@$article = null
-		@$docHeaders = null
+		// Anchor Change Event
+		this.$window.on('anchorchange', this.anchorChange)
 
-		# Link Click Events
-		@$body
-			.on('click', 'a[href]:external', @externalLinkClick)
-			.on('click', '[data-href]', @linkClick)
+		// State Change Event
+		this.$window.on('statechangecomplete', this.stateChange)
 
-		# Anchor Change Event
-		@$window.on('anchorchange', @anchorChange)
+		// Always trigger initial page change
+		this.$window.trigger('anchorchange')
+		this.$window.trigger('statechangecomplete')
 
-		# State Change Event
-		@$window.on('statechangecomplete', @stateChange)
+		// ScrollSpy
+		if ( this.scrollSpy != null ) {
+			setInterval(this.scrollSpy, 500)
+		}
 
-		# Always trigger initial page change
-		@$window.trigger('anchorchange')
-		@$window.trigger('statechangecomplete')
+		// Resize
+		if ( this.resize != null ) {
+			$(window).on('resize', this.resize)
+			this.resize()
+		}
+	}
 
-		# ScrollSpy
-		if @scrollSpy?
-			setInterval(@scrollSpy, 500)
+	// Open Link
+	// Open the URL in a specific way depending on the action
+	openLink ({url, action}) {
+		// Open the link in a new or current window depending on the action
+		if ( action === 'new' ) {
+			window.open(url, '_blank')
+		}
+		else if ( action === 'same' ) {
+			wait(100, function () {
+				document.location.href = url
+			})
+		}
+		else if ( action === 'default' ) {
+			// ignore, and handle by the browser
+		}
+		else {
+			console.log('unknown link action', action)
+		}
 
-		# Resize
-		if @resize?
-			$(window).on('resize', @resize)
-			@resize()
+		// Chain
+		return this
+	}
 
-		# Chain
-		@
+	// Open Outbound Link
+	// Open an outbound link and track the event
+	openOutboundLink ({url, action}) {
+		// https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide
+		const hostname = url.replace(/^.+?\/+([^/]+).*$/, '$1')
+		if ( window._gaq ) {
+			window._gaq.push(['_trackEvent', 'Outbound Links', hostname, url, 0, true])
+			this.openLink({url, action})
+		}
 
-	# Open Link
-	# Open the URL in a specific way depending on the action
-	openLink: ({url,action}) ->
-		# Open the link in a new or current window depending on the action
-		if action is 'new'
-			window.open(url,'_blank')
-		else if action is 'same'
-			wait(100, -> document.location.href = url)
-		else if action is 'default'
-			# ignore, and handle by the browser
-		else
-			console?.log?('unknown link action', action)
+		// Chain
+		return this
+	}
 
-		# Chain
-		@
+	// External Link Click
+	// The handler for when an external link is clicked
+	externalLinkClick (event) {
+		// Prepare
+		const $link = $(event.target)
+		const url = $link.attr('href')
+		let action = null
+		if ( !url )  return this
 
-	# Open Outbound Link
-	# Open an outbound link and track the event
-	openOutboundLink: ({url,action}) ->
-		# https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide
-		hostname = url.replace(/^.+?\/+([^\/]+).*$/,'$1')
-		window._gaq?.push(['_trackEvent', "Outbound Links", hostname, url, 0, true])
-		@openLink({url,action})
-
-		# Chain
-		@
-
-	# External Link Click
-	# The handler for when an external link is clicked
-	externalLinkClick: (event) =>
-		# Prepare
-		$link = $(event.target)
-		url = $link.attr('href')
-		return @  unless url
-
-		# Discover how we should handle the link
-		if event.which is 2 or event.metaKey or event.shiftKey
+		// Discover how we should handle the link
+		if ( event.which === 2 || event.metaKey || event.shiftKey ) {
 			action = 'default'
-		else
+		}
+		else {
 			action = 'new'
 			event.preventDefault()
+		}
 
-		# Open the link
-		@openOutboundLink({url,action})
+		// Open the link
+		this.openOutboundLink({url, action})
 
-		# Chain
-		@
+		// Chain
+		return this
+	}
 
-	# Link CLick
-	# The handler for when a link is clicked
-	linkClick: (event) =>
-		# Prepare
-		$link = $(event.target)
-		url = $link.data('href')
-		return  unless url
+	// Link CLick
+	// The handler for when a link is clicked
+	linkClick (event) {
+		// Prepare
+		const $link = $(event.target)
+		const url = $link.data('href')
+		let action = null
+		if ( !url )  return this
 
-		# Discover how we should handle the link
-		if event.which is 2 or event.metaKey
+		// Discover how we should handle the link
+		if ( event.which === 2 || event.metaKey ) {
 			action = 'new'
-		else
+		}
+		else {
 			action = 'same'
 			event.preventDefault()
+		}
 
-		# Open the link
-		if $link.is(':internal')
-			@openLink({url,action})
-		else
-			@openOutboundLink({url,action})
+		// Open the link
+		if ( $link.is(':internal') ) {
+			this.openLink({url, action})
+		}
+		else {
+			this.openOutboundLink({url, action})
+		}
 
-		# Done
-		return
+		// Chain
+		return this
+	}
 
-	# Previous Section
-	# Go to the previous section in our documentation
-	previousSection: ->
-		# Prepare
-		{$docHeaders} = @
+	// Previous Section
+	// Go to the previous section in our documentation
+	previousSection () {
+		// Prepare
+		const $docHeaders = this.$docHeaders
+		if ( !$docHeaders )  return this
 
-		# Check
-		return  unless $docHeaders?
-
-		# Handle
-		$current = $docHeaders.filter('.current')
-		if $current.length
-			$prev = $current.prevAll('h2:first')
-			if $prev.length
+		// Handle
+		const $current = $docHeaders.filter('.current')
+		if ( $current.length ) {
+			const $prev = $current.prevAll('h2:first')
+			if ( $prev.length ) {
 				$prev.click()
-			else
+			}
+			else {
 				$docHeaders.filter('.current').removeClass('current')
 				$docHeaders.last().click()
+			}
+		}
 
-		# Chain
-		@
+		// Chain
+		return this
+	}
 
-	# Next Section
-	# Go to the next section in our documentation
-	nextSection: ->
-		# Prepare
-		{$docHeaders} = @
+	// Next Section
+	// Go to the next section in our documentation
+	nextSection () {
+		// Prepare
+		const $docHeaders = this.$docHeaders
+		if ( !$docHeaders )  return this
 
-		# Check
-		return  unless $docHeaders?
-
-		# Handle
-		$current = $docHeaders.filter('.current')
-		if $current.length
-			$next = $current.nextAll('h2:first')
-			if $next.length
+		// Handle
+		const $current = $docHeaders.filter('.current')
+		if ( $current.length ) {
+			const $next = $current.nextAll('h2:first')
+			if ( $next.length ) {
 				$next.click()
-			else
-				#$current.click()
+			}
+			else {
+				// $current.click()
 				$docHeaders.first().click()
-		else
+			}
+		}
+		else {
 			$docHeaders.first().click()
+		}
 
-		# Chain
-		@
+		// Chain
+		return this
+	}
 
-	# Anchor Change
-	anchorChange: =>
-		hash = History.getHash()
-		return  unless hash
-		el = document.getElementById(hash)
-		return  unless el
-		if el.className.indexOf('anchor-link') isnt -1
+	// Anchor Change
+	anchorChange () {
+		const hash = History.getHash()
+		if ( !hash )  return this
+		const el = document.getElementById(hash)
+		if ( !el )  return this
+		if ( el.className.indexOf('anchor-link') !== -1 ) {
 			$(el).trigger('select')
-		else
-			$(el).ScrollTo(@config.sectionScrollOpts)
+		}
+		else {
+			$(el).ScrollTo(this.config.sectionScrollOpts)
+		}
+		return this
+	}
 
-	# State Change
-	stateChange: =>
-		# Prepare
-		{$docHeaders,$docSectionWrapper,config} = @
+	// State Change
+	stateChange () {
+		// Prepare
+		const config = this.config
+		const $docSectionWrapper = this.docSectionWrapper
 
-		# Special handling for long docs
-		@$article = $article = $('#content article:first')
+		// Special handling for long docs
+		const $article = this.$article = $('#content article:first')
 
-		# Anchors
-		if $article.is('.block.doc, .block.page')
-			$article.find('h1,h2,h3,h4,h5,h6').each ->
-				return  if @id
-				id = (@textContent or @innerText or '').toLowerCase().replace(/\s+/g,' ').replace(/[^a-zA-Z0-9]+/g,'-').replace(/--+/g,'-').replace(/^-|-$/g,'')
-				return  if !id or document.getElementById(id)
-				@id = id
-				@setAttribute('data-href', '#'+@id)  unless @getAttribute('data-href')
-				@className += 'hover-link'  unless @className.indexOf('hover-link') isnt -1
+		// Anchors
+		if ( $article.is('.block.doc, .block.page') ) {
+			$article.find('h1,h2,h3,h4,h5,h6').each(function () {
+				if ( this.id ) {
+					return
+				}
+				const id = (this.textContent || this.innerText || '').toLowerCase()
+					.replace(/\s+/g, ' ')
+					.replace(/[^a-zA-Z0-9]+/g, '-')
+					.replace(/--+/g, '-')
+					.replace(/^-|-$/g, '')
+				if ( !id || document.getElementById(id) ) {
+					return
+				}
+				this.id = id
+				if ( !this.getAttribute('data-href') ) {
+					this.setAttribute('data-href', '#' + id)
+				}
+				if ( this.className.indexOf('hover-link') === -1 ) {
+					this.className += 'hover-link'
+				}
+			})
+		}
 
-		# Documentation
-		if $article.is('.block.doc')
-			@$docHeaders = $docHeaders = $article.find('h2')
+		// Documentation
+		if ( $article.is('.block.doc') ) {
+			const $docHeaders = this.$docHeaders = $article.find('h2')
 
-			# Compact
-			if $article.is('.compact')
+			// Compact
+			if ( $article.is('.compact') ) {
 				$docHeaders
 					.addClass('hover-link anchor-link')
-					.each (index) ->
-						$header = $(this)
-						$header.nextUntil('h2').wrapAll($docSectionWrapper.clone().attr('id','h2-'+index))
-					.on 'select', (event,opts) ->
+					.each(function (index) {
+						const $header = $(this)
+						$header.nextUntil('h2').wrapAll($docSectionWrapper.clone().attr('id', 'h2-' + index))
+					})
+					.on('select', function (event, opts) {
 						$docHeaders.filter('.current').removeClass('current')
-						$header = $(this)
+						const $header = $(this)
 							.addClass('current')
-							.stop(true,false).css({'opacity':0.5}).animate({opacity:1},1000)
+							.stop(true, false).css({opacity: 0.5}).animate({opacity: 1}, 1000)
 							.prevAll('.section-wrapper')
 								.addClass('active')
 								.end()
 							.next('.section-wrapper')
 								.addClass('active')
 								.end()
-						$header.ScrollTo(config.sectionScrollOpts)  if !opts or opts.scroll isnt false
-					.first()
-						.trigger('select', {scroll:false})
+						if ( !opts || opts.scroll !== false ) {
+							$header.ScrollTo(config.sectionScrollOpts)
+						}
+					})
+					.first().trigger('select', {scroll: false})
+			}
 
-			# Non-Compact
-			else
+			// Non-Compact
+			else {
 				$docHeaders
 					.addClass('hover-link anchor-link')
-					.on 'select', (event,opts) ->
+					.on('select', function (event, opts) {
 						$docHeaders.filter('.current').removeClass('current')
-						$header = $(this)
+						const $header = $(this)
 							.addClass('current')
-							.stop(true,false).css({'opacity':0.5}).animate({opacity:1},1000)
-						$header.ScrollTo(config.sectionScrollOpts)  if !opts or opts.scroll isnt false
+							.stop(true, false).css({opacity: 0.5}).animate({opacity: 1}, 1000)
+						if ( !opts || opts.scroll !== false ) {
+							$header.ScrollTo(config.sectionScrollOpts)
+						}
+					})
+			}
+		}
 
-		else
-			@$docHeaders = $docHeaders = null
+		else {
+			this.$docHeaders = null
+		}
 
-		# Scroll to the article
+		// Scroll to the article
 		$article.ScrollTo(config.articleScrollOpts)
 
-		# Chain
-		@
+		// Chain
+		return this
+	}
 
-	# Scroll Spy
-	scrollSpy: =>
-		# Handle
-		pageLeftToRead = document.height - (window.scrollY + window.innerHeight)
-		$articleNav = @$article.find('.prev-next a.next')
-		if pageLeftToRead <= 50
-			$articleNav.css('opacity',1)
-		else
+	// Scroll Spy
+	scrollSpy () {
+		// Handle
+		const pageLeftToRead = document.height - (window.scrollY + window.innerHeight)
+		const $articleNav = this.$article.find('.prev-next a.next')
+		if ( pageLeftToRead <= 50 ) {
+			$articleNav.css('opacity', 1)
+		}
+		else {
 			$articleNav.removeAttr('style')
+		}
 
-		# Chain
-		@
+		// Chain
+		return this
+	}
+}
 
-# Export
-@BevryApp = BevryApp
+// Export
+window.BevryApp = BevryApp

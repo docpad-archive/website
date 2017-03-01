@@ -9,16 +9,19 @@
     "list": [
       "travisci",
       "---",
-      "slackin",
       "patreon",
+      "opencollective",
       "gratipay",
       "flattr",
       "paypal",
       "bitcoin",
-      "wishlist"
+      "wishlist",
+      "---",
+      "slackin"
     ],
     "config": {
       "patreonUsername": "bevry",
+      "opencollectiveUsername": "bevry",
       "gratipayUsername": "bevry",
       "flattrUsername": "balupton",
       "paypalURL": "https://bevry.me/paypal",
@@ -49,16 +52,17 @@
   },
   "engines": {
     "node": "6",
-    "npm": "3"
+    "npm": "4"
   },
   "dependencies": {
-    "docpad": "~6.78.5",
+    "docpad": "~6.79.0",
     "docpad-plugin-cleanurls": "~2.8.1",
     "docpad-plugin-coffeekup": "~2.2.0",
     "docpad-plugin-coffeescript": "~2.5.0",
+    "docpad-plugin-downloader": "~2.1.4",
     "docpad-plugin-eco": "~2.1.0",
     "docpad-plugin-feedr": "~2.11.0",
-    "docpad-plugin-highlightjs": "~2.3.0",
+    "docpad-plugin-highlightjs": "~2.4.0",
     "docpad-plugin-marked": "~2.3.0",
     "docpad-plugin-partials": "~2.9.2",
     "docpad-plugin-raw": "~2.4.1",
@@ -66,21 +70,31 @@
     "docpad-plugin-services": "~2.6.0",
     "docpad-plugin-stylus": "~2.11.0",
     "docpad-plugin-text": "~2.3.3",
-    "getcontributors": "^1.3.7",
-    "moment": "^2.13.0",
+    "getcontributors": "^1.4.5",
+    "moment": "^2.17.1",
     "underscore.string": "^3.3.4"
   },
   "devDependencies": {
-    "coffeelint": "^1.15.7",
+    "coffeelint": "^1.16.0",
     "docpad-plugin-ghpages": "~2.4.4",
     "docpad-plugin-livereload": "~2.7.1",
-    "projectz": "^1.1.6"
+    "eslint": "^3.16.1",
+    "projectz": "^1.3.2"
   },
-  "subdomain": "docpad",
   "main": "node_modules/.bin/docpad-server",
   "scripts": {
+    "our:setup": "npm install",
+    "our:clean": "rm -Rf ./docs ./es2015 ./out",
+    "our:compile": "echo 'no need for a compile'",
+    "our:meta": "npm run our:meta:projectz",
+    "our:meta:projectz": "projectz compile",
+    "our:verify": "npm run our:verify:eslint && npm run our:verify:coffeelint",
+    "our:verify:eslint": "eslint --fix ./ --ignore-path .gitignore",
+    "our:verify:coffeelint": "coffeelint ./src",
+    "our:test": "npm run our:verify && npm test",
+    "our:release": "npm run deploy",
     "start": "docpad-server",
-    "test": "coffeelint **.coffee && docpad generate --silent",
+    "test": "docpad generate --silent",
     "info": "docpad info --silent",
     "deploy": "docpad deploy-ghpages --silent --env static"
   }

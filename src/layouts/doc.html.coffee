@@ -14,7 +14,7 @@ section '#content', ->
 	div '.page', ->
 		text @partial('content/block.html.coffee', {
 			partial: @partial
-			cssClasses: ["doc"].concat(@document.cssClasses or [])
+			cssClasses: ['doc'].concat(@document.cssClasses or [])
 			permalink: @document.url
 			heading: @document.title
 			subheading: @document.subheading
@@ -29,6 +29,6 @@ section '#content', ->
 					url: nextModel.attributes.url
 					title: nextModel.attributes.title
 			up:
-				url: "/docs/"
+				url: '/docs/'
 				title: 'Documentation'
 		})

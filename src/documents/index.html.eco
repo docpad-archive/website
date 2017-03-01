@@ -70,7 +70,9 @@ standalone: true
 
 	<a href="/docs/intro" title="Get Started" class="btn">Get Started with DocPad</a>
 
-	<script async defer src="//slack.bevry.me/slackin.js"></script>
+	<p>
+		<script async defer src="//slack.bevry.me/slackin.js"></script>
+	</p>
 
 	<div class="tweets">
 		<a class="twitter-timeline" href="https://twitter.com/DocPad/favorites" data-widget-id="333060177597169665" data-cards="hidden" align="center" height="420">Twitter on @DocPad</a>

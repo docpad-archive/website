@@ -41,7 +41,7 @@ const navigationData = {
 	top: {
 		Intro: '/docs/intro',
 		Install: '/docs/install',
-		Start: '/docs/start',
+		Start: '/docs/begin',
 		Showcase: '/docs/showcase',
 		Plugins: '/docs/plugins',
 		Documentation: '/docs/'

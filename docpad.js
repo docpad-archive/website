@@ -103,17 +103,6 @@ function getLabelName (label) {
 const docpadConfig = {
 
 	// =================================
-	// DocPad Configuration
-
-	// Regenerate each day
-	regenerateEvery: 1000 * 60 * 60 * 24,
-
-	// Don't use debug log level as it outputs too much and travis complains
-	// https://travis-ci.org/docpad/website/builds/104133494
-	logLevel: 6,
-
-
-	// =================================
 	// Template Data
 	// These are variables that will be accessible via our templates
 	// To access one of these within our templates, refer to the FAQ: https://github.com/bevry/docpad/wiki/FAQ
@@ -471,6 +460,12 @@ const docpadConfig = {
 		}
 	}
 
+}
+
+// Don't use debug log level on travis as it outputs too much and travis complains
+// https://travis-ci.org/docpad/website/builds/104133494
+if ( process.env.TRAVIS ) {
+	docpadConfig.logLevel = 6
 }
 
 // Export our DocPad Configuration

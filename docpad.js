@@ -39,18 +39,18 @@ const textData = {
 
 const navigationData = {
 	top: {
-		Intro: '/docs/intro',
-		Install: '/docs/install',
-		Start: '/docs/start',
-		Showcase: '/docs/showcase',
-		Plugins: '/docs/plugins',
+		Intro: '/docs/intro/',
+		Install: '/docs/install/',
+		Start: '/docs/begin/',
+		Showcase: '/docs/showcase/',
+		Plugins: '/docs/plugins/',
 		Documentation: '/docs/'
 	},
 
 	bottom: {
 		DocPad: '/',
 		GitHub: 'https://github.com/docpad/docpad',
-		Support: '/support'
+		Support: '/support/'
 	}
 }
 
@@ -391,12 +391,12 @@ const docpadConfig = {
 		cleanurls: {
 			// Common Redirects
 			simpleRedirects: {
-				'/license': '/g/blob/master/LICENSE.md#readme',
-				'/chat-logs': 'https://botbot.me/freenode/docpad/',
-				'/chat': 'https://discuss.bevry.me/tags/chat',
-				'/changelog': '/g/blob/master/HISTORY.md#readme',
+				'/license': 'https://github.com/docpad/docpad/blob/master/LICENSE.md#readme',
+				'/changelog': 'https://github.com/docpad/docpad/blob/master/HISTORY.md#readme',
 				'/changes': '/changelog',
 				'/history': '/changelog',
+				'/chat-logs': 'https://botbot.me/freenode/docpad/',
+				'/chat': 'https://discuss.bevry.me/tags/chat',
 				// use /support-channels, as there is a /support documentation page
 				'/support-channels': 'https://discuss.bevry.me/t/official-bevry-support-channels/63',
 				'/bug-report': '/support-channels',
@@ -411,8 +411,8 @@ const docpadConfig = {
 				'/praise': 'https://twitter.com/docpad/favorites',
 				'/growl': 'http://growl.info/downloads',
 				'/partners': '/docs/support#support-consulting-partners',
-				'/docs/start': '/docs/begin',
-				'/get-started': '/docs/overview',
+				'/docs/start': '/docs/begin/',
+				'/get-started': '/docs/overview/',
 				'/chat-guidelines': '/i/384',
 				'/unstable-node': '/i/725',
 				'/render-early-via-include': '/i/378',

@@ -95,6 +95,6 @@
     "start": "docpad-server",
     "test": "docpad generate --silent --env static",
     "info": "docpad info --silent",
-    "deploy": "surge --project ./out --domain https://docpad.surge.sh"
+    "deploy": "surge --project ./out --domain https://docpad.org"
   }
 }

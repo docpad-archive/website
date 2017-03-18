@@ -19,7 +19,7 @@
 
 ## Getting Started
 
-1. [Install DocPad](http://docpad.org/install)
+1. [Install DocPad](https://docpad.org/docs/install/)
 
 1. Clone and run the server
 

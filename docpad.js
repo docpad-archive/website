@@ -166,6 +166,7 @@ const docpadConfig = {
 				'/changelog': 'https://github.com/docpad/docpad/blob/master/HISTORY.md#readme',
 				'/changes': '/changelog',
 				'/history': '/changelog',
+				'/install': '/docs/install',
 				'/chat-logs': 'https://botbot.me/freenode/docpad/',
 				'/chat': 'https://discuss.bevry.me/tags/chat',
 				// use /support-channels, as there is a /support documentation page

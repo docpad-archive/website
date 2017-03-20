@@ -125,7 +125,6 @@ mixinIconAccountPointer()
 	h4
 		font-family: fontFutura
 		font-weight: fontMyraidNormal
-		text-transform: uppercase
 
 .topbar .links
 .sidebar
@@ -135,12 +134,6 @@ mixinIconAccountPointer()
 .bottombar
 	font-family: fontMyraid
 	font-weight: fontMyraidNormal
-	text-transform: uppercase
-
-.mainbar
-	code
-	pre
-		text-transform: none
 
 
 // ------------------------------------
@@ -148,7 +141,7 @@ mixinIconAccountPointer()
 
 a
 	text-decoration: none
-a:not(.hover-link),.link
+a:not(.hover-link), .link
 	cursor: pointer
 	text-decoration: none
 	color: colorLink
@@ -221,21 +214,6 @@ em
 nav
 nav li
 	list-style: none
-
-.btn
-	background-color: colorLightGold
-	background-image: linear-gradient(top, colorLightGold, colorGold)
-	border: 2px solid white
-	border-radius: 3px
-	color: colorDarkestBrown !important
-	display: inline-block
-	margin: 1em auto
-	padding: 15px 30px
-	text-shadow: 1px 1px 0 rgba(white, .3)
-
-	&:hover
-		background-image: none
-		box-shadow: inset 1px 1px 2px rgba(black, .2)
 
 
 // ====================================
@@ -370,15 +348,6 @@ nav li
 	h1
 		margin-bottom: 0
 
-	#goog-fixurl
-		.other-things
-			margin: 2em 0 0
-			font-weight: normal !important
-
-		ul
-		ul li
-			list-style: none
-
 .splash
 	p
 		color: colorDarkBrown
@@ -390,6 +359,19 @@ nav li
 
 	.btn
 		font-size: 1.5em
+		background-color: colorLightGold
+		background-image: linear-gradient(top, colorLightGold, colorGold)
+		border: 2px solid white
+		border-radius: 3px
+		color: colorDarkestBrown !important
+		display: inline-block
+		margin: 1em auto
+		padding: 15px 30px
+		text-shadow: 1px 1px 0 rgba(white, .3)
+
+		&:hover
+			background-image: none
+			box-shadow: inset 1px 1px 2px rgba(black, .2)
 
 
 	// ====================================
@@ -501,11 +483,20 @@ nav li
 		padding-bottom: 0
 		margin-bottom: 0
 
+
 // ====================================
 // Navigation
 
 // Menu
 .list-menu
+	cursor: default
+	a
+		all: initial
+		cursor: pointer
+		&:hover
+			text-decoration: underline
+			color: colorDarkGold
+
 	// Group
 	ul
 		padding: 0
@@ -515,12 +506,6 @@ nav li
 	.list-menu-title
 		font-size: 1em
 		margin: 0
-		font-weight: inherit
-		font-family: inherit
-		text-transform: inherit
-
-	// Link
-	.list-menu-link
 		border-left: 5px solid transparent
 		color: colorDarkestBrown
 		display: inline-block
@@ -528,18 +513,16 @@ nav li
 		font-weight: fontMyraidBold
 
 	// Category
-	.list-menu-category > .list-menu-link .list-menu-title
+	.list-menu-category > .list-menu-title
 		font-weight: fontMyraidBoldest
 
 	// Item
-	.list-menu-item .list-menu-link
-		text-transform: none
-		&:hover
-			color: colorDarkGold
-
-	// Item Active
-	.list-menu-item.active .list-menu-link
+	.list-menu-title
 		font-weight: fontMyraidBold
+		color: colorDarkestBrown
+
+	// Active Item
+	.active > .list-menu-title
 		color: colorDarkGold
 
 // Sidebar
@@ -549,22 +532,10 @@ nav li
 		// Category Group
 		.list-menu-categories
 			margin: 0.3em 0
-			// border-left: 2px solid colorLightGold
 
 		// Category
 		.list-menu-category
 			padding: 5px 0
-
-			&.active > .list-menu-link
-				border-color: colorLightGold
-			/*
-			&.inactive
-				.list-menu-items
-					max-height: 0
-			&:hover
-				.list-menu-items
-					max-height: 300px
-			*/
 
 		// Item Group
 		.list-menu-items
@@ -592,14 +563,12 @@ nav li
 			float: left
 			min-height: 350px
 
-			> .list-menu-link
-				padding: 0
-				border: none
+			.list-menu-title
 				color: colorDarkGold
-				.list-menu-title
-					font-size: 1.5em
-					font-family: fontFutura
-					font-weight: fontMyraidNormal
+				padding: 0
+				font-size: 1.5em
+				font-family: fontFutura
+				font-weight: fontMyraidNormal
 
 		// Item Group
 		.list-menu-items
@@ -607,14 +576,12 @@ nav li
 			background: white
 			border-radius: 3px
 
-			// Item
-			.list-menu-item
-				a
-					font-weight: fontMyraidBold
-					color: colorDarkestBrown
-
 		.list-menu-home
 			display: none
+
+.list-menu-project > .list-menu-title
+.list-menu-project > .list-menu-link
+	display:none
 
 // ====================================
 // Main Content
@@ -636,6 +603,9 @@ nav li
 	border-radius: 3px
 	word-wrap: break-word
 	overflow: hidden
+
+	.parentcrumbs
+		display: none
 
 	.section-wrapper
 		display:none

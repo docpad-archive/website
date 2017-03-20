@@ -1,105 +1,19 @@
-/* eslint camelcase:0 */
 'use strict'
 
 // Require
-const moment = require('moment')
-const strUtil = require('underscore.string')
-const fsUtil = require('fs')
-const pathUtil = require('path')
+const helpers = require('outpatient')
 
 // Prepare
-const textData = {
-	heading: 'DocPad',
-	copyright: 'DocPad is a <a href="http://bevry.me" title="Bevry - An open company and community dedicated to empowering developers everywhere.">Bevry</a> creation.',
-
-	linkNames: {
-		main: 'Website',
-		learn: 'Learn',
-		email: 'Email',
-		twitter: 'Twitter',
-
-		support: 'Support',
-		showcase: 'Showcase'
-	},
-
-	projectNames: {
-		docpad: 'DocPad',
-		node: 'Node.js',
-		queryengine: 'Query Engine'
-	},
-
-	categoryNames: {
-		start: 'Getting Started',
-		community: 'Community',
-		core: 'Core',
-		extend: 'Extend',
-		handsonnode: 'Hands on with Node'
-	}
-}
-
-const navigationData = {
-	top: {
-		Intro: '/docs/intro',
-		Install: '/docs/install',
-		Start: '/docs/begin',
-		Showcase: '/docs/showcase',
-		Plugins: '/docs/plugins',
-		Documentation: '/docs/'
-	},
-
-	bottom: {
-		DocPad: '/',
-		GitHub: 'https://github.com/docpad/docpad',
-		Support: '/support'
-	}
-}
-
 const websiteVersion = require('./package.json').version
 const docpadVersion = require('./package.json').dependencies.docpad.toString().replace('~', '').replace('^', '')
 const exchangeUrl = `https://helper.docpad.org/exchange.cson?version=${docpadVersion}`
 const siteUrl = process.env.NODE_ENV === 'production' ? 'http://docpad.org' : 'http://localhost:9778'
 
 
-
-// =================================
-// Helpers
-
-// Humanize
-function humanize (text = '') {
-	return require('underscore.string').humanize(
-		text.replace(/^[-0-9]+/, '').replace(/\..+/, '')
-	)
-}
-
-// Titles
-function getName (a, b) {
-	if ( b == null ) {
-		return textData[b] || humanize(b)
-	}
-	else {
-		return textData[a][b] || humanize(b)
-	}
-}
-function getProjectName (project) {
-	return getName('projectNames', project)
-}
-function getCategoryName (category) {
-	return getName('categoryNames', category)
-}
-function getLinkName (link) {
-	return getName('linkNames', link)
-}
-function getLabelName (label) {
-	return getName('labelNames', label)
-}
-
-
 // =================================
 // Configuration
 
-
 // The DocPad Configuration File
-// It is simply a CoffeeScript Object which is parsed by CSON
 const docpadConfig = {
 
 	// =================================
@@ -112,10 +26,37 @@ const docpadConfig = {
 		// -----------------------------
 		// Misc
 
-		text: textData,
-		navigation: navigationData,
-		moment,
-		strUtil,
+		text: {
+			heading: 'DocPad',
+			copyright: 'DocPad is a <a href="http://bevry.me" title="Bevry - An open company and community dedicated to empowering developers everywhere.">Bevry</a> creation.',
+
+			linkNames: {
+				main: 'Website',
+				learn: 'Learn',
+				email: 'Email',
+				twitter: 'Twitter',
+
+				support: 'Support',
+				showcase: 'Showcase'
+			}
+		},
+
+		navigation: {
+			top: {
+				Intro: '/docs/intro',
+				Install: '/docs/install',
+				Start: '/docs/begin',
+				Showcase: '/docs/showcase',
+				Plugins: '/docs/plugins',
+				Documentation: '/docs/'
+			},
+
+			bottom: {
+				DocPad: '/',
+				GitHub: 'https://github.com/docpad/docpad',
+				Support: '/support'
+			}
+		},
 
 		// The URL we use to fetch the exchange data, included in template data for debugging
 		exchangeUrl,
@@ -153,65 +94,8 @@ const docpadConfig = {
 			]
 		},
 
-		// -----------------------------
-		// Helper Functions
-
-		// Names
-		getName,
-		getProjectName,
-		getCategoryName,
-		getLinkName,
-		getLabelName,
-
-		// Get the prepared site/document title
-		// Often we would like to specify particular formatting to our page's title
-		// we can apply that formatting here
-		getPreparedTitle () {
-			// if we have a title, we should use it suffixed by the site's title
-			if ( this.document.pageTitle !== false && this.document.title ) {
-				return `${this.document.pageTitle || this.document.title} | ${this.site.title}`
-			}
-			// if we don't have a title, then we should just use the site's title
-			else if ( this.document.pageTitle === false || this.document.title == null ) {
-				return this.site.title
-			}
-		},
-
-		// Get the prepared site/document description
-		getPreparedDescription () {
-			// if we have a document description, then we should use that, otherwise use the site's description
-			return this.document.description || this.site.description
-		},
-
-		// Get the prepared site/document keywords
-		getPreparedKeywords () {
-			// Merge the document keywords with the site keywords
-			this.site.keywords.concat(this.document.keywords || []).join(', ')
-		},
-
-		// Get Version
-		getVersion (v, places = 1) {
-			return v.split('.').slice(0, places).join('.')
-		},
-
-		// Read File
-		readFile (relativePath) {
-			/* eslint no-sync:0 */
-			const path = this.document.fullDirPath + '/' + relativePath
-			const result = fsUtil.readFileSync(path)
-			if ( result instanceof Error ) {
-				throw result
-			}
-			else {
-				return result.toString()
-			}
-		},
-
-		// Code File
-		codeFile (relativePath, language) {
-			language = language || pathUtil.extname(relativePath).substr(1)
-			const contents = this.readFile(relativePath)
-			return `<pre><code class="${language}">${contents}</code></pre>`
+		services: {
+			googleSearch: '000711355494423975011:mvl83obfzvq'
 		}
 	},
 
@@ -220,115 +104,6 @@ const docpadConfig = {
 	// Collections
 
 	collections: {
-
-		// Fetch all documents that exist within the docs directory
-		// And give them the following meta data based on their file structure
-		// [\-0-9]+#{category}/[\-0-9]+#{name}.extension
-		docs (database) {
-			const query = {
-				write: true,
-				relativeOutDirPath: {
-					$startsWith: 'learn/'
-				},
-				body: {
-					$ne: ''
-				}
-			}
-			const sorting = [
-				{projectDirectory: 1},
-				{categoryDirectory: 1},
-				{filename: 1}
-			]
-
-			return database.findAllLive(query, sorting).on('add', function (document) {
-				// Prepare
-				const a = document.attributes
-
-				// learn/#{organisation}/#{project}/#{category}/#{filename}
-				const pathDetailsRegexString = `
-					^
-					.*?learn/
-					(.+?)/        // organisation
-					(.+?)/        // project
-					(.+?)/        // category
-					(.+?)\\.      // basename
-					(.+?)         // extension
-					$
-				`.replace(/\/\/.+/g, '').replace(/\s/g, '')
-				const pathDetailsRegex = new RegExp(pathDetailsRegexString)
-				const pathDetails = pathDetailsRegex.exec(a.relativePath)
-
-				// Properties
-				const layout = 'doc'
-				const standalone = true
-
-				// Check if we are correctly structured
-				if ( pathDetails != null ) {
-					const organisationDirectory = pathDetails[1]
-					const projectDirectory = pathDetails[2]
-					const categoryDirectory = pathDetails[3]
-					const basename = pathDetails[4]
-
-					const organisation = organisationDirectory.replace(/[-0-9]+/, '')
-					const organisationName = humanize(organisation)
-
-					const project = projectDirectory.replace(/[-0-9]+/, '')
-					const projectName = getProjectName(project)
-
-					const category = categoryDirectory.replace(/^[-0-9]+/, '')
-					const categoryName = getCategoryName(category)
-
-					const name = basename.replace(/^[-0-9]+/, '')
-
-					const title = `${a.title || humanize(name)}`
-					const pageTitle = `${title} | DocPad`  // changed from bevry website
-
-					const urls = [`/docs/${name}`, `/docs/${category}-${name}`, `/docpad/${name}`]
-
-					const githubEditUrl = `https://github.com/${organisationDirectory}/${projectDirectory}/edit/master/`
-					// const proseEditUrl = `http://prose.io/#${organisationDirectory}/${projectDirectory}/edit/master/`
-					const editUrl = githubEditUrl + a.relativePath.replace(`learn/${organisationDirectory}/${projectDirectory}/`, '')
-
-					// Apply
-					document.setMetaDefaults({
-						layout,
-						standalone,
-
-						name,
-						title,
-						pageTitle,
-
-						url: urls[0],
-
-						editUrl,
-
-						organisationDirectory,
-						organisation,
-						organisationName,
-
-						projectDirectory,
-						project,
-						projectName,
-
-						categoryDirectory,
-						category,
-						categoryName
-					}).addUrl(urls)
-				}
-
-				// Otherwise ignore this document
-				else {
-					/* eslint no-console:0 */
-					console.log(`The document ${a.relativePath} was at an invalid path, so has been ignored`)
-					document.setMetaDefaults({
-						ignore: true,
-						render: false,
-						write: false
-					})
-				}
-			})
-		},
-
 		partners (database) {
 			const query = {relativeOutDirPath: 'learn/docpad/documentation/partners'}
 			const sort = [{filename: 1}]
@@ -344,12 +119,6 @@ const docpadConfig = {
 
 	// Alias stylus highlighting to css and there is no inbuilt stylus support
 	plugins: {
-		highlightjs: {
-			aliases: {
-				stylus: 'css'
-			}
-		},
-
 		feedr: {
 			feeds: {
 				latestPackage: {
@@ -360,7 +129,6 @@ const docpadConfig = {
 					url: exchangeUrl,
 					parse: 'cson'
 				}
-				// 'twitter-favorites': url: 'https://api.twitter.com/1.1/favorites/list.json?screen_name=docpad&count=200&include_entities=true'
 			}
 		},
 
@@ -464,6 +232,40 @@ const docpadConfig = {
 	}
 
 }
+
+// Apply our helpers to the docpad configuration
+helpers({
+	config: {
+		getUrl ({ name }) {
+			return `/docs/${name}`
+		},
+		docs: {
+			title: 'Documentation',
+			url: '/docs/'
+		},
+		projects: {
+			documentation: {
+				title: 'DocPad Documentation',
+				url: '/docs/',
+				categories: {
+					start: {
+						title: 'Getting Started'
+					},
+					community: {
+						title: 'Community'
+					},
+					core: {
+						title: 'Core'
+					},
+					extend: {
+						title: 'Extend'
+					}
+				}
+			}
+		}
+	},
+	docpadConfig
+})
 
 // Don't use debug log level on travis as it outputs too much and travis complains
 // https://travis-ci.org/docpad/website/builds/104133494

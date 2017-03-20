@@ -48,13 +48,15 @@ const docpadConfig = {
 				Start: '/docs/begin',
 				Showcase: '/docs/showcase',
 				Plugins: '/docs/plugins',
-				Documentation: '/docs/'
+				Documentation: '/docs/',
+				Fund: '/donate/'
 			},
 
 			bottom: {
 				DocPad: '/',
 				GitHub: 'https://github.com/docpad/docpad',
-				Support: '/support'
+				Support: '/support',
+				Donate: '/donate/'
 			}
 		},
 

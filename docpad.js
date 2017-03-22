@@ -195,6 +195,7 @@ const docpadConfig = {
 				'/troubleshoot': '/docs/troubleshoot',
 				'/partners': '/docs/support#support-consulting-partners',
 				'/docs/start': '/docs/begin',
+				'/docs/skeletons': '/docs/showcase#skeletons',
 				'/get-started': '/docs/overview',
 				
 				// docpad

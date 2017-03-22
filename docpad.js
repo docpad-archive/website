@@ -169,6 +169,7 @@ const docpadConfig = {
 				'/chat-logs': 'https://botbot.me/freenode/docpad/',
 				'/chat': 'https://discuss.bevry.me/tags/chat',
 				'/support-channels': 'https://discuss.bevry.me/t/official-bevry-support-channels/63',
+				'/issues': 'https://github.com/docpad/docpad/issues',
 				'/bug-report': '/support-channels',
 				'/forum': 'https://discuss.bevry.me/tags/docpad',
 				'/stackoverflow': 'https://discuss.bevry.me/t/official-stack-overflow-support/61/3',
@@ -177,6 +178,7 @@ const docpadConfig = {
 				'/terms': 'https://bevry.me/tos',
 				'/privacy': 'https://bevry.me/privacy',
 				'/github': 'https://github.com/docpad',
+				'/twitter': 'https://twitter.com/docpad',
 				
 				// aliases
 				'/gittip-community': '/donate',
@@ -205,16 +207,13 @@ const docpadConfig = {
 				'/render-early-via-include': 'https://github.com/docpad/docpad/issues/378',
 				'/extension-not-rendering': 'https://github.com/docpad/docpad/issues/192',
 				'/plugin-conventions': 'https://github.com/docpad/docpad/issues/313',
-				'/plugin-uncompiled': 'https://github.com/docpad/docpad/issues/925',
-				
-				// social
-				'/twitter': 'https://twitter.com/docpad'
+				'/plugin-uncompiled': 'https://github.com/docpad/docpad/issues/925'
 			},
 
 			advancedRedirects: [
 				// Issues
 				// /(i|issue)[/#{issue}]
-				[/^\/(?:i|issues)(?:\/(.*))?$/, 'https://github.com/docpad/docpad/issues/$1'],
+				[/^\/(?:i|issues)\/(.+)$/, 'https://github.com/docpad/docpad/issues/$1'],
 
 				// Plugins
 				// /(p|plugin)/#{pluginName}

@@ -180,7 +180,7 @@ const docpadConfig = {
 				'/github': 'https://github.com/docpad',
 				'/twitter': 'https://twitter.com/docpad',
 				'/reddit': 'https://www.reddit.com/r/docpad',
-				'/trello': 'https://bevry.me/trello,
+				'/trello': 'https://bevry.me/trello',
 				
 				// aliases
 				'/gittip-community': '/donate',

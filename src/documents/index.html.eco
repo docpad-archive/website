@@ -54,7 +54,7 @@ standalone: true
 		<ul class="providers clearfix"><% for partner in @getCollection('partners').models: %>
 			<li>
 				<a
-					href="/docpad/support#<%= partner.get('shortname') or partner.get('basename') %>"
+					href="/docs/support/#<%= partner.get('shortname') or partner.get('basename') %>"
 					title="<%= partner.get('description') %>"
 				>
 					<%- partner.get('title') %>

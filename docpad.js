@@ -176,6 +176,7 @@ const docpadConfig = {
 				'/tos': 'https://bevry.me/tos',
 				'/terms': 'https://bevry.me/tos',
 				'/privacy': 'https://bevry.me/privacy',
+				'/github': 'https://github.com/docpad',
 				
 				// aliases
 				'/gittip-community': '/donate',
@@ -211,31 +212,13 @@ const docpadConfig = {
 			},
 
 			advancedRedirects: [
-				// Old URLs
-				[/^https?:\/\/(?:refresh\.docpad\.org|docpad\.herokuapp\.com|docpad\.github\.io\/website)(.*)$/, 'https://docpad.org$1'],
-
-				// Content
-				// /docpad[/#{relativeUrl}]
-				[/^\/docpad(?:\/(.*))?$/, '/docs/$1'],
-
-				// Learning Centre Content
-				[/^\/((?:node|joe|query-?engine).*)$/, 'https://learn.bevry.me/$1'],
-
-				// GitHub
-				// /(g|github|bevry/docpad)[/#{path}]
-				[/^\/(?:g|github|bevry\/docpad)(?:\/(.*))?$/, 'https://github.com/docpad/docpad/$1'],
-
 				// Issues
 				// /(i|issue)[/#{issue}]
 				[/^\/(?:i|issues)(?:\/(.*))?$/, 'https://github.com/docpad/docpad/issues/$1'],
 
 				// Plugins
 				// /(p|plugin)/#{pluginName}
-				[/^\/(?:p|plugin)\/(.+)$/, 'https://github.com/docpad/docpad-plugin-$1'],
-
-				// Plugins via Full (legacy)
-				// /(docs/)?docpad-plugin-#{pluginName}
-				[/^\/(?:docs\/)?docpad-plugin-(.+)$/, 'https://github.com/docpad/docpad-plugin-$1']
+				[/^\/(?:p|plugin)\/(.+)$/, 'https://github.com/docpad/docpad-plugin-$1']
 			]
 		}
 	}

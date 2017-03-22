@@ -164,19 +164,17 @@ const docpadConfig = {
 
 			// Common Redirects
 			simpleRedirects: {
-				'/license': 'https://github.com/docpad/docpad/blob/master/LICENSE.md#readme',
-				'/changelog': 'https://github.com/docpad/docpad/blob/master/HISTORY.md#readme',
-				'/changes': '/changelog',
-				'/history': '/changelog',
-				'/install': '/docs/install',
+				// community
+				'/chat-guidelines': 'http://learn.bevry.me/community/chat-guidelines',
 				'/chat-logs': 'https://botbot.me/freenode/docpad/',
 				'/chat': 'https://discuss.bevry.me/tags/chat',
-				// use /support-channels, as there is a /support documentation page
 				'/support-channels': 'https://discuss.bevry.me/t/official-bevry-support-channels/63',
 				'/bug-report': '/support-channels',
 				'/forum': 'https://discuss.bevry.me/tags/docpad',
 				'/stackoverflow': 'https://discuss.bevry.me/t/official-stack-overflow-support/61/3',
 				'/donate': 'https://bevry.me/donate',
+				
+				// aliases
 				'/gittip-community': '/donate',
 				'/gittip': '/donate',
 				'/gratipay-community': '/donate',
@@ -184,26 +182,34 @@ const docpadConfig = {
 				'/flattr': '/donate',
 				'/praise': 'https://twitter.com/docpad/favorites',
 				'/growl': 'http://growl.info/downloads',
+				'/plugins': '/docs/plugins',
+				'/upgrade': '/docs/upgrade',
+				'/install': '/docs/install',
+				'/troubleshoot': '/docs/troubleshoot',
 				'/partners': '/docs/support#support-consulting-partners',
 				'/docs/start': '/docs/begin',
 				'/get-started': '/docs/overview',
-				'/chat-guidelines': '/i/384',
-				'/unstable-node': '/i/725',
-				'/render-early-via-include': '/i/378',
-				'/extension-not-rendering': '/i/192',
-				'/plugin-conventions': '/i/313',
-				'/plugin-uncompiled': '/i/925',
-				'/twitter': 'https://twitter.com/docpad',
-				'/tweet': '/twitter',
-				'/t': '/twitter'
+				
+				// docpad
+				'/license': 'https://github.com/docpad/docpad/blob/master/LICENSE.md#readme',
+				'/changelog': 'https://github.com/docpad/docpad/blob/master/HISTORY.md#readme',
+				'/changes': '/changelog',
+				'/history': '/changelog',
+				
+				// issues
+				'/unstable-node': 'https://github.com/docpad/docpad/issues/725',
+				'/render-early-via-include': 'https://github.com/docpad/docpad/issues/378',
+				'/extension-not-rendering': 'https://github.com/docpad/docpad/issues/192',
+				'/plugin-conventions': 'https://github.com/docpad/docpad/issues/313',
+				'/plugin-uncompiled': 'https://github.com/docpad/docpad/issues/925',
+				
+				// social
+				'/twitter': 'https://twitter.com/docpad'
 			},
 
 			advancedRedirects: [
 				// Old URLs
 				[/^https?:\/\/(?:refresh\.docpad\.org|docpad\.herokuapp\.com|docpad\.github\.io\/website)(.*)$/, 'https://docpad.org$1'],
-
-				// Short Links
-				[/^\/(plugins|upgrade|install|troubleshoot)\/?$/, '/docs/$1'],
 
 				// Content
 				// /docpad[/#{relativeUrl}]

@@ -6,7 +6,7 @@ const helpers = require('outpatient')
 // Prepare
 const websiteVersion = require('./package.json').version
 const docpadVersion = require('./package.json').dependencies.docpad.toString().replace('~', '').replace('^', '')
-const exchangeUrl = `https://helper.docpad.org/exchange.cson?version=${docpadVersion}`
+const exchangeUrl = `https://helper.docpad.org/exchange?version=${docpadVersion}`
 const siteUrl = process.env.NODE_ENV === 'production' ? 'https://docpad.org' : 'http://localhost:9778'
 
 
@@ -129,7 +129,7 @@ const docpadConfig = {
 				},
 				exchange: {
 					url: exchangeUrl,
-					parse: 'cson'
+					parse: 'json'
 				}
 			}
 		},

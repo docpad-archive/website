@@ -153,8 +153,8 @@ const docpadConfig = {
 		repocloner: {
 			repos: [{
 				name: 'DocPad Documentation',
-				path: 'src/documents/learn/docpad/documentation',
-				url: 'https://github.com/bevry/docpad-documentation.git'
+				path: 'src/documents/learn/docpad-documentation/docpad',
+				url: 'https://github.com/docpad/documentation.git'
 			}]
 		},
 
@@ -181,7 +181,7 @@ const docpadConfig = {
 				'/twitter': 'https://twitter.com/docpad',
 				'/reddit': 'https://www.reddit.com/r/docpad',
 				'/trello': 'https://bevry.me/trello',
-				
+
 				// aliases
 				'/gittip-community': '/donate',
 				'/gittip': '/donate',
@@ -198,13 +198,13 @@ const docpadConfig = {
 				'/docs/start': '/docs/begin',
 				'/docs/skeletons': '/docs/showcase#skeletons',
 				'/get-started': '/docs/overview',
-				
+
 				// docpad
 				'/license': 'https://github.com/docpad/docpad/blob/master/LICENSE.md#readme',
 				'/changelog': 'https://github.com/docpad/docpad/blob/master/HISTORY.md#readme',
 				'/changes': '/changelog',
 				'/history': '/changelog',
-				
+
 				// issues
 				'/unstable-node': 'https://github.com/docpad/docpad/issues/725',
 				'/render-early-via-include': 'https://github.com/docpad/docpad/issues/378',
@@ -238,7 +238,8 @@ helpers({
 			url: '/docs/'
 		},
 		projects: {
-			documentation: {
+			docpad: {
+				editUrl: 'https://github.com/docpad/documentation/edit/master/',
 				title: 'DocPad Documentation',
 				url: '/docs/',
 				categories: {

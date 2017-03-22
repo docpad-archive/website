@@ -7,7 +7,7 @@ const helpers = require('outpatient')
 const websiteVersion = require('./package.json').version
 const docpadVersion = require('./package.json').dependencies.docpad.toString().replace('~', '').replace('^', '')
 const exchangeUrl = `https://helper.docpad.org/exchange.cson?version=${docpadVersion}`
-const siteUrl = process.env.NODE_ENV === 'production' ? 'http://docpad.org' : 'http://localhost:9778'
+const siteUrl = process.env.NODE_ENV === 'production' ? 'https://docpad.org' : 'http://localhost:9778'
 
 
 // =================================
@@ -28,7 +28,7 @@ const docpadConfig = {
 
 		text: {
 			heading: 'DocPad',
-			copyright: 'DocPad is a <a href="http://bevry.me" title="Bevry - An open company and community dedicated to empowering developers everywhere.">Bevry</a> creation.',
+			copyright: 'DocPad is a <a href="https://bevry.me" title="Bevry - An open company and community dedicated to empowering developers everywhere.">Bevry</a> creation.',
 
 			linkNames: {
 				main: 'Website',

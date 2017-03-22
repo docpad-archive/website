@@ -173,6 +173,9 @@ const docpadConfig = {
 				'/forum': 'https://discuss.bevry.me/tags/docpad',
 				'/stackoverflow': 'https://discuss.bevry.me/t/official-stack-overflow-support/61/3',
 				'/donate': 'https://bevry.me/donate',
+				'/tos': 'https://bevry.me/tos',
+				'/terms': 'https://bevry.me/tos',
+				'/privacy': 'https://bevry.me/privacy',
 				
 				// aliases
 				'/gittip-community': '/donate',
@@ -214,9 +217,6 @@ const docpadConfig = {
 				// Content
 				// /docpad[/#{relativeUrl}]
 				[/^\/docpad(?:\/(.*))?$/, '/docs/$1'],
-
-				// Bevry Content
-				[/^\/((?:tos|terms|privacy).*)$/, 'https://bevry.me/$1'],
 
 				// Learning Centre Content
 				[/^\/((?:node|joe|query-?engine).*)$/, 'https://learn.bevry.me/$1'],

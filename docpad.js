@@ -179,7 +179,8 @@ const docpadConfig = {
 				'/privacy': 'https://bevry.me/privacy',
 				'/github': 'https://github.com/docpad',
 				'/twitter': 'https://twitter.com/docpad',
-				'/reddit': 'http://www.reddit.com/r/docpad',
+				'/reddit': 'https://www.reddit.com/r/docpad',
+				'/trello': 'https://bevry.me/trello,
 				
 				// aliases
 				'/gittip-community': '/donate',

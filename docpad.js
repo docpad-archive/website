@@ -107,7 +107,7 @@ const docpadConfig = {
 
 	collections: {
 		partners (database) {
-			const query = {relativeOutDirPath: 'learn/docpad/documentation/partners'}
+			const query = {relativeOutDirPath: 'learn/docpad-documentation/docpad/partners'}
 			const sort = [{filename: 1}]
 			return database.findAllLive(query, sort).on('add', function (document) {
 				document.setMetaDefaults({write: false})

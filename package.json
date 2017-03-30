@@ -56,13 +56,13 @@
     "npm": "4"
   },
   "dependencies": {
-    "docpad": "~6.79.0",
+    "docpad": "~6.79.4",
     "docpad-plugin-cleanurls": "~2.8.1",
     "docpad-plugin-coffeekup": "~2.2.0",
     "docpad-plugin-coffeescript": "~2.5.0",
-    "docpad-plugin-downloader": "~2.1.4",
+    "docpad-plugin-downloader": "~2.2.0",
     "docpad-plugin-eco": "~2.1.0",
-    "docpad-plugin-feedr": "~2.11.0",
+    "docpad-plugin-feedr": "~2.12.0",
     "docpad-plugin-highlightjs": "~2.4.0",
     "docpad-plugin-marked": "~2.3.0",
     "docpad-plugin-raw": "~2.4.1",

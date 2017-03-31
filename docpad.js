@@ -160,7 +160,7 @@ const docpadConfig = {
 
 		cleanurls: {
 			// enable this for surge.sh deployment
-			trailingSlashes: true,
+			// trailingSlashes: true,
 
 			// Common Redirects
 			simpleRedirects: {

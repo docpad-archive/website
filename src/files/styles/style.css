@@ -1,0 +1,848 @@
+/***
+standalone: true
+***/
+
+:root {
+	--colorBlue: #259dcf;
+	--colorDarkGold: #998758;
+	--colorGold: #b09e6e;
+	--colorLightGold: #c0ae7e;
+	--colorLighterGold: #e2d5b2;
+	--colorLightestGold: #f2ead4;
+	--colorDarkestBrown: #3e3e3e;
+	--colorDarkBrown: #777;
+	--colorBrown: #9f9f9f;
+	--colorLightBrown: #aaa;
+	--colorLighterBrown: #dbdbdb;
+	--colorLightestBrown: #f1f1f1;
+
+	--bodyFont: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	--bodyBackground: var(--colorLightestBrown);
+	--bodyColor: var(--colorDarkestBrown);
+
+	--headingFont: Cambria, Calibri, Helvetica, Arial, sans-serif;
+
+	--codeFont: Monaco, Menlo, Consolas, 'Source Code Pro', 'courier new', monospace, serif;
+	--codeFontNormal: 500;
+	--codeBackground: var(--colorLightestGold);
+	--codeBorder: hsl(186, 8%, 88%);  /* hsl(192, 8%, 84%) */
+	--codeColor: hsl(186, 8%, 15%);
+
+	--quoteColor: hsl(11, 90%, 55%);
+
+	--linkColor: var(--colorBlue);
+	--accentColor: var(--colorDarkGold);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* icons */
+.up > .icon:before {
+	content: '↑';
+}
+.down > .icon:before {
+	content: '↓';
+}
+.prev > .icon:before {
+	content: '←';
+}
+.next > .icon:before {
+	content: '→';
+}
+
+/* main */
+html {
+	font-family: var(--bodyFont);
+	background: var(--bodyBackground);
+	color: var(--bodyColor);
+}
+html, body, div {
+	margin: 0;
+	padding: 0;
+}
+h1, h2, h3, h4 {
+	font-family: var(--headingFont);
+}
+
+/* links */
+a, .link  {
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	color: var(--linkColor);
+}
+a:hover, .link:hover {
+	text-decoration: underline;
+}
+
+/* code */
+code,
+pre code,
+.hljs {
+	font-weight: normal;
+	font-family: var(--codeFont);
+	background: var(--codeBackground);
+	border: 1px solid var(--codeBorder);
+	border-radius: 0.5em;
+	color: var(--codeColor);
+}
+
+code {
+	font-size: 0.75em;
+	display: inline-block;
+	padding: 0.05em 0.5em 0em;
+	margin: 0.4em 0.2em 0.2em 0;
+	white-space: pre;
+}
+
+pre code,
+.hljs {
+	font-size: 0.7em;
+	display: block;
+	margin: 2.5em 0;
+	padding: 1em 1.5em;
+	line-height: 1.5em;
+	overflow: auto;
+}
+
+/* misc */
+blockquote {
+	margin: 3em;
+	color: var(--quoteColor);
+}
+blockquote em {
+	font-style: italic;
+}
+em {
+	font-style: italic;
+}
+nav,
+nav li {
+	list-style: none;
+}
+
+
+/* ====================================
+   Layout */
+
+html, body, .container {
+	height: 100%;
+}
+.container {
+	display: grid;
+	grid-template-columns: 220px 1fr;
+	grid-template-rows: 2.5rem 1fr 2.5rem;
+	grid-template-areas:
+		"topbar topbar"
+		"sidebar contentbar"
+		"bottombar bottombar";
+}
+.topbar {
+	grid-area: topbar;
+	height: 2.5rem;
+	border-bottom: 1px solid var(--colorLightBrown);
+}
+.sidebar {
+	grid-area: sidebar;
+	width: 220px;
+	border: 1px solid white;
+	border-right: 1px solid var(--colorLightBrown);
+	border-left: none;
+}
+.contentbar {
+	grid-area: contentbar;
+	border: 1px solid white;
+	border-right: none;
+	padding: 0 3%;
+}
+.bottombar {
+	grid-area: bottombar;
+	height: 2.5rem;
+	border-top: 1px solid var(--colorLightBrown);
+}
+
+/* topbar */
+.topbar {
+	display: grid;
+	grid-template-columns: 1fr 300px;
+	grid-template-rows: 2.5rem;
+	grid-template-areas: "links search";
+	clear: both;
+	overflow: hidden;
+}
+.topbar .links {
+	grid-area: links;
+	line-height: 2.6rem;
+}
+.topbar .search {
+	grid-area: search;
+	padding: 0.3rem 0.5rem 0;
+}
+.topbar a {
+	line-height: 1rem;
+	font-size: 1rem;
+	margin: 0 5px;
+	padding: 0 7px;
+	color: var(--colorDarkestBrown);
+	font-weight: bolder;
+	padding-bottom: 2px;
+	border-bottom: 3px solid transparent;
+}
+.topbar a:hover,
+.topbar a.active {
+	text-decoration: none;
+	border-color: var(--colorLightGold);
+}
+.topbar a.logo {
+	margin-left: 5px;
+	padding-bottom: 3px;
+	font-size: 1.25rem;
+}
+.topbar .search * {
+	box-sizing: content-box;
+}
+.topbar .search .gsc-control-cse {
+	padding: 0;
+	border: none;
+	background: none;
+	border: none;
+}
+
+/* bottombar */
+.bottombar {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 2.5rem;
+	grid-template-areas: "about links";
+	background: var(--bodyBackground);
+}
+.bottombar .about {
+	grid-area: about;
+}
+.bottombar .links {
+	grid-area: links;
+}
+
+
+/* ====================================
+   Content */
+
+body:not(.page-docs):not(.page-index) .contentbar {
+	background: white;
+}
+
+.contentbar h1,
+.contentbar h2,
+.contentbar h3,
+.contentbar h4,
+.contentbar h5,
+.contentbar h6 {
+	margin: 2em 0 0.5em;
+}
+.contentbar .block-header h1 {
+	margin: 1em 0 0em;
+}
+
+
+
+/* ====================================
+   Sidebar and Docs Menus */
+
+.list-menu {
+	cursor: default;
+}
+.list-menu ul,
+.list-menu li {
+	margin: 0;
+	padding: 0;
+}
+.list-menu a,
+.list-menu .active {
+	line-height: 1rem;
+	font-size: 1rem;
+	color: var(--colorDarkestBrown);
+	font-weight: bolder;
+	padding-left: 5px;
+	border-left: 3px solid transparent;
+}
+.list-menu a:hover,
+.list-menu .active {
+	color: var(--colorDarkGold);
+	border-color: var(--colorLightGold);
+}
+
+.sidebar .list-menu-items {
+	margin: 0 15px;
+}
+.list-menu h1,
+.list-menu h2,
+.list-menu h3,
+.list-menu h4,
+.list-menu h5,
+.list-menu h6 {
+	margin: 0.2em 5px;
+	padding: 0.2em 0;
+}
+
+.list-menu-project > .list-menu-title {
+	display: none;
+}
+.docs .list-menu-categories {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+   align-content: center;
+	grid-gap: 1rem;
+   justify-content: space-evenly;
+}
+.docs .list-menu-category {
+	grid-column: span 1;
+	grid-row: span 1;
+}
+.docs .list-menu-category > .list-menu-title a {
+	all: unset;
+}
+.docs .list-menu-items {
+	padding: 1rem 3%;
+	background: white;
+	border-radius: 3px;
+}
+
+/* hide sidebar on docs and landing page */
+.page-docs .sidebar,
+.page-index .sidebar {
+	display: none;
+}
+.page-index .container,
+.page-docs .container {
+	grid-template-areas:
+		"topbar topbar"
+		"contentbar contentbar"
+		"bottombar bottombar";
+}
+.page-index .contentbar,
+.page-docs .contentbar {
+	border-left: none;
+}
+
+
+/* ====================================
+   Splash & Error */
+
+.splash section,
+.error section {
+	margin: 3em 0;
+	padding: 1.5em 0;
+	text-align: center;
+}
+
+.splash h1,
+.error h1 {
+	font-size: 4rem;
+}
+
+.splash h2,
+.error h2,
+.splash h3,
+.error h3 {
+	font-size: 2.5rem;
+}
+
+.error section {
+	margin: 0;
+}
+.error h1 {
+	margin-bottom: 0;
+}
+
+.splash p {
+	color: var(--colorDarkBrown);
+	font-size: 1.1em;
+	line-height: 1.6em;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 50%;
+}
+.splash .btn {
+	font-size: 1.5em;
+	background-color: var(--colorLightGold);
+	background-image: linear-gradient(to bottom, var(--colorLightGold), var(--colorGold));
+	border: 2px solid white;
+	border-radius: 3px;
+	color: var(--colorDarkestBrown) !important;
+	display: inline-block;
+	margin: 1em auto;
+	padding: 15px 30px;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+}
+.splash .btn:hover {
+	background-image: none;
+	box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ====================================
+   Splash: Hero */
+
+.splash .overview {
+	font-family: var(--headingFont);
+	font-size: 1.4em;
+	line-height: 1.2em;
+	list-style: none;
+	padding: 3em 0 1em;
+
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+   align-content: center;
+	grid-gap: 1rem;
+   justify-content: space-evenly;
+}
+.splash .overview li {
+	grid-column: span 1;
+	grid-row: span 1;
+	position: relative;
+	cursor: pointer;
+}
+.splash .overview li span {
+	display: block;
+}
+.splash .overview li .image {
+	display: block;
+	background: url(/images/splash-features.png) no-repeat 4px 100%;
+	width: 152px;
+	height: 256px;
+	margin: 0 auto;
+}
+.splash .overview li.versioning .image {
+	background-position: 0 10px;
+}
+.splash .overview li.skeletons .image {
+	background-position: -206px 0;
+}
+.splash .overview li.language .image {
+	background-position: -400px 0;
+}
+.splash .overview li.deploys .image {
+	background-position: -596px 0;
+}
+.splash .overview li.plugins .image {
+	background-position: -806px 0;
+}
+.splash .overview li .popover {
+	position: absolute;
+	left: 0;
+	z-index: 3;
+
+	background: white;
+	padding: 1rem;
+	border-radius: .25em;
+
+	line-height: 1.25em;
+
+	visibility: hidden;
+	opacity: 0;
+	transition: all .2s ease-in-out;
+}
+.splash .overview li .popover:before {
+	content: "";
+	background: white;
+
+	z-index: -3;
+	width: 1em;
+	height: 1em;
+	margin-left: -.5em;
+
+	position: absolute;
+	top: -.4em;
+	left: 50%;
+
+	transform: rotate(45deg);
+}
+.splash .overview li:hover .popover {
+	visibility: visible;
+	opacity: 1;
+	margin-top: 1em;
+}
+
+/* ====================================
+	Splash - Support & About Sections */
+
+.splash .support {
+	background: var(--colorLightGold);
+	color: var(--colorDarkestBrown);
+}
+
+.splash .providers {
+	list-style: none;
+	padding: 2em 0 0;
+}
+.splash .providers li {
+	display: inline-block;
+	margin: 0 3em 2em;
+}
+.splash .providers a {
+	color: var(--colorLightestGold);
+	font-size: 1.4em;
+	font-weight: 400;
+}
+.splash .providers a:hover {
+	color: white;
+}
+
+
+.splash .tweets {
+	margin-top: 2em;
+	margin-bottom: 0;
+}
+
+.splash .about {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+/* ====================================
+   Main Content */
+
+.parentcrumbs {
+	display: none;
+}
+
+.block-edit {
+	text-align: right;
+	padding: 1.5em 0 1em;
+}
+.block-edit a {
+	transition: all 0.2s ease-out;
+	color: var(--colorLighterBrown);
+}
+.block-edit a:hover {
+	color: var(--colorDarkestBrown);
+}
+
+.block table {
+	font-size: 1em;
+	margin: 2em 0;
+	width: 100%;
+}
+.block th,
+.block td {
+	padding: 0.8em;
+}
+.block th {
+	background: var(--colorLightGold);
+	color: white;
+	font: var(--headingFont);
+	font-weight: bold;
+}
+.block tr:nth-child(2n+2) {
+	background: var(--colorLightestBrown);
+}
+
+/*
+.block
+	padding: 0.5em 3%;
+	background: white;
+	border-radius: 3px;
+	word-wrap: break-word;
+	overflow: hidden;
+
+	.section-wrapper
+		display:none
+		&.active
+			display:block
+
+	h1
+		margin-bottom: 0;
+		font-size: 2.5em;
+		font-weight: fontMyraidBoldest;
+
+	h2
+		font-weight: fontMyraidBoldest;
+		font-size: 1.8em;
+		margin-top: 4em;
+
+	.compact
+		h2
+			color: linkColor;
+
+	h3
+		font-size: 1.5em;
+		margin-top: 3em;
+
+	h4
+		font-size: 1.2em;
+		margin-top: 2.5em;
+
+	h2
+		border-bottom: 1px dotted colorLighterBrown;
+
+
+	a
+		color: linkColor;
+		font-weight: fontMyraidBold;
+		&:hover
+			text-decoration: underline;
+
+	dl dt
+		font-weight: fontMyraidBoldest;
+	dl dd
+		margin: 0 0 1.4em 1.1em;
+
+	img
+		border: 2px solid colorLightestBrown;
+		display: block;
+		margin: 1em auto;
+		max-width: 100%;
+
+	.block-footer
+		border-top: 1px dotted colorLighterBrown;
+		margin: 5em 0 1.5em;
+		padding-top: 1em;
+		clearfix()
+
+	.prev-next
+		position: relative;
+		height: 2em;
+
+		a
+			font-weight: fontMyraidBoldest;
+
+		.prev
+		.next
+		.up
+			display: block;
+			position: absolute;
+			bottom: 0;
+			height: 2em;
+			width: 33%;
+			text-decoration: none;
+			&:hover
+				opacity: 1;
+				.title
+					text-decoration: underline;
+			.icon
+				display: block;
+				height: auto;
+				width: auto;
+
+		.prev
+			left: 0;
+			text-align: left;
+			.icon
+				mixinIconPagePrev()
+		.next
+			right: 0;
+			text-align: right;
+			.icon
+				mixinIconPageNext()
+		.up
+			left: 33%;
+			text-align: center;
+			.icon
+				mixinIconPageUp()
+
+
+// ====================================
+// Footer
+
+.bottombar
+	font-size: 1em;
+	border-top: 1px solid white;
+	box-shadow: 0 -1px 0 var(--colorLightBrown);
+	padding: 1em 0;
+	line-height: 2em;
+
+	a
+		font-weight: fontMyraidBoldest;
+		&:hover
+			text-decoration: underline;
+
+	.about
+		float: left;
+		a
+			color: linkColor;
+
+	.links
+		float: right;
+		a
+			color: var(--colorDarkestBrown);
+			margin: 0 0.5em;
+
+
+
+// ====================================
+// Layout: Responsive;
+// Write your responsive layout styles here
+// Below is merely an example of how this should work
+
+@media screen and (max-width: 1280px);
+	// Shrink features even more
+	.splash
+		.overview
+			li
+				font-size: 90%;
+				.image
+					zoom(0.9)
+
+@media screen and (max-width: 1024px);
+	// Remove side padding
+	.container
+		width: 100%;
+
+	// Shrink features even more
+	.splash
+		.overview
+			li
+				column(4)
+				display: inline-block;
+				float: none;
+
+	// Remove margin about the bottombar
+	.bottombar
+		margin-top: 2em;
+		.about
+			margin-left: 2%;
+		.links
+			margin-right: 2%;
+
+@media screen and (max-width: 960px);
+	// Reduce doc columns
+	.docs
+		.list-menu
+			.list-menu-category
+				font-size: 90%;
+				min-height: 300px;
+
+@media screen and (max-width: 900px);
+	// Hide the search bar
+	.topbar
+		.search
+			display: none;
+
+@media screen and (max-width: 830px);
+	// Reduce doc columns
+	.docs
+		.list-menu
+			.list-menu-category
+				width: 23%;
+				margin: 0 1%;
+
+	.splash
+		.overview
+			li
+				margin: 0 3%;
+				.image
+					zoom(0.8)
+
+@media screen and (max-width: 768px);
+	// Reduce doc columns per row to 2
+	.docs
+		.list-menu
+			.list-menu-category
+				width: 47%;
+				margin: 1em 1.5%;
+
+	// Remove top margin on the bottombar
+	.bottombar
+		margin-top: 0;
+		.about
+		.links
+			margin: 0;
+
+@media screen and (max-width: 650px);
+	// Adjust font sizes
+	.page
+		font-size: 95%;
+		padding-left: 0;
+		width: 100%;
+	.splash
+		font-size: 80%;
+		.overview
+			li
+				column(4)
+				display: inline-block;
+				float: none;
+				padding: 0 0 2em;
+				.image
+					zoom(0.6)
+
+	.block
+		h2
+			margin-top: 3em;
+		h3
+			margin-top: 2.5em;
+		h4
+			margin-top: 2.1em;
+
+	// Make footer two rows
+	.bottombar
+		text-align: center;
+		.about
+		.links
+			float: none;
+
+
+@media screen and (max-width: 560px);
+	.splash
+		.overview
+			li
+				.image
+					zoom(0.5)
+
+@media screen and (max-width: 450px);
+	// Shrink features even more
+	.splash
+		section
+			margin: 2em 0;
+
+	// Hide the links
+	.block-edit
+		display: none;
+	.bottombar
+		.links
+			display: none;
+
+	// Hide the links
+	.topbar
+		a.secondary
+			display: none;
+
+	// Allow code blocks to break
+	code
+		word-wrap: break-word;
+
+	// Adjust font sizes
+	.page
+		font-size: 90%;
+	.splash
+		font-size: 65%;
+		p
+			font-size: 130%;
+	.block
+		h2
+			margin: 2.3em 0 1em;
+		h3
+			margin: 2.2em 0 1em;
+		h4
+			margin: 2.1em 0 1em;
+
+
+@media screen and (max-width: 320px);
+	// Shrink features even more
+	.splash
+		.overview
+			margin: 0;
+
+	// Reduce doc columns per row to 1
+	.docs
+		.list-menu
+			.list-menu-category
+				width: 100%;
+				margin: 1em 0;
+				min-height: inherit;
+
+	// Adjust font sizes
+	.prev-next .title
+		font-size: 70%;
+
+*/

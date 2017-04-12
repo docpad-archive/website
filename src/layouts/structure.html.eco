@@ -1,0 +1,26 @@
+<!---
+layout: default
+--->
+
+<nav class="topbar">
+	<div class="links">
+		<a class="logo primary" href="/" title="<%= @text['heading'] %>"><%= @text['heading'] %></a>
+		<% for own name, url of @navigation.top: %>
+			<a class="secondary" href="<%= url %>"><%= name %></a>
+		<% end %>
+	</div>
+	<%- @renderGoogleSearch() %>
+</nav>
+
+<nav class="sidebar"><%- @renderMenu({render: 'projects'}) %></nav>
+
+<div class="contentbar"><%- @content %></div>
+
+<footer class="bottombar">
+	<div class="about"><%- @text['copyright'] %></div>
+	<div class="links">
+		<% for own name, url of @navigation.bottom: %>
+			<a href="<%= url %>"><%= name %></a>
+		<% end %>
+	</div>
+</footer>

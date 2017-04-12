@@ -3,3 +3,10 @@ layout: structure
 --->
 
 <%- @renderDocumentationLayout() %>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function (event) {
+		anchors.options.placement = "left";
+		anchors.add().remove(".list-menu-title");
+	});
+</script>

@@ -83,7 +83,6 @@ const docpadConfig = {
 			// Styles
 			styles: [
 				'/vendor/normalize.css',
-				'/vendor/h5bp.css',
 				'/vendor/highlight.css',
 				'/styles/style.css'
 			].map(function (url) {
@@ -136,10 +135,6 @@ const docpadConfig = {
 
 		downloader: {
 			downloads: [{
-				name: 'HTML5 Boilerplate',
-				path: 'src/raw/vendor/h5bp.css',
-				url: 'https://rawgit.com/h5bp/html5-boilerplate/5.3.0/dist/css/main.css'
-			}, {
 				name: 'Normalize CSS',
 				path: 'src/raw/vendor/normalize.css',
 				url: 'https://rawgit.com/h5bp/html5-boilerplate/5.3.0/dist/css/normalize.css'

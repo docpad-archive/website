@@ -4,7 +4,8 @@ layout: structure
 
 <%- @renderDocumentationLayout() %>
 
-<script>
+<script defer src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
+<script defer>
 	document.addEventListener("DOMContentLoaded", function (event) {
 		anchors.add().remove(".list-menu-title");
 	});

@@ -90,9 +90,7 @@ const docpadConfig = {
 			}),
 
 			// Script
-			scripts: [
-				'//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js'
-			]
+			scripts: []
 		},
 
 		services: {

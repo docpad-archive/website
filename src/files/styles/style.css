@@ -19,6 +19,7 @@ standalone: true
 	--barSize: 2.5rem;
 	--paddingSize: 2%;
 	--marginSize: 10px;
+	--sidebarSize: 200px;
 
 	--bodyFont: sans-serif; /* -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; */
 	--bodyBackground: var(--colorLightestBrown);
@@ -148,10 +149,10 @@ html, body, div, nav, section, aside, article {
 	box-sizing: content-box;
 	position: fixed;
 	z-index: 1;
-	width: 200px;
+	width: var(--sidebarSize);
 	padding-right: 20px;
 	top: 0;
-	left: -200px;
+	left: calc(var(--sidebarSize) * -1);
 	transition: left 0.3s ease-in;
 }
 .sidebar > .list-menu {
@@ -272,7 +273,6 @@ html, body, div, nav, section, aside, article {
 	line-height: 1rem;
 	font-size: 1rem;
 	color: var(--colorDarkestBrown);
-	font-weight: bolder;
 }
 
 .sidebar .list-menu-title {
@@ -303,14 +303,22 @@ html, body, div, nav, section, aside, article {
 	padding: 0.2em 0;
 }
 
+.docs header {
+	display: none;
+}
+.docs .list-menu {
+	padding-top: calc(var(--barSize) / 2);
+}
+.docs .list-menu-title {
+	font-weight: normal;
+}
 .docs .list-menu-project > .list-menu-title {
 	display: none;
 }
 .docs .list-menu-categories {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-   align-content: center;
-	grid-gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(var(--sidebarSize), 1fr));
+	grid-gap: calc(var(--marginSize) * 2);
    justify-content: space-evenly;
 }
 .docs .list-menu-category {
@@ -321,7 +329,7 @@ html, body, div, nav, section, aside, article {
 	all: unset;
 }
 .docs .list-menu-items {
-	padding: 1rem var(--paddingSize);
+	padding: var(--marginSize);
 	background: white;
 	border-radius: 3px;
 }
@@ -390,16 +398,14 @@ html, body, div, nav, section, aside, article {
 	line-height: 1.2em;
 	list-style: none;
 	padding: 3em 0 1em;
-
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-   align-content: center;
-	grid-gap: 1rem;
-   justify-content: space-evenly;
+	text-align: center;
+}
+.splash .overview a {
+	color: var(--colorDarkestBrown);
 }
 .splash .overview li {
-	grid-column: span 1;
-	grid-row: span 1;
+	margin: 0 var(--paddingSize);
+	display: inline-block;
 	position: relative;
 	cursor: pointer;
 }
@@ -411,7 +417,6 @@ html, body, div, nav, section, aside, article {
 	background: url(/images/splash-features.png) no-repeat 4px 100%;
 	width: 152px;
 	height: 256px;
-	margin: 0 auto;
 }
 .splash .overview li.versioning .image {
 	background-position: 0 10px;
@@ -615,7 +620,13 @@ html, body, div, nav, section, aside, article {
 	.block td {
 		padding: var(--marginSize) 0;
 	}
-	.block-edit {
+	.bottombar {
+		grid-template-areas: "about";
+		text-align: center;
+	}
+	.block-edit,
+	.up,
+	.bottombar .links {
 		display: none;
 	}
 	.gsc-results-wrapper-visible {
@@ -626,183 +637,37 @@ html, body, div, nav, section, aside, article {
 		height: 100% !important;
 		padding: 2rem var(--paddingSize) !important;
 	}
+	.splash {
+		font-size: 80%;
+	}
+	.splash p {
+		font-size: 1rem;
+		max-width: 95%;
+	}
+	.splash .overview li {
+		font-size: 1em;
+	}
+	.splash .overview li .image {
+		zoom: 0.5;
+	}
 }
 
-/*
-
-// ====================================
-// Layout: Responsive;
-// Write your responsive layout styles here
-// Below is merely an example of how this should work
-
-@media screen and (max-width: 1280px);
-	// Shrink features even more
-	.splash
-		.overview
-			li
-				font-size: 90%;
-				.image
-					zoom(0.9)
-
-@media screen and (max-width: 1024px);
-	// Remove side padding
-	.container
-		width: 100%;
-
-	// Shrink features even more
-	.splash
-		.overview
-			li
-				column(4)
-				display: inline-block;
-				float: none;
-
-	// Remove margin about the bottombar
-	.bottombar
-		margin-top: 2em;
-		.about
-			margin-left: 2%;
-		.links
-			margin-right: 2%;
-
-@media screen and (max-width: 960px);
-	// Reduce doc columns
-	.docs
-		.list-menu
-			.list-menu-category
-				font-size: 90%;
-				min-height: 300px;
-
-@media screen and (max-width: 900px);
-	// Hide the search bar
-	.topbar
-		.search
-			display: none;
-
-@media screen and (max-width: 830px);
-	// Reduce doc columns
-	.docs
-		.list-menu
-			.list-menu-category
-				width: 23%;
-				margin: 0 1%;
-
-	.splash
-		.overview
-			li
-				margin: 0 3%;
-				.image
-					zoom(0.8)
-
-@media screen and (max-width: 768px);
-	// Reduce doc columns per row to 2
-	.docs
-		.list-menu
-			.list-menu-category
-				width: 47%;
-				margin: 1em 1.5%;
-
-	// Remove top margin on the bottombar
-	.bottombar
-		margin-top: 0;
-		.about
-		.links
-			margin: 0;
-
-@media screen and (max-width: 650px);
-	// Adjust font sizes
-	.page
-		font-size: 95%;
-		padding-left: 0;
-		width: 100%;
-	.splash
-		font-size: 80%;
-		.overview
-			li
-				column(4)
-				display: inline-block;
-				float: none;
-				padding: 0 0 2em;
-				.image
-					zoom(0.6)
-
-	.block
-		h2
-			margin-top: 3em;
-		h3
-			margin-top: 2.5em;
-		h4
-			margin-top: 2.1em;
-
-	// Make footer two rows
-	.bottombar
-		text-align: center;
-		.about
-		.links
-			float: none;
-
-
-@media screen and (max-width: 560px);
-	.splash
-		.overview
-			li
-				.image
-					zoom(0.5)
-
-@media screen and (max-width: 450px);
-	// Shrink features even more
-	.splash
-		section
-			margin: 2em 0;
-
-	// Hide the links
-	.block-edit
-		display: none;
-	.bottombar
-		.links
-			display: none;
-
-	// Hide the links
-	.topbar
-		a.secondary
-			display: none;
-
-	// Allow code blocks to break
-	code
-		overflow-wrap: break-word;
-
-	// Adjust font sizes
-	.page
+@media screen and (max-width: 1280px) {
+	.splash .overview li {
 		font-size: 90%;
-	.splash
-		font-size: 65%;
-		p
-			font-size: 130%;
-	.block
-		h2
-			margin: 2.3em 0 1em;
-		h3
-			margin: 2.2em 0 1em;
-		h4
-			margin: 2.1em 0 1em;
-
-
-@media screen and (max-width: 320px);
-	// Shrink features even more
-	.splash
-		.overview
-			margin: 0;
-
-	// Reduce doc columns per row to 1
-	.docs
-		.list-menu
-			.list-menu-category
-				width: 100%;
-				margin: 1em 0;
-				min-height: inherit;
-
-	// Adjust font sizes
-	.prev-next .title
-		font-size: 70%;
-
-*/
+	}
+	.splash .overview li .image {
+		zoom: 0.9;
+	}
+}
+@media screen and (max-width: 830px) {
+	.splash p {
+		max-width: 80%;
+	}
+	.splash .overview li {
+		font-size: 80%;
+	}
+	.splash .overview li .image {
+		zoom: 0.7;
+	}
+}

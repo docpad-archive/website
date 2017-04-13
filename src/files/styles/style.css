@@ -149,7 +149,7 @@ html, body, div, nav, section, aside, article {
 	position: fixed;
 	z-index: 1;
 	width: 200px;
-	padding-right: var(--paddingSize);
+	padding-right: 20px;
 	top: 0;
 	left: -200px;
 	transition: left 0.3s ease-in;
@@ -162,6 +162,8 @@ html, body, div, nav, section, aside, article {
 }
 .topbar:hover + .sidebar,
 .sidebar:hover {
+	/* we've added  ontouchstart="" to .container to get this to work on mobile
+	   http://stackoverflow.com/a/13080306/130638 */
 	left: 0;
 }
 .contentbar {
@@ -191,8 +193,8 @@ html, body, div, nav, section, aside, article {
 .links a {
 	line-height: 1rem;
 	font-size: 1rem;
-	margin: 0 var(--marginSize);
-	padding: 0 var(--marginSize);
+	margin: 0 calc(var(--marginSize) / 2);
+	padding: 0 calc(var(--marginSize) / 2);
 	color: var(--colorDarkestBrown);
 	font-weight: bolder;
 }
@@ -207,7 +209,6 @@ html, body, div, nav, section, aside, article {
 }
 .topbar .links a.logo {
 	padding-bottom: 3px;
-	margin-left: 0;
 }
 
 .topbar .links a.logo,
@@ -217,11 +218,11 @@ html, body, div, nav, section, aside, article {
 .topbar .search * {
 	box-sizing: content-box;
 }
-.topbar .search .gsc-control-cse {
-	padding: 0;
-	border: none;
-	background: none;
-	border: none;
+.gsc-control-cse {
+	padding: 0 !important;
+	border: none !important;
+	background: none !important;
+	border: none !important;
 }
 
 /* bottombar */
@@ -616,6 +617,14 @@ html, body, div, nav, section, aside, article {
 	}
 	.block-edit {
 		display: none;
+	}
+	.gsc-results-wrapper-visible {
+		box-sizing: border-box !important;
+		top: 0 !important;
+		left: 0 !important;
+		width: 100% !important;
+		height: 100% !important;
+		padding: 2rem var(--paddingSize) !important;
 	}
 }
 

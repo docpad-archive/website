@@ -43,12 +43,12 @@ const docpadConfig = {
 
 		navigation: {
 			top: {
+				Documentation: '/docs/',
 				Intro: '/docs/intro',
 				Install: '/docs/install',
 				Start: '/docs/begin',
 				Showcase: '/docs/showcase',
 				Plugins: '/docs/plugins',
-				Documentation: '/docs/',
 				Fund: '/donate/'
 			},
 

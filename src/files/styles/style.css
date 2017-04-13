@@ -17,7 +17,7 @@ standalone: true
 	--colorLightestBrown: #f1f1f1;
 
 	--barSize: 2.5rem;
-	--paddingSize: 3%;
+	--paddingSize: 2%;
 	--marginSize: 10px;
 
 	--bodyFont: sans-serif; /* -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; */
@@ -514,7 +514,7 @@ html, body, div, nav, section, aside, article {
 }
 .block th,
 .block td {
-	padding: 0.8em;
+	padding: var(--marginSize);
 }
 .block th {
 	background: var(--colorLightGold);
@@ -612,7 +612,7 @@ html, body, div, nav, section, aside, article {
 	}
 	.block th,
 	.block td {
-		padding: 0;
+		padding: var(--marginSize) 0;
 	}
 	.block-edit {
 		display: none;

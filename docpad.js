@@ -235,8 +235,8 @@ helpers({
 		projects: {
 			docpad: {
 				editUrl: 'https://github.com/docpad/documentation/edit/master/',
-				title: 'DocPad Documentation',
-				url: '/docs/',
+				title: 'DocPad',
+				url: '/',
 				categories: {
 					start: {
 						title: 'Getting Started'

@@ -16,6 +16,10 @@ standalone: true
 	--colorLighterBrown: #dbdbdb;
 	--colorLightestBrown: #f1f1f1;
 
+	--barSize: 2.5rem;
+	--sidebarSize: 220px;
+	--paddingSize: 3%;
+
 	--bodyFont: sans-serif; /* -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; */
 	--bodyBackground: var(--colorLightestBrown);
 	--bodyColor: var(--colorDarkestBrown);
@@ -125,77 +129,93 @@ nav li {
 /* ====================================
    Layout */
 
-html, body, .container {
+html, body, .sidebar {
 	height: 100%;
+}
+div, nav, section, aside, article {
+	width: 100%;
 }
 .container {
 	display: grid;
-	grid-template-columns: 220px 1fr;
-	grid-template-rows: 2.5rem 1fr 2.5rem;
+	grid-template-columns: var(--sidebarSize) 1fr;
+	grid-template-rows: var(--barSize) auto auto;
 	grid-template-areas:
 		"topbar topbar"
-		"sidebar contentbar"
-		"bottombar bottombar";
+		". contentbar"
+		". bottombar";
 }
 .topbar {
 	grid-area: topbar;
-	height: 2.5rem;
+	position: fixed;
+	z-index: 2;
+	height: var(--barSize);
 	border-bottom: 1px solid var(--colorLightBrown);
+	box-shadow: 0 0 1px white;
+	background: var(--bodyBackground);
 }
 .sidebar {
-	grid-area: sidebar;
-	width: 220px;
-	border: 1px solid white;
-	border-right: 1px solid var(--colorLightBrown);
-	border-left: none;
+	position: fixed;
+	z-index: 1;
+	width: var(--sidebarSize);
 }
 .contentbar {
 	grid-area: contentbar;
-	border: 1px solid white;
-	border-right: none;
-	padding: 0 3%;
+	padding: 0 var(--paddingSize);
+	background: white;
+	border-left: 1px solid var(--colorLightBrown);
+	border-bottom: 1px solid var(--colorLightBrown);
+	box-shadow: 0 0 1px white;
 }
 .bottombar {
 	grid-area: bottombar;
-	height: 2.5rem;
-	border-top: 1px solid var(--colorLightBrown);
+	height: var(--barSize);
+}
+.topbar, .sidebar {
+	top: 0;
+	left: 0;
+	background: var(--bodyBackground);
 }
 
 /* topbar */
 .topbar {
 	display: grid;
 	grid-template-columns: 1fr 300px;
-	grid-template-rows: 2.5rem;
+	grid-template-rows: var(--barSize);
 	grid-template-areas: "links search";
-	clear: both;
 	overflow: hidden;
-}
-.topbar .links {
-	grid-area: links;
-	line-height: 2.6rem;
 }
 .topbar .search {
 	grid-area: search;
 	padding: 0.3rem 0.5rem 0;
 }
-.topbar a {
+.links {
+	grid-area: links;
+	line-height: var(--barSize);
+}
+.links a {
 	line-height: 1rem;
 	font-size: 1rem;
 	margin: 0 5px;
 	padding: 0 7px;
 	color: var(--colorDarkestBrown);
 	font-weight: bolder;
+}
+.topbar .links a {
 	padding-bottom: 2px;
 	border-bottom: 3px solid transparent;
 }
-.topbar a:hover,
-.topbar a.active {
+.topbar .links a:hover,
+.topbar .links a.active {
 	text-decoration: none;
 	border-color: var(--colorLightGold);
 }
-.topbar a.logo {
+.topbar .links a.logo {
 	margin-left: 5px;
 	padding-bottom: 3px;
+}
+
+.topbar .links a.logo,
+.list-menu-project > .list-menu-title a {
 	font-size: 1.25rem;
 }
 .topbar .search * {
@@ -212,24 +232,40 @@ html, body, .container {
 .bottombar {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 2.5rem;
+	grid-template-rows: var(--barSize);
 	grid-template-areas: "about links";
 	background: var(--bodyBackground);
+	padding: 0 var(--paddingSize);
+	line-height: var(--barSize);
 }
 .bottombar .about {
 	grid-area: about;
 }
-.bottombar .links {
-	grid-area: links;
+.bottombar .links a {
+	font-weight: normal;
+	border: none;
 }
 
 
 /* ====================================
    Content */
 
-body:not(.page-docs):not(.page-index) .contentbar {
-	background: white;
+/* hide sidebar on docs and landing page */
+.page-index,
+.page-docs {
+	--sidebarSize: 0;
 }
+.page-docs .sidebar,
+.page-index .sidebar {
+	display: none;
+}
+.page-index .contentbar,
+.page-docs .contentbar {
+	background: var(--bodyBackground);
+	border-left: none;
+	padding-bottom: var(--barSize);
+}
+
 
 .contentbar h1,
 .contentbar h2,
@@ -284,7 +320,7 @@ body:not(.page-docs):not(.page-index) .contentbar {
 	padding: 0.2em 0;
 }
 
-.list-menu-project > .list-menu-title {
+.docs .list-menu-project > .list-menu-title {
 	display: none;
 }
 .docs .list-menu-categories {
@@ -302,26 +338,9 @@ body:not(.page-docs):not(.page-index) .contentbar {
 	all: unset;
 }
 .docs .list-menu-items {
-	padding: 1rem 3%;
+	padding: 1rem var(--paddingSize);
 	background: white;
 	border-radius: 3px;
-}
-
-/* hide sidebar on docs and landing page */
-.page-docs .sidebar,
-.page-index .sidebar {
-	display: none;
-}
-.page-index .container,
-.page-docs .container {
-	grid-template-areas:
-		"topbar topbar"
-		"contentbar contentbar"
-		"bottombar bottombar";
-}
-.page-index .contentbar,
-.page-docs .contentbar {
-	border-left: none;
 }
 
 
@@ -505,17 +524,6 @@ body:not(.page-docs):not(.page-index) .contentbar {
 	display: none;
 }
 
-.block-edit {
-	text-align: right;
-	padding: 1.5em 0 1em;
-}
-.block-edit a {
-	transition: all 0.2s ease-out;
-	color: var(--colorLighterBrown);
-}
-.block-edit a:hover {
-	color: var(--colorDarkestBrown);
-}
 
 .block table {
 	font-size: 1em;
@@ -541,6 +549,45 @@ body:not(.page-docs):not(.page-index) .contentbar {
 .block h2 {
 	border-bottom: 1px dotted var(--colorLighterBrown);
 }
+
+
+.block-footer {
+	border-top: 1px dotted var(--colorLighterBrown);
+	margin: 5em 0 1em;
+	padding-top: 1em;
+}
+.block-edit {
+	margin-bottom: 1em;
+	text-align: right;
+}
+.block-edit a {
+	transition: all 0.2s ease-out;
+	color: var(--colorLighterBrown);
+}
+.block-edit a:hover {
+	color: var(--colorDarkestBrown);
+}
+
+.prev-next {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-areas: "prev up next";
+}
+.prev {
+	grid-area: prev;
+}
+.up {
+	text-align: center;
+	grid-area: up;
+}
+.next {
+	text-align: right;
+	grid-area: next;
+}
+.prev-next .icon {
+	display: block;
+}
+
 
 /*
 .block
@@ -597,53 +644,6 @@ body:not(.page-docs):not(.page-index) .contentbar {
 		display: block;
 		margin: 1em auto;
 		max-width: 100%;
-
-	.block-footer
-		border-top: 1px dotted colorLighterBrown;
-		margin: 5em 0 1.5em;
-		padding-top: 1em;
-		clearfix()
-
-	.prev-next
-		position: relative;
-		height: 2em;
-
-		a
-			font-weight: fontMyraidBoldest;
-
-		.prev
-		.next
-		.up
-			display: block;
-			position: absolute;
-			bottom: 0;
-			height: 2em;
-			width: 33%;
-			text-decoration: none;
-			&:hover
-				opacity: 1;
-				.title
-					text-decoration: underline;
-			.icon
-				display: block;
-				height: auto;
-				width: auto;
-
-		.prev
-			left: 0;
-			text-align: left;
-			.icon
-				mixinIconPagePrev()
-		.next
-			right: 0;
-			text-align: right;
-			.icon
-				mixinIconPageNext()
-		.up
-			left: 33%;
-			text-align: center;
-			.icon
-				mixinIconPageUp()
 
 
 // ====================================

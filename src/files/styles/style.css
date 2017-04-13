@@ -17,7 +17,6 @@ standalone: true
 	--colorLightestBrown: #f1f1f1;
 
 	--barSize: 2.5rem;
-	--sidebarSize: 220px;
 	--paddingSize: 3%;
 
 	--bodyFont: sans-serif; /* -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; */
@@ -129,51 +128,47 @@ nav li {
 /* ====================================
    Layout */
 
-html, body, .sidebar {
+html, body, .container, .sidebar, .sidebar .list-menu {
 	height: 100%;
 }
-div, nav, section, aside, article {
+html, body, div, nav, section, aside, article {
 	width: 100%;
 }
-.container {
-	display: grid;
-	grid-template-columns: var(--sidebarSize) 1fr;
-	grid-template-rows: var(--barSize) auto auto;
-	grid-template-areas:
-		"topbar topbar"
-		". contentbar"
-		". bottombar";
-}
 .topbar {
-	grid-area: topbar;
 	position: fixed;
 	z-index: 2;
 	height: var(--barSize);
 	border-bottom: 1px solid var(--colorLightBrown);
 	box-shadow: 0 0 1px white;
 	background: var(--bodyBackground);
-}
-.sidebar {
-	position: fixed;
-	z-index: 1;
-	width: var(--sidebarSize);
-}
-.contentbar {
-	grid-area: contentbar;
-	padding: 0 var(--paddingSize);
-	background: white;
-	border-left: 1px solid var(--colorLightBrown);
-	border-bottom: 1px solid var(--colorLightBrown);
-	box-shadow: 0 0 1px white;
-}
-.bottombar {
-	grid-area: bottombar;
-	height: var(--barSize);
-}
-.topbar, .sidebar {
 	top: 0;
 	left: 0;
+}
+.sidebar {
+	box-sizing: content-box;
+	position: fixed;
+	z-index: 1;
+	width: 200px;
+	padding-right: var(--paddingSize);
+	top: 0;
+	left: -200px;
+	transition: left 0.3s ease-in;
+}
+.sidebar > .list-menu {
+	overflow: auto;
 	background: var(--bodyBackground);
+	border-right: 1px solid var(--colorLightBrown);
+	box-shadow: 0 0 1px white;
+}
+.topbar:hover + .sidebar,
+.sidebar:hover {
+	left: 0;
+}
+.contentbar {
+	padding: var(--barSize) var(--paddingSize) 0;
+	background: white;
+	border-bottom: 1px solid var(--colorLightBrown);
+	box-shadow: 0 0 1px white;
 }
 
 /* topbar */
@@ -251,14 +246,6 @@ div, nav, section, aside, article {
    Content */
 
 /* hide sidebar on docs and landing page */
-.page-index,
-.page-docs {
-	--sidebarSize: 0;
-}
-.page-docs .sidebar,
-.page-index .sidebar {
-	display: none;
-}
 .page-index .contentbar,
 .page-docs .contentbar {
 	background: var(--bodyBackground);

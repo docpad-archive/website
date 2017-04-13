@@ -102,7 +102,6 @@ pre code,
 .hljs {
 	display: block flow;
 	line-height: 1.5em;
-	margin: 2.5em 0;
 	padding: 1em 1.5em;
 	overflow: scroll;
 	width: 100%;
@@ -243,7 +242,7 @@ html, body, div, nav, section, aside, article {
 
 
 /* ====================================
-   Content */
+   Pages */
 
 /* hide sidebar on docs and landing page */
 .page-index .contentbar,
@@ -252,20 +251,6 @@ html, body, div, nav, section, aside, article {
 	border-left: none;
 	padding-bottom: var(--barSize);
 }
-
-
-.contentbar h1,
-.contentbar h2,
-.contentbar h3,
-.contentbar h4,
-.contentbar h5,
-.contentbar h6 {
-	margin: 2em 0 0.5em;
-}
-.contentbar .block-header h1 {
-	margin: 1em 0 0em;
-}
-
 
 
 /* ====================================
@@ -533,9 +518,6 @@ html, body, div, nav, section, aside, article {
 .block {
 	line-height: 1.4em;
 }
-.block h2 {
-	border-bottom: 1px dotted var(--colorLighterBrown);
-}
 
 
 .block-footer {
@@ -576,90 +558,36 @@ html, body, div, nav, section, aside, article {
 }
 
 
-/*
-.block
-	padding: 0.5em 3%;
-	background: white;
-	border-radius: 3px;
-	word-wrap: break-word;
-	overflow: hidden;
-
-	.section-wrapper
-		display:none
-		&.active
-			display:block
-
-	h1
-		margin-bottom: 0;
-		font-size: 2.5em;
-		font-weight: fontMyraidBoldest;
-
-	h2
-		font-weight: fontMyraidBoldest;
-		font-size: 1.8em;
-		margin-top: 4em;
-
-	.compact
-		h2
-			color: linkColor;
-
-	h3
-		font-size: 1.5em;
-		margin-top: 3em;
-
-	h4
-		font-size: 1.2em;
-		margin-top: 2.5em;
-
-	h2
-		border-bottom: 1px dotted colorLighterBrown;
-
-
-	a
-		color: linkColor;
-		font-weight: fontMyraidBold;
-		&:hover
-			text-decoration: underline;
-
-	dl dt
-		font-weight: fontMyraidBoldest;
-	dl dd
-		margin: 0 0 1.4em 1.1em;
-
-	img
-		border: 2px solid colorLightestBrown;
-		display: block;
-		margin: 1em auto;
-		max-width: 100%;
-
-
-// ====================================
-// Footer
-
-.bottombar
-	font-size: 1em;
-	border-top: 1px solid white;
-	box-shadow: 0 -1px 0 var(--colorLightBrown);
-	padding: 1em 0;
+.block h1,
+.block h2,
+.block h3,
+.block h4,
+.block h5,
+.block h6 {
+	margin-top: 2em;
+}
+.block h2 {
 	line-height: 2em;
+	border-bottom: 1px dotted var(--colorLighterBrown);
+}
+.block-header h1 {
+	margin: 0;
+}
 
-	a
-		font-weight: fontMyraidBoldest;
-		&:hover
-			text-decoration: underline;
+/* fix for anchor links */
+.block :target {
+	margin-top: 0;
+	padding-top: var(--barSize);
+}
 
-	.about
-		float: left;
-		a
-			color: linkColor;
+.block img {
+	border: 2px solid var(--colorLightestBrown);
+	display: block;
+	margin: 1em auto;
+	max-width: 100%;
+}
 
-	.links
-		float: right;
-		a
-			color: var(--colorDarkestBrown);
-			margin: 0 0.5em;
-
-
+/*
 
 // ====================================
 // Layout: Responsive;

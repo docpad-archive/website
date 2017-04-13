@@ -16,14 +16,13 @@ standalone: true
 	--colorLighterBrown: #dbdbdb;
 	--colorLightestBrown: #f1f1f1;
 
-	--bodyFont: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	--bodyFont: sans-serif; /* -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; */
 	--bodyBackground: var(--colorLightestBrown);
 	--bodyColor: var(--colorDarkestBrown);
 
-	--headingFont: Cambria, Calibri, Helvetica, Arial, sans-serif;
+	--headingFont: sans-serif; /* Cambria, Calibri, Helvetica, Arial, sans-serif; */
 
-	--codeFont: Monaco, Menlo, Consolas, 'Source Code Pro', 'courier new', monospace, serif;
-	--codeFontNormal: 500;
+	--codeFont: monospace;
 	--codeBackground: var(--colorLightestGold);
 	--codeBorder: hsl(186, 8%, 88%);  /* hsl(192, 8%, 84%) */
 	--codeColor: hsl(186, 8%, 15%);
@@ -57,6 +56,7 @@ html {
 	font-family: var(--bodyFont);
 	background: var(--bodyBackground);
 	color: var(--bodyColor);
+	word-wrap: break-word;
 }
 html, body, div {
 	margin: 0;
@@ -82,29 +82,27 @@ code,
 pre code,
 .hljs {
 	font-weight: normal;
-	font-family: var(--codeFont);
-	background: var(--codeBackground);
+	font-size: 1em;
+	line-height: 1em;
+	padding: 0 0.5em 0;
 	border: 1px solid var(--codeBorder);
 	border-radius: 0.5em;
-	color: var(--codeColor);
-}
 
-code {
-	font-size: 0.75em;
-	display: inline-block;
-	padding: 0.05em 0.5em 0em;
-	margin: 0.4em 0.2em 0.2em 0;
+	word-wrap: normal;
 	white-space: pre;
+	font-family: var(--codeFont);
+	background: var(--codeBackground);
+	color: var(--codeColor);
 }
 
 pre code,
 .hljs {
-	font-size: 0.7em;
-	display: block;
+	display: block flow;
+	line-height: 1.5em;
 	margin: 2.5em 0;
 	padding: 1em 1.5em;
-	line-height: 1.5em;
-	overflow: auto;
+	overflow: scroll;
+	width: 100%;
 }
 
 /* misc */
@@ -483,7 +481,7 @@ body:not(.page-docs):not(.page-index) .contentbar {
 .splash .providers a {
 	color: var(--colorLightestGold);
 	font-size: 1.4em;
-	font-weight: 400;
+	font-weight: lighter;
 }
 .splash .providers a:hover {
 	color: white;
@@ -522,7 +520,6 @@ body:not(.page-docs):not(.page-index) .contentbar {
 .block table {
 	font-size: 1em;
 	margin: 2em 0;
-	width: 100%;
 }
 .block th,
 .block td {
@@ -536,6 +533,13 @@ body:not(.page-docs):not(.page-index) .contentbar {
 }
 .block tr:nth-child(2n+2) {
 	background: var(--colorLightestBrown);
+}
+
+.block {
+	line-height: 1.4em;
+}
+.block h2 {
+	border-bottom: 1px dotted var(--colorLighterBrown);
 }
 
 /*

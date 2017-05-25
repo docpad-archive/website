@@ -1,86 +1,20 @@
-# 2015 August 25
+# 2017 May 25
 # https://docpad.org/docs/deploy
-
-sudo: false
+# https://github.com/balupton/awesome-travis
 language: node_js
 node_js:
-  - "6"     # lts
+  - "7"
 cache:
   directories:
-    - $HOME/.npm  # http://stackoverflow.com/q/42521884/130638
-
-install: |
-  # Ensure NPM is latest
-  # https://github.com/balupton/awesome-travis#ensure-npm-is-latest
-  export CURRENT_NPM_VERSION="$(npm --version)" || exit -1
-  export LATEST_NPM_VERSION="$(npm view npm version)" || exit -1
-  if test "$CURRENT_NPM_VERSION" != "$LATEST_NPM_VERSION"; then
-    echo "running an old npm version $CURRENT_NPM_VERSION, upgrading npm to $LATEST_NPM_VERSION..."
-    npm install npm --global --cache-min=Infinity || exit -1
-    echo "...npm upgrade complete"
-  fi
-
-install: |
-  # Ensure dependencies install with a LTS node version
-  # https://github.com/balupton/awesome-travis#use-lts-node-version-for-preparation
-  export CURRENT_NODE_VERSION="$(node --version)" || exit -1
-  export LTS_NODE_VERSIONS="$(nvm ls-remote --lts)" || exit -1
-  if echo "$LTS_NODE_VERSIONS" | grep "$CURRENT_NODE_VERSION"; then
-    echo "running on a LTS node version, completing setup..."
-    npm run our:setup || exit -1
-    echo "...setup complete with current LTS version"
-  else
-    echo "running on a non-LTS node version, completing setup on a LTS node version..."
-    nvm install --lts
-    export LTS_NODE_INSTALLED_VERSION="$(node --version)" || exit -1
-    npm run our:setup || exit -1
-    nvm use "$TRAVIS_NODE_VERSION" || exit -1
-    echo "...setup complete with LTS"
-  fi
-
-before_script: |
-  # Ensure compilation and linting occur on a LTS node version
-  # https://github.com/balupton/awesome-travis#use-lts-node-version-for-preparation
-  if test "$LTS_NODE_INSTALLED_VERSION"; then
-    echo "running on a non-LTS node version, compiling with LTS, skipping linting..."
-    nvm use "$LTS_NODE_INSTALLED_VERSION" || exit -1
-    npm run our:compile || exit -1
-    nvm use "$TRAVIS_NODE_VERSION" || exit -1
-    echo "...compiled"
-  else
-    echo "running on a LTS node version, compiling and linting..."
-    npm run our:compile && npm run our:verify || exit -1
-    echo "...compiled and linted"
-  fi
-
-after_success: |
-  # Custom Deployment
-  # https://github.com/balupton/awesome-travis#npm-script-deployment
-  if ([ "$TRAVIS_BRANCH" == "$DEPLOY_BRANCH" ] &&
-      [ -z "$TRAVIS_TAG" ] &&
-      [ "$TRAVIS_PULL_REQUEST" == "false" ]); then
-    echo "deploying..."
-    npm run deploy || exit -1
-    echo "...deployed"
-  else
-    echo "skipped deploy"
-  fi
-
-
-# ========================================
-# Custom Configuration
-
-env:
-  global:
-  # Custom Deploy
-  # travis encrypt "SURGE_LOGIN=$SURGE_LOGIN" --add env.global
-  # travis encrypt "SURGE_TOKEN=$SURGE_TOKEN" --add env.global
-  - DEPLOY_BRANCH='master'  # this is the branch that you want deployed
-  - secure: YyxmAjx6bw/iARcoTJHFXkj1G1/0JGgOeeyE0w6y/5kFBSTJAmf0sZHzREs5uP8hs3FSCr5w16CJgFYwwaQiW5aPiDUNZ/Az5TOVH5ided5abVOSeK+rd1IxgKvquWDwCgtU+hBMOAWljcp6X+41gC812V03sIF/alNsK4RqCZc=
-  - secure: e8O1Z+/YVuiWXRguQBJkBGQdNtMR1zhjjPp6GQyKBEGCeXj6+KRGbVi7P16P3z5NpVk4bF1KlZtD2QiJgEz20LHdn0FZTi/nc8QPiqeR+poW7ioPdFfjRHcZOCoNGhMLOKq3KKZS9HqBff8rR6wfdbMi3RYxXtHDnuUPNwOYWfs=
-
-# https://github.com/balupton/awesome-travis#slack
-# https://github.com/balupton/awesome-travis#email
+    - $HOME/.npm  # npm's cache
+    - $HOME/.yarn-cache  # yarn's cache
+install:
+  - eval "$(curl -s https://raw.githubusercontent.com/balupton/awesome-travis/master/scripts/node-upgrade-npm.bash)"
+  - eval "$(curl -s https://raw.githubusercontent.com/balupton/awesome-travis/master/scripts/node-install.bash)"
+before_script:
+  - eval "$(curl -s https://raw.githubusercontent.com/balupton/awesome-travis/master/scripts/node-verify.bash)"
+after_success:
+  - eval "$(curl -s https://raw.githubusercontent.com/balupton/awesome-travis/master/scripts/node-deploy.bash)"
 notifications:
   email:
     recipients:

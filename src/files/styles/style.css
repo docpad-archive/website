@@ -43,16 +43,16 @@ standalone: true
 }
 
 /* icons */
-.up > .icon:before {
+.up > .icon::before {
 	content: '↑';
 }
-.down > .icon:before {
+.down > .icon::before {
 	content: '↓';
 }
-.prev > .icon:before {
+.prev > .icon::before {
 	content: '←';
 }
-.next > .icon:before {
+.next > .icon::before {
 	content: '→';
 }
 
@@ -72,7 +72,7 @@ h1, h2, h3, h4 {
 }
 
 /* links */
-a, .link  {
+a, .link {
 	display: inline-block;
 	text-decoration: none;
 	cursor: pointer;
@@ -89,7 +89,7 @@ pre code,
 	font-weight: normal;
 	font-size: 1em;
 	line-height: 1em;
-	padding: 0 0.5em 0;
+	padding: 0 0.5em;
 	border: 1px solid var(--codeBorder);
 	border-radius: 0.5em;
 	break-inside: avoid;
@@ -220,10 +220,10 @@ html, body, div, nav, section, aside, article {
 	box-sizing: content-box;
 }
 .gsc-control-cse {
+	margin: 0 !important;
 	padding: 0 !important;
 	border: none !important;
 	background: none !important;
-	border: none !important;
 }
 
 /* bottombar */
@@ -319,7 +319,7 @@ html, body, div, nav, section, aside, article {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(var(--sidebarSize), 1fr));
 	grid-gap: calc(var(--marginSize) * 2);
-   justify-content: space-evenly;
+	justify-content: space-evenly;
 }
 .docs .list-menu-category {
 	grid-column: span 1;
@@ -440,25 +440,25 @@ html, body, div, nav, section, aside, article {
 
 	background: white;
 	padding: 1rem;
-	border-radius: .25em;
+	border-radius: 0.25em;
 
 	line-height: 1.25em;
 
 	visibility: hidden;
 	opacity: 0;
-	transition: all .2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 }
-.splash .overview li .popover:before {
+.splash .overview li .popover::before {
 	content: "";
 	background: white;
 
 	z-index: -3;
 	width: 1em;
 	height: 1em;
-	margin-left: -.5em;
+	margin-left: -0.5em;
 
 	position: absolute;
-	top: -.4em;
+	top: -0.4em;
 	left: 50%;
 
 	transform: rotate(45deg);
@@ -609,7 +609,8 @@ html, body, div, nav, section, aside, article {
 	max-width: 100%;
 }
 
-
+/* ====================================
+   Media Queries */
 
 @media screen and (max-width: 600px) {
 	body {

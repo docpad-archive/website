@@ -82,12 +82,10 @@ const docpadConfig = {
 
 			// Styles
 			styles: [
-				'/vendor/normalize.css',
-				'/vendor/highlight.css',
+				'//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css',
+				'//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css',
 				'/styles/style.css'
-			].map(function (url) {
-				return `${url}?websiteVersion=${websiteVersion}`
-			}),
+			],
 
 			// Script
 			scripts: []
@@ -104,10 +102,10 @@ const docpadConfig = {
 
 	collections: {
 		partners (database) {
-			const query = {relativeOutDirPath: 'learn/docpad-documentation/docpad/partners'}
-			const sort = [{filename: 1}]
+			const query = { relativeOutDirPath: 'learn/docpad-documentation/docpad/partners' }
+			const sort = [{ filename: 1 }]
 			return database.findAllLive(query, sort).on('add', function (document) {
-				document.setMetaDefaults({write: false})
+				document.setMetaDefaults({ write: false })
 			})
 		}
 	},
@@ -257,7 +255,7 @@ helpers({
 
 // Don't use debug log level on travis as it outputs too much and travis complains
 // https://travis-ci.org/docpad/website/builds/104133494
-if ( process.env.TRAVIS ) {
+if (process.env.TRAVIS) {
 	docpadConfig.logLevel = 6
 }
 

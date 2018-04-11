@@ -74,13 +74,13 @@
     "outpatient": "^3.0.0"
   },
   "devDependencies": {
+    "cloudflare-stout": "^1.3.1-8",
     "coffeelint": "^2.0.7",
     "docpad-plugin-livereload": "~2.9.0",
     "eslint": "^4.17.0",
     "projectz": "^1.4.0",
     "stylelint": "^9.2.0",
-    "stylelint-config-standard": "^18.0.0",
-    "cloudflare-stout": "^1.3.2"
+    "stylelint-config-standard": "^18.0.0"
   },
   "scripts": {
     "our:setup": "npm run our:setup:npm",

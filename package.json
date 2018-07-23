@@ -28,8 +28,7 @@
       "flattrUsername": "balupton",
       "paypalURL": "https://bevry.me/paypal",
       "bitcoinURL": "https://bevry.me/bitcoin",
-      "wishlistURL": "https://bevry.me/wishlist",
-      "slackinURL": "https://slack.bevry.me"
+      "wishlistURL": "https://bevry.me/wishlist"
     }
   },
   "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
@@ -56,28 +55,27 @@
     "url": "https://github.com/docpad/website.git"
   },
   "engines": {
-    "node": "8",
-    "npm": "5"
+    "node": "8"
   },
   "dependencies": {
-    "docpad": "~6.79.4",
+    "docpad": "~6.80.6",
     "docpad-plugin-cleanurls": "~2.11.0",
-    "docpad-plugin-downloader": "~2.2.0",
-    "docpad-plugin-eco": "~2.2.1",
-    "docpad-plugin-feedr": "~2.12.0",
-    "docpad-plugin-highlightjs": "~2.5.0",
-    "docpad-plugin-marked": "~2.4.0",
-    "docpad-plugin-raw": "~2.5.1",
-    "docpad-plugin-repocloner": "~2.3.1",
-    "docpad-plugin-text": "~2.5.0",
+    "docpad-plugin-downloader": "~2.4.0",
+    "docpad-plugin-eco": "~2.3.0",
+    "docpad-plugin-feedr": "~2.14.0",
+    "docpad-plugin-highlightjs": "~2.6.0",
+    "docpad-plugin-marked": "~2.5.0",
+    "docpad-plugin-raw": "~2.6.0",
+    "docpad-plugin-repocloner": "~2.4.0",
+    "docpad-plugin-text": "~2.6.0",
     "getcontributors": "^1.4.5",
     "outpatient": "^3.0.0"
   },
   "devDependencies": {
-    "cloudflare-stout": "^1.3.1-8",
+    "now": "^11.3.1",
     "coffeelint": "^2.0.7",
-    "docpad-plugin-livereload": "~2.9.0",
-    "eslint": "^4.17.0",
+    "docpad-plugin-livereload": "~2.10.0",
+    "eslint": "^5.2.0",
     "projectz": "^1.4.0",
     "stylelint": "^9.2.0",
     "stylelint-config-standard": "^18.0.0"
@@ -90,7 +88,7 @@
     "our:meta": "npm run our:meta:projectz",
     "our:meta:projectz": "projectz compile",
     "our:verify": "npm run my:verify:eslint && npm run my:verify:coffeelint && npm run my:verify:stylelint",
-    "our:deploy": "npm run my:deploy",
+    "our:deploy": "echo no need for this project",
     "our:test": "npm run our:verify && npm test",
     "our:release": "npm run our:release:prepare && npm run our:release:push",
     "our:release:prepare": "npm run our:clean && npm run our:compile && npm run our:test && npm run our:meta",
@@ -98,8 +96,23 @@
     "my:verify:eslint": "eslint --fix ./ --ignore-path .gitignore",
     "my:verify:coffeelint": "coffeelint ./src",
     "my:verify:stylelint": "stylelint --fix 'src/**/*.css'",
-    "my:deploy": "stout deploy --bucket docpad.org --root out",
-    "start": "docpad run",
     "test": "docpad generate --silent --env static"
+  },
+  "now": {
+    "type": "static",
+    "public": true,
+    "alias": [
+      "docpad",
+      "docpad.org"
+    ],
+    "files": [
+      "out"
+    ],
+    "static": {
+      "directoryListing": false,
+      "cleanUrls": true,
+      "trailingSlash": false,
+      "public": "out"
+    }
   }
 }

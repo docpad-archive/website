@@ -4,9 +4,7 @@
 const helpers = require('outpatient')
 
 // Prepare
-const websiteVersion = require('./package.json').version
 const docpadVersion = require('./package.json').dependencies.docpad.toString().replace('~', '').replace('^', '')
-const exchangeUrl = `https://helper.docpad.org/exchange?version=${docpadVersion}`
 const siteUrl = process.env.NODE_ENV === 'production' ? 'https://docpad.org' : 'http://localhost:9778'
 
 
@@ -60,10 +58,6 @@ const docpadConfig = {
 			}
 		},
 
-		// The URL we use to fetch the exchange data, included in template data for debugging
-		exchangeUrl,
-
-
 		// -----------------------------
 		// Site Properties
 
@@ -93,6 +87,14 @@ const docpadConfig = {
 
 		services: {
 			googleSearch: '000711355494423975011:mvl83obfzvq'
+		},
+
+		// heleprs
+		getLatestData () {
+			return require('./src/raw/vendor/latest.json')
+		},
+		getExchangeData () {
+			return require('./src/raw/vendor/exchange.json')
 		}
 	},
 
@@ -116,25 +118,23 @@ const docpadConfig = {
 
 	// Alias stylus highlighting to css and there is no inbuilt stylus support
 	plugins: {
-		feedr: {
-			feeds: {
-				latestPackage: {
-					url: 'https://helper.docpad.org/latest.json',
-					parse: 'json'
-				},
-				exchange: {
-					url: exchangeUrl,
-					parse: 'json'
-				}
-			}
-		},
-
 		downloader: {
 			downloads: [{
+				name: 'latest.json',
+				path: 'src/raw/vendor/latest.json',
+				url: 'https://helper.docpad.org/latest.json'
+			},
+			{
+				name: 'exchange.json',
+				path: 'src/raw/vendor/exchange.json',
+				url: `https://helper.docpad.org/exchange?version=${docpadVersion}`
+			},
+			{
 				name: 'Normalize CSS',
 				path: 'src/raw/vendor/normalize.css',
 				url: 'https://rawgit.com/h5bp/html5-boilerplate/5.3.0/dist/css/normalize.css'
-			}, {
+			},
+			{
 				name: 'Highlight.js XCode Theme',
 				path: 'src/raw/vendor/highlight.css',
 				url: 'https://rawgit.com/isagalaev/highlight.js/8.0/src/styles/xcode.css'

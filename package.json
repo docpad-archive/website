@@ -62,7 +62,6 @@
     "docpad-plugin-cleanurls": "~2.11.0",
     "docpad-plugin-downloader": "~2.4.0",
     "docpad-plugin-eco": "~2.3.0",
-    "docpad-plugin-feedr": "~2.14.0",
     "docpad-plugin-highlightjs": "~2.6.0",
     "docpad-plugin-marked": "~2.5.0",
     "docpad-plugin-raw": "~2.6.0",

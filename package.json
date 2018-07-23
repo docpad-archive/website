@@ -98,6 +98,7 @@
     "test": "docpad generate --silent --env static"
   },
   "now": {
+    "name": "website",
     "type": "static",
     "public": true,
     "alias": [
